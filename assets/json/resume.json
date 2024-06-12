@@ -1,157 +1,283 @@
 {
   "basics": {
-    "name": "Albert Einstein",
-    "label": "Scientist",
+    "name": "Chiara Di Vece",
+    "label": "PhD Student in Computer Science",
     "image": "",
-    "email": "albert@einstein.de",
-    "phone": "(912) 123-4567",
-    "url": "https://alshedivat.github.io/al-folio/",
-    "summary": "A German-born theoretical physicist, widely ranked among the greatest and most influential scientists of all time",
+    "email": "chiaradivece@gmail.com",
+    "phone": "(+39) 338-874-2388",
+    "url": "https://github.com/chiaradivece",
+    "summary": "PhD Student specializing in Deep Learning, Deep Reinforcement Learning, and Image Analysis for healthcare.",
     "location": {
-      "address": "2712 Broadway St",
-      "postalCode": "CA 94115",
-      "city": "San Francisco",
-      "countryCode": "US",
-      "region": "California"
+      "address": "University College London, Charles Bell House, 43-45 Foley St",
+      "postalCode": "W1W 7TY",
+      "city": "London",
+      "region": "United Kingdom"
     },
     "profiles": [
       {
+        "network": "LinkedIn",
+        "username": "chiaradivece",
+        "url": "https://www.linkedin.com/in/chiara-di-vece/"
+      },
+      {
+        "network": "GitHub",
+        "username": "chiaradivece",
+        "url": "https://github.com/chiaradivece"
+      },
+      {
         "network": "Twitter",
-        "username": "AlbertEinstein",
-        "url": "https://twitter.com/AlbertEinstein"
+        "username": "chiaradivece_",
+        "url": "https://twitter.com/chiaradivece_"
       }
     ]
   },
   "work": [
     {
-      "name": "Institute for Advanced Study, Princeton University",
-      "position": "Professor of Theoretical Physics",
-      "url": "https://example.com",
-      "startDate": "1933-01-01",
-      "endDate": "1955-01-01",
-      "summary": "Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.",
-      "highlights": ["Relativity"]
-    }
-  ],
-  "volunteer": [
+      "name": "University College London - Dept of Computer Science",
+      "position": "PhD Student in Computer Science",
+      "url": "https://www.ucl.ac.uk",
+      "startDate": "2020-09-01",
+      "endDate": "Present",
+      "summary": "Development of a training system for autonomous navigation and guidance in freehand fetal ultrasound scans exploiting vision-based deep reinforcement learning. Collaboration with the Wellcome / EPSRC Centre for Interventional and Surgical Sciences (WEISS).",
+      "highlights": [
+        "Deep Learning",
+        "Deep Reinforcement Learning",
+        "Image Analysis",
+        "Pytorch",
+        "Python",
+        "C#"
+      ]
+    },
     {
-      "organization": "People's Climate March",
-      "location": "Zurich, Switzerland",
-      "position": "Lead Organizer",
-      "url": "https://example.com",
-      "startDate": "2014-04-01",
-      "endDate": "2015-07-01",
-      "summary": "Lead organizer for the New York City branch of the People's Climate March, the largest climate march in history.",
-      "highlights": ["Awarded 'Climate Hero' award by Greenpeace for my efforts organizing the march.", "Men of the year 2014 by Time magazine"]
+      "name": "MathWorks - Deep Learning Algorithms",
+      "position": "Software Engineer Intern",
+      "url": "https://www.mathworks.com",
+      "startDate": "2023-06-01",
+      "endDate": "2023-09-01",
+      "summary": "Extended the Deep Learning Toolbox with the sort method, now supported by the Automatic Differentiation engine. The function can be used to build custom layers.",
+      "highlights": [
+        "Deep Learning",
+        "Algorithms",
+        "Matlab"
+      ]
+    },
+    {
+      "name": "University College London - Dept of Computer Science",
+      "position": "Teaching Assistant",
+      "url": "https://www.ucl.ac.uk",
+      "startDate": "2021-09-01",
+      "endDate": "Present",
+      "summary": "Running coding lab sessions, Q/A sessions, homework/exams development and marking for courses like COMP0089: Reinforcement Learning, COMP0037: Robotic Systems, COMP0088: Introduction to Machine Learning, ENGF0003: Mathematical Modelling and Analysis 1.",
+      "highlights": [
+        "Python",
+        "Reinforcement Learning",
+        "Robotic Systems",
+        "Machine Learning",
+        "Mathematical Modelling"
+      ]
+    },
+    {
+      "name": "Politecnico di Milano - Dept of Electronics, Information and Bioengineering",
+      "position": "Research Intern",
+      "url": "https://www.polimi.it",
+      "startDate": "2020-03-01",
+      "endDate": "2020-09-01",
+      "summary": "Worked at the Neuroengineering and Medical Robotics Lab on the European project EDEN2020 for the development of a position-based dynamics simulator of brain deformations for path planning and intra-operative control in keyhole neurosurgery. Supervised MSc student on the thesis development involving KUKA robot and haptic interfaces for palpation procedures.",
+      "highlights": [
+        "Unity",
+        "Deformation Simulation",
+        "C++",
+        "C#"
+      ]
+    },
+    {
+      "name": "University of Illinois at Chicago - Dept of Bioengineering",
+      "position": "Graduate Teaching Assistant",
+      "url": "https://www.uic.edu",
+      "startDate": "2019-01-01",
+      "endDate": "2019-05-01",
+      "summary": "Ran exercise practice sessions, Q/A sessions, homework/exams marking for BME310: Biological Systems Analysis, covering system dynamics and frequency-domain analysis in bioengineering systems.",
+      "highlights": [
+        "Matlab",
+        "Biological Systems Analysis"
+      ]
+    },
+    {
+      "name": "University of Illinois at Chicago - Dept of Urology & UIC Innovation Center",
+      "position": "Graduate Research Student",
+      "url": "https://www.uic.edu",
+      "startDate": "2019-01-01",
+      "endDate": "2019-05-01",
+      "summary": "Developed a novel haptic and virtual reality-based simulator for improvement of psychomotor skill in Veress needle insertion.",
+      "highlights": [
+        "Segmentation",
+        "3D Slicer",
+        "Blender",
+        "Haptic Devices",
+        "C++"
+      ]
     }
   ],
   "education": [
     {
-      "institution": "University of Zurich, Zurich, Switzerland",
-      "location": "Zurich, Switzerland",
-      "url": "https://www.uzh.ch/",
-      "area": "Software Development",
+      "institution": "University College London",
+      "location": "London, United Kingdom",
+      "url": "https://www.ucl.ac.uk",
+      "area": "Computer Science",
       "studyType": "PhD",
-      "startDate": "1905-01-01",
-      "endDate": "1905-01-01",
-      "score": "10",
-      "courses": ["Theory of Relativity"]
+      "startDate": "2020-09-01",
+      "endDate": "Present",
+      "score": "",
+      "courses": []
+    },
+    {
+      "institution": "Politecnico di Milano",
+      "location": "Milan, Italy",
+      "url": "https://www.polimi.it",
+      "area": "Industrial Engineering",
+      "studyType": "Licence",
+      "startDate": "2021-11-01",
+      "endDate": "",
+      "score": "",
+      "courses": []
+    },
+    {
+      "institution": "Politecnico di Milano",
+      "location": "Milan, Italy",
+      "url": "https://www.polimi.it",
+      "area": "Biomedical Engineering",
+      "studyType": "Master of Science",
+      "startDate": "2017-09-01",
+      "endDate": "2019-12-01",
+      "score": "110/110 cum Laude",
+      "courses": []
+    },
+    {
+      "institution": "University of Illinois at Chicago",
+      "location": "Chicago, USA",
+      "url": "https://www.uic.edu",
+      "area": "Bioengineering",
+      "studyType": "Master of Science",
+      "startDate": "2017-10-01",
+      "endDate": "2019-08-01",
+      "score": "4.00/4.00",
+      "courses": []
+    },
+    {
+      "institution": "Politecnico di Milano",
+      "location": "Milan, Italy",
+      "url": "https://www.polimi.it",
+      "area": "Biomedical Engineering",
+      "studyType": "Bachelor of Science",
+      "startDate": "2014-10-01",
+      "endDate": "2017-07-01",
+      "score": "107/110",
+      "courses": []
     }
   ],
   "awards": [
     {
-      "title": "Nobel Prize in Physics",
-      "date": "1921-11-01",
-      "awarder": "Royal Swedish Academy of Sciences",
-      "url": "https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/",
-      "summary": "The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'"
+      "title": "Women’s health tech grant",
+      "date": "2024-01-01",
+      "awarder": "UCL’s EPSRC Impact Acceleration Account",
+      "url": "",
+      "summary": "Awarded £5000 for research on women's health technology."
+    },
+    {
+      "title": "AURIS/IPCAI Young Investigator Travel Award",
+      "date": "2022-01-01",
+      "awarder": "AURIS",
+      "url": "",
+      "summary": "1st place award for young investigator travel."
+    },
+    {
+      "title": "Microsoft/MathWorks WiMIUA Best Poster Award",
+      "date": "2022-01-01",
+      "awarder": "Microsoft/MathWorks",
+      "url": "",
+      "summary": "2nd place award for best poster."
+    },
+    {
+      "title": "MICCAI2022 Women in MICCAI Inspirational Leadership Legacy",
+      "date": "2022-01-01",
+      "awarder": "MICCAI",
+      "url": "",
+      "summary": "1st place award for inspirational leadership."
+    },
+    {
+      "title": "Top 3 for group project work",
+      "date": "2021-01-01",
+      "awarder": "UCL Medical Image Computing Summer School (MedICSS)",
+      "url": "",
+      "summary": "Top 3 project work award."
+    },
+    {
+      "title": "Alta Scuola Politecnica Top 3 projects",
+      "date": "2020-01-01",
+      "awarder": "Alta Scuola Politecnica",
+      "url": "",
+      "summary": "Top 3 projects award."
+    },
+    {
+      "title": "UCL Research Studentship",
+      "date": "2020-01-01",
+      "awarder": "University College London",
+      "url": "",
+      "summary": "Research studentship in the Department of Computer Science."
+    },
+    {
+      "title": "Rare Disease Hackathon",
+      "date": "2017-01-01",
+      "awarder": "N/A",
+      "url": "",
+      "summary": "1st place award at the Rare Disease Hackathon in Florence, Italy."
+    },
+    {
+      "title": "Young Professional Demo Competition Event",
+      "date": "2017-01-01",
+      "awarder": "IEEE 3rd International Forum on Research and Technologies for Society and Industry Leveraging a better tomorrow (RTSI)",
+      "url": "",
+      "summary": "1st place award."
+    },
+    {
+      "title": "Xilinx Open Hardware Contest",
+      "date": "2017-01-01",
+      "awarder": "Xilinx",
+      "url": "",
+      "summary": "Finalist in the contest."
     }
   ],
-  "certificates": [
-    {
-      "name": "Machine Learning",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-location-dot"
-    },
-    {
-      "name": "Quantum Computing",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-tag"
-    },
-    {
-      "name": "Quantum Information",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-envelope"
-    },
-    {
-      "name": "Quantum Cryptography",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-hashtag"
-    },
-    {
-      "name": "Quantum Communication",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-calendar"
-    },
-    {
-      "name": "Quantum Teleportation",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-clipboard-check"
-    }
-  ],
-  "publications": [
-    {
-      "name": "Zur Elektrody/namik bewegter Körper",
-      "publisher": "Annalen der Physik",
-      "releaseDate": "1905-06-30",
-      "url": "https://en.wikisource.org/wiki/Translation:On_the_Electrodynamics_of_Moving_Bodies",
-      "summary": "It concerned an interpretation of the Michelson–Morley experiment and the properties of light and time. Special relativity incorporates the principle that the speed of light is the same for all inertial observers regardless of the state of motion of the source."
-    },
-    {
-      "name": "Über einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt",
-      "publisher": "Annalen der Physik",
-      "releaseDate": "1905-03-18",
-      "url": "https://de.wikisource.org/wiki/Über_einen_die_Erzeugung_und_Verwandlung_des_Lichtes_betreffenden_heuristischen_Gesichtspunkt",
-      "summary": "In the second paper, he applied the quantum theory to light to explain the photoelectric effect. In particular, he used the idea of light quanta (photons) to explain experimental results, but stressed the importance of the experimental results. The importance of his work on the photoelectric effect earned him the Nobel Prize in Physics in 1921."
-    },
-    {
-      "name": "Die Grundlage der allgemeinen Relativitätstheorie",
-      "publisher": "Annalen der Physik",
-      "releaseDate": "1916-03-20",
-      "url": "https://de.wikisource.org/wiki/Die_Grundlage_der_allgemeinen_Relativitätstheorie",
-      "summary": "The publication of the theory of general relativity made him internationally famous. He was professor of physics at the universities of Zurich (1909–1911) and Prague (1911–1912), before he returned to ETH Zurich (1912–1914)."
-    }
-  ],
+  "certificates": [],
+  "publications": [],
   "skills": [
     {
-      "name": "Physics",
-      "level": "Master",
-      "icon": "fa-solid fa-hashtag",
-      "keywords": [
-        "Quantum Mechanics",
-        "Quantum Computing",
-        "Quantum Information",
-        "Quantum Cryptography",
-        "Quantum Communication",
-        "Quantum Teleportation"
-      ]
+      "name": "Deep Learning",
+      "level": "Expert",
+      "icon": "",
+      "keywords": ["Deep Reinforcement Learning", "Pytorch", "Python"]
+    },
+    {
+      "name": "Image Analysis",
+      "level": "Expert",
+      "icon": "",
+      "keywords": ["Medical Imaging", "3D Slicer", "Segmentation"]
+    },
+    {
+      "name": "Software Development",
+      "level": "Advanced",
+      "icon": "",
+      "keywords": ["Unity", "C#", "C++"]
+    },
+    {
+      "name": "Mathematical Modelling",
+      "level": "Advanced",
+      "icon": "",
+      "keywords": ["Matlab"]
     }
   ],
   "languages": [
     {
-      "language": "German",
+      "language": "Italian",
       "fluency": "Native speaker",
       "icon": ""
     },
@@ -163,38 +289,121 @@
   ],
   "interests": [
     {
-      "name": "Physics",
-      "icon": "fa-solid fa-tag",
-      "keywords": [
-        "Quantum Mechanics",
-        "Quantum Computing",
-        "Quantum Information",
-        "Quantum Cryptography",
-        "Quantum Communication",
-        "Quantum Teleportation"
-      ]
-    }
-  ],
-  "references": [
-    {
-      "name": "Professor John Doe",
-      "icon": "fa-solid fa-laptop",
-      "reference": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit. D"
+      "name": "Medical Robotics",
+      "icon": "",
+      "keywords": ["Autonomous Navigation", "Path Planning"]
     },
     {
-      "name": "Professor John Doe",
-      "icon": "fa-solid fa-thumbtack",
-      "reference": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit. D"
+      "name": "Haptics",
+      "icon": "",
+      "keywords": ["VR-based Simulators", "Haptic Interfaces"]
     }
   ],
+  "references": [],
   "projects": [
     {
-      "name": "Quantum Computing",
-      "summary": "Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.",
-      "highlights": ["Quantum Teleportation", "Quantum Cryptography"],
-      "startDate": "2018-01-01",
-      "endDate": "2018-01-01",
-      "url": "https://example.com"
+      "name": "6D Pose Regression of Ultrasound Diagnostic Planes",
+      "summary": "Developed a regression CNN to predict the 6D pose (3D rotations and translations) of a plane in relation to the anatomy using image features and a Unity-based simulation environment for automatic acquisition of supervised synthetic data. Achieved reliable localization of US planes within the fetal brain in phantom data with a median error of 0.90 mm/1.17° and successful generalization of pose regression for an unseen real fetal brain.",
+      "highlights": ["Deep Learning", "Medical Image Analysis", "Pytorch", "Python", "C#"],
+      "startDate": "2020-09-01",
+      "endDate": "Present",
+      "url": "https://github.com/surgical-vision/ipcai2022-pose-regression"
+    },
+    {
+      "name": "Simulation of Brain Deformations in Keyhole Neurosurgery",
+      "summary": "Developed a Unity-based realistic and time-bounded simulator that mocks brain deformations during keyhole surgical procedures. Validated using recorded deformation data of in-vivo animal trials, achieving a mean mismatch of 4.73±2.15%.",
+      "highlights": ["Unity", "Simulation", "Python", "C#"],
+      "startDate": "2020-02-01",
+      "endDate": "2021-02-01",
+      "url": ""
+    },
+    {
+      "name": "Virtual Reality and Haptics for Surgical Skills Training",
+      "summary": "Developed a VR and haptic-based simulator for urological training in obtaining the pneumoperitoneum. Improved the acquisition of psychomotor skills and achieved a 'good' usability score in the System Usability Scale test with experienced clinicians.",
+      "highlights": ["Segmentation", "Medical Imaging", "Blender", "Haptic Devices", "C++"],
+      "startDate": "2019-01-01",
+      "endDate": "2019-12-01",
+      "url": "https://github.com/chiaradivece/AbdominalModels_Segmentation"
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "WEISS, University College London",
+      "location": "London, United Kingdom",
+      "position": "Student Representative",
+      "url": "https://www.ucl.ac.uk",
+      "startDate": "2021-09-01",
+      "endDate": "Present",
+      "summary": "",
+      "highlights": []
+    },
+    {
+      "organization": "Alta Scuola Politecnica Alumni Mentoring Program",
+      "location": "Italy",
+      "position": "Volunteer Tutor",
+      "url": "",
+      "startDate": "2021-02-01",
+      "endDate": "Present",
+      "summary": "ASP alumni (Mentors) accompany the ASP students (Mentees) in their final year of the Alta Scuola Politecnica in an individual path of growth, designed for the needs of each student. Mentors and students create a relationship of trust and mutual exchange, benefiting from a constructive and long-lasting interaction.",
+      "highlights": []
+    },
+    {
+      "organization": "Alta Scuola Politecnica (ASP), Technology Talents",
+      "location": "Milan, Italy",
+      "position": "Participant",
+      "url": "https://www.polimi.it",
+      "startDate": "2017-10-01",
+      "endDate": "2020-02-01",
+      "summary": "Joint honor program of Politecnico di Milano and Politecnico di Torino running in parallel with the MSc and based on merit. Developed a multidisciplinary project recognized as one of the three best projects of the cycle.",
+      "highlights": []
+    },
+    {
+      "organization": "IEEE Women in Engineering Student Branch Affinity Group",
+      "location": "Milan, Italy",
+      "position": "Executive Board Member",
+      "url": "https://www.polimi.it",
+      "startDate": "2018-03-01",
+      "endDate": "Present",
+      "summary": "Part of the executive board of one of the largest associations at PoliMi, managed social media pages, and organized networking events.",
+      "highlights": []
+    },
+    {
+      "organization": "Professional Center of Academic Dance 'La Dance'",
+      "location": "Italy",
+      "position": "Ballet Student",
+      "url": "",
+      "startDate": "2000-09-01",
+      "endDate": "2015-06-01",
+      "summary": "Obtained the Diploma in Ballet, modern and contemporary dance.",
+      "highlights": []
+    }
+  ],
+  "extracurricular": [
+    {
+      "name": "Talks",
+      "highlights": [
+        {
+          "title": "Deep Reinforcement Learning-based Guidance in Freehand Obstetric Ultrasound Training",
+          "date": "2022-07-01",
+          "event": "Women in Medical Image Understanding and Analysis workshop (WiMIUA) - University of Cambridge",
+          "location": "Cambridge, UK",
+          "summary": "Invited Presenter"
+        },
+        {
+          "title": "Embodiment of AI: How robot can interpret environment information and act",
+          "date": "2020-05-01",
+          "event": "PhD Spring School - Università della Calabria - Dept of Computer Science",
+          "location": "Catanzaro, Italy",
+          "summary": "Lecturer and Organizer"
+        },
+        {
+          "title": "Theralight: Lightwave Technologies for Theranostic of Tumors",
+          "date": "2020-02-01",
+          "event": "SharedCity: Innovation, Participation and Sustainability in Cities of the Future",
+          "location": "Milan, Italy",
+          "summary": "Invited Speaker"
+        }
+      ]
     }
   ]
 }
