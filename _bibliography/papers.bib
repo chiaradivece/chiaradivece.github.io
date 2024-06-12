@@ -1,113 +1,84 @@
 ---
 ---
 
-@string{aps = {American Physical Society,}}
-
-@book{einstein1920relativity,
-  title={Relativity: the Special and General Theory},
-  author={Einstein, Albert},
-  year={1920},
-  publisher={Methuen & Co Ltd},
-  html={relativity.html}
+@article{le2024probe,
+  title={Probe motion during mid-trimester fetal anomaly scan in the clinical setting: A prospective observational study},
+  author={Le Lous, Maela and Vasconcelos, Francisco and Di Vece, Chiara and Dromey, Brian and Napolitano, Raffaele and Yoo, Soojoeong and Edwards, Eddie and Huaulme, Arnaud and Peebles, Donald and Stoyanov, Danail and others},
+  journal={European Journal of Obstetrics \& Gynecology and Reproductive Biology},
+  year={2024},
+  publisher={Elsevier}
 }
 
-@book{einstein1956investigations,
-  bibtex_show={true},
-  title={Investigations on the Theory of the Brownian Movement},
-  author={Einstein, Albert},
-  year={1956},
-  publisher={Courier Corporation},
-  preview={brownian-motion.gif}
+@article{di2024measuring,
+  title={Measuring proximity to standard planes during fetal brain ultrasound scanning},
+  author={Di Vece, Chiara and Cirigliano, Antonio and Lous, Meala Le and Napolitano, Raffaele and David, Anna L and Peebles, Donald and Jannin, Pierre and Vasconcelos, Francisco and Stoyanov, Danail},
+  journal={arXiv preprint arXiv:2404.07124},
+  year={2024},
+  selected={true},
+  abstract = {This paper introduces a novel pipeline designed to bring ultrasound (US) plane pose estimation closer to clinical use for more effective navigation to the standard planes (SPs) in the fetal brain. We propose a semi-supervised segmentation model utilizing both labeled SPs and unlabeled 3D US volume slices. Our model enables reliable segmentation across a diverse set of fetal brain images. Furthermore, the model incorporates a classification mechanism to identify the fetal brain precisely. Our model not only filters out frames lacking the brain but also generates masks for those containing it, enhancing the relevance of plane pose regression in clinical settings. We focus on fetal brain navigation from 2D ultrasound (US) video analysis and combine this model with a US plane pose regression network to provide sensorless proximity detection to SPs and non-SPs planes; we emphasize the importance of proximity detection to SPs for guiding sonographers, offering a substantial advantage over traditional methods by allowing earlier and more precise adjustments during scanning. We demonstrate the practical applicability of our approach through validation on real fetal scan videos obtained from sonographers of varying expertise levels. Our findings demonstrate the potential of our approach to complement existing fetal US technologies and advance prenatal diagnostic practices.},
+  html = {https://arxiv.org/abs/2404.07124},
+  preview = {miccai2024.png},
+  note = "Under review for the 27th International Conference on Medical Image Computing and Computer Assisted Intervention"
 }
 
-@article{einstein1950meaning,
-  abbr={AJP},
-  bibtex_show={true},
-  title={The meaning of relativity},
-  author={Einstein, Albert and Taub, AH},
-  journal={American Journal of Physics},
-  volume={18},
-  number={6},
-  pages={403--404},
-  year={1950},
-  publisher={American Association of Physics Teachers}
+@article{tmrb,
+  title={Ultrasound plane pose regression: assessing generalized pose coordinates in the fetal brain},
+  author={Di Vece, Chiara and Le Lous, Maela and Dromey, Brian and Vasconcelos, Francisco and David, Anna L and Peebles, Donald and Stoyanov, Danail},
+  journal={IEEE Transactions on Medical Robotics and Bionics},
+  year={2023},
+  selected={true},
+  abstract = {In obstetric ultrasound (US) scanning, the learner's ability to mentally build a three-dimensional (3D) map of the fetus from a two-dimensional (2D) US image represents a significant challenge in skill acquisition. We aim to build a US plane localization system for 3D visualization, training, and guidance without integrating additional sensors. This work builds on top of our previous work, which predicts the six-dimensional (6D) pose of arbitrarily oriented US planes slicing the fetal brain with respect to a normalized reference frame using a convolutional neural network (CNN) regression network. Here, we analyze in detail the assumptions of the normalized fetal brain reference frame and quantify its accuracy with respect to the acquisition of transventricular (TV) standard plane (SP) for fetal biometry. We investigate the impact of registration quality in the training and testing data and its subsequent effect on trained models. Finally, we introduce data augmentations and larger training sets that improve the results of our previous work, achieving median errors of 2.77 mm and 6.63° for translation and rotation, respectively.},
+  html = {https://ieeexplore.ieee.org/abstract/document/10302329},
+  preview = {tmrb.png},
+  publisher={IEEE}
 }
 
-@article{PhysRev.47.777,
-  abbr={PhysRev},
-  title={Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?},
-  author={Einstein, A. and Podolsky, B. and Rosen, N.},
-  abstract={In a complete theory there is an element corresponding to each element of reality. A sufficient condition for the reality of a physical quantity is the possibility of predicting it with certainty, without disturbing the system. In quantum mechanics in the case of two physical quantities described by non-commuting operators, the knowledge of one precludes the knowledge of the other. Then either (1) the description of reality given by the wave function in quantum mechanics is not complete or (2) these two quantities cannot have simultaneous reality. Consideration of the problem of making predictions concerning a system on the basis of measurements made on another system that had previously interacted with it leads to the result that if (1) is false then (2) is also false. One is thus led to conclude that the description of reality as given by a wave function is not complete.},
-  journal={Phys. Rev.},
-  location={New Jersey},
-  volume={47},
-  issue={10},
-  pages={777--780},
-  numpages={0},
-  year={1935},
-  month={May},
-  publisher=aps,
-  doi={10.1103/PhysRev.47.777},
-  url={http://link.aps.org/doi/10.1103/PhysRev.47.777},
-  html={https://journals.aps.org/pr/abstract/10.1103/PhysRev.47.777},
-  pdf={example_pdf.pdf},
-  altmetric={248277},
-  dimensions={true},
-  google_scholar_id={qyhmnyLat1gC},
-  video={https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ},
-  additional_info={. *More Information* can be [found here](https://github.com/alshedivat/al-folio/)},
-  selected={true}
+@inproceedings{hamlyn,
+  author = "Chiara Di~Vece and Brian Dromey and Francisco Vasconcelos and Anna David and Donald Peebles and Danail Stoyanov",
+  title =   "Deep Learning-based Plane Pose Regression towards Training in Freehand Obstetric Ultrasound",
+  booktitle = "Proceedings of the 12th Hamlyn Symposium on Medical Robotics 2022",
+  year = "2022",
 }
 
-@article{einstein1905molekularkinetischen,
-  title={{\"U}ber die von der molekularkinetischen Theorie der W{\"a}rme geforderte Bewegung von in ruhenden Fl{\"u}ssigkeiten suspendierten Teilchen},
-  author={Einstein, A.},
-  journal={Annalen der physik},
-  volume={322},
-  number={8},
-  pages={549--560},
-  year={1905},
-  publisher={Wiley Online Library}
+@article{ipcai,
+  author =       "Chiara Di~Vece and Brian Dromey and Francisco Vasconcelos and Anna David and Donald Peebles and Danail Stoyanov",
+  title =        "Deep Learning-based Plane Pose Regression in Obstetric Ultrasound",
+  journal =      "International Journal for Computer Assisted Radiology and Surgery (IJCARS)",
+  year =         "2022",
+  selected={true},
+  abstract = {Purpose: In obstetric ultrasound (US) scanning, the learner's ability to mentally build a three-dimensional (3D) map of the fetus from a two-dimensional (2D) US image represents a major challenge in skill acquisition. We aim to build a US plane localisation system for 3D visualisation, training, and guidance without integrating additional sensors. Methods: We propose a regression convolutional neural network (CNN) using image features to estimate the six-dimensional pose of arbitrarily oriented US planes relative to the fetal brain centre. The network was trained on synthetic images acquired from phantom 3D US volumes and fine-tuned on real scans. Training data was generated by slicing US volumes into imaging planes in Unity at random coordinates and more densely around the standard transventricular (TV) plane. Results: With phantom data, the median errors are 0.90 mm/1.17 and 0.44 mm/1.21 for random planes and planes close to the TV one, respectively. With real data, using a different fetus with the same gestational age (GA), these errors are 11.84 mm/25.17. The average inference time is 2.97 ms per plane. Conclusion: The proposed network reliably localises US planes within the fetal brain in phantom data and successfully generalises pose regression for an unseen fetal brain from a similar GA as in training. Future development will expand the prediction to volumes of the whole fetus and assess its potential for vision-based, freehand US-assisted navigation when acquiring standard fetal planes.},
+  html = {https://link.springer.com/article/10.1007/s11548-022-02609-z},
+  preview = {ijcars.png},
+  note = "Accepted for presentation at the 13th International Conference on Information Processing in Computer-Assisted Interventions (IPCAI 2022)"
+ }
+ 
+@article{ral,
+  author =       "{Segato*, A. and \textbf{Di~Vece*, C.}} and Sara Zucchelli and Marco Di~Marzo and Thomas Wendler and Mohammad Farid Azampour and Stefano Galvan and Riccardo Secoli and Elena De~Momi",
+  title =        "Position-Based Dynamics Simulator of Brain Deformations for Path Planning and Intra-Operative Control in Keyhole Neurosurgery",
+  journal =      "IEEE Robotics and Automation Letters",
+  year =         "2021",
+  note = "\textbf{*Equal contribution}; Accepted for presentation at the 2021 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2021)"
+ }
+
+@article{ijcars,
+  author =       "Chiara Di~Vece and Cristian Luciano and Elena De~Momi",
+  title =        "Improvement of Psychomotor Skills Development for Veress Needle Placement using Haptics and Virtual Reality",
+  journal =      "International Journal for Computer Assisted Radiology and Surgery (IJCARS)",
+  year =         "2021"
 }
 
-@article{einstein1905movement,
-  abbr={Ann. Phys.},
-  title={Un the movement of small particles suspended in statiunary liquids required by the molecular-kinetic theory 0f heat},
-  author={Einstein, A.},
-  journal={Ann. Phys.},
-  volume={17},
-  pages={549--560},
-  year={1905}
+@inproceedings{embc,
+  author =       "Giulia Crocioni* and Chiara Di~Vece* and Hananeh Esmailbeigi",
+  title =        "GLOS: GLOve for Speech Recognition",
+  booktitle =  "2019 41st Annual International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC)",
+  year =         "2019",
+  note = "\textbf{*Equal contribution}"
 }
 
-@article{einstein1905electrodynamics,
-  title={On the electrodynamics of moving bodies},
-  author={Einstein, A.},
-  year={1905}
-}
 
-@Article{einstein1905photoelectriceffect,
-  bibtex_show={true},
-  abbr={Ann. Phys.},
-  title="{{\"U}ber einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt}",
-  author={Albert Einstein},
-  abstract={This is the abstract text.},
-  journal={Ann. Phys.},
-  volume={322},
-  number={6},
-  pages={132--148},
-  year={1905},
-  doi={10.1002/andp.19053220607},
-  award={Albert Einstein receveid the **Nobel Prize in Physics** 1921 *for his services to Theoretical Physics, and especially for his discovery of the law of the photoelectric effect*},
-  award_name={Nobel Prize}
-}
-
-@book{przibram1967letters,
-  bibtex_show={true},
-  title={Letters on wave mechanics},
-  author={Einstein, Albert and Schrödinger, Erwin and Planck, Max and Lorentz, Hendrik Antoon and Przibram, Karl},
-  year={1967},
-  publisher={Vision},
-  preview={wave-mechanics.gif},
-  abbr={Vision}
-}
+@inproceedings{rtsi,
+  author =       "{Bracco*, F. and \textbf{Di~Vece*, C.}} and Luca Cerina and Marco Domenico Santambrogio",
+  title =        "BIE-PInCS: Brain injury evaluation with pupillometer based on infrared camera system",
+  booktitle =      "2017 IEEE 3rd International Forum on Research and Technologies for Society and Industry (RTSI)",
+  year =         "2017",
+  note = "\textbf{*Equal contribution}"}
