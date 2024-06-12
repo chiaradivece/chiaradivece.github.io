@@ -30,6 +30,6 @@ I\'ve received my Master of Science in Bioengineering from the University of Ill
 
 I\'ve received my B.Sc. in Biomedical Engineering (July 2017) from Politecnico di Milano, discussing my B.Sc. thesis entitled \"FPGA-based system for Brain Injury evaluation through pupillometry\" developed at the NECSTLab (Novel, Emerging Computing System Technologies Laboratory) of Politecnico di Milano.
 
-Dive into my research papers and publications for a deeper look into my scientific contributions on the [publications page](/chiaradivece/publications/).
+Dive into my research papers and publications for a deeper look into my scientific contributions on the [publications page](publications).
 
 I\'m always open to collaboration and inquiries. Reach out to me at: chiara(dot)divece(dot)20@ucl(dot)ac(dot)uk
