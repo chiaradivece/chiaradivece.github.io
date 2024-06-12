@@ -1,76 +1,65 @@
-<!-- ---
+---
 layout: page
-title: Miscellaneous
+title: Projects
 permalink: /projects/
-description: 
+description: A growing collection of your cool projects.
 nav: true
-nav_order: 5
-display_categories: [fun]
+nav_order: 3
+display_categories: [work, fun]
 horizontal: false
 ---
-**Music**
-
-In my spare time, I like to compose music. You can check my music on [Spotify](https://open.spotify.com/artist/6wWv9SWI07KvCb9YTNJFpa?si=QDW-VkW6QuKi_b2RUyxBxw) or [Apple music](https://music.apple.com/us/artist/uncle-pores/1719448357).
-
-The genre of my music is mostly pop folk and Indie. I learnt Indian classical music for a long time, so I also make fusion electronic music with Indian classical instruments. I generally use open-source AI softwares to help me in the composition and the vocals.
-
-Some of my representative albums are below.
-<!-- projects_horizontal.liquid -->
-<div class="col">
-  <div class="project-card">
-    <h3>{{ project.title }}</h3>
-    <a href="{{ project.link }}">
-      <img src="{{ project.image }}" alt="{{ project.title }}">
-    </a>
-    <p>{{ project.description }}</p>
-  </div>
-</div>
-
 
 <!-- pages/projects.md -->
 <div class="projects">
-{%- if site.enable_project_categories and page.display_categories %}
+{% if site.enable_project_categories and page.display_categories %}
   <!-- Display categorized projects -->
-  {%- for category in page.display_categories %}
-  <h2 class="category">{{ category }}</h2>
-  {%- assign categorized_projects = site.projects | where: "category", category -%}
-  {%- assign sorted_projects = categorized_projects | sort: "importance" %}
+  {% for category in page.display_categories %}
+  <a id="{{ category }}" href=".#{{ category }}">
+    <h2 class="category">{{ category }}</h2>
+  </a>
+  {% assign categorized_projects = site.projects | where: "category", category %}
+  {% assign sorted_projects = categorized_projects | sort: "importance" %}
   <!-- Generate cards for each project -->
-  {% if page.horizontal -%}
+  {% if page.horizontal %}
   <div class="container">
-    <div class="row row-cols-2">
-    {%- for project in sorted_projects -%}
+    <div class="row row-cols-1 row-cols-md-2">
+    {% for project in sorted_projects %}
       {% include projects_horizontal.liquid %}
-    {%- endfor %}
+    {% endfor %}
     </div>
   </div>
-  {%- else -%}
-  <div class="grid">
-    {%- for project in sorted_projects -%}
+  {% else %}
+  <div class="row row-cols-1 row-cols-md-3">
+    {% for project in sorted_projects %}
       {% include projects.liquid %}
-    {%- endfor %}
+    {% endfor %}
   </div>
-  {%- endif -%}
+  {% endif %}
   {% endfor %}
 
-{%- else -%}
+{% else %}
+
 <!-- Display projects without categories -->
-  {%- assign sorted_projects = site.projects | sort: "importance" -%}
+
+{% assign sorted_projects = site.projects | sort: "importance" %}
+
   <!-- Generate cards for each project -->
-  {% if page.horizontal -%}
+
+{% if page.horizontal %}
+
   <div class="container">
-    <div class="row row-cols-2">
-    {%- for project in sorted_projects -%}
+    <div class="row row-cols-1 row-cols-md-2">
+    {% for project in sorted_projects %}
       {% include projects_horizontal.liquid %}
-    {%- endfor %}
+    {% endfor %}
     </div>
   </div>
-  {%- else -%}
-  <div class="grid">
-    {%- for project in sorted_projects -%}
+  {% else %}
+  <div class="row row-cols-1 row-cols-md-3">
+    {% for project in sorted_projects %}
       {% include projects.liquid %}
-    {%- endfor %}
+    {% endfor %}
   </div>
-  {%- endif -%}
-{%- endif -%}
-</div> -->
+  {% endif %}
+{% endif %}
+</div>
