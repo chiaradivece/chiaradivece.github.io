@@ -1,34 +1,80 @@
-"adams":
-  - firstname: ["Edwin", "E.", "E. P.", "Edwin Plimpton"]
-    url: https://en.wikipedia.org/wiki/Edwin_Plimpton_Adams
+"Stoyanov":
+  - firstname: ["Danail", "D.", "Dan"]
+    url: https://profiles.ucl.ac.uk/32290-danail-stoyanov
 
-"podolsky":
-  - firstname: ["Boris", "B.", "B. Y.", "Boris Yakovlevich"]
-    url: https://en.wikipedia.org/wiki/Boris_Podolsky
+"Vasconcelos":
+  - firstname: ["Francisco", "F."]
+    url: https://profiles.ucl.ac.uk/53449-francisco-porto-guerra-e-vasconcelos
 
-"rosen":
-  - firstname: ["Nathan", "N."]
-    url: https://en.wikipedia.org/wiki/Nathan_Rosen
+"Le Lous":
+  - firstname: ["Maela", "M."]
+    url: https://medicis.univ-rennes1.fr/members/maela.le.lous/index
 
-"bach":
-  - firstname: ["Johann Sebastian", "J. S."]
-    url: https://en.wikipedia.org/wiki/Johann_Sebastian_Bach
+"Dromey":
+  - firstname: ["Brian", "B."]
+    url: https://www.linkedin.com/in/brian-dromey-4a0944248/?trk=public_profile_samename-profile&originalSubdomain=uk
+  
+"David":
+  - firstname: ["Anna", "A.", "A. L."]
+    url: https://www.uclh.nhs.uk/our-services/find-consultant/professor-anna-david
 
-  - firstname: ["Carl Philipp Emanuel", "C. P. E."]
-    url: https://en.wikipedia.org/wiki/Carl_Philipp_Emanuel_Bach
+"Peblees":
+  - firstname: ["Donald", "D."]
+    url: https://www.uclh.nhs.uk/our-services/find-consultant/professor-donald-peebles
 
-"przibram":
-  - firstname: ["Karl"]
-    url: https://link.springer.com/article/10.1007/s00016-019-00242-z
+"Napolitano":
+  - firstname: ["Raffaele", "R."]
+    url: https://www.uclh.nhs.uk/our-services/find-consultant/mr-raffaele-napolitano
 
-"schrodinger":
-  - firstname: ["Erwin"]
-    url: https://en.wikipedia.org/wiki/Erwin_Schr%C3%B6dinger
+"Jannin":
+  - firstname: ["Pierre", "P."]
+    url: https://medicis.univ-rennes1.fr/members/pierre.jannin/index
 
-"lorentz":
-  - firstname: ["Hendrik Antoon"]
-    url: https://en.wikipedia.org/wiki/Hendrik_Lorentz
+"De Momi":
+  - firstname: ["Elena", "E."]
+    url: https://www.deib.polimi.it/eng/people/details/172386
 
-"planck":
-  - firstname: ["Max"]
-    url: https://en.wikipedia.org/wiki/Max_Planck
+"Azampour": 
+  - firstname: ["Mohammad Farid", "M. F."]
+    url: https://www.cs.cit.tum.de/camp/members/mohammad-farid-azampour/
+
+"Segato":
+  - firstname: ["Alice", "A."]
+    url: https://scholar.google.com/citations?user=vRPYolkAAAAJ&hl=it
+
+"Galvan":
+  - firstname: ["Stefano", "S."]
+    url: https://profiles.imperial.ac.uk/s.galvan
+
+"Wendler":
+  - firstname: ["Thomas", "T."]
+    url: https://campar.in.tum.de/Main/ThomasWendler
+
+"Secoli":
+  - firstname: ["Riccardo", "R."]
+    url: https://profiles.imperial.ac.uk/r.secoli
+
+"Luciano":
+  - firstname: ["Cristian", "C."]
+    url: https://scholar.google.com/citations?user=1fNSkFwAAAAJ&hl=en
+
+"Esmailbeigi":
+  - firstname: ["Hananeh", "H."]
+    url: https://bme.uic.edu/profiles/hananeh-esmailbeigi-phd/
+
+"Santambrogio":
+  - firstname: ["Marco", "M.", "Marco Domenico", "M. D."]
+    url: https://www.deib.polimi.it/eng/people/details/356156
+
+"Crocioni":
+  - firstname: ["Giulia", "G."]
+    url: https://www.esciencecenter.nl/team/giulia-crocioni/
+
+"Bracco":
+  - firstname: ["Filippo", "F."]
+    url: https://www.mecc.polimi.it/dottorato/i-nostri-dottorandi/xxxvii-ciclo/filippo-bracco
+
+"Cerina":
+  - firstname: ["Luca", "L."]
+    url: https://research.tue.nl/en/persons/luca-cerina
+
