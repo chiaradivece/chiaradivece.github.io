@@ -71,6 +71,7 @@ Three claims, in this order of weight (confirmed):
 - **Name and title:** Chiara Di Vece, PhD. AI Lead (short form); AI Lead and Founding Applied Scientist (full form).
 - **Voice:** first person, plain and specific, warm without hype. Copy that sounded generated was rejected in review; a plain statement beats a clever one. Approved lines:
   - "From computer vision for fetal ultrasound to soft robotics."
+  - About: "I build real-time perception for things that move: first an ultrasound probe over a fetal brain, now soft robots. I lead AI at morph, a soft robotics startup still in stealth."
   - "My PhD taught machines to find their way through fetal ultrasound. Now I build AI for soft robots."
   - "The scan brings the two together: a simulated soft actuator, shown as an ultrasound image."
 - **Binding visual constraints set by the owner** (recorded, not expanded):
@@ -85,7 +86,7 @@ Three claims, in this order of weight (confirmed):
 - **Portrait:** `assets/img/chiara.jpg`, plus a cutout at `assets/img/chiara-cutout.webp`.
 - **CV:** the short CV at `assets/pdf/Chiara_Di_Vece_CV.pdf`. An extended CV exists but is not published.
 - **Publications:** 13 papers with links and notes in `_data/publications.yml`. Live Scholar numbers are in `_data/scholar.yml`.
-- **Recognition:** awards, reviewing venues, talks, teaching, mentoring and community roles in `_data/recognition.yml`.
+- **Recognition:** awards, reviewing venues, talks, teaching, mentoring and community roles in `_data/recognition.yml`. The "awards" number counts competitive awards only; degree honours and admissions carry `honour: true`, stay in the Awards row and are not counted.
 - **Research images:** `assets/img/research/fetal-pipeline.jpg` and `assets/img/research/hykey.jpg`.
 - **Viva photos:** `assets/img/news/viva-*.webp`.
   - The group photo shows about 25 colleagues; the owner confirmed their consent to publish it (October 2026).

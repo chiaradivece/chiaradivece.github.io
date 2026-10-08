@@ -92,9 +92,9 @@ layout: default
       <div class="about-text" data-reveal>
         <h2 class="section-title">Hi, I'm <i>Chiara</i>.</h2>
         <p class="about-lead">
-          I'm a biomedical engineer turned AI scientist. I lead AI at
-          <a href="{{ p.company_url }}" rel="noopener">morph</a>, a soft robotics startup still in
-          stealth, across computer vision, physical AI, robotics and AI agents.
+          I build real-time perception for things that move: first an ultrasound probe over a fetal
+          brain, now soft robots. I lead AI at <a href="{{ p.company_url }}" rel="noopener">morph</a>,
+          a soft robotics startup still in stealth.
         </p>
         <p>
           My PhD at UCL taught deep learning models to guide sonographers to the right views in
@@ -114,7 +114,8 @@ layout: default
           <div class="number"><dt>citations</dt><dd>{{ scholar.citations }}</dd></div>
           <div class="number"><dt>h-index</dt><dd>{{ scholar.h_index }}</dd></div>
           <div class="number"><dt>papers</dt><dd>{{ pubs.size }}</dd></div>
-          <div class="number"><dt>awards and honours</dt><dd>{{ rec.awards.size }}</dd></div>
+          {%- assign competitive = rec.awards | where_exp: "a", "a.honour != true" %}
+          <div class="number"><dt>awards</dt><dd>{{ competitive.size }}</dd></div>
         </dl>
         <p class="facts-source">Citations and h-index from <a href="{{ scholar.profile | escape }}" rel="noopener">Google Scholar</a>, updated {{ scholar.updated | date: "%B %Y" }}.</p>
       </div>
@@ -273,7 +274,18 @@ layout: default
 
     {%- assign els = site.data.elements %}
     <details class="el-panel" data-el-panel open>
-      <summary class="el-panel-toggle"><span>Filter by element</span><span class="el-panel-state" data-el-panel-state></span></summary>
+      <summary class="el-panel-toggle"><span>Filter papers</span><span class="el-panel-state" data-el-panel-state></span></summary>
+      <div class="pub-controls">
+        <ul class="el-legend" aria-label="Element families">
+          {%- for f in els.families %}
+          <li class="el-key" data-family="{{ f.id }}"><span class="el-swatch" aria-hidden="true"></span>{{ f.name }}</li>
+          {%- endfor %}
+        </ul>
+        <div class="chips" role="group" aria-label="More filters" data-pub-filters>
+          <button type="button" class="chip" data-toggle="first" aria-pressed="false">First author</button>
+          <button type="button" class="chip" data-toggle="journal" aria-pressed="false">Journals</button>
+        </div>
+      </div>
     <div class="elements" role="group" aria-label="Filter papers by research element" data-element-grid data-stagger style="--step: 25ms">
       {%- for el in els.elements %}
       {%- assign n = 0 %}
@@ -295,18 +307,6 @@ layout: default
         <a class="pub-bar-link" href="#publications" data-pub-change>Change</a>
         <button type="button" class="pub-bar-link" data-pub-bar-clear>Clear</button>
       </p>
-    </div>
-
-    <div class="pub-controls">
-      <ul class="el-legend" aria-label="Element families">
-        {%- for f in els.families %}
-        <li class="el-key" data-family="{{ f.id }}"><span class="el-swatch" aria-hidden="true"></span>{{ f.name }}</li>
-        {%- endfor %}
-      </ul>
-      <div class="chips" role="group" aria-label="More filters" data-pub-filters>
-        <button type="button" class="chip" data-toggle="first" aria-pressed="false">First author</button>
-        <button type="button" class="chip" data-toggle="journal" aria-pressed="false">Journals</button>
-      </div>
     </div>
 
     <div class="pub-years" id="paper-list" data-pub-list>

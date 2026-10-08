@@ -33,18 +33,21 @@ awards:
   - year: 2019
     title: MSc with honours
     detail: Politecnico di Milano and Politecnico di Torino
+    honour: true  # shown in the rail, not counted in "awards"
   - year: 2019
     title: Rare Disease Hackathon
     detail: 3rd place. Florence, Italy
   - year: 2018
     title: MSc with honours
     detail: University of Illinois Chicago
+    honour: true
   - year: 2018
     title: IEEE Computer Society Lance Stafford Larson Writing Award
     detail: 3rd place, undergraduate competition
   - year: 2017
     title: Admitted to Alta Scuola Politecnica
     detail: Top 1% of students at PoliMi and PoliTo
+    honour: true
   - year: 2017
     title: Rare Disease Hackathon
     detail: 1st place. Florence, Italy
