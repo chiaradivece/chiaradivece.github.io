@@ -1,0 +1,521 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-08T19:35:35+00:00",
+  "title": "Design System: Chiara Di Vece",
+  "extensions": {
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "Powder Blue",
+        "tonalRamp": [
+          "oklch(15% 0.057 248.5)",
+          "oklch(26% 0.057 248.5)",
+          "oklch(38% 0.057 248.5)",
+          "oklch(49% 0.057 248.5)",
+          "oklch(61% 0.057 248.5)",
+          "oklch(72% 0.057 248.5)",
+          "oklch(84% 0.057 248.5)",
+          "oklch(95% 0.057 248.5)"
+        ]
+      },
+      "accent-mark": {
+        "role": "primary",
+        "displayName": "Signal Blue",
+        "tonalRamp": [
+          "oklch(15% 0.095 249.1)",
+          "oklch(26% 0.095 249.1)",
+          "oklch(38% 0.095 249.1)",
+          "oklch(49% 0.095 249.1)",
+          "oklch(61% 0.095 249.1)",
+          "oklch(72% 0.095 249.1)",
+          "oklch(84% 0.095 249.1)",
+          "oklch(95% 0.095 249.1)"
+        ]
+      },
+      "accent-ink": {
+        "role": "primary",
+        "displayName": "Ink Blue",
+        "tonalRamp": [
+          "oklch(15% 0.092 247.4)",
+          "oklch(26% 0.092 247.4)",
+          "oklch(38% 0.092 247.4)",
+          "oklch(49% 0.092 247.4)",
+          "oklch(61% 0.092 247.4)",
+          "oklch(72% 0.092 247.4)",
+          "oklch(84% 0.092 247.4)",
+          "oklch(95% 0.092 247.4)"
+        ]
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Cool Paper",
+        "tonalRamp": [
+          "oklch(15% 0.003 247.9)",
+          "oklch(26% 0.003 247.9)",
+          "oklch(38% 0.003 247.9)",
+          "oklch(49% 0.003 247.9)",
+          "oklch(61% 0.003 247.9)",
+          "oklch(72% 0.003 247.9)",
+          "oklch(84% 0.003 247.9)",
+          "oklch(95% 0.003 247.9)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "tonalRamp": [
+          "oklch(15% 0.002 247.8)",
+          "oklch(26% 0.002 247.8)",
+          "oklch(38% 0.002 247.8)",
+          "oklch(49% 0.002 247.8)",
+          "oklch(61% 0.002 247.8)",
+          "oklch(72% 0.002 247.8)",
+          "oklch(84% 0.002 247.8)",
+          "oklch(95% 0.002 247.8)"
+        ]
+      },
+      "surface-2": {
+        "role": "neutral",
+        "displayName": "Sunk Surface",
+        "tonalRamp": [
+          "oklch(15% 0.009 247.9)",
+          "oklch(26% 0.009 247.9)",
+          "oklch(38% 0.009 247.9)",
+          "oklch(49% 0.009 247.9)",
+          "oklch(61% 0.009 247.9)",
+          "oklch(72% 0.009 247.9)",
+          "oklch(84% 0.009 247.9)",
+          "oklch(95% 0.009 247.9)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "oklch(15% 0.014 258.4)",
+          "oklch(26% 0.014 258.4)",
+          "oklch(38% 0.014 258.4)",
+          "oklch(49% 0.014 258.4)",
+          "oklch(61% 0.014 258.4)",
+          "oklch(72% 0.014 258.4)",
+          "oklch(84% 0.014 258.4)",
+          "oklch(95% 0.014 258.4)"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Soft Ink",
+        "tonalRamp": [
+          "oklch(15% 0.021 251.1)",
+          "oklch(26% 0.021 251.1)",
+          "oklch(38% 0.021 251.1)",
+          "oklch(49% 0.021 251.1)",
+          "oklch(61% 0.021 251.1)",
+          "oklch(72% 0.021 251.1)",
+          "oklch(84% 0.021 251.1)",
+          "oklch(95% 0.021 251.1)"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "tonalRamp": [
+          "oklch(15% 0.023 250.6)",
+          "oklch(26% 0.023 250.6)",
+          "oklch(38% 0.023 250.6)",
+          "oklch(49% 0.023 250.6)",
+          "oklch(61% 0.023 250.6)",
+          "oklch(72% 0.023 250.6)",
+          "oklch(84% 0.023 250.6)",
+          "oklch(95% 0.023 250.6)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "tonalRamp": [
+          "oklch(15% 0.014 248.0)",
+          "oklch(26% 0.014 248.0)",
+          "oklch(38% 0.014 248.0)",
+          "oklch(49% 0.014 248.0)",
+          "oklch(61% 0.014 248.0)",
+          "oklch(72% 0.014 248.0)",
+          "oklch(84% 0.014 248.0)",
+          "oklch(95% 0.014 248.0)"
+        ]
+      },
+      "screen": {
+        "role": "neutral",
+        "displayName": "Monitor Black",
+        "tonalRamp": [
+          "oklch(15% 0.010 255.7)",
+          "oklch(26% 0.010 255.7)",
+          "oklch(38% 0.010 255.7)",
+          "oklch(49% 0.010 255.7)",
+          "oklch(61% 0.010 255.7)",
+          "oklch(72% 0.010 255.7)",
+          "oklch(84% 0.010 255.7)",
+          "oklch(95% 0.010 255.7)"
+        ]
+      },
+      "on-accent": {
+        "role": "neutral",
+        "displayName": "Ink on Blue"
+      },
+      "ghost": {
+        "role": "neutral",
+        "displayName": "Ghost"
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper"
+      },
+      "nav-bg": {
+        "role": "neutral",
+        "displayName": "Nav Glass"
+      },
+      "bg-dark": {
+        "role": "neutral",
+        "displayName": "Cool Paper (dark)"
+      },
+      "surface-dark": {
+        "role": "neutral",
+        "displayName": "Surface (dark)"
+      },
+      "surface-2-dark": {
+        "role": "neutral",
+        "displayName": "Sunk Surface (dark)"
+      },
+      "ink-dark": {
+        "role": "neutral",
+        "displayName": "Ink (dark)"
+      },
+      "ink-2-dark": {
+        "role": "neutral",
+        "displayName": "Soft Ink (dark)"
+      },
+      "ink-3-dark": {
+        "role": "neutral",
+        "displayName": "Muted Ink (dark)"
+      },
+      "line-dark": {
+        "role": "neutral",
+        "displayName": "Hairline (dark)"
+      },
+      "accent-mark-dark": {
+        "role": "primary",
+        "displayName": "Signal Blue (dark)"
+      },
+      "accent-ink-dark": {
+        "role": "primary",
+        "displayName": "Ink Blue (dark)"
+      },
+      "ghost-dark": {
+        "role": "neutral",
+        "displayName": "Ghost (dark)"
+      },
+      "paper-dark": {
+        "role": "neutral",
+        "displayName": "Paper (dark)"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The hero headline, one phrase per line, ending in a Signal Blue full stop."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles, with exactly one italic word (400) in the same family."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Research card headings; smaller titles step down to about 1.1rem/600."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Opening paragraphs of About and Research, and the lead news item."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Paragraphs in Soft Ink, 58-62ch, tabular numerals."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Scholar numbers in About; the first one in Ink Blue."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Dates, captions and metadata in Muted Ink."
+      },
+      "label-caps": {
+        "displayName": "Label Caps",
+        "purpose": "Only on the Scientist ID badge, where an ID card would use it."
+      }
+    },
+    "shadows": [
+      {
+        "name": "soft",
+        "value": "0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)",
+        "purpose": "Hover lift for research cards, award cards and element tiles; the scan monitor at rest."
+      },
+      {
+        "name": "soft-dark",
+        "value": "0 1px 0 rgb(255 255 255 / 0.03), 0 18px 40px -20px rgb(0 0 0 / 0.7)",
+        "purpose": "Soft, in the dark theme."
+      },
+      {
+        "name": "lift",
+        "value": "0 1px 0 rgb(16 20 26 / 0.04), 0 28px 48px -26px rgb(36 52 70 / 0.45)",
+        "purpose": "The Scientist ID badge, hanging in front of the page."
+      },
+      {
+        "name": "lift-dark",
+        "value": "0 1px 0 rgb(255 255 255 / 0.03), 0 28px 48px -24px rgb(0 0 0 / 0.75)",
+        "purpose": "Lift, in the dark theme."
+      },
+      {
+        "name": "selection-ring",
+        "value": "0 0 0 2px var(--bg), 0 0 0 4px var(--accent-mark)",
+        "purpose": "A selected element tile; combined with soft on hover."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 2px solid var(--accent-mark); outline-offset: 3px",
+        "purpose": "Every :focus-visible element."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "Entrances, presses, reveals, hover lifts. The default curve."
+      },
+      {
+        "name": "ease-in-out",
+        "value": "cubic-bezier(0.77, 0, 0.175, 1)",
+        "purpose": "Things moving on screen: the nav underline, the clip-path image reveal, view transitions."
+      },
+      {
+        "name": "press",
+        "value": "transform: scale(0.97) over 160ms ease-out",
+        "purpose": "Every pressable element on :active (icon buttons 0.95)."
+      },
+      {
+        "name": "hover-color",
+        "value": "200ms ease",
+        "purpose": "Colour and border changes."
+      },
+      {
+        "name": "lift",
+        "value": "translateY(-2px) + soft shadow over 200ms ease-out",
+        "purpose": "Cards and tiles on fine-pointer hover; reduced motion keeps only the shadow."
+      },
+      {
+        "name": "reveal",
+        "value": "translateY(16px) + fade over 600ms ease-out; stagger step 50ms",
+        "purpose": "First view of blocks and groups; reduced motion keeps the fade."
+      },
+      {
+        "name": "image-reveal",
+        "value": "clip-path inset(0 0 100% 0) to inset(0) over 800ms ease-in-out",
+        "purpose": "Figures uncovered from the top on first view."
+      },
+      {
+        "name": "view-transition",
+        "value": "260ms ease-in-out; exits 150ms, entries 240ms",
+        "purpose": "Publication filtering; instant when keyboard-triggered."
+      },
+      {
+        "name": "dialog",
+        "value": "open 220ms, close 150ms, scale 0.96 to 1",
+        "purpose": "The photo lightbox, using @starting-style."
+      },
+      {
+        "name": "marquee",
+        "value": "60s linear infinite",
+        "purpose": "Reviewing venues; pauses on hover and through a toggle."
+      },
+      {
+        "name": "badge-spring",
+        "value": "stiffness 60, damping 5, limit 28deg",
+        "purpose": "The Scientist ID badge pendulum (assets/js/motion.js)."
+      },
+      {
+        "name": "parallax-spring",
+        "value": "stiffness 90, damping 18",
+        "purpose": "Hero portrait pointer parallax, fine pointers only."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "560px"
+      },
+      {
+        "name": "tiles-8",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "stack",
+        "value": "900px"
+      },
+      {
+        "name": "nav",
+        "value": "1024px"
+      },
+      {
+        "name": "about-3col",
+        "value": "1100px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Solid Button",
+      "kind": "button",
+      "refersTo": "button-solid",
+      "description": "Primary action, such as Download CV. Ink pill that turns Powder Blue on hover.",
+      "html": "<a class=\"ds-btn ds-btn-solid\" href=\"#\">Download CV</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 0.5rem; height: 48px; padding: 0 1.4rem; border-radius: 999px; border: 1px solid transparent; font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); font-weight: 550; font-size: 0.975rem; white-space: nowrap; text-decoration: none; cursor: pointer; transition: transform 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)), background-color 200ms ease, border-color 200ms ease, color 200ms ease; } .ds-btn:active { transform: scale(0.97); } .ds-btn:focus-visible { outline: 2px solid var(--accent-mark, #5b8fc2); outline-offset: 3px; } .ds-btn-solid { background: var(--ink, #10141a); color: var(--bg, #f4f6f8); } .ds-btn-solid:hover { background: var(--accent, #a8c8e8); color: var(--on-accent, #10141a); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action, such as Get in touch. Hairline pill whose border turns Ink on hover.",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#\">Get in touch</a>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; height: 48px; padding: 0 1.4rem; border-radius: 999px; border: 1px solid var(--line, #d3dbe3); background: transparent; color: var(--ink, #10141a); font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); font-weight: 550; font-size: 0.975rem; text-decoration: none; cursor: pointer; transition: transform 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)), border-color 200ms ease; } .ds-btn-ghost:hover { border-color: var(--ink, #10141a); } .ds-btn-ghost:active { transform: scale(0.97); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--accent-mark, #5b8fc2); outline-offset: 3px; }"
+    },
+    {
+      "name": "Icon Button",
+      "kind": "button",
+      "refersTo": "icon-button",
+      "description": "40px circle for the theme toggle, the menu, rail arrows and pause controls.",
+      "html": "<button class=\"ds-icon-btn\" type=\"button\" aria-label=\"Next\"><svg viewBox=\"0 0 256 256\" width=\"18\" height=\"18\" aria-hidden=\"true\" fill=\"currentColor\"><path d=\"M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z\"/></svg></button>",
+      "css": ".ds-icon-btn { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 999px; border: 1px solid var(--line, #d3dbe3); background: transparent; color: var(--ink, #10141a); cursor: pointer; transition: transform 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)), border-color 200ms ease; } .ds-icon-btn:hover { border-color: var(--ink, #10141a); } .ds-icon-btn:active { transform: scale(0.95); } .ds-icon-btn:focus-visible { outline: 2px solid var(--accent-mark, #5b8fc2); outline-offset: 3px; }"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Publication filters. Hairline pill; fills with Ink when pressed.",
+      "html": "<div class=\"ds-chips\"><button class=\"ds-chip\" type=\"button\" aria-pressed=\"true\">First author</button><button class=\"ds-chip\" type=\"button\" aria-pressed=\"false\">Journal</button></div>",
+      "css": ".ds-chips { display: flex; gap: 0.5rem; } .ds-chip { display: inline-flex; align-items: center; height: 38px; padding: 0 1rem; border-radius: 999px; border: 1px solid var(--line, #d3dbe3); background: transparent; color: var(--ink-2, #3f4852); font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); font-size: 0.9rem; cursor: pointer; transition: transform 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)), background-color 200ms ease, color 200ms ease, border-color 200ms ease; } .ds-chip:hover { border-color: var(--ink, #10141a); color: var(--ink, #10141a); } .ds-chip:active { transform: scale(0.97); } .ds-chip:focus-visible { outline: 2px solid var(--accent-mark, #5b8fc2); outline-offset: 3px; } .ds-chip[aria-pressed=\"true\"] { background: var(--ink, #10141a); color: var(--bg, #f4f6f8); border-color: var(--ink, #10141a); }"
+    },
+    {
+      "name": "Tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Paper status and venue labels; the accent variant is a Powder Blue fill.",
+      "html": "<span class=\"ds-tag ds-tag-accent\">Journal</span> <span class=\"ds-tag\">MICCAI 2025</span>",
+      "css": ".ds-tag { display: inline-flex; align-items: center; height: 22px; padding: 0 0.6rem; border-radius: 999px; border: 1px solid var(--line, #d3dbe3); color: var(--ink-2, #3f4852); font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); font-size: 0.75rem; font-weight: 500; white-space: nowrap; } .ds-tag-accent { border-color: transparent; background: var(--accent, #a8c8e8); color: var(--on-accent, #10141a); }"
+    },
+    {
+      "name": "Element Tile",
+      "kind": "custom",
+      "refersTo": "element-learning",
+      "description": "Periodic-table filter tile. Families differ by value (Ink, Powder Blue, Sunk Surface, outline).",
+      "html": "<div class=\"ds-els\"><button class=\"ds-el ds-el-imaging\" type=\"button\" aria-pressed=\"false\"><span class=\"ds-el-count\">7</span><span class=\"ds-el-symbol\">Us</span><span class=\"ds-el-name\">Ultrasound</span></button><button class=\"ds-el ds-el-learning\" type=\"button\" aria-pressed=\"true\"><span class=\"ds-el-count\">9</span><span class=\"ds-el-symbol\">Dl</span><span class=\"ds-el-name\">Deep learning</span></button><button class=\"ds-el ds-el-geometry\" type=\"button\" aria-pressed=\"false\"><span class=\"ds-el-count\">4</span><span class=\"ds-el-symbol\">Sm</span><span class=\"ds-el-name\">Simulation</span></button><button class=\"ds-el ds-el-practice\" type=\"button\" aria-pressed=\"false\"><span class=\"ds-el-count\">3</span><span class=\"ds-el-symbol\">Ds</span><span class=\"ds-el-name\">Datasets</span></button></div>",
+      "css": ".ds-els { display: grid; grid-template-columns: repeat(4, 96px); gap: 8px; } .ds-el { aspect-ratio: 1; display: grid; grid-template-rows: auto 1fr 2.4em; align-items: start; padding: 8px 9px; text-align: left; border-radius: 10px; border: 1px solid transparent; font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); cursor: pointer; transition: transform 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)), box-shadow 200ms ease; } .ds-el-count { font-size: 0.68rem; opacity: 0.75; line-height: 1; } .ds-el-symbol { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1; align-self: center; } .ds-el-name { font-size: 0.69rem; line-height: 1.25; opacity: 0.85; align-self: end; } .ds-el-imaging { background: var(--ink, #10141a); color: var(--bg, #f4f6f8); } .ds-el-learning { background: var(--accent, #a8c8e8); color: var(--on-accent, #10141a); } .ds-el-geometry { background: var(--surface-2, #e7ecf1); color: var(--ink, #10141a); } .ds-el-practice { background: transparent; color: var(--ink, #10141a); border-color: var(--line, #d3dbe3); } .ds-el[aria-pressed=\"true\"] { box-shadow: 0 0 0 2px var(--bg, #f4f6f8), 0 0 0 4px var(--accent-mark, #5b8fc2); } .ds-el:hover { transform: translateY(-2px); box-shadow: var(--shadow, 0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)); } .ds-el[aria-pressed=\"true\"]:hover { box-shadow: 0 0 0 2px var(--bg, #f4f6f8), 0 0 0 4px var(--accent-mark, #5b8fc2), var(--shadow, 0 12px 32px -18px rgb(36 52 70 / 0.3)); } .ds-el:active { transform: scale(0.97); } .ds-el:focus-visible { outline: 2px solid var(--accent-mark, #5b8fc2); outline-offset: 3px; }"
+    },
+    {
+      "name": "Research Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Surface card with a Hairline border; flat at rest, lifts 2px onto the soft shadow on hover.",
+      "html": "<article class=\"ds-card\"><h3>Simulation for surgical training</h3><p>A position-based dynamics model of brain deformation for keyhole neurosurgery, and a VR and haptics trainer.</p><a class=\"ds-card-link\" href=\"#\">IEEE RA-L</a></article>",
+      "css": ".ds-card { display: grid; gap: 0.85rem; max-width: 360px; padding: clamp(1.4rem, 2.5vw, 2rem); border-radius: 14px; background: var(--surface, #fcfdfe); border: 1px solid var(--line, #d3dbe3); font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); color: var(--ink, #10141a); transition: transform 200ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)), box-shadow 200ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)); } .ds-card:hover { transform: translateY(-2px); box-shadow: var(--shadow, 0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)); } .ds-card h3 { margin: 0; font-size: 1.6rem; font-weight: 600; letter-spacing: -0.025em; line-height: 1.1; } .ds-card p { margin: 0; color: var(--ink-2, #3f4852); line-height: 1.6; } .ds-card-link { justify-self: start; font-size: 0.8rem; color: var(--ink, #10141a); text-decoration: none; border-bottom: 1px solid var(--line, #d3dbe3); padding-bottom: 2px; } .ds-card-link:hover { color: var(--accent-ink, #2b5f8c); border-color: currentColor; } .ds-card-link:focus-visible { outline: 2px solid var(--accent-mark, #5b8fc2); outline-offset: 3px; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Sticky 64px glass bar; Soft Ink links with a Signal Blue underline under the current section.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-mark\" href=\"#\"><span class=\"ds-nav-glyph\"></span>Chiara Di Vece</a><div class=\"ds-nav-links\"><a href=\"#\">About</a><a href=\"#\" aria-current=\"location\">Research</a><a href=\"#\">Publications</a></div></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 1.5rem; height: 64px; padding: 0 16px; background: var(--nav-bg, rgb(244 246 248 / 0.8)); backdrop-filter: blur(14px) saturate(140%); border-bottom: 1px solid var(--line, #d3dbe3); font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); } .ds-nav-mark { display: inline-flex; align-items: center; gap: 0.6rem; font-weight: 600; letter-spacing: -0.01em; color: var(--ink, #10141a); text-decoration: none; } .ds-nav-glyph { width: 22px; height: 22px; background: conic-gradient(from 146deg at 50% 4%, var(--accent-mark, #5b8fc2) 0deg 68deg, transparent 68deg); mask: radial-gradient(circle at 50% 4%, #000 0 95%, transparent 96%); } .ds-nav-links { display: flex; gap: 1.6rem; margin-left: auto; font-size: 0.925rem; } .ds-nav-links a { color: var(--ink-2, #3f4852); text-decoration: none; padding: 0.4rem 0; transition: color 200ms ease; } .ds-nav-links a:hover { color: var(--ink, #10141a); } .ds-nav-links a[aria-current] { color: var(--ink, #10141a); box-shadow: inset 0 -2px 0 var(--accent-mark, #5b8fc2); } .ds-nav a:focus-visible { outline: 2px solid var(--accent-mark, #5b8fc2); outline-offset: 3px; border-radius: 4px; }"
+    },
+    {
+      "name": "Scientist ID Badge",
+      "kind": "custom",
+      "refersTo": "badge-card",
+      "description": "Signature object: an ID card on a Signal Blue lanyard, swung by a damped pendulum in motion.js.",
+      "html": "<div class=\"ds-badge\"><div class=\"ds-badge-strap\"></div><div class=\"ds-badge-clip\"></div><div class=\"ds-badge-card\"><div class=\"ds-badge-top\"><span class=\"ds-badge-glyph\"></span>Scientist ID</div><div class=\"ds-badge-photo\"></div><div class=\"ds-badge-name\">Chiara Di Vece</div><div class=\"ds-badge-role\">AI Lead, morph</div><div class=\"ds-badge-fields\"><div><small>Field</small>Physical AI</div><div><small>PhD</small>UCL '26</div></div></div></div>",
+      "css": ".ds-badge { display: grid; justify-items: center; width: 248px; font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); } .ds-badge-strap { width: 20px; height: 56px; background: var(--accent-mark, #5b8fc2); } .ds-badge-clip { width: 30px; height: 22px; margin-top: -1px; border-radius: 5px 5px 8px 8px; background: linear-gradient(180deg, #d9dee4, #9aa3ad); } .ds-badge-card { width: 100%; margin-top: -3px; display: grid; gap: 10px; padding: 0 14px 16px; border-radius: 14px; background: var(--surface, #fcfdfe); border: 1px solid var(--line, #d3dbe3); box-shadow: var(--shadow-lift, 0 1px 0 rgb(16 20 26 / 0.04), 0 28px 48px -26px rgb(36 52 70 / 0.45)); color: var(--ink, #10141a); } .ds-badge-top { display: flex; align-items: center; gap: 8px; height: 34px; margin-inline: -14px; padding-inline: 14px; border-radius: 13px 13px 0 0; background: var(--accent, #a8c8e8); color: var(--on-accent, #10141a); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; } .ds-badge-glyph { width: 14px; height: 14px; background: conic-gradient(from 146deg at 50% 4%, currentColor 0deg 68deg, transparent 68deg); mask: radial-gradient(circle at 50% 4%, #000 0 95%, transparent 96%); } .ds-badge-photo { aspect-ratio: 1 / 1.04; border-radius: 10px; background: var(--surface-2, #e7ecf1); } .ds-badge-name { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; } .ds-badge-role { font-size: 0.85rem; color: var(--ink-3, #5c6773); margin-top: -6px; } .ds-badge-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-top: 10px; border-top: 1px solid var(--line, #d3dbe3); font-size: 0.82rem; font-weight: 600; } .ds-badge-fields small { display: block; font-size: 0.69rem; font-weight: 500; color: var(--ink-3, #5c6773); letter-spacing: 0.08em; text-transform: uppercase; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Clean Signal",
+    "overview": "One clear signal on a quiet field. The page is a cool, near-white field of blue-grey neutrals. Across it runs a single powder-blue signal that marks what matters: the selected filter, the current job, the first number, the dot that ends the headline. Helvetica Neue carries everything, set tight and large where it speaks and loose and calm where it informs. The precision is technical. The warmth comes from a real person: the portrait, the swinging ID badge, the live local time, the photos from the viva.\n\nThe density is moderate and the rhythm is editorial: big section titles with one word in italic, hairline rules instead of boxes, and data laid out as lists and grids rather than dashboards. A few hand-made objects carry the personality, so the rest of the page can stay plain:\n\n- an ultrasound monitor that stays dark in both themes;\n- a periodic table of research elements;\n- an ID badge on a lanyard;\n- a marquee of reviewing venues.\n\nMotion is physical and brief: strong ease-out curves, springs for anything that hangs or follows the pointer, and nothing that moves without a way to pause it.\n\nThe mood is crisp, technical and human. The confirmed anti-reference is anything that reads as AI-generated: template typography, purple-blue glow gradients, stock imagery, generic same-size feature cards.",
+    "keyCharacteristics": [
+      "One hue (powder blue) on cool blue-grey neutrals; every neutral leans toward the accent's hue.",
+      "A single family, Helvetica Neue, with a self-hosted TeX Gyre Heros fallback.",
+      "Flat surfaces with 1px hairlines; cards lift onto a soft shadow on hover.",
+      "Pills for things you press, 14px corners for things that hold content.",
+      "Real photography and real research figures only.",
+      "Light and dark themes with the same structure; the scan monitor is always dark.",
+      "Motion uses strong ease-out (`cubic-bezier(0.23, 1, 0.32, 1)`), presses scale to 0.97, and every looping animation can be paused."
+    ],
+    "rules": [
+      {
+        "name": "The One Signal Rule",
+        "body": "Powder blue is the only hue. Families and states are told apart by value (ink, blue fill, sunk grey, outline), never by adding a colour. The four element families prove that it works.",
+        "section": "colors"
+      },
+      {
+        "name": "The Three Blues Rule",
+        "body": "Fill blue is for areas, Signal Blue for marks of 1–3px, Ink Blue for text. Never set text in fill blue on a light background.",
+        "section": "colors"
+      },
+      {
+        "name": "The Monitor Rule",
+        "body": "Anything that shows imaging (the scan, the photo lightbox) sits on Monitor Black in both themes, like a real screen.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Family Rule",
+        "body": "Helvetica Neue only. No serif, no monospace, no display face from a template library.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Italic Rule",
+        "body": "A section title gets one italic word, in the same family at a lighter weight. Never two, never a different font.",
+        "section": "typography"
+      },
+      {
+        "name": "The Lift-on-Hover Rule",
+        "body": "Cards are flat until a fine pointer reaches them; then they rise 2px onto the Soft shadow over 200ms. Touch never lifts. Reduced motion keeps the shadow and drops the rise.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Physical Object Rule",
+        "body": "A shadow at rest means \"this is an object\": the badge, the monitor. Nothing else casts one until it is hovered.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** use Ink Blue (#2b5f8c) for any blue text, and Signal Blue (#5b8fc2) for focus rings, underlines and marks of 1–3px.",
+      "**Do** tell states and categories apart by value (Ink, Powder Blue fill, Sunk Surface, outline) before reaching for anything else.",
+      "**Do** give every pressable element `transform: scale(0.97)` on `:active` at 160ms with `cubic-bezier(0.23, 1, 0.32, 1)`.",
+      "**Do** gate hover motion behind `(hover: hover) and (pointer: fine)`, and give every animation a reduced-motion variant that keeps the fade and drops the movement.",
+      "**Do** put a pause control on anything that moves continuously (WCAG 2.2.2).",
+      "**Do** keep tap targets at 44px on coarse pointers.",
+      "**Do** theme browser surfaces from the palette: text selection in Powder Blue; a 2px Signal Blue focus ring with a 3px offset; scrollbars tinted from Ink; tabular numerals.",
+      "**Do** use real photographs of the owner and real research figures."
+    ],
+    "donts": [
+      "**Don't** add a second hue, a gradient accent or a purple-blue glow.",
+      "**Don't** set text in Powder Blue (#a8c8e8) on a light background.",
+      "**Don't** introduce a second typeface. The earlier Bricolage Grotesque and Geist pairing was rejected for looking AI-generated, and no serif or monospace face belongs here either.",
+      "**Don't** use `transition: all` or animate layout properties. Use transform, opacity, clip-path and box-shadow; `block-size` is allowed only for the details accordion.",
+      "**Don't** lift anything on touch, or move anything under reduced motion.",
+      "**Don't** give a card a shadow at rest unless it is a physical object (the badge, the monitor).",
+      "**Don't** nest cards, or build a section out of same-size icon-and-heading cards.",
+      "**Don't** use stock or generated imagery."
+    ]
+  }
+}

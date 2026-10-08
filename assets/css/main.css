@@ -712,7 +712,8 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .elements[data-active] .el[aria-pressed="false"] { opacity: 0.32; }
 .el:active { transform: scale(0.97); }
 @media (hover: hover) and (pointer: fine) {
-  .el:hover { transform: translateY(-2px); }
+  .el:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .el[aria-pressed="true"]:hover { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent-mark), var(--shadow); }
   .el:active { transform: scale(0.97); }
 }
 
@@ -844,7 +845,9 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
   overflow-x: auto; overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  padding-bottom: 4px;
+  /* room inside the scroller for a hovered card's lift and shadow, cancelled by the margins */
+  padding-block: 6px 28px;
+  margin-block: -6px -24px;
 }
 .rail::-webkit-scrollbar { display: none; }
 @media (min-width: 560px) { .rail { grid-auto-columns: minmax(260px, 42%); } }
@@ -865,6 +868,17 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .award:first-child .award-year { color: var(--accent-ink); }
 .award-title { font-size: 1.05rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.005em; align-self: end; }
 .award-detail { font-size: 0.875rem; color: var(--ink-3); }
+
+/* Lift on hover: research cells and award cards (and the element tiles above) rise 2px
+   onto the soft shadow. Fine pointers only, since a tap would leave it stuck; reduced
+   motion keeps the shadow and drops the rise. */
+.cell, .award { transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .cell:hover, .award:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
+  .cell:hover, .award:hover, .el:hover { transform: none; }
+}
 
 
 /* ---------- Talks ---------- */
