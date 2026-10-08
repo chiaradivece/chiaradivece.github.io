@@ -4,6 +4,8 @@
   var root = document.documentElement;
   var nav = document.querySelector('[data-nav]');
 
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   /* ---------- Theme toggle ---------- */
   var themeBtn = document.querySelector('[data-theme-toggle]');
   var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -14,12 +16,32 @@
     return darkQuery.matches ? 'dark' : 'light';
   }
 
+  function applyTheme(next) {
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    themeBtn.setAttribute('aria-pressed', String(next === 'dark'));
+  }
+
   if (themeBtn) {
-    themeBtn.addEventListener('click', function () {
+    themeBtn.addEventListener('click', function (e) {
       var next = currentTheme() === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', next);
-      try { localStorage.setItem('theme', next); } catch (e) {}
-      themeBtn.setAttribute('aria-pressed', String(next === 'dark'));
+      // The new theme grows in a circle from the button. Keyboard presses (detail 0),
+      // reduced motion and browsers without View Transitions switch instantly.
+      if (typeof document.startViewTransition !== 'function' || reduceMotion || e.detail === 0) {
+        applyTheme(next);
+        return;
+      }
+      var r = themeBtn.getBoundingClientRect();
+      var x = r.left + r.width / 2;
+      var y = r.top + r.height / 2;
+      var radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+      var transition = document.startViewTransition(function () { applyTheme(next); });
+      transition.ready.then(function () {
+        root.animate(
+          { clipPath: ['circle(0px at ' + x + 'px ' + y + 'px)', 'circle(' + radius + 'px at ' + x + 'px ' + y + 'px)'] },
+          { duration: 500, easing: 'cubic-bezier(0.77, 0, 0.175, 1)', pseudoElement: '::view-transition-new(root)' }
+        );
+      });
     });
     themeBtn.setAttribute('aria-pressed', String(currentTheme() === 'dark'));
   }
@@ -55,20 +77,95 @@
     }).observe(sentinel);
   }
 
-  /* ---------- Scroll reveal ---------- */
-  var revealEls = document.querySelectorAll('[data-reveal]');
+  /* ---------- Reveals ---------- */
+  // Each element reveals once, the first time it scrolls into view. Staggered groups
+  // give their children an index; afterwards every hook is removed, so the reveal's
+  // transitions and clip-path never interfere with an element's own hover/press styles.
+  var MAX_STAGGER = 12;
+  var revealEls = document.querySelectorAll('[data-reveal], [data-stagger], [data-reveal-image]');
+
+  document.querySelectorAll('[data-stagger]').forEach(function (group) {
+    Array.prototype.forEach.call(group.children, function (child, i) {
+      child.style.setProperty('--i', Math.min(i, MAX_STAGGER));
+    });
+  });
+
+  function cleanUp(el) {
+    el.removeAttribute('data-reveal');
+    el.removeAttribute('data-stagger');
+    el.removeAttribute('data-reveal-image');
+    el.classList.remove('is-in');
+  }
+
+  function revealed(el) {
+    el.classList.add('is-in');
+    var steps = el.hasAttribute('data-stagger') ? Math.min(el.children.length - 1, MAX_STAGGER) : 0;
+    var step = parseFloat(getComputedStyle(el).getPropertyValue('--step')) || 50;
+    setTimeout(function () { cleanUp(el); }, steps * step + 900);
+  }
+
   if ('IntersectionObserver' in window) {
+    // A figure starts fully clipped, and the observer treats a fully clipped element as
+    // never visible, so figures are watched through their parent instead.
+    var targetFor = new Map();
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-in');
-          io.unobserve(entry.target);
-        }
+        if (!entry.isIntersecting) return;
+        io.unobserve(entry.target);
+        revealed(targetFor.get(entry.target));
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
-    revealEls.forEach(function (el) { io.observe(el); });
+    revealEls.forEach(function (el) {
+      var watched = el.hasAttribute('data-reveal-image') ? el.parentElement : el;
+      targetFor.set(watched, el);
+      io.observe(watched);
+    });
   } else {
-    revealEls.forEach(function (el) { el.classList.add('is-in'); });
+    revealEls.forEach(cleanUp);
+  }
+
+  /* ---------- Nav: an underline follows the section being read ---------- */
+  var indicator = document.querySelector('[data-nav-indicator]');
+  if (indicator && 'IntersectionObserver' in window) {
+    var linkFor = {};
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(function (a) {
+      linkFor[a.getAttribute('href').slice(1)] = a;
+    });
+    var activeLink = null;
+
+    var placeIndicator = function (link, instant) {
+      if (instant) indicator.style.transition = 'none';
+      indicator.style.transform = 'translateX(' + link.offsetLeft + 'px) scaleX(' + link.offsetWidth + ')';
+      if (instant) {
+        void indicator.offsetWidth; // commit the jump before transitions come back
+        indicator.style.transition = '';
+      }
+    };
+
+    var setActive = function (link) {
+      if (link === activeLink) return;
+      if (activeLink) activeLink.removeAttribute('aria-current');
+      var wasHidden = !activeLink;
+      activeLink = link;
+      if (!link) { indicator.classList.remove('is-on'); return; }
+      link.setAttribute('aria-current', 'location');
+      // Appearing: jump into place, then fade in. Already visible: glide over.
+      placeIndicator(link, wasHidden);
+      indicator.classList.add('is-on');
+    };
+
+    // A thin band across the middle of the viewport decides which section is "current"
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) setActive(linkFor[entry.target.id] || null);
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('main > section[id], footer[id]').forEach(function (sec) { spy.observe(sec); });
+
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(function () { if (activeLink) placeIndicator(activeLink, true); })
+        .observe(document.querySelector('.nav-links'));
+    }
   }
 
   /* ---------- Publications: research elements + filters ---------- */
@@ -194,39 +291,40 @@
     updateButtons();
   }
 
-  /* ---------- Local clocks (Seattle + London) ---------- */
+  /* ---------- Local time (Seattle + London), shown as a sentence ---------- */
   var clockEls = document.querySelectorAll('[data-tz]');
-  var noteEls = document.querySelectorAll('[data-tz-day]');
-  var notes = Array.prototype.map.call(noteEls, function (el) { return el.textContent; });
 
-  function renderClocks() {
+  function renderClocks(animate) {
     var now = new Date();
     clockEls.forEach(function (el) {
-      var tz = el.getAttribute('data-tz');
+      var text;
       try {
-        var parts = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: tz }).formatToParts(now);
+        var parts = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: el.getAttribute('data-tz') }).formatToParts(now);
         var time = '', period = '';
         parts.forEach(function (p) {
           if (p.type === 'dayPeriod') period = p.value.toLowerCase();
           else if (p.type !== 'literal' || p.value === ':') time += p.value;
         });
-        el.innerHTML = time + '<span class="clock-ampm">' + period + '</span>';
-        el.setAttribute('datetime', now.toISOString());
-      } catch (e) { el.textContent = '--:--'; }
-    });
-    noteEls.forEach(function (el, i) {
-      try {
-        var day = new Intl.DateTimeFormat('en-US', { weekday: 'long', timeZone: el.getAttribute('data-tz-day') }).format(now);
-        el.textContent = notes[i] ? day + '. ' + notes[i] : day;
-      } catch (e) {}
+        text = time + '\u00a0' + period;
+      } catch (e) { return; }
+      if (el.textContent === text) return;
+      el.textContent = text;
+      el.setAttribute('datetime', now.toISOString());
+      // A new minute slides up into place: state indication, once a minute at most
+      if (animate && !reduceMotion && el.animate) {
+        el.animate(
+          [{ opacity: 0, transform: 'translateY(0.35em)', filter: 'blur(2px)' }, { opacity: 1, transform: 'none', filter: 'none' }],
+          { duration: 300, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }
+        );
+      }
     });
   }
   if (clockEls.length) {
-    renderClocks();
+    renderClocks(false);
     // Tick on the minute boundary, then every minute
     setTimeout(function () {
-      renderClocks();
-      setInterval(renderClocks, 60000);
+      renderClocks(true);
+      setInterval(function () { renderClocks(true); }, 60000);
     }, 60000 - (Date.now() % 60000) + 50);
   }
 
