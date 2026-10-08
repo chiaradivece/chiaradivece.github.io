@@ -32,7 +32,7 @@
   var pointer = { active: false, x: 0, y: 0 };
   var sweep = -HALF, sweepDir = 1;
   var dpr = 1, CW = 0, CH = 0;
-  var t = 0, last = 0, raf = 0, onScreen = true;
+  var t = 0, last = 0, raf = 0, onScreen = true, paused = false;
 
   function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
   function smoothstep(a, b, v) { var x = clamp((v - a) / (b - a), 0, 1); return x * x * (3 - 2 * x); }
@@ -300,7 +300,7 @@
   }
 
   function schedule() {
-    if (!raf && onScreen && !reduceMotion && !document.hidden) raf = requestAnimationFrame(tick);
+    if (!raf && onScreen && !paused && !reduceMotion && !document.hidden) raf = requestAnimationFrame(tick);
   }
 
   /* ---------- Input ---------- */
@@ -337,4 +337,16 @@
     if (!document.hidden) { last = 0; schedule(); }
   });
   schedule();
+
+  // Pause control: moving content must be stoppable (WCAG 2.2.2)
+  var toggle = document.querySelector('[data-scan-toggle]');
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      paused = !paused;
+      toggle.setAttribute('aria-pressed', String(paused));
+      toggle.setAttribute('aria-label', paused ? 'Play the scan animation' : 'Pause the scan animation');
+      if (paused) { if (raf) cancelAnimationFrame(raf); raf = 0; }
+      else { last = 0; schedule(); }
+    });
+  }
 })();
