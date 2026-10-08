@@ -223,7 +223,6 @@
   if (elementGrid && pubList) {
     var tiles = elementGrid.querySelectorAll('[data-element]');
     var toggles = document.querySelectorAll('[data-toggle]');
-    var clearBtn = document.querySelector('[data-clear]');
     var statusEl = document.querySelector('[data-pub-status]');
     var emptyBox = document.querySelector('[data-pub-empty]');
     var emptyText = document.querySelector('[data-pub-empty-text]');
@@ -243,12 +242,13 @@
 
     function plural(n, word) { return n + ' ' + word + (n === 1 ? '' : 's'); }
     var pubSection = elementGrid.closest('section');
+    var changeLink = document.querySelector('[data-pub-change]');
     var barActions = document.querySelector('[data-pub-bar-actions]');
-    // "7 of 13 papers on Deep learning", "2 of 13 first-author journal papers on Imaging"
+    // "7 of 13 papers on Deep learning", "2 of 13 papers on Imaging · first author, journals"
     function describe(n) {
-      var kind = (state.first ? 'first-author ' : '') + (state.journal ? 'journal ' : '');
       var topic = state.element ? ' on ' + elementName(state.element).replace(/\u00ad/g, '') : '';
-      return n + ' of ' + pubs.length + ' ' + kind + 'papers' + topic;
+      var also = [state.first ? 'first author' : '', state.journal ? 'journals' : ''].filter(Boolean).join(', ');
+      return n + ' of ' + pubs.length + ' papers' + topic + (also ? ' · ' + also : '');
     }
     function countFor(s) {
       var n = 0;
@@ -308,13 +308,11 @@
         btn.setAttribute('aria-pressed', String(!!state[btn.dataset.toggle]));
       });
       var filtered = !!(state.element || state.first || state.journal);
-      if (clearBtn) {
-        if (!filtered && document.activeElement === clearBtn && tiles[0]) tiles[0].focus();
-        clearBtn.hidden = !filtered;
-      }
       if (statusEl) statusEl.textContent = filtered ? describe(shown) : 'Showing all ' + pubs.length + ' papers';
       if (pubSection) pubSection.toggleAttribute('data-filtered', filtered);
       if (barActions) barActions.hidden = !filtered;
+      if (panelState) panelState.textContent = state.element ? elementName(state.element).replace(/\u00ad/g, '') : '';
+      updateBarActions();
       if (pillText) pillText.textContent = shown ? 'Show ' + plural(shown, 'paper') : 'No papers match';
       updatePill();
     }
@@ -324,20 +322,36 @@
     var listBelow = false;
     var gridInView = false;
     var chipsRow = document.querySelector('[data-pub-filters]');
+    var bar = document.querySelector('[data-pub-bar]');
+    var barInView = false;
+    var showLink = document.querySelector('[data-pub-show]');
+    var panel = document.querySelector('[data-el-panel]');
+    var panelState = document.querySelector('[data-el-panel-state]');
     function updatePill() {
       if (!pill) return;
       var filtered = !!(state.element || state.first || state.journal);
-      pill.hidden = !(filtered && gridInView && listBelow);
+      pill.hidden = !(filtered && gridInView && listBelow && !barInView);
       placePill();
+      updateBarActions();
+    }
+    // Show while the list is still below; Change once the tiles are out of view; Clear always
+    function updateBarActions() {
+      if (showLink) showLink.hidden = !listBelow;
+      if (changeLink) changeLink.hidden = gridInView && !(panel && !panel.open);
     }
     // Resting 16px above the bottom edge; when the chips scroll into that spot, the button
     // rides 8px above them instead, so it never covers a control and never disappears.
     var placing = 0;
     var wide = window.matchMedia('(min-width: 900px)');
+    var phone = window.matchMedia('(max-width: 639px)');
+    function syncPanel() { if (panel) panel.open = !phone.matches; }
+    syncPanel();
+    if (phone.addEventListener) phone.addEventListener('change', syncPanel);
+    if (panel) panel.addEventListener('toggle', function () { updateBarActions(); });
     function placePill() {
       if (!pill || !chipsRow) return;
       var filtered = !!(state.element || state.first || state.journal);
-      if (!(filtered && gridInView && listBelow)) return;
+      if (!(filtered && gridInView && listBelow && !barInView)) return;
       var vh = window.innerHeight;
       if (wide.matches) {
         // Desktop: the list is a short scroll away; if the button would cover tiles, leave it out
@@ -374,16 +388,25 @@
         updatePill();
       });
       filterParts.forEach(function (el) { filterIO.observe(el); });
+      if (bar) {
+        // "in view" means fully readable, not a sliver at the bottom edge
+        new IntersectionObserver(function (entries) {
+          barInView = entries[0].intersectionRatio >= 0.99;
+          updatePill();
+        }, { threshold: [0, 1] }).observe(bar);
+      }
       // The jump lands on the status line ("Showing 6 of 13 papers") just below the nav, with
       // the list right under it, and moves focus there without adding a #hash to the address
-      pill.addEventListener('click', function (e) {
+      var jumpToResults = function (e) {
         e.preventDefault();
         pill.hidden = true;
         if (statusEl) {
           statusEl.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
           statusEl.focus({ preventScroll: true });
         }
-      });
+      };
+      pill.addEventListener('click', jumpToResults);
+      if (showLink) showLink.addEventListener('click', jumpToResults);
     }
 
     // Pointer-driven changes animate the list with a View Transition; keyboard-driven
@@ -426,17 +449,11 @@
         update(e);
       });
     });
-    if (clearBtn) {
-      clearBtn.addEventListener('click', function (e) {
-        state = { element: null, first: false, journal: false };
-        update(e);
-      });
-    }
-    var changeLink = document.querySelector('[data-pub-change]');
     var barClear = document.querySelector('[data-pub-bar-clear]');
     if (changeLink) {
       changeLink.addEventListener('click', function (e) {
         e.preventDefault();
+        if (panel && !panel.open) panel.open = true;
         elementGrid.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
         var selected = elementGrid.querySelector('[aria-pressed="true"]') || tiles[0];
         if (selected) selected.focus({ preventScroll: true });

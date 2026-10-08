@@ -25,6 +25,8 @@ facts:
     value: AI Lead, morph
   - label: PhD
     value: Computer Science, UCL, 2026
+  - label: Previously
+    value: MathWorks (Deep Learning Toolbox) · AI SuitUp
 
 # Local clocks shown in the contact section (IANA time zone names)
 clocks:
