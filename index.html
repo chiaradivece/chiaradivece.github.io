@@ -30,7 +30,7 @@
       } catch (e) {}
     })();
   </script>
-  <link rel="stylesheet" href="/assets/css/main.css?v=1791488210">
+  <link rel="stylesheet" href="/assets/css/main.css?v=1791496354">
   <link rel="preload" as="image" href="/assets/img/chiara-cutout.webp" fetchpriority="high">
 
   <script type="application/ld+json">
@@ -80,11 +80,13 @@
     <nav class="nav-links" id="nav-links" aria-label="Sections">
       <a href="#about">About</a>
       <a href="#news">News</a>
-      <a href="#experience">Experience</a>
       <a href="#research">Research</a>
       <a href="#publications">Publications</a>
-      <a href="#recognition">Recognition</a>
       <a href="#talks">Talks</a>
+      <a href="#experience">Experience</a>
+      <a href="#recognition">Awards</a>
+      <a class="nav-extra" href="#contact">Contact</a>
+      <a class="nav-extra" href="/assets/pdf/Chiara_Di_Vece_CV.pdf" download>Download CV</a>
       <span class="nav-indicator" aria-hidden="true" data-nav-indicator></span>
     </nav>
     <div class="nav-actions">
@@ -112,7 +114,8 @@
     <div class="hero-inner wrap">
       <div class="hero-copy">
         <h1 class="hero-title">
-          <span class="hero-kicker">Chiara Di Vece, PhD</span>
+          <span class="sr-only">Chiara Di Vece: </span>
+          <span class="hero-kicker">AI Lead at morph · PhD, UCL</span>
           <span class="hero-line">
             <span class="hero-line-part">From computer vision</span>
             <span class="hero-line-part">for fetal ultrasound</span>
@@ -124,19 +127,36 @@
             Download CV <span class="icon" aria-hidden="true"><svg><use href="#i-download-simple"/></svg></span>
 
           </a>
-          <a class="btn btn-ghost" href="#contact">Get in touch</a>
+          <a class="btn btn-ghost" href="#publications">Read the papers</a>
         </div>
       </div>
     </div>
-    <div class="hero-ghost" aria-hidden="true"><span class="hero-ghost-text" data-depth="-14" data-text="CHIARA"></span></div>
     <div class="hero-figure">
+      <!-- A 68° ultrasound sector behind the portrait: the same fan as the nav mark and the scan -->
+      <svg class="hero-fan" data-depth="-5" viewBox="0 0 1118 1000" aria-hidden="true" focusable="false">
+        <defs>
+          <radialGradient id="fan-depth" cx="559" cy="0" r="1000" gradientUnits="userSpaceOnUse">
+            <stop offset="0" class="fan-stop-near"/>
+            <stop offset="1" class="fan-stop-far"/>
+          </radialGradient>
+          <clipPath id="fan-shape"><path d="M559 0 L0 829 A1000 1000 0 0 0 1118 829 Z"/></clipPath>
+        </defs>
+        <path class="fan-field" d="M559 0 L0 829 A1000 1000 0 0 0 1118 829 Z" fill="url(#fan-depth)"/>
+        <path class="fan-outline" d="M559 0 L0 829 A1000 1000 0 0 0 1118 829 Z" fill="none"/>
+        <g class="fan-depths" clip-path="url(#fan-shape)" fill="none">
+          <circle cx="559" cy="0" r="250"/><circle cx="559" cy="0" r="500"/><circle cx="559" cy="0" r="750"/>
+        </g>
+        <g class="fan-ticks">
+          <path d="M419 207 l-15 -10 M279 415 l-15 -10 M140 622 l-15 -10"/>
+        </g>
+      </svg>
       <div class="hero-figure-enter">
         <img class="hero-portrait" data-depth="9" src="/assets/img/chiara-cutout.webp" alt="Chiara Di Vece" width="892" height="680" fetchpriority="high" decoding="async">
       </div>
     </div>
   </section>
 
-  <!-- About: the hero figure comes back as a badge on a lanyard -->
+  <!-- About: who I am, then the role and the numbers -->
   <section class="section about wrap" id="about">
     <div class="about-grid">
       <div class="about-text" data-reveal>
@@ -154,28 +174,6 @@
         </p>
       </div>
 
-      <div class="about-badge">
-        <div class="badge-rig" data-badge-rig>
-          <span class="badge-pin" aria-hidden="true"></span>
-          <div class="badge-drop" data-badge-drop>
-            <div class="badge-swing" data-badge-swing>
-              <span class="badge-strap" aria-hidden="true"></span>
-              <span class="badge-clip" aria-hidden="true"></span>
-              <div class="badge-card" data-badge-card role="img" aria-label="ID badge: Chiara Di Vece, PhD, AI Lead at morph">
-                <div class="badge-top"><span class="badge-glyph"></span><span>Scientist ID</span></div>
-                <div class="badge-photo"><img src="/assets/img/chiara.jpg" alt="" width="1024" height="1024" loading="lazy" decoding="async" draggable="false"></div>
-                <p class="badge-name">Chiara Di Vece</p>
-                <p class="badge-role">PhD · AI Lead</p>
-                <div class="badge-fields">
-                  <span><small>Field</small>Physical AI</span>
-                  <span><small>PhD</small>UCL '26</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="about-facts">
         <dl class="facts" data-stagger>
           <div class="fact"><dt>Role</dt><dd>AI Lead, morph</dd></div>
@@ -185,7 +183,7 @@
           <div class="number"><dt>citations</dt><dd>131</dd></div>
           <div class="number"><dt>h-index</dt><dd>7</dd></div>
           <div class="number"><dt>papers</dt><dd>13</dd></div>
-          <div class="number"><dt>awards</dt><dd>18</dd></div>
+          <div class="number"><dt>awards and honours</dt><dd>18</dd></div>
         </dl>
         <p class="facts-source">Citations and h-index from <a href="https://scholar.google.com/citations?user=CStrr20AAAAJ&amp;hl=en" rel="noopener">Google Scholar</a>, updated October 2026.</p>
       </div>
@@ -194,12 +192,22 @@
 
   <!-- News: latest item large, next four as a list, the rest folded away -->
   <section class="section news wrap" id="news">
-    <h2 class="section-title" data-reveal>Lately</h2>
+    <h2 class="section-title" data-reveal>News</h2>
     <div class="news-grid">
-      <article class="news-lead" data-reveal>
-        <p class="news-date">Sep 2026</p>
-        <p class="news-lead-text">My PhD in Computer Science from UCL has been officially awarded. The thesis is on real-time deep learning-based plane pose estimation and navigation in freehand fetal brain ultrasound.</p>
-      </article>
+      <div class="news-main">
+        <article class="news-lead" data-reveal>
+          <p class="news-date">Sep 2026</p>
+          <p class="news-lead-text">My PhD in Computer Science from UCL has been officially awarded. The thesis is on real-time deep learning-based plane pose estimation and navigation in freehand fetal brain ultrasound.</p>
+        </article>
+        <figure class="news-feature" data-reveal>
+          <ul class="news-photos news-feature-photos">
+            <li><a href="/assets/img/news/viva-screen.webp" data-lightbox-open data-caption="Next to the title slide of my viva"><img src="/assets/img/news/viva-screen-thumb.webp" alt="Chiara next to the title slide of her PhD viva, Real-Time Deep Learning-Based Plane Pose Estimation and Navigation in Freehand Fetal Brain Ultrasound" width="405" height="720" loading="lazy" decoding="async"></a></li>
+            <li><a href="/assets/img/news/viva-ucl.webp" data-lightbox-open data-caption="Outside UCL&#39;s main building on the day"><img src="/assets/img/news/viva-ucl-thumb.webp" alt="Chiara in front of the UCL main building on the day of her viva" width="405" height="720" loading="lazy" decoding="async"></a></li>
+            <li><a href="/assets/img/news/viva-group.webp" data-lightbox-open data-caption="With the Surgical Robot Vision group at the UCL Hawkes Institute, after the viva"><img src="/assets/img/news/viva-group-thumb.webp" alt="Chiara with colleagues from the Surgical Robot Vision group at the UCL Hawkes Institute after the viva" width="720" height="405" loading="lazy" decoding="async"></a></li>
+          </ul>
+          <figcaption class="news-feature-caption"><span class="news-date">Feb 2026</span> My PhD viva at UCL</figcaption>
+        </figure>
+      </div>
       <ol class="news-list" data-stagger>
         <li class="news-item">
   <p class="news-date">Jul 2026</p>
@@ -216,11 +224,6 @@
         <li class="news-item">
   <p class="news-date">Feb 2026</p>
   <p class="news-text">I defended my PhD at UCL and passed with minor corrections. Thank you to my supervisors Dan Stoyanov and Francisco Vasconcelos, and to my examiners Ester Bonmati and George Mylonas.</p>
-  <ul class="news-photos">
-    <li><a href="/assets/img/news/viva-screen.webp" data-lightbox-open><img src="/assets/img/news/viva-screen-thumb.webp" alt="Chiara next to the title slide of her PhD viva, Real-Time Deep Learning-Based Plane Pose Estimation and Navigation in Freehand Fetal Brain Ultrasound" width="405" height="720" loading="lazy" decoding="async"></a></li>
-    <li><a href="/assets/img/news/viva-ucl.webp" data-lightbox-open><img src="/assets/img/news/viva-ucl-thumb.webp" alt="Chiara in front of the UCL main building on the day of her viva" width="405" height="720" loading="lazy" decoding="async"></a></li>
-    <li><a href="/assets/img/news/viva-group.webp" data-lightbox-open><img src="/assets/img/news/viva-group-thumb.webp" alt="Chiara with colleagues from the Surgical Robot Vision group at the UCL Hawkes Institute after the viva" width="720" height="405" loading="lazy" decoding="async"></a></li>
-  </ul>
 </li>
 
         <li class="news-item">
@@ -249,113 +252,7 @@
     </details>
   </section>
 
-  <!-- Experience: industry vs academia -->
-  <section class="section experience wrap" id="experience">
-    <h2 class="section-title" data-reveal>Where I've <i>worked</i></h2>
-    <div class="exp-grid">
-      <div class="exp-col">
-        <h3 class="exp-heading">Industry</h3>
-        <ol class="exp-list" data-stagger>
-          <li class="job is-current">
-            <div class="job-meta">
-              <span class="job-dates">Oct 2024 - Present</span><span class="tag tag-accent">Now</span>
-            </div>
-            <h4 class="job-role">AI Lead and Founding Applied Scientist</h4>
-            <p class="job-org"><a href="https://morph.inc/" rel="noopener">morph</a>
-            </p>
-            <p class="job-summary">Leading AI development at a stealth-stage soft robotics startup, with a focus on computer vision, physical AI, robotics and AI agents.</p>
-          </li>
-          <li class="job">
-            <div class="job-meta">
-              <span class="job-dates">Jan 2023 - Jan 2025</span>
-            </div>
-            <h4 class="job-role">AI Researcher</h4>
-            <p class="job-org">AI SuitUp<span class="job-place">Remote (Albuquerque, US)</span>
-            </p>
-            <p class="job-summary">Research and prototyping for generative AI headshots. Optimised face detection, alignment and style transfer pipelines across diverse demographics, and cut inference time for web-scale deployment.</p>
-          </li>
-          <li class="job">
-            <div class="job-meta">
-              <span class="job-dates">Jun 2023 - Sep 2023</span>
-            </div>
-            <h4 class="job-role">Software Engineer Intern, Deep Learning Algorithms</h4>
-            <p class="job-org"><a href="https://www.mathworks.com/" rel="noopener">MathWorks</a><span class="job-place">Cambridge, UK</span>
-            </p>
-            <p class="job-summary">Extended the Deep Learning Toolbox with a differentiable sort, fully supported by the automatic differentiation engine, so users can build custom layers that sort.</p>
-          </li>
-        </ol>
-      </div>
-      <div class="exp-col">
-        <h3 class="exp-heading">Research and teaching</h3>
-        <ol class="exp-list" data-stagger>
-          <li class="job">
-            <div class="job-meta">
-              <span class="job-dates">Sep 2020 - Jan 2025</span>
-            </div>
-            <h4 class="job-role">PhD Researcher and Teaching Assistant</h4>
-            <p class="job-org">University College London
-            </p>
-            <p class="job-summary">Sole researcher on the AI-guided fetal brain ultrasound line in the Surgical Robot Vision group and UCL Hawkes Institute, supervised by Danail Stoyanov and Francisco Vasconcelos. Took sensorless 6D plane pose estimation from first principles to a real-time navigation pipeline (3&nbsp;ms latency) on NVIDIA's Clara AGX clinical platform, with NVIDIA's Holoscan team. TA for Reinforcement Learning (with Google DeepMind), Robotic Systems, Machine Learning and Mathematical Modelling.</p>
-          </li>
-          <li class="job">
-            <div class="job-meta">
-              <span class="job-dates">Mar 2020 - Sep 2020</span>
-            </div>
-            <h4 class="job-role">Research Intern</h4>
-            <p class="job-org">Politecnico di Milano, NEARLab<span class="job-place">Milan, Italy</span>
-            </p>
-            <p class="job-summary">NeuroEngineering and Medical Robotics Lab, EU project EDEN2020. Built a real-time, position-based dynamics simulator of brain deformation for keyhole neurosurgery in Unity, validated against in-vivo animal data (mean mismatch 4.73 ± 2.15%). Published in IEEE RA-L and presented at IROS.</p>
-          </li>
-          <li class="job">
-            <div class="job-meta">
-              <span class="job-dates">Jan 2019 - May 2019</span>
-            </div>
-            <h4 class="job-role">Graduate Researcher and Teaching Assistant</h4>
-            <p class="job-org">University of Illinois Chicago<span class="job-place">Chicago, US</span>
-            </p>
-            <p class="job-summary">Developed a haptics and VR simulator for Veress needle insertion training, rated "good" on the System Usability Scale by experienced clinicians. TA for Biological Systems Analysis.</p>
-          </li>
-        </ol>
-      </div>
-    </div>
-    <div class="edu-block">
-      <h3 class="exp-heading">Education</h3>
-      <ul class="edu" data-stagger>
-        <li>
-          <span class="edu-degree">PhD in Computer Science</span>
-          <span class="edu-school">University College London<span class="edu-dates">2020 - 2026</span></span>
-          <span class="edu-note">Thesis: Real-time deep learning-based plane pose estimation and navigation in freehand fetal brain ultrasound</span>
-        </li>
-        <li>
-          <span class="edu-degree">MSc Biomedical Engineering</span>
-          <span class="edu-school">Politecnico di Milano<span class="edu-dates">2017 - 2019</span></span>
-          <span class="edu-note">Summa cum laude. Double degree with UIC and Politecnico di Torino</span>
-        </li>
-        <li>
-          <span class="edu-degree">MSc Bioengineering</span>
-          <span class="edu-school">University of Illinois Chicago<span class="edu-dates">2018 - 2019</span></span>
-          <span class="edu-note">GPA 4.00/4.00, summa cum laude</span>
-        </li>
-        <li>
-          <span class="edu-degree">Alta Scuola Politecnica</span>
-          <span class="edu-school">Politecnico di Milano and Politecnico di Torino<span class="edu-dates">2017 - 2020</span></span>
-          <span class="edu-note">Top 1% honours programme, diploma with merit</span>
-        </li>
-        <li>
-          <span class="edu-degree">BSc Biomedical Engineering</span>
-          <span class="edu-school">Politecnico di Milano<span class="edu-dates">2014 - 2017</span></span>
-          <span class="edu-note">Thesis: FPGA-based brain injury evaluation through pupillometry</span>
-        </li>
-        <li>
-          <span class="edu-degree">Licensed Industrial Engineer</span>
-          <span class="edu-school">Italy<span class="edu-dates">2021</span></span>
-          <span class="edu-note">Professional licence to practise</span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Research: the scan lives here now, then the themes -->
+  <!-- Research: the scan, the bridge in one picture, then the themes -->
   <section class="section research wrap" id="research">
     <h2 class="section-title" data-reveal>Research</h2>
     <div class="research-intro">
@@ -440,86 +337,107 @@
   <!-- Publications -->
   <section class="section pubs wrap" id="publications">
     <div class="pubs-head" data-reveal>
-      <h2 class="section-title">Things I've <i>written</i></h2>
-      <p class="pubs-intro">The elements of my research. Pick one to light up the papers that use it.</p>
+      <h2 class="section-title">Publications</h2>
+      <p class="pubs-intro">Three to start with, then all 13. Pick an element to show only the papers that use it.</p>
     </div>
+
+    <ol class="picks" aria-label="Three papers to start with" data-stagger>
+      <li class="pick">
+        <p class="pick-meta">2026 · IEEE Transactions on Medical Imaging</p>
+        <h3 class="pick-title"><a href="https://arxiv.org/abs/2404.07124" rel="noopener">Measuring proximity to standard planes during fetal brain ultrasound scanning</a></h3>
+        <p class="pick-foot"><span class="tag">Under review</span><a class="pick-cited" href="https://scholar.google.com/scholar?oi=bibs&amp;hl=en&amp;cites=15047813065327009074" rel="noopener">Cited by 4</a>
+        </p>
+      </li>
+      <li class="pick">
+        <p class="pick-meta">2025 · IEEE Robotics and Automation Letters</p>
+        <h3 class="pick-title"><a href="https://doi.org/10.1109/LRA.2025.3540529" rel="noopener">Robotic arm platform for multi-view image acquisition and 3D reconstruction in minimally invasive surgery</a></h3>
+        <p class="pick-foot"><a class="pick-cited" href="https://scholar.google.com/scholar?oi=bibs&amp;hl=en&amp;cites=18055705067697277225" rel="noopener">Cited by 9</a>
+        </p>
+      </li>
+      <li class="pick">
+        <p class="pick-meta">2022 · International Journal of Computer Assisted Radiology and Surgery (IPCAI 2022)</p>
+        <h3 class="pick-title"><a href="https://doi.org/10.1007/s11548-022-02609-z" rel="noopener">Deep learning-based plane pose regression in obstetric ultrasound</a></h3>
+        <p class="pick-foot"><span class="tag tag-accent">AURIS/IPCAI Young Investigator Travel Award, 1st place</span><a class="pick-cited" href="https://scholar.google.com/scholar?oi=bibs&amp;hl=en&amp;cites=13085558872664317052" rel="noopener">Cited by 25</a>
+        </p>
+      </li>
+    </ol>
     <div class="elements" role="group" aria-label="Filter papers by research element" data-element-grid data-stagger style="--step: 25ms">
-      <button type="button" class="el" data-family="imaging" data-element="Us" aria-pressed="false" aria-label="Ultrasound, 6 papers">
+      <button type="button" class="el" data-family="imaging" data-element="Us" data-name="Ultrasound" aria-pressed="false" aria-label="Ultrasound, 6 papers">
         <span class="el-count" aria-hidden="true">6</span>
         <span class="el-symbol" aria-hidden="true">Us</span>
         <span class="el-name" aria-hidden="true">Ultrasound</span>
       </button>
-      <button type="button" class="el" data-family="imaging" data-element="Hs" aria-pressed="false" aria-label="Hyperspectral, 1 paper">
+      <button type="button" class="el" data-family="imaging" data-element="Hs" data-name="Hyper&shy;spectral" aria-pressed="false" aria-label="Hyper&shy;spectral, 1 paper">
         <span class="el-count" aria-hidden="true">1</span>
         <span class="el-symbol" aria-hidden="true">Hs</span>
-        <span class="el-name" aria-hidden="true">Hyperspectral</span>
+        <span class="el-name" aria-hidden="true">Hyper&shy;spectral</span>
       </button>
-      <button type="button" class="el" data-family="imaging" data-element="Lp" aria-pressed="false" aria-label="Laparoscopy, 3 papers">
+      <button type="button" class="el" data-family="imaging" data-element="Lp" data-name="Laparo&shy;scopy" aria-pressed="false" aria-label="Laparo&shy;scopy, 3 papers">
         <span class="el-count" aria-hidden="true">3</span>
         <span class="el-symbol" aria-hidden="true">Lp</span>
-        <span class="el-name" aria-hidden="true">Laparoscopy</span>
+        <span class="el-name" aria-hidden="true">Laparo&shy;scopy</span>
       </button>
-      <button type="button" class="el" data-family="imaging" data-element="Ir" aria-pressed="false" aria-label="Infrared, 1 paper">
+      <button type="button" class="el" data-family="imaging" data-element="Ir" data-name="Infrared" aria-pressed="false" aria-label="Infrared, 1 paper">
         <span class="el-count" aria-hidden="true">1</span>
         <span class="el-symbol" aria-hidden="true">Ir</span>
         <span class="el-name" aria-hidden="true">Infrared</span>
       </button>
-      <button type="button" class="el" data-family="learning" data-element="Dl" aria-pressed="false" aria-label="Deep learning, 7 papers">
+      <button type="button" class="el" data-family="learning" data-element="Dl" data-name="Deep learning" aria-pressed="false" aria-label="Deep learning, 7 papers">
         <span class="el-count" aria-hidden="true">7</span>
         <span class="el-symbol" aria-hidden="true">Dl</span>
         <span class="el-name" aria-hidden="true">Deep learning</span>
       </button>
-      <button type="button" class="el" data-family="learning" data-element="Ps" aria-pressed="false" aria-label="Pose estimation, 6 papers">
+      <button type="button" class="el" data-family="learning" data-element="Ps" data-name="Pose estimation" aria-pressed="false" aria-label="Pose estimation, 6 papers">
         <span class="el-count" aria-hidden="true">6</span>
         <span class="el-symbol" aria-hidden="true">Ps</span>
         <span class="el-name" aria-hidden="true">Pose estimation</span>
       </button>
-      <button type="button" class="el" data-family="learning" data-element="Km" aria-pressed="false" aria-label="Keypoint matching, 2 papers">
+      <button type="button" class="el" data-family="learning" data-element="Km" data-name="Keypoint matching" aria-pressed="false" aria-label="Keypoint matching, 2 papers">
         <span class="el-count" aria-hidden="true">2</span>
         <span class="el-symbol" aria-hidden="true">Km</span>
         <span class="el-name" aria-hidden="true">Keypoint matching</span>
       </button>
-      <button type="button" class="el" data-family="learning" data-element="Lm" aria-pressed="false" aria-label="Landmarks and segmentation, 2 papers">
+      <button type="button" class="el" data-family="learning" data-element="Lm" data-name="Landmarks and segmen&shy;tation" aria-pressed="false" aria-label="Landmarks and segmen&shy;tation, 2 papers">
         <span class="el-count" aria-hidden="true">2</span>
         <span class="el-symbol" aria-hidden="true">Lm</span>
-        <span class="el-name" aria-hidden="true">Landmarks and segmentation</span>
+        <span class="el-name" aria-hidden="true">Landmarks and segmen&shy;tation</span>
       </button>
-      <button type="button" class="el" data-family="geometry" data-element="3d" aria-pressed="false" aria-label="3D reconstruction, 3 papers">
+      <button type="button" class="el" data-family="geometry" data-element="3d" data-name="3D recon&shy;struction" aria-pressed="false" aria-label="3D recon&shy;struction, 3 papers">
         <span class="el-count" aria-hidden="true">3</span>
         <span class="el-symbol" aria-hidden="true">3d</span>
-        <span class="el-name" aria-hidden="true">3D reconstruction</span>
+        <span class="el-name" aria-hidden="true">3D recon&shy;struction</span>
       </button>
-      <button type="button" class="el" data-family="geometry" data-element="Sm" aria-pressed="false" aria-label="Simulation, 3 papers">
+      <button type="button" class="el" data-family="geometry" data-element="Sm" data-name="Simulation" aria-pressed="false" aria-label="Simulation, 3 papers">
         <span class="el-count" aria-hidden="true">3</span>
         <span class="el-symbol" aria-hidden="true">Sm</span>
         <span class="el-name" aria-hidden="true">Simulation</span>
       </button>
-      <button type="button" class="el" data-family="geometry" data-element="Vr" aria-pressed="false" aria-label="VR and haptics, 1 paper">
+      <button type="button" class="el" data-family="geometry" data-element="Vr" data-name="VR and haptics" aria-pressed="false" aria-label="VR and haptics, 1 paper">
         <span class="el-count" aria-hidden="true">1</span>
         <span class="el-symbol" aria-hidden="true">Vr</span>
         <span class="el-name" aria-hidden="true">VR and haptics</span>
       </button>
-      <button type="button" class="el" data-family="geometry" data-element="Rb" aria-pressed="false" aria-label="Robotics, 2 papers">
+      <button type="button" class="el" data-family="geometry" data-element="Rb" data-name="Robotics" aria-pressed="false" aria-label="Robotics, 2 papers">
         <span class="el-count" aria-hidden="true">2</span>
         <span class="el-symbol" aria-hidden="true">Rb</span>
         <span class="el-name" aria-hidden="true">Robotics</span>
       </button>
-      <button type="button" class="el" data-family="practice" data-element="Ds" aria-pressed="false" aria-label="Datasets and benchmarks, 4 papers">
+      <button type="button" class="el" data-family="practice" data-element="Ds" data-name="Datasets and bench&shy;marks" aria-pressed="false" aria-label="Datasets and bench&shy;marks, 4 papers">
         <span class="el-count" aria-hidden="true">4</span>
         <span class="el-symbol" aria-hidden="true">Ds</span>
-        <span class="el-name" aria-hidden="true">Datasets and benchmarks</span>
+        <span class="el-name" aria-hidden="true">Datasets and bench&shy;marks</span>
       </button>
-      <button type="button" class="el" data-family="practice" data-element="Cs" aria-pressed="false" aria-label="Clinical studies, 3 papers">
+      <button type="button" class="el" data-family="practice" data-element="Cs" data-name="Clinical studies" aria-pressed="false" aria-label="Clinical studies, 3 papers">
         <span class="el-count" aria-hidden="true">3</span>
         <span class="el-symbol" aria-hidden="true">Cs</span>
         <span class="el-name" aria-hidden="true">Clinical studies</span>
       </button>
-      <button type="button" class="el" data-family="practice" data-element="Ns" aria-pressed="false" aria-label="Neurosurgery, 1 paper">
+      <button type="button" class="el" data-family="practice" data-element="Ns" data-name="Neuro&shy;surgery" aria-pressed="false" aria-label="Neuro&shy;surgery, 1 paper">
         <span class="el-count" aria-hidden="true">1</span>
         <span class="el-symbol" aria-hidden="true">Ns</span>
-        <span class="el-name" aria-hidden="true">Neurosurgery</span>
+        <span class="el-name" aria-hidden="true">Neuro&shy;surgery</span>
       </button>
-      <button type="button" class="el" data-family="practice" data-element="Ws" aria-pressed="false" aria-label="Wearable sensing, 1 paper">
+      <button type="button" class="el" data-family="practice" data-element="Ws" data-name="Wearable sensing" aria-pressed="false" aria-label="Wearable sensing, 1 paper">
         <span class="el-count" aria-hidden="true">1</span>
         <span class="el-symbol" aria-hidden="true">Ws</span>
         <span class="el-name" aria-hidden="true">Wearable sensing</span>
@@ -538,10 +456,18 @@
         <button type="button" class="chip" data-toggle="journal" aria-pressed="false">Journals</button>
         <button type="button" class="chip chip-clear" data-clear hidden>Clear</button>
       </div>
-      <p class="pub-status" data-pub-status aria-live="polite">Showing all 13 papers</p>
     </div>
 
-    <div class="pub-years" data-pub-list>
+    <!-- While a filter is on, this bar pins under the nav: what is showing, and the way back -->
+    <div class="pub-bar" data-pub-bar>
+      <p class="pub-status" id="pub-status" tabindex="-1" data-pub-status aria-live="polite">Showing all 13 papers</p>
+      <p class="pub-bar-actions" data-pub-bar-actions hidden>
+        <a class="pub-bar-link" href="#publications" data-pub-change>Change</a>
+        <button type="button" class="pub-bar-link" data-pub-bar-clear>Clear</button>
+      </p>
+    </div>
+
+    <div class="pub-years" id="paper-list" data-pub-list>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2026</h3>
         <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="sole" data-elements="Us Dl Ps Lm">
@@ -737,33 +663,196 @@
           </li>
         </ol>
       </div>
-      <p class="pubs-empty" data-pub-empty hidden>No papers match this filter yet.</p>
+      <div class="pubs-empty" data-pub-empty hidden>
+        <p data-pub-empty-text>No papers match these filters.</p>
+        <button type="button" class="chip" data-pub-empty-fix>Show all papers</button>
+      </div>
     </div>
+    <a class="results-pill" href="#pub-status" data-results-pill hidden><span data-results-pill-text>Show papers</span> <span class="icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
+</a>
     <p class="pubs-foot">* Equal contribution. Citation counts refresh weekly from <a href="https://scholar.google.com/citations?user=CStrr20AAAAJ&amp;hl=en" rel="noopener">Google Scholar</a>.</p>
   </section>
 
-  <!-- Reviewing: the one marquee on the page -->
-  <section class="reviewing" aria-labelledby="reviewing-title" data-reveal>
-    <div class="reviewing-head wrap">
-      <h2 class="reviewing-title" id="reviewing-title">15+ peer reviews for</h2>
-      <button class="icon-btn motion-toggle" type="button" data-marquee-toggle aria-pressed="false" aria-label="Pause the scrolling list of venues">
-        <span class="when-playing"><span class="icon" aria-hidden="true"><svg><use href="#i-pause"/></svg></span>
+  <!-- Talks and reviewing: what I speak on and how to invite me, past talks, then the review record -->
+  <section class="section talks wrap" id="talks">
+    <div class="talks-head" data-reveal>
+      <h2 class="section-title">Talks and reviewing</h2>
+      <div class="talks-invite">
+        <p>Happy to speak about real-time AI for ultrasound, physical AI and soft robotics, and to review or join programme committees.</p>
+        <div class="invite-actions">
+          <a class="btn btn-solid btn-small" href="mailto:chiaradivece@gmail.com?subject=Invitation%20to%20speak">Invite me to speak</a>
+          <button class="icon-btn copy-btn" type="button" data-copy="chiaradivece@gmail.com" aria-label="Copy my email address">
+            <span class="when-idle"><span class="icon" aria-hidden="true"><svg><use href="#i-copy"/></svg></span>
 </span>
-        <span class="when-paused"><span class="icon" aria-hidden="true"><svg><use href="#i-play"/></svg></span>
+            <span class="when-done"><span class="icon" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
 </span>
-      </button>
-    </div>
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track"><span>IEEE Transactions on Medical Imaging</span><span>Medical Image Analysis</span><span>MICCAI</span><span>CVPR</span><span>ECCV</span><span>ICRA</span><span>IROS</span><span>IEEE Robotics and Automation Letters</span><span>IPCAI</span><span>IJCARS</span><span>IEEE Access</span><span>EMBC</span><span>IEEE Transactions on Medical Imaging</span><span>Medical Image Analysis</span><span>MICCAI</span><span>CVPR</span><span>ECCV</span><span>ICRA</span><span>IROS</span><span>IEEE Robotics and Automation Letters</span><span>IPCAI</span><span>IJCARS</span><span>IEEE Access</span><span>EMBC</span>
+          </button>
+          <p class="copy-note" data-copy-note role="status"></p>
+        </div>
       </div>
     </div>
-    <p class="sr-only">IEEE Transactions on Medical Imaging, Medical Image Analysis, MICCAI, CVPR, ECCV, ICRA, IROS, IEEE Robotics and Automation Letters, IPCAI, IJCARS, IEEE Access, EMBC</p>
+    <ol class="talk-list" data-stagger>
+      <li class="talk">
+        <span class="talk-date">Mar 2025</span>
+        <h3 class="talk-title">FETUS: Freehand Echographic Training for Ultrasound System</h3>
+        <p class="talk-event"><span>Invited presenter</span> Innovation in Women's Health Tech 2025, Impact Hub London</p>
+      </li>
+      <li class="talk">
+        <span class="talk-date">Jul 2022</span>
+        <h3 class="talk-title">Deep reinforcement learning-based guidance in freehand obstetric ultrasound training</h3>
+        <p class="talk-event"><span>Invited presenter</span> Women in Medical Image Understanding and Analysis (WiMIUA), University of Cambridge</p>
+      </li>
+      <li class="talk">
+        <span class="talk-date">May 2020</span>
+        <h3 class="talk-title">Embodiment of AI: how robots can interpret environment information and act</h3>
+        <p class="talk-event"><span>Lecturer and organiser</span> PhD Spring School, Università della Calabria</p>
+      </li>
+      <li class="talk">
+        <span class="talk-date">Feb 2020</span>
+        <h3 class="talk-title">Theralight: lightwave technologies for theranostics of tumours</h3>
+        <p class="talk-event"><span>Invited speaker</span> SharedCity: Innovation, Participation and Sustainability in Cities of the Future, Milan</p>
+      </li>
+    </ol>
+
+    <!-- The review record; the venue marquee runs edge to edge (the only marquee on the page) -->
+    <div class="reviewing" data-reveal>
+      <div class="reviewing-head">
+        <h3 class="reviewing-title" id="reviewing-title"><span class="reviewing-count">15+</span> peer reviews</h3>
+        <p class="reviewing-award">Outstanding Reviewer Award, IPCAI 2024, top 7% of reviewers</p>
+        <button class="icon-btn motion-toggle" type="button" data-marquee-toggle aria-pressed="false" aria-label="Pause the scrolling list of venues">
+          <span class="when-playing"><span class="icon" aria-hidden="true"><svg><use href="#i-pause"/></svg></span>
+</span>
+          <span class="when-paused"><span class="icon" aria-hidden="true"><svg><use href="#i-play"/></svg></span>
+</span>
+        </button>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track"><span>IEEE Transactions on Medical Imaging</span><span>Medical Image Analysis</span><span>MICCAI</span><span>CVPR</span><span>ECCV</span><span>ICRA</span><span>IROS</span><span>IEEE Robotics and Automation Letters</span><span>IPCAI</span><span>IJCARS</span><span>IEEE Access</span><span>EMBC</span><span>IEEE Transactions on Medical Imaging</span><span>Medical Image Analysis</span><span>MICCAI</span><span>CVPR</span><span>ECCV</span><span>ICRA</span><span>IROS</span><span>IEEE Robotics and Automation Letters</span><span>IPCAI</span><span>IJCARS</span><span>IEEE Access</span><span>EMBC</span>
+        </div>
+      </div>
+      <p class="sr-only">Reviewer for IEEE Transactions on Medical Imaging, Medical Image Analysis, MICCAI, CVPR, ECCV, ICRA, IROS, IEEE Robotics and Automation Letters, IPCAI, IJCARS, IEEE Access, EMBC</p>
+    </div>
   </section>
 
-  <!-- Recognition rail -->
+  <!-- Experience: industry vs academia -->
+  <section class="section experience wrap" id="experience">
+    <h2 class="section-title" data-reveal>Experience</h2>
+    <div class="exp-grid">
+      <div class="exp-col">
+        <h3 class="exp-heading">Industry</h3>
+        <ol class="exp-list" data-stagger>
+          <li class="job is-current">
+            <div class="job-meta">
+              <span class="job-dates">Oct 2024 - Present</span><span class="tag tag-accent">Now</span>
+            </div>
+            <h4 class="job-role">AI Lead and Founding Applied Scientist</h4>
+            <p class="job-org"><a href="https://morph.inc/" rel="noopener">morph</a>
+            </p>
+            <p class="job-summary">Leading AI development at a stealth-stage soft robotics startup, with a focus on computer vision, physical AI, robotics and AI agents.</p>
+          </li>
+          <li class="job">
+            <div class="job-meta">
+              <span class="job-dates">Jan 2023 - Jan 2025</span>
+            </div>
+            <h4 class="job-role">AI Researcher</h4>
+            <p class="job-org">AI SuitUp<span class="job-place">Remote (Albuquerque, US)</span>
+            </p>
+            <p class="job-summary">Research and prototyping for generative AI headshots. Optimised face detection, alignment and style transfer pipelines across diverse demographics, and cut inference time for web-scale deployment.</p>
+          </li>
+          <li class="job">
+            <div class="job-meta">
+              <span class="job-dates">Jun 2023 - Sep 2023</span>
+            </div>
+            <h4 class="job-role">Software Engineer Intern, Deep Learning Algorithms</h4>
+            <p class="job-org"><a href="https://www.mathworks.com/" rel="noopener">MathWorks</a><span class="job-place">Cambridge, UK</span>
+            </p>
+            <details class="job-more">
+              <summary>What I did<span class="sr-only"> at MathWorks</span></summary>
+              <p class="job-summary">Extended the Deep Learning Toolbox with a differentiable sort, fully supported by the automatic differentiation engine, so users can build custom layers that sort.</p>
+            </details>
+          </li>
+        </ol>
+      </div>
+      <div class="exp-col">
+        <h3 class="exp-heading">Research and teaching</h3>
+        <ol class="exp-list" data-stagger>
+          <li class="job">
+            <div class="job-meta">
+              <span class="job-dates">Sep 2020 - Jan 2025</span>
+            </div>
+            <h4 class="job-role">PhD Researcher and Teaching Assistant</h4>
+            <p class="job-org">University College London
+            </p>
+            <p class="job-summary">Sole researcher on the AI-guided fetal brain ultrasound line in the Surgical Robot Vision group and UCL Hawkes Institute, supervised by Danail Stoyanov and Francisco Vasconcelos. Took sensorless 6D plane pose estimation from first principles to a real-time navigation pipeline (3&nbsp;ms latency) on NVIDIA's Clara AGX clinical platform, with NVIDIA's Holoscan team. TA for Reinforcement Learning (with Google DeepMind), Robotic Systems, Machine Learning and Mathematical Modelling.</p>
+          </li>
+          <li class="job">
+            <div class="job-meta">
+              <span class="job-dates">Mar 2020 - Sep 2020</span>
+            </div>
+            <h4 class="job-role">Research Intern</h4>
+            <p class="job-org">Politecnico di Milano, NEARLab<span class="job-place">Milan, Italy</span>
+            </p>
+            <details class="job-more">
+              <summary>What I did<span class="sr-only"> at Politecnico di Milano, NEARLab</span></summary>
+              <p class="job-summary">NeuroEngineering and Medical Robotics Lab, EU project EDEN2020. Built a real-time, position-based dynamics simulator of brain deformation for keyhole neurosurgery in Unity, validated against in-vivo animal data (mean mismatch 4.73 ± 2.15%). Published in IEEE RA-L and presented at IROS.</p>
+            </details>
+          </li>
+          <li class="job">
+            <div class="job-meta">
+              <span class="job-dates">Jan 2019 - May 2019</span>
+            </div>
+            <h4 class="job-role">Graduate Researcher and Teaching Assistant</h4>
+            <p class="job-org">University of Illinois Chicago<span class="job-place">Chicago, US</span>
+            </p>
+            <details class="job-more">
+              <summary>What I did<span class="sr-only"> at University of Illinois Chicago</span></summary>
+              <p class="job-summary">Developed a haptics and VR simulator for Veress needle insertion training, rated "good" on the System Usability Scale by experienced clinicians. TA for Biological Systems Analysis.</p>
+            </details>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div class="edu-block">
+      <h3 class="exp-heading">Education</h3>
+      <ul class="edu" data-stagger>
+        <li>
+          <span class="edu-degree">PhD in Computer Science</span>
+          <span class="edu-school">University College London<span class="edu-dates">2020 - 2026</span></span>
+          <span class="edu-note">Thesis: Real-time deep learning-based plane pose estimation and navigation in freehand fetal brain ultrasound</span>
+        </li>
+        <li>
+          <span class="edu-degree">MSc Biomedical Engineering</span>
+          <span class="edu-school">Politecnico di Milano<span class="edu-dates">2017 - 2019</span></span>
+          <span class="edu-note">Summa cum laude. Double degree with UIC and Politecnico di Torino</span>
+        </li>
+        <li>
+          <span class="edu-degree">MSc Bioengineering</span>
+          <span class="edu-school">University of Illinois Chicago<span class="edu-dates">2018 - 2019</span></span>
+          <span class="edu-note">GPA 4.00/4.00, summa cum laude</span>
+        </li>
+        <li>
+          <span class="edu-degree">Alta Scuola Politecnica</span>
+          <span class="edu-school">Politecnico di Milano and Politecnico di Torino<span class="edu-dates">2017 - 2020</span></span>
+          <span class="edu-note">Top 1% honours programme, diploma with merit</span>
+        </li>
+        <li>
+          <span class="edu-degree">BSc Biomedical Engineering</span>
+          <span class="edu-school">Politecnico di Milano<span class="edu-dates">2014 - 2017</span></span>
+          <span class="edu-note">Thesis: FPGA-based brain injury evaluation through pupillometry</span>
+        </li>
+        <li>
+          <span class="edu-degree">Licensed Industrial Engineer</span>
+          <span class="edu-school">Italy<span class="edu-dates">2021</span></span>
+          <span class="edu-note">Professional licence to practise</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Awards rail (the reviewer award sits with the review record above) -->
   <section class="section recognition wrap" id="recognition">
     <div class="rail-head" data-reveal>
-      <h2 class="section-title">Proud <i>moments</i></h2>
+      <h2 class="section-title">Awards</h2>
       <div class="rail-controls">
         <button class="icon-btn" type="button" data-rail-prev aria-label="Previous awards"><span class="icon" aria-hidden="true"><svg><use href="#i-arrow-left"/></svg></span>
 </button>
@@ -776,11 +865,6 @@
         <span class="award-year">2025</span>
         <h3 class="award-title">Women's Health Tech Grant, top 3 project</h3>
         <p class="award-detail">London, UK</p>
-      </li>
-      <li class="award">
-        <span class="award-year">2024</span>
-        <h3 class="award-title">Outstanding Reviewer Award, IPCAI</h3>
-        <p class="award-detail">Top 7% of reviewers. Barcelona, Spain</p>
       </li>
       <li class="award">
         <span class="award-year">2024</span>
@@ -865,33 +949,6 @@
     </ol>
   </section>
 
-  <!-- Talks + teaching -->
-  <section class="section talks wrap" id="talks">
-    <h2 class="section-title" data-reveal>On <i>stage</i></h2>
-    <ol class="talk-list" data-stagger>
-      <li class="talk">
-        <span class="talk-date">Mar 2025</span>
-        <h3 class="talk-title">FETUS: Freehand Echographic Training for Ultrasound System</h3>
-        <p class="talk-event"><span>Invited presenter</span> Innovation in Women's Health Tech 2025, Impact Hub London</p>
-      </li>
-      <li class="talk">
-        <span class="talk-date">Jul 2022</span>
-        <h3 class="talk-title">Deep reinforcement learning-based guidance in freehand obstetric ultrasound training</h3>
-        <p class="talk-event"><span>Invited presenter</span> Women in Medical Image Understanding and Analysis (WiMIUA), University of Cambridge</p>
-      </li>
-      <li class="talk">
-        <span class="talk-date">May 2020</span>
-        <h3 class="talk-title">Embodiment of AI: how robots can interpret environment information and act</h3>
-        <p class="talk-event"><span>Lecturer and organiser</span> PhD Spring School, Università della Calabria</p>
-      </li>
-      <li class="talk">
-        <span class="talk-date">Feb 2020</span>
-        <h3 class="talk-title">Theralight: lightwave technologies for theranostics of tumours</h3>
-        <p class="talk-event"><span>Invited speaker</span> SharedCity: Innovation, Participation and Sustainability in Cities of the Future, Milan</p>
-      </li>
-    </ol>
-  </section>
-
   <section class="section teaching wrap" id="teaching">
     <h2 class="section-title" data-reveal>Teaching and mentoring</h2>
     <div class="teach-grid">
@@ -959,11 +1016,14 @@
         <span class="when-done"><span class="icon" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
 </span>
       </button>
+      <p class="copy-note" data-copy-note role="status"></p>
     </div>
     <p class="contact-time" data-clocks>
       It's <time class="contact-clock" data-tz="America/Los_Angeles">--:--</time> in Seattle and <time class="contact-clock" data-tz="Europe/London">--:--</time> in London right now.
     </p>
     <ul class="socials">
+      <li><a href="/assets/pdf/Chiara_Di_Vece_CV.pdf" type="application/pdf"><span class="icon" aria-hidden="true"><svg><use href="#i-download-simple"/></svg></span>
+<span>CV (PDF)</span></a></li>
       <li><a href="https://scholar.google.com/citations?user=CStrr20AAAAJ" rel="noopener me"><span class="icon" aria-hidden="true"><svg><use href="#i-googlescholar"/></svg></span>
 <span>Google Scholar</span></a></li>
       <li><a href="https://www.linkedin.com/in/chiaradivece/" rel="noopener me"><span class="icon" aria-hidden="true"><svg><use href="#i-linkedin-logo"/></svg></span>
@@ -986,10 +1046,17 @@
     <button class="icon-btn lightbox-close" aria-label="Close photo"><span class="icon" aria-hidden="true"><svg><use href="#i-x"/></svg></span>
 </button>
   </form>
+  <div class="lightbox-stage" data-lightbox-stage>
+    <button class="icon-btn lightbox-nav lightbox-prev" type="button" data-lightbox-prev aria-label="Previous photo" hidden><span class="icon" aria-hidden="true"><svg><use href="#i-arrow-left"/></svg></span>
+</button>
+    <button class="icon-btn lightbox-nav lightbox-next" type="button" data-lightbox-next aria-label="Next photo" hidden><span class="icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
+</button>
+  </div>
+  <p class="lightbox-caption" aria-live="polite"><span class="lightbox-count" data-lightbox-count></span><span class="sr-only">. </span><span data-lightbox-caption></span></p>
 </dialog>
 
-  <script src="/assets/js/main.js?v=1791488210" defer></script>
-  <script src="/assets/js/scan.js?v=1791488210" defer></script>
-  <script src="/assets/js/motion.js?v=1791488210" defer></script>
+  <script src="/assets/js/main.js?v=1791496354" defer></script>
+  <script src="/assets/js/scan.js?v=1791496354" defer></script>
+  <script src="/assets/js/motion.js?v=1791496354" defer></script>
 </body>
 </html>
