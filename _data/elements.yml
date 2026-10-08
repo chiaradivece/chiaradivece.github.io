@@ -1,0 +1,34 @@
+# The "elements" of the research, shown as a periodic-table-style filter above the
+# publication list. Papers reference elements by symbol in publications.yml.
+# The paper count on each tile is computed from publications.yml.
+
+families:
+  - id: imaging
+    name: Imaging
+  - id: learning
+    name: Learning
+  - id: geometry
+    name: 3D and simulation
+  - id: practice
+    name: Data and clinic
+
+elements:
+  - { symbol: Us, name: Ultrasound, family: imaging }
+  - { symbol: Hs, name: Hyperspectral, family: imaging }
+  - { symbol: Lp, name: Laparoscopy, family: imaging }
+  - { symbol: Ir, name: Infrared, family: imaging }
+
+  - { symbol: Dl, name: Deep learning, family: learning }
+  - { symbol: Ps, name: Pose estimation, family: learning }
+  - { symbol: Km, name: Keypoint matching, family: learning }
+  - { symbol: Lm, name: Landmarks and segmentation, family: learning }
+
+  - { symbol: 3d, name: 3D reconstruction, family: geometry }
+  - { symbol: Sm, name: Simulation, family: geometry }
+  - { symbol: Vr, name: VR and haptics, family: geometry }
+  - { symbol: Rb, name: Robotics, family: geometry }
+
+  - { symbol: Ds, name: Datasets and benchmarks, family: practice }
+  - { symbol: Cs, name: Clinical studies, family: practice }
+  - { symbol: Ns, name: Neurosurgery, family: practice }
+  - { symbol: Ws, name: Wearable sensing, family: practice }

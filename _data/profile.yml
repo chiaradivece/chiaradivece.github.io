@@ -8,6 +8,24 @@ company_url: https://morph.inc/
 email: chiaradivece@gmail.com
 cv: /assets/pdf/Chiara_Di_Vece_CV.pdf
 photo: /assets/img/chiara.jpg
+cutout: /assets/img/chiara-cutout.webp
+
+# Hero headline, one entry per line (the page adds the full stop)
+tagline:
+  - From computer vision
+  - for fetal ultrasound
+  - to soft robotics
+
+# Quick facts next to the badge in About
+facts:
+  - label: Based in
+    value: Seattle, WA
+  - label: Team in
+    value: London, UK
+  - label: Role
+    value: AI Lead, morph
+  - label: PhD
+    value: Computer Science, UCL, 2026
 location: Seattle, WA
 
 # Local clocks shown in the contact section (IANA time zone names)

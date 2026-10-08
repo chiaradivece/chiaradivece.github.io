@@ -36,78 +36,90 @@ layout: default
 
 <main id="main">
 
-  <!-- Hero: name + scan simulation -->
-  <section class="hero wrap" id="top">
-    <div class="hero-copy">
-      <h1 class="hero-name" aria-label="{{ p.name }}">
-        <span class="hero-line" aria-hidden="true">{{ p.first_name }}</span>
-        <span class="hero-line" aria-hidden="true">{{ p.last_name }}<span class="hero-dot">.</span></span>
-      </h1>
-      <p class="hero-sub">
-        AI Lead at <a href="{{ p.company_url }}" rel="noopener">morph</a>, building physical AI for soft robots.
-        My UCL PhD taught machines to navigate fetal ultrasound.
-      </p>
-      <div class="hero-ctas">
-        <a class="btn btn-solid" href="{{ p.cv | relative_url }}" download>
-          Download CV {% include icon.html name="download-simple" %}
-        </a>
-        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+  <!-- Hero: Chiara herself, the line, and the way in -->
+  <section class="hero" id="top" data-hero>
+    <div class="hero-inner wrap">
+      <div class="hero-copy">
+        <h1 class="hero-title">
+          <span class="hero-kicker">{{ p.name }}, PhD</span>
+          <span class="hero-line">
+            {%- for line in p.tagline %}
+            <span class="hero-line-part">{{ line }}{% if forloop.last %}<span class="hero-dot">.</span>{% endif %}</span>
+            {%- endfor %}
+          </span>
+        </h1>
+        <div class="hero-ctas">
+          <a class="btn btn-solid" href="{{ p.cv | relative_url }}" download>
+            Download CV {% include icon.html name="download-simple" %}
+          </a>
+          <a class="btn btn-ghost" href="#contact">Get in touch</a>
+        </div>
       </div>
     </div>
-
-    <figure class="scan" aria-label="Animated, simulated ultrasound scan of a soft robotic actuator">
-      <div class="scan-screen">
-        <canvas data-scan></canvas>
+    <div class="hero-ghost" aria-hidden="true"><span class="hero-ghost-text" data-depth="-14">{{ p.first_name | upcase }}</span></div>
+    <div class="hero-figure">
+      <div class="hero-figure-enter">
+        <img class="hero-portrait" data-depth="9" src="{{ p.cutout | relative_url }}" alt="{{ p.name }}" width="892" height="680" fetchpriority="high" decoding="async">
       </div>
-      <figcaption class="scan-caption">Simulated ultrasound of a soft actuator. <span class="caption-mouse">Move your pointer over it to push it around.</span><span class="caption-touch">Drag sideways across it to push it around.</span></figcaption>
-    </figure>
+    </div>
   </section>
 
-  <!-- About -->
+  <!-- About: the hero figure comes back as a badge on a lanyard -->
+  {%- assign scholar = site.data.scholar %}
   <section class="section about wrap" id="about" data-reveal>
-    <h2 class="section-title">About</h2>
     <div class="about-grid">
-      <div class="about-photo">
-        <img src="{{ p.photo | relative_url }}" alt="Portrait of {{ p.name }}" width="800" height="1000" loading="lazy" decoding="async">
+      <div class="about-text">
+        <h2 class="section-title">Hi, I'm <i>Chiara</i>.</h2>
+        <p class="about-lead">
+          I'm a biomedical engineer turned AI scientist. I lead AI at
+          <a href="{{ p.company_url }}" rel="noopener">morph</a>, a soft robotics startup still in
+          stealth, across computer vision, physical AI, robotics and AI agents.
+        </p>
+        <p>
+          My PhD at UCL taught deep learning models to guide sonographers to the right views in
+          fetal brain ultrasound, without any tracking hardware, in real time on NVIDIA's Clara AGX.
+          Before that I built surgical simulators with haptics and VR in Milan and Chicago. I also
+          trained in ballet for fifteen years.
+        </p>
       </div>
 
-      <div class="about-body">
-        <p class="lead">
-          I'm a biomedical engineer turned AI scientist, drawn to problems where
-          learning systems meet the physical world.
-        </p>
-        <p>
-          I lead AI at <a href="{{ p.company_url }}" rel="noopener">morph</a>, a soft robotics
-          startup still in stealth, working across computer vision, physical AI, robotics and AI
-          agents. I'm based in Seattle and work closely with our team in London.
-        </p>
-        <p>
-          My PhD at UCL asked whether deep learning could guide sonographers to the right
-          diagnostic views in freehand fetal brain ultrasound, with no external tracking hardware.
-          It ended with a real-time navigation pipeline running on NVIDIA's Clara AGX clinical
-          platform. Before that, I built surgical simulators with haptics and virtual reality in
-          Milan and Chicago, after fifteen years of ballet training.
-        </p>
+      <div class="about-badge">
+        <div class="badge-rig" data-badge-rig>
+          <span class="badge-pin" aria-hidden="true"></span>
+          <div class="badge-drop" data-badge-drop>
+            <div class="badge-swing" data-badge-swing>
+              <span class="badge-strap" aria-hidden="true"></span>
+              <span class="badge-clip" aria-hidden="true"></span>
+              <div class="badge-card" data-badge-card role="img" aria-label="ID badge: {{ p.name }}, PhD, AI Lead at morph">
+                <div class="badge-top"><span class="badge-glyph"></span><span>Scientist ID</span></div>
+                <div class="badge-photo"><img src="{{ p.photo | relative_url }}" alt="" width="1024" height="1024" loading="lazy" decoding="async" draggable="false"></div>
+                <p class="badge-name">{{ p.name }}</p>
+                <p class="badge-role">PhD · AI Lead</p>
+                <div class="badge-fields">
+                  <span><small>Field</small>Physical AI</span>
+                  <span><small>PhD</small>UCL '26</span>
+                  <span><small>Base</small>Seattle</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <ul class="edu" aria-label="Education">
-          {%- for e in p.education %}
-          <li>
-            <span class="edu-degree">{{ e.degree }}</span>
-            <span class="edu-school">{{ e.school }}<span class="edu-dates">{{ e.dates }}</span></span>
-            <span class="edu-note">{{ e.note }}</span>
-          </li>
+      <div class="about-facts">
+        <dl class="facts">
+          {%- for f in p.facts %}
+          <div class="fact"><dt>{{ f.label }}</dt><dd>{{ f.value }}</dd></div>
           {%- endfor %}
-        </ul>
+        </dl>
+        <dl class="numbers">
+          <div class="number"><dt>citations</dt><dd>{{ scholar.citations }}</dd></div>
+          <div class="number"><dt>h-index</dt><dd>{{ scholar.h_index }}</dd></div>
+          <div class="number"><dt>papers</dt><dd>{{ pubs.size }}</dd></div>
+          <div class="number"><dt>awards</dt><dd>{{ rec.awards.size }}</dd></div>
+        </dl>
+        <p class="facts-source">Citations and h-index from <a href="{{ scholar.profile | escape }}" rel="noopener">Google Scholar</a>, updated {{ scholar.updated | date: "%B %Y" }}.</p>
       </div>
-
-      {%- assign scholar = site.data.scholar %}
-      <dl class="stats">
-        <div class="stat"><dt>citations</dt><dd>{{ scholar.citations }}</dd></div>
-        <div class="stat"><dt>h-index</dt><dd>{{ scholar.h_index }}</dd></div>
-        <div class="stat"><dt>papers</dt><dd>{{ pubs.size }}</dd></div>
-        <div class="stat"><dt>awards</dt><dd>{{ rec.awards.size }}</dd></div>
-        <p class="stats-source">Citations and h-index from <a href="{{ scholar.profile | escape }}" rel="noopener">Google Scholar</a>, updated {{ scholar.updated | date: "%B %Y" }}</p>
-      </dl>
     </div>
   </section>
 
@@ -179,11 +191,35 @@ layout: default
       </div>
       {%- endfor %}
     </div>
+    <div class="edu-block">
+      <h3 class="exp-heading">Education</h3>
+      <ul class="edu">
+        {%- for e in p.education %}
+        <li>
+          <span class="edu-degree">{{ e.degree }}</span>
+          <span class="edu-school">{{ e.school }}<span class="edu-dates">{{ e.dates }}</span></span>
+          <span class="edu-note">{{ e.note }}</span>
+        </li>
+        {%- endfor %}
+      </ul>
+    </div>
   </section>
 
-  <!-- Research themes (bento) -->
+  <!-- Research: the scan lives here now, then the themes -->
   <section class="section research wrap" id="research" data-reveal>
     <h2 class="section-title">Research</h2>
+    <div class="research-intro">
+      <div class="research-intro-text">
+        <p class="research-lead">My PhD taught machines to find their way through fetal ultrasound. Now I build AI for soft robots.</p>
+        <p>The scan brings the two together: a simulated soft actuator, shown as an ultrasound image.</p>
+      </div>
+      <figure class="scan" aria-label="Animated, simulated ultrasound scan of a soft robotic actuator">
+        <div class="scan-screen">
+          <canvas data-scan></canvas>
+        </div>
+        <figcaption class="scan-caption"><span class="caption-mouse">Move your pointer over it to push it around.</span><span class="caption-touch">Drag sideways across it to push it around.</span></figcaption>
+      </figure>
+    </div>
     <div class="bento">
       <article class="cell cell-fetal">
         <div class="cell-media cell-media-paper">
@@ -202,12 +238,6 @@ layout: default
             <a href="https://doi.org/10.1038/s41598-026-47854-3" rel="noopener">Scientific Reports {% include icon.html name="arrow-up-right" %}</a>
           </p>
         </div>
-      </article>
-
-      <article class="cell cell-now">
-        <span class="tag tag-accent">Now</span>
-        <h3>Physical AI at morph</h3>
-        <p>Computer vision, robotics and AI agents for soft robotics. We're in stealth, so more on this soon.</p>
       </article>
 
       <article class="cell cell-sim">
@@ -247,14 +277,34 @@ layout: default
   <section class="section pubs wrap" id="publications" data-reveal>
     <div class="pubs-head">
       <h2 class="section-title">Publications</h2>
-      <div class="chips" role="group" aria-label="Filter publications" data-pub-filters>
-        <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All <span class="chip-count">{{ pubs.size }}</span></button>
-        <button type="button" class="chip" data-filter="first" aria-pressed="false">First author</button>
-        <button type="button" class="chip" data-filter="journal" aria-pressed="false">Journals</button>
-        <button type="button" class="chip" data-filter="ultrasound" aria-pressed="false">Ultrasound</button>
-        <button type="button" class="chip" data-filter="surgical-vision" aria-pressed="false">Surgical vision</button>
-        <button type="button" class="chip" data-filter="simulation" aria-pressed="false">Simulation</button>
+      <p class="pubs-intro">The elements of my research. Pick one to light up the papers that use it.</p>
+    </div>
+
+    {%- assign els = site.data.elements %}
+    <div class="elements" role="group" aria-label="Filter papers by research element" data-element-grid>
+      {%- for el in els.elements %}
+      {%- assign n = 0 %}
+      {%- for pub in pubs %}{% if pub.elements contains el.symbol %}{% assign n = n | plus: 1 %}{% endif %}{% endfor %}
+      <button type="button" class="el" data-family="{{ el.family }}" data-element="{{ el.symbol }}" aria-pressed="false" aria-label="{{ el.name }}, {{ n }} {% if n == 1 %}paper{% else %}papers{% endif %}">
+        <span class="el-count" aria-hidden="true">{{ n }}</span>
+        <span class="el-symbol" aria-hidden="true">{{ el.symbol }}</span>
+        <span class="el-name" aria-hidden="true">{{ el.name }}</span>
+      </button>
+      {%- endfor %}
+    </div>
+
+    <div class="pub-controls">
+      <ul class="el-legend" aria-label="Element families">
+        {%- for f in els.families %}
+        <li class="el-key" data-family="{{ f.id }}"><span class="el-swatch" aria-hidden="true"></span>{{ f.name }}</li>
+        {%- endfor %}
+      </ul>
+      <div class="chips" role="group" aria-label="More filters" data-pub-filters>
+        <button type="button" class="chip" data-toggle="first" aria-pressed="false">First author</button>
+        <button type="button" class="chip" data-toggle="journal" aria-pressed="false">Journals</button>
+        <button type="button" class="chip chip-clear" data-clear hidden>Clear</button>
       </div>
+      <p class="pub-status" data-pub-status aria-live="polite">Showing all {{ pubs.size }} papers</p>
     </div>
 
     <div class="pub-years" data-pub-list>
@@ -265,7 +315,7 @@ layout: default
         <ol class="pub-items">
           {%- for pub in y.items %}
           {%- assign primary = pub.links.Paper | default: pub.links.arXiv -%}
-          <li class="pub" data-pub data-type="{{ pub.type }}" data-first="{{ pub.first }}" data-topics="{{ pub.topics | join: ' ' }}">
+          <li class="pub" data-pub data-type="{{ pub.type }}" data-first="{{ pub.first }}" data-elements="{{ pub.elements | join: ' ' }}">
             <h4 class="pub-title"><a href="{{ primary }}" rel="noopener">{{ pub.title }}</a></h4>
             <p class="pub-authors">{{ pub.authors | replace: "C. Di Vece", "<strong>C. Di Vece</strong>" }}</p>
             <p class="pub-venue">
@@ -293,7 +343,7 @@ layout: default
     <p class="pubs-foot">* Equal contribution. Citation counts refresh weekly from <a href="{{ site.data.scholar.profile | escape }}" rel="noopener">Google Scholar</a>.</p>
   </section>
 
-  <!-- Reviewing marquee -->
+  <!-- Reviewing: the one marquee on the page -->
   <section class="reviewing" aria-labelledby="reviewing-title" data-reveal>
     <h2 class="reviewing-title wrap" id="reviewing-title">15+ peer reviews for</h2>
     <div class="marquee" aria-hidden="true">
