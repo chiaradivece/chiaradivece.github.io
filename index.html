@@ -98,7 +98,6 @@ layout: default
                 <div class="badge-fields">
                   <span><small>Field</small>Physical AI</span>
                   <span><small>PhD</small>UCL '26</span>
-                  <span><small>Base</small>Seattle</span>
                 </div>
               </div>
             </div>
@@ -182,7 +181,7 @@ layout: default
             <h4 class="job-role">{{ job.role }}</h4>
             <p class="job-org">
               {%- if job.url %}<a href="{{ job.url }}" rel="noopener">{{ job.org }}</a>{% else %}{{ job.org }}{% endif %}
-              <span class="job-place">{{ job.place }}</span>
+              {%- if job.place %}<span class="job-place">{{ job.place }}</span>{% endif %}
             </p>
             <p class="job-summary">{{ job.summary }}</p>
           </li>
@@ -440,7 +439,7 @@ layout: default
       <div class="clock">
         <span class="clock-city">{{ c.city }}</span>
         <time class="clock-time" data-tz="{{ c.tz }}">--:--</time>
-        <span class="clock-note" data-tz-day="{{ c.tz }}">{{ c.note }}</span>
+        <span class="clock-note" data-tz-day="{{ c.tz }}"></span>
       </div>
       {%- endfor %}
     </div>

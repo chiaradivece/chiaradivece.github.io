@@ -217,7 +217,7 @@
     noteEls.forEach(function (el, i) {
       try {
         var day = new Intl.DateTimeFormat('en-US', { weekday: 'long', timeZone: el.getAttribute('data-tz-day') }).format(now);
-        el.textContent = day + '. ' + notes[i];
+        el.textContent = notes[i] ? day + '. ' + notes[i] : day;
       } catch (e) {}
     });
   }

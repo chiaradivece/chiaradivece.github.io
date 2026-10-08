@@ -2,7 +2,6 @@ industry:
   - role: AI Lead and Founding Applied Scientist
     org: morph
     url: https://morph.inc/
-    place: London, UK
     dates: Oct 2024 - Present
     current: true
     summary: >-
@@ -30,7 +29,6 @@ industry:
 academia:
   - role: PhD Researcher and Teaching Assistant
     org: University College London
-    place: London, UK
     dates: Sep 2020 - Jan 2025
     summary: >-
       Sole researcher on the AI-guided fetal brain ultrasound line in the Surgical Robot
