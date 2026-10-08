@@ -2,7 +2,7 @@
 #   type:    journal | conference | preprint
 #   status:  optional label shown as a tag, e.g. Under review
 #   first:   sole (first author) | joint (equal contribution) | none
-#   topics:  ultrasound | surgical-vision | simulation | sensing
+#   elements: symbols from elements.yml (drives the research-elements filter)
 #   links:   label -> url (Paper, arXiv, Code, Data)
 #   note:    optional short highlight (award, acceptance)
 #   featured: true to pin in the research section
@@ -14,7 +14,7 @@
   type: journal
   status: Under review
   first: sole
-  topics: [ultrasound]
+  elements: [Us, Dl, Ps, Lm]
   links:
     arXiv: https://arxiv.org/abs/2404.07124
 
@@ -24,7 +24,7 @@
   year: 2026
   type: journal
   first: none
-  topics: [surgical-vision]
+  elements: [Hs, Lp, Dl, Km, Ps, 3d, Ds]
   links:
     Paper: https://doi.org/10.1007/s11548-026-03633-z
     arXiv: https://arxiv.org/abs/2604.17446
@@ -36,7 +36,7 @@
   year: 2026
   type: journal
   first: sole
-  topics: [ultrasound]
+  elements: [Us, Dl, Lm, Ds, Cs]
   links:
     Paper: https://doi.org/10.1038/s41598-026-47854-3
     Data: https://doi.org/10.5522/04/30819911
@@ -48,7 +48,7 @@
   year: 2025
   type: journal
   first: none
-  topics: [surgical-vision]
+  elements: [Lp, 3d, Rb, Ds]
   links:
     Paper: https://doi.org/10.1109/LRA.2025.3540529
     arXiv: https://arxiv.org/abs/2410.11703
@@ -59,7 +59,7 @@
   year: 2025
   type: conference
   first: joint
-  topics: [surgical-vision]
+  elements: [Dl, Km, Ps, 3d, Ds]
   links:
     Paper: https://doi.org/10.1007/978-3-031-91989-3_8
     arXiv: https://arxiv.org/abs/2408.16445
@@ -71,7 +71,7 @@
   year: 2024
   type: journal
   first: none
-  topics: [ultrasound]
+  elements: [Us, Cs]
   links:
     Paper: https://doi.org/10.1016/j.ejogrb.2024.04.042
 
@@ -81,7 +81,7 @@
   year: 2023
   type: journal
   first: sole
-  topics: [ultrasound]
+  elements: [Us, Dl, Ps]
   links:
     Paper: https://doi.org/10.1109/TMRB.2023.3328638
 
@@ -91,7 +91,7 @@
   year: 2022
   type: conference
   first: sole
-  topics: [ultrasound]
+  elements: [Us, Dl, Ps]
   links:
     Paper: https://doi.org/10.31256/HSMR2022.24
 
@@ -101,7 +101,7 @@
   year: 2022
   type: journal
   first: sole
-  topics: [ultrasound]
+  elements: [Us, Dl, Ps, Sm]
   note: AURIS/IPCAI Young Investigator Travel Award, 1st place
   links:
     Paper: https://doi.org/10.1007/s11548-022-02609-z
@@ -112,7 +112,7 @@
   year: 2021
   type: journal
   first: joint
-  topics: [simulation]
+  elements: [Sm, Rb, Ns]
   links:
     Paper: https://doi.org/10.1109/LRA.2021.3090016
 
@@ -122,7 +122,7 @@
   year: 2021
   type: journal
   first: sole
-  topics: [simulation]
+  elements: [Lp, Vr, Sm, Cs]
   links:
     Paper: https://doi.org/10.1007/s11548-021-02341-0
 
@@ -132,7 +132,7 @@
   year: 2019
   type: conference
   first: joint
-  topics: [sensing]
+  elements: [Ws]
   links:
     Paper: https://doi.org/10.1109/EMBC.2019.8857927
 
@@ -142,6 +142,6 @@
   year: 2017
   type: conference
   first: joint
-  topics: [sensing]
+  elements: [Ir]
   links:
     Paper: https://doi.org/10.1109/RTSI.2017.8065976

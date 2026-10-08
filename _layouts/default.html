@@ -31,6 +31,9 @@
     })();
   </script>
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  {%- if page.url == "/" %}
+  <link rel="preload" as="image" href="{{ site.data.profile.cutout | relative_url }}" fetchpriority="high">
+  {%- endif %}
 
   <script type="application/ld+json">
   {
@@ -51,5 +54,6 @@
   {{ content }}
   <script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
   <script src="{{ '/assets/js/scan.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/motion.js' | relative_url }}" defer></script>
 </body>
 </html>
