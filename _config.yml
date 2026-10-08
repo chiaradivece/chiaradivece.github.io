@@ -17,6 +17,8 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - PRODUCT.md
+  - DESIGN.md
   - LICENSE
   - vendor
   - .github

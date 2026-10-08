@@ -9,3 +9,8 @@ node_modules
 .playwright-mcp
 .claude/settings.local.json
 Gemfile.lock
+
+# Impeccable live-mode session state (the config itself is tracked)
+.impeccable/live/*
+!.impeccable/live/config.json
+.impeccable/config.local.json
