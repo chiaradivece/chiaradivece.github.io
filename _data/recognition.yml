@@ -1,0 +1,133 @@
+awards:
+  - year: 2025
+    title: Women's Health Tech Grant, top 3 project
+    detail: London, UK
+  - year: 2024
+    title: Outstanding Reviewer Award, IPCAI
+    detail: Top 7% of reviewers. Barcelona, Spain
+  - year: 2024
+    title: Women's Health Tech Grant
+    detail: UCL EPSRC Impact Acceleration Account, £5,000
+  - year: 2022
+    title: AURIS/IPCAI Young Investigator Travel Award
+    detail: 1st place. Tokyo, Japan
+  - year: 2022
+    title: Invited IJCARS journal paper
+    detail: Selected from the best papers of IPCAI 2022
+  - year: 2022
+    title: Women in MICCAI Inspirational Leadership Legacy
+    detail: 1st place. Singapore
+  - year: 2022
+    title: Microsoft/MathWorks WiMIUA Best Poster
+    detail: 2nd place. Cambridge, UK
+  - year: 2021
+    title: Best group project, UCL MedICSS
+    detail: 1st place. London, UK
+  - year: 2020
+    title: UCL Research Studentship
+    detail: Department of Computer Science
+  - year: 2020
+    title: Alta Scuola Politecnica, top 3 thesis projects
+    detail: Turin, Italy
+  - year: 2019
+    title: MSc with honours
+    detail: Politecnico di Milano and Politecnico di Torino
+  - year: 2019
+    title: Rare Disease Hackathon
+    detail: 3rd place. Florence, Italy
+  - year: 2018
+    title: MSc with honours
+    detail: University of Illinois Chicago
+  - year: 2018
+    title: IEEE Computer Society Lance Stafford Larson Writing Award
+    detail: 3rd place, undergraduate competition
+  - year: 2017
+    title: Admitted to Alta Scuola Politecnica
+    detail: Top 1% of students at PoliMi and PoliTo
+  - year: 2017
+    title: Rare Disease Hackathon
+    detail: 1st place. Florence, Italy
+  - year: 2017
+    title: IEEE RTSI Young Professional Demo Competition
+    detail: 1st place. Modena, Italy
+  - year: 2017
+    title: Xilinx Open Hardware Contest
+    detail: Finalist. Dublin, Ireland
+
+reviewing:
+  - IEEE Transactions on Medical Imaging
+  - Medical Image Analysis
+  - MICCAI
+  - CVPR
+  - ECCV
+  - ICRA
+  - IROS
+  - IEEE Robotics and Automation Letters
+  - IPCAI
+  - IJCARS
+  - IEEE Access
+  - EMBC
+
+talks:
+  - date: Mar 2025
+    title: "FETUS: Freehand Echographic Training for Ultrasound System"
+    role: Invited presenter
+    event: Innovation in Women's Health Tech 2025, Impact Hub London
+  - date: Jul 2022
+    title: Deep reinforcement learning-based guidance in freehand obstetric ultrasound training
+    role: Invited presenter
+    event: Women in Medical Image Understanding and Analysis (WiMIUA), University of Cambridge
+  - date: May 2020
+    title: "Embodiment of AI: how robots can interpret environment information and act"
+    role: Lecturer and organiser
+    event: PhD Spring School, Università della Calabria
+  - date: Feb 2020
+    title: "Theralight: lightwave technologies for theranostics of tumours"
+    role: Invited speaker
+    event: "SharedCity: Innovation, Participation and Sustainability in Cities of the Future, Milan"
+
+teaching:
+  - code: COMP0089
+    name: Reinforcement Learning
+    detail: UCL, taught with Google DeepMind
+  - code: COMP0037
+    name: Robotic Systems
+    detail: UCL
+  - code: COMP0088
+    name: Introduction to Machine Learning
+    detail: UCL
+  - code: ENGF0003
+    name: Mathematical Modelling and Analysis
+    detail: UCL
+  - code: BME310
+    name: Biological Systems Analysis
+    detail: University of Illinois Chicago
+
+mentoring:
+  - role: Research Mentor
+    org: Lumiere Education
+    dates: 2022 - Present
+    summary: >-
+      Thirteen high school and undergraduate mentees guided from research question to
+      paper, five of them published or accepted, including at the International
+      Conference on Human-Computer Interaction.
+  - role: Graduate Research Advisor
+    org: UCL and Politecnico di Milano
+    dates: 2020 - 2024
+    summary: >-
+      Advised eight MSc, visiting and summer students on ultrasound pose estimation,
+      haptic ultrasound simulators, clinical video tracking and surgical teleoperation.
+
+community:
+  - role: PhD Students Representative
+    org: UCL Hawkes Institute
+    dates: 2021 - 2025
+  - role: Volunteer Mentor
+    org: Alta Scuola Politecnica
+    dates: 2021 - Present
+  - role: Executive Board, IEEE Women in Engineering
+    org: Politecnico di Milano
+    dates: 2018 - 2020
+  - role: Volunteer Tutor
+    org: San Filippo Neri Association
+    dates: 2016 - 2018

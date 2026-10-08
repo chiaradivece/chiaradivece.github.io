@@ -1,0 +1,53 @@
+# News, newest first. The first item is shown large; the next four as a list;
+# anything older goes under "Older news".
+#
+#   date:  free text shown as-is, e.g. "Jul 2026"
+#   text:  one or two sentences
+#   link:  optional URL (the LinkedIn or X post, a paper, a repo)
+#   label: optional link text, defaults to "Read more"
+
+- date: Sep 2026
+  text: >-
+    My PhD in Computer Science from UCL has been officially awarded. The thesis is on
+    real-time deep learning-based plane pose estimation and navigation in freehand fetal
+    brain ultrasound.
+
+- date: Jul 2026
+  text: >-
+    HyKey, our hyperspectral keypoint detection and matching method for minimally invasive
+    surgery, was presented at IPCAI 2026 in Nagoya. The dataset and code are public.
+  link: https://github.com/alexsaikia/HyKey-Hyperspectral-Keypoint-Detection
+  label: Dataset and code
+
+- date: Apr 2026
+  text: >-
+    Our multicentre benchmark dataset for landmark-based fetal ultrasound biometry is out in
+    Scientific Reports, with open data and code.
+  link: https://doi.org/10.1038/s41598-026-47854-3
+  label: Read the paper
+
+- date: Feb 2026
+  text: >-
+    I defended my PhD at UCL and passed with minor corrections. Thank you to my supervisors
+    Dan Stoyanov and Francisco Vasconcelos, and to my examiners Ester Bonmati and George
+    Mylonas.
+
+- date: May 2025
+  text: >-
+    "Mismatched", our study of where image matching methods and benchmarks break down, is
+    published in the ECCV 2024 Workshops proceedings.
+  link: https://doi.org/10.1007/978-3-031-91989-3_8
+  label: Read the paper
+
+- date: Apr 2025
+  text: >-
+    Our robotic arm platform for multi-view image acquisition and 3D reconstruction in
+    minimally invasive surgery is published in IEEE Robotics and Automation Letters.
+  link: https://doi.org/10.1109/LRA.2025.3540529
+  label: Read the paper
+
+- date: Mar 2025
+  text: >-
+    I presented FETUS, our freehand ultrasound training system, at Innovation in Women's
+    Health Tech 2025 in London. Our Women's Health Tech Grant project was also named one
+    of the top 3.

@@ -1,0 +1,66 @@
+# Single source of truth for identity, links and headline numbers.
+name: Chiara Di Vece
+first_name: Chiara
+last_name: Di Vece
+role: AI Lead and Founding Applied Scientist
+company: morph
+company_url: https://morph.inc/
+email: chiaradivece@gmail.com
+cv: /assets/pdf/Chiara_Di_Vece_CV.pdf
+photo: /assets/img/chiara.jpg
+location: Seattle, WA
+
+# Local clocks shown in the contact section (IANA time zone names)
+clocks:
+  - city: Seattle
+    tz: America/Los_Angeles
+    note: Where I'm based
+  - city: London
+    tz: Europe/London
+    note: Where my team is
+
+links:
+  - label: Google Scholar
+    icon: googlescholar
+    url: https://scholar.google.com/citations?user=CStrr20AAAAJ
+  - label: LinkedIn
+    icon: linkedin-logo
+    url: https://www.linkedin.com/in/chiaradivece/
+  - label: GitHub
+    icon: github-logo
+    url: https://github.com/chiaradivece
+  - label: ORCID
+    icon: orcid
+    url: https://orcid.org/0000-0002-2853-9791
+  - label: X
+    icon: x-logo
+    url: https://x.com/chiaradv_
+  - label: YouTube
+    icon: youtube-logo
+    url: https://www.youtube.com/@chiaradivece2848
+
+education:
+  - degree: PhD in Computer Science
+    school: University College London
+    dates: 2020 - 2026
+    note: "Thesis: Real-time deep learning-based plane pose estimation and navigation in freehand fetal brain ultrasound"
+  - degree: MSc Biomedical Engineering
+    school: Politecnico di Milano
+    dates: 2017 - 2019
+    note: Summa cum laude. Double degree with UIC and Politecnico di Torino
+  - degree: MSc Bioengineering
+    school: University of Illinois Chicago
+    dates: 2018 - 2019
+    note: GPA 4.00/4.00, summa cum laude
+  - degree: Alta Scuola Politecnica
+    school: Politecnico di Milano and Politecnico di Torino
+    dates: 2017 - 2020
+    note: Top 1% honours programme, diploma with merit
+  - degree: BSc Biomedical Engineering
+    school: Politecnico di Milano
+    dates: 2014 - 2017
+    note: "Thesis: FPGA-based brain injury evaluation through pupillometry"
+  - degree: Licensed Industrial Engineer
+    school: Italy
+    dates: "2021"
+    note: Professional licence to practise

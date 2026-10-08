@@ -1,0 +1,147 @@
+# Newest first. Fields:
+#   type:    journal | conference | preprint
+#   status:  optional label shown as a tag, e.g. Under review
+#   first:   sole (first author) | joint (equal contribution) | none
+#   topics:  ultrasound | surgical-vision | simulation | sensing
+#   links:   label -> url (Paper, arXiv, Code, Data)
+#   note:    optional short highlight (award, acceptance)
+#   featured: true to pin in the research section
+
+- title: Measuring proximity to standard planes during fetal brain ultrasound scanning
+  authors: C. Di Vece, A. Cirigliano, M. Le Lous, R. Napolitano, A. L. David, D. Peebles, P. Jannin, F. Vasconcelos, D. Stoyanov
+  venue: IEEE Transactions on Medical Imaging
+  year: 2026
+  type: journal
+  status: Under review
+  first: sole
+  topics: [ultrasound]
+  links:
+    arXiv: https://arxiv.org/abs/2404.07124
+
+- title: "HyKey: hyperspectral keypoint detection and matching in minimally invasive surgery"
+  authors: A. Saikia, C. Di Vece, Z. Mao, S. Bonilla, C. He, J. Ramalhinho, T. Czempiel, S. Bano, D. Stoyanov
+  venue: International Journal of Computer Assisted Radiology and Surgery (IPCAI 2026)
+  year: 2026
+  type: journal
+  first: none
+  topics: [surgical-vision]
+  links:
+    Paper: https://doi.org/10.1007/s11548-026-03633-z
+    arXiv: https://arxiv.org/abs/2604.17446
+    Code: https://github.com/alexsaikia/HyKey-Hyperspectral-Keypoint-Detection
+
+- title: A multicentre benchmark dataset for comprehensive landmark-based fetal ultrasound biometry
+  authors: C. Di Vece, Z. Mao, N. Avisdris, B. Dromey, R. Napolitano, D. Ben Bashat, F. Vasconcelos, D. Stoyanov, L. Joskowicz, S. Bano
+  venue: Scientific Reports
+  year: 2026
+  type: journal
+  first: sole
+  topics: [ultrasound]
+  links:
+    Paper: https://doi.org/10.1038/s41598-026-47854-3
+    Data: https://doi.org/10.5522/04/30819911
+    Code: https://github.com/surgical-vision/Multicentre-Fetal-Biometry
+
+- title: Robotic arm platform for multi-view image acquisition and 3D reconstruction in minimally invasive surgery
+  authors: A. Saikia, C. Di Vece, S. Bonilla, C. He, M. Magbagbeola, L. Mennillo, T. Czempiel, S. Bano, D. Stoyanov
+  venue: IEEE Robotics and Automation Letters
+  year: 2025
+  type: journal
+  first: none
+  topics: [surgical-vision]
+  links:
+    Paper: https://doi.org/10.1109/LRA.2025.3540529
+    arXiv: https://arxiv.org/abs/2410.11703
+
+- title: "Mismatched: evaluating the limits of image matching approaches and benchmarks"
+  authors: S. Bonilla*, C. Di Vece*, R. Daher*, X. Ju*, D. Stoyanov, F. Vasconcelos, S. Bano
+  venue: ECCV 2024 Workshops
+  year: 2025
+  type: conference
+  first: joint
+  topics: [surgical-vision]
+  links:
+    Paper: https://doi.org/10.1007/978-3-031-91989-3_8
+    arXiv: https://arxiv.org/abs/2408.16445
+    Code: https://github.com/surgical-vision/colmap-match-converter
+
+- title: "Probe motion during mid-trimester fetal anomaly scan in the clinical setting: a prospective observational study"
+  authors: M. Le Lous, F. Vasconcelos, C. Di Vece, B. Dromey, R. Napolitano, S. Yoo, E. Edwards, A. Huaulme, D. Peebles, D. Stoyanov, P. Jannin
+  venue: European Journal of Obstetrics & Gynecology and Reproductive Biology
+  year: 2024
+  type: journal
+  first: none
+  topics: [ultrasound]
+  links:
+    Paper: https://doi.org/10.1016/j.ejogrb.2024.04.042
+
+- title: "Ultrasound plane pose regression: assessing generalized pose coordinates in the fetal brain"
+  authors: C. Di Vece, M. Le Lous, B. Dromey, F. Vasconcelos, A. L. David, D. Peebles, D. Stoyanov
+  venue: IEEE Transactions on Medical Robotics and Bionics
+  year: 2023
+  type: journal
+  first: sole
+  topics: [ultrasound]
+  links:
+    Paper: https://doi.org/10.1109/TMRB.2023.3328638
+
+- title: Deep learning-based plane pose regression towards training in freehand obstetric ultrasound
+  authors: C. Di Vece, B. Dromey, F. Vasconcelos, A. L. David, D. Peebles, D. Stoyanov
+  venue: Hamlyn Symposium on Medical Robotics
+  year: 2022
+  type: conference
+  first: sole
+  topics: [ultrasound]
+  links:
+    Paper: https://doi.org/10.31256/HSMR2022.24
+
+- title: Deep learning-based plane pose regression in obstetric ultrasound
+  authors: C. Di Vece, B. Dromey, F. Vasconcelos, A. L. David, D. Peebles, D. Stoyanov
+  venue: International Journal of Computer Assisted Radiology and Surgery (IPCAI 2022)
+  year: 2022
+  type: journal
+  first: sole
+  topics: [ultrasound]
+  note: AURIS/IPCAI Young Investigator Travel Award, 1st place
+  links:
+    Paper: https://doi.org/10.1007/s11548-022-02609-z
+
+- title: Position-based dynamics simulator of brain deformations for path planning and intra-operative control in keyhole neurosurgery
+  authors: A. Segato*, C. Di Vece*, S. Zucchelli, M. Di Marzo, T. Wendler, M. F. Azampour, S. Galvan, R. Secoli, E. De Momi
+  venue: IEEE Robotics and Automation Letters (IROS 2021)
+  year: 2021
+  type: journal
+  first: joint
+  topics: [simulation]
+  links:
+    Paper: https://doi.org/10.1109/LRA.2021.3090016
+
+- title: Psychomotor skills development for Veress needle placement using a virtual reality and haptics-based simulator
+  authors: C. Di Vece, C. Luciano, E. De Momi
+  venue: International Journal of Computer Assisted Radiology and Surgery
+  year: 2021
+  type: journal
+  first: sole
+  topics: [simulation]
+  links:
+    Paper: https://doi.org/10.1007/s11548-021-02341-0
+
+- title: "GLOS: GLOve for speech recognition"
+  authors: G. Crocioni*, C. Di Vece*, H. Esmailbeigi
+  venue: IEEE Engineering in Medicine and Biology Conference (EMBC)
+  year: 2019
+  type: conference
+  first: joint
+  topics: [sensing]
+  links:
+    Paper: https://doi.org/10.1109/EMBC.2019.8857927
+
+- title: "BIE-PInCS: brain injury evaluation with pupillometer based on infrared camera system"
+  authors: F. Bracco*, C. Di Vece*, L. Cerina, M. D. Santambrogio
+  venue: IEEE Forum on Research and Technologies for Society and Industry (RTSI)
+  year: 2017
+  type: conference
+  first: joint
+  topics: [sensing]
+  links:
+    Paper: https://doi.org/10.1109/RTSI.2017.8065976
