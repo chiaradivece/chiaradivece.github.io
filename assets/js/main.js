@@ -328,6 +328,40 @@
     }, 60000 - (Date.now() % 60000) + 50);
   }
 
+  /* ---------- Pause control for the venue marquee (WCAG 2.2.2) ---------- */
+  var marqueeToggle = document.querySelector('[data-marquee-toggle]');
+  var marquee = document.querySelector('.marquee');
+  if (marqueeToggle && marquee) {
+    marqueeToggle.addEventListener('click', function () {
+      var paused = !marquee.classList.contains('is-paused');
+      marquee.classList.toggle('is-paused', paused);
+      marqueeToggle.setAttribute('aria-pressed', String(paused));
+      marqueeToggle.setAttribute('aria-label', paused ? 'Play the scrolling list of venues' : 'Pause the scrolling list of venues');
+    });
+  }
+
+  /* ---------- Photo lightbox ---------- */
+  var lightbox = document.querySelector('[data-lightbox]');
+  if (lightbox && typeof lightbox.showModal === 'function') {
+    // The image is created on first use, so the page never ships an <img> without a source
+    var lightboxImg = document.createElement('img');
+    lightboxImg.className = 'lightbox-img';
+    var lightboxReady = false;
+    document.querySelectorAll('[data-lightbox-open]').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var thumb = link.querySelector('img');
+        if (!lightboxReady) { lightbox.appendChild(lightboxImg); lightboxReady = true; }
+        lightboxImg.src = link.getAttribute('href');
+        lightboxImg.alt = thumb ? thumb.alt : '';
+        lightbox.setAttribute('aria-label', thumb ? thumb.alt : 'Photo');
+        lightbox.showModal();
+      });
+    });
+    // Clicking the dimmed backdrop (the dialog itself, outside the image) closes it
+    lightbox.addEventListener('click', function (e) { if (e.target === lightbox) lightbox.close(); });
+  }
+
   /* ---------- Copy email ---------- */
   document.querySelectorAll('[data-copy]').forEach(function (btn) {
     btn.addEventListener('click', function () {

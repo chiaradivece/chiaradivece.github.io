@@ -57,7 +57,7 @@ layout: default
         </div>
       </div>
     </div>
-    <div class="hero-ghost" aria-hidden="true"><span class="hero-ghost-text" data-depth="-14">{{ p.first_name | upcase }}</span></div>
+    <div class="hero-ghost" aria-hidden="true"><span class="hero-ghost-text" data-depth="-14" data-text="{{ p.first_name | upcase }}"></span></div>
     <div class="hero-figure">
       <div class="hero-figure-enter">
         <img class="hero-portrait" data-depth="9" src="{{ p.cutout | relative_url }}" alt="{{ p.name }}" width="892" height="680" fetchpriority="high" decoding="async">
@@ -140,10 +140,7 @@ layout: default
       {%- if news.size > 1 %}
       <ol class="news-list" data-stagger>
         {%- for item in news offset: 1 limit: 4 %}
-        <li class="news-item">
-          <p class="news-date">{{ item.date }}</p>
-          <p class="news-text">{{ item.text }}{% if item.link %} <a class="news-link" href="{{ item.link }}" rel="noopener">{{ item.label | default: "Read more" }} {% include icon.html name="arrow-up-right" %}</a>{% endif %}</p>
-        </li>
+        {% include news-item.html item=item %}
         {%- endfor %}
       </ol>
       {%- endif %}
@@ -153,10 +150,7 @@ layout: default
       <summary>Older news</summary>
       <ol class="news-list">
         {%- for item in news offset: 5 %}
-        <li class="news-item">
-          <p class="news-date">{{ item.date }}</p>
-          <p class="news-text">{{ item.text }}{% if item.link %} <a class="news-link" href="{{ item.link }}" rel="noopener">{{ item.label | default: "Read more" }} {% include icon.html name="arrow-up-right" %}</a>{% endif %}</p>
-        </li>
+        {% include news-item.html item=item %}
         {%- endfor %}
       </ol>
     </details>
@@ -216,6 +210,10 @@ layout: default
       <figure class="scan" aria-label="Animated, simulated ultrasound scan of a soft robotic actuator">
         <div class="scan-screen" data-reveal-image>
           <canvas data-scan></canvas>
+          <button class="icon-btn motion-toggle scan-toggle" type="button" data-scan-toggle aria-pressed="false" aria-label="Pause the scan animation">
+            <span class="when-playing">{% include icon.html name="pause" %}</span>
+            <span class="when-paused">{% include icon.html name="play" %}</span>
+          </button>
         </div>
         <figcaption class="scan-caption"><span class="caption-mouse">Move your pointer over it to push it around.</span><span class="caption-touch">Drag sideways across it to push it around.</span></figcaption>
       </figure>
@@ -345,7 +343,13 @@ layout: default
 
   <!-- Reviewing: the one marquee on the page -->
   <section class="reviewing" aria-labelledby="reviewing-title" data-reveal>
-    <h2 class="reviewing-title wrap" id="reviewing-title">15+ peer reviews for</h2>
+    <div class="reviewing-head wrap">
+      <h2 class="reviewing-title" id="reviewing-title">15+ peer reviews for</h2>
+      <button class="icon-btn motion-toggle" type="button" data-marquee-toggle aria-pressed="false" aria-label="Pause the scrolling list of venues">
+        <span class="when-playing">{% include icon.html name="pause" %}</span>
+        <span class="when-paused">{% include icon.html name="play" %}</span>
+      </button>
+    </div>
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
         {%- for round in (1..2) %}
@@ -445,3 +449,9 @@ layout: default
     <p class="fineprint">© {{ site.time | date: "%Y" }} {{ p.name }}</p>
   </div>
 </footer>
+
+<dialog class="lightbox" data-lightbox aria-label="Photo">
+  <form method="dialog" class="lightbox-bar">
+    <button class="icon-btn lightbox-close" aria-label="Close photo">{% include icon.html name="x" %}</button>
+  </form>
+</dialog>
