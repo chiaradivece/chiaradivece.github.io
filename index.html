@@ -63,6 +63,7 @@
       <a href="#publications">Publications</a>
       <a href="#recognition">Recognition</a>
       <a href="#talks">Talks</a>
+      <span class="nav-indicator" aria-hidden="true" data-nav-indicator></span>
     </nav>
     <div class="nav-actions">
       <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle dark mode">
@@ -109,9 +110,9 @@
   </section>
 
   <!-- About: the hero figure comes back as a badge on a lanyard -->
-  <section class="section about wrap" id="about" data-reveal>
+  <section class="section about wrap" id="about">
     <div class="about-grid">
-      <div class="about-text">
+      <div class="about-text" data-reveal>
         <h2 class="section-title">Hi, I'm <i>Chiara</i>.</h2>
         <p class="about-lead">
           I'm a biomedical engineer turned AI scientist. I lead AI at
@@ -149,11 +150,11 @@
       </div>
 
       <div class="about-facts">
-        <dl class="facts">
+        <dl class="facts" data-stagger>
           <div class="fact"><dt>Role</dt><dd>AI Lead, morph</dd></div>
           <div class="fact"><dt>PhD</dt><dd>Computer Science, UCL, 2026</dd></div>
         </dl>
-        <dl class="numbers">
+        <dl class="numbers" data-stagger>
           <div class="number"><dt>citations</dt><dd>131</dd></div>
           <div class="number"><dt>h-index</dt><dd>7</dd></div>
           <div class="number"><dt>papers</dt><dd>13</dd></div>
@@ -165,14 +166,14 @@
   </section>
 
   <!-- News: latest item large, next four as a list, the rest folded away -->
-  <section class="section news wrap" id="news" data-reveal>
-    <h2 class="section-title">News</h2>
+  <section class="section news wrap" id="news">
+    <h2 class="section-title" data-reveal>Lately</h2>
     <div class="news-grid">
-      <article class="news-lead">
+      <article class="news-lead" data-reveal>
         <p class="news-date">Sep 2026</p>
         <p class="news-lead-text">My PhD in Computer Science from UCL has been officially awarded. The thesis is on real-time deep learning-based plane pose estimation and navigation in freehand fetal brain ultrasound.</p>
       </article>
-      <ol class="news-list">
+      <ol class="news-list" data-stagger>
         <li class="news-item">
           <p class="news-date">Jul 2026</p>
           <p class="news-text">HyKey, our hyperspectral keypoint detection and matching method for minimally invasive surgery, was presented at IPCAI 2026 in Nagoya. The dataset and code are public. <a class="news-link" href="https://github.com/alexsaikia/HyKey-Hyperspectral-Keypoint-Detection" rel="noopener">Dataset and code <span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg></span></a></p>
@@ -207,12 +208,12 @@
   </section>
 
   <!-- Experience: industry vs academia -->
-  <section class="section experience wrap" id="experience" data-reveal>
-    <h2 class="section-title">Experience</h2>
+  <section class="section experience wrap" id="experience">
+    <h2 class="section-title" data-reveal>Where I've <i>worked</i></h2>
     <div class="exp-grid">
       <div class="exp-col">
         <h3 class="exp-heading">Industry</h3>
-        <ol class="exp-list">
+        <ol class="exp-list" data-stagger>
           <li class="job is-current">
             <div class="job-meta">
               <span class="job-dates">Oct 2024 - Present</span><span class="tag tag-accent">Now</span>
@@ -244,7 +245,7 @@
       </div>
       <div class="exp-col">
         <h3 class="exp-heading">Research and teaching</h3>
-        <ol class="exp-list">
+        <ol class="exp-list" data-stagger>
           <li class="job">
             <div class="job-meta">
               <span class="job-dates">Sep 2020 - Jan 2025</span>
@@ -277,7 +278,7 @@
     </div>
     <div class="edu-block">
       <h3 class="exp-heading">Education</h3>
-      <ul class="edu">
+      <ul class="edu" data-stagger>
         <li>
           <span class="edu-degree">PhD in Computer Science</span>
           <span class="edu-school">University College London<span class="edu-dates">2020 - 2026</span></span>
@@ -313,23 +314,23 @@
   </section>
 
   <!-- Research: the scan lives here now, then the themes -->
-  <section class="section research wrap" id="research" data-reveal>
-    <h2 class="section-title">Research</h2>
+  <section class="section research wrap" id="research">
+    <h2 class="section-title" data-reveal>Research</h2>
     <div class="research-intro">
-      <div class="research-intro-text">
+      <div class="research-intro-text" data-reveal>
         <p class="research-lead">My PhD taught machines to find their way through fetal ultrasound. Now I build AI for soft robots.</p>
         <p>The scan brings the two together: a simulated soft actuator, shown as an ultrasound image.</p>
       </div>
       <figure class="scan" aria-label="Animated, simulated ultrasound scan of a soft robotic actuator">
-        <div class="scan-screen">
+        <div class="scan-screen" data-reveal-image>
           <canvas data-scan></canvas>
         </div>
         <figcaption class="scan-caption"><span class="caption-mouse">Move your pointer over it to push it around.</span><span class="caption-touch">Drag sideways across it to push it around.</span></figcaption>
       </figure>
     </div>
-    <div class="bento">
+    <div class="bento" data-stagger>
       <article class="cell cell-fetal">
-        <div class="cell-media cell-media-paper">
+        <div class="cell-media cell-media-paper" data-reveal-image>
           <img src="/assets/img/research/fetal-pipeline.jpg" alt="Pipeline figure: standard plane classification, 6D plane pose regression on a fetal head model, and distance to the standard plane over video frames" width="1600" height="431" loading="lazy" decoding="async">
         </div>
         <div class="cell-body">
@@ -373,7 +374,7 @@
             <a href="https://doi.org/10.1007/978-3-031-91989-3_8" rel="noopener">Mismatched <span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg></span></a>
           </p>
         </div>
-        <div class="cell-media">
+        <div class="cell-media" data-reveal-image>
           <img src="/assets/img/research/hykey.jpg" alt="Hyperspectral and RGB laparoscopic images of ex-vivo and in-vivo tissue from the HyKey dataset" width="909" height="339" loading="lazy" decoding="async">
         </div>
       </article>
@@ -381,12 +382,12 @@
   </section>
 
   <!-- Publications -->
-  <section class="section pubs wrap" id="publications" data-reveal>
-    <div class="pubs-head">
-      <h2 class="section-title">Publications</h2>
+  <section class="section pubs wrap" id="publications">
+    <div class="pubs-head" data-reveal>
+      <h2 class="section-title">Things I've <i>written</i></h2>
       <p class="pubs-intro">The elements of my research. Pick one to light up the papers that use it.</p>
     </div>
-    <div class="elements" role="group" aria-label="Filter papers by research element" data-element-grid>
+    <div class="elements" role="group" aria-label="Filter papers by research element" data-element-grid data-stagger style="--step: 25ms">
       <button type="button" class="el" data-family="imaging" data-element="Us" aria-pressed="false" aria-label="Ultrasound, 6 papers">
         <span class="el-count" aria-hidden="true">6</span>
         <span class="el-symbol" aria-hidden="true">Us</span>
@@ -676,15 +677,15 @@
   </section>
 
   <!-- Recognition rail -->
-  <section class="section recognition wrap" id="recognition" data-reveal>
-    <div class="rail-head">
-      <h2 class="section-title">Recognition</h2>
+  <section class="section recognition wrap" id="recognition">
+    <div class="rail-head" data-reveal>
+      <h2 class="section-title">Proud <i>moments</i></h2>
       <div class="rail-controls">
         <button class="icon-btn" type="button" data-rail-prev aria-label="Previous awards"><span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/></svg></span></button>
         <button class="icon-btn" type="button" data-rail-next aria-label="Next awards"><span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg></span></button>
       </div>
     </div>
-    <ol class="rail" data-rail tabindex="0" aria-label="Awards, newest first">
+    <ol class="rail" data-rail data-stagger tabindex="0" aria-label="Awards, newest first">
       <li class="award">
         <span class="award-year">2025</span>
         <h3 class="award-title">Women's Health Tech Grant, top 3 project</h3>
@@ -779,9 +780,9 @@
   </section>
 
   <!-- Talks + teaching -->
-  <section class="section talks wrap" id="talks" data-reveal>
-    <h2 class="section-title">Talks</h2>
-    <ol class="talk-list">
+  <section class="section talks wrap" id="talks">
+    <h2 class="section-title" data-reveal>On <i>stage</i></h2>
+    <ol class="talk-list" data-stagger>
       <li class="talk">
         <span class="talk-date">Mar 2025</span>
         <h3 class="talk-title">FETUS: Freehand Echographic Training for Ultrasound System</h3>
@@ -805,10 +806,10 @@
     </ol>
   </section>
 
-  <section class="section teaching wrap" id="teaching" data-reveal>
-    <h2 class="section-title">Teaching and mentoring</h2>
+  <section class="section teaching wrap" id="teaching">
+    <h2 class="section-title" data-reveal>Teaching and mentoring</h2>
     <div class="teach-grid">
-      <ul class="modules">
+      <ul class="modules" data-stagger>
         <li class="module">
           <span class="module-code">COMP0089</span>
           <span class="module-name">Reinforcement Learning</span>
@@ -835,7 +836,7 @@
           <span class="module-detail">University of Illinois Chicago</span>
         </li>
       </ul>
-      <div class="mentoring">
+      <div class="mentoring" data-reveal>
         <div class="mentor">
           <p class="mentor-meta"><span>2022 - Present</span></p>
           <h3>Research Mentor, Lumiere Education</h3>
@@ -847,7 +848,7 @@
           <p>Advised eight MSc, visiting and summer students on ultrasound pose estimation, haptic ultrasound simulators, clinical video tracking and surgical teleoperation.</p>
         </div>
       </div>
-      <div class="community">
+      <div class="community" data-reveal>
         <h3 class="community-title">Community</h3>
         <ul class="community-list">
           <li><span class="community-role">PhD Students Representative</span> <span class="community-org">UCL Hawkes Institute</span> <span class="community-dates">2021 - 2025</span></li>
@@ -863,27 +864,17 @@
 
 <footer class="contact" id="contact">
   <div class="wrap">
-    <h2 class="contact-title">Get in touch</h2>
-    <p class="contact-sub">Open to research collaborations, speaking and conversations about physical AI.</p>
+    <h2 class="contact-label">Get in touch</h2>
     <div class="contact-email">
       <a class="contact-email-link" href="mailto:chiaradivece@gmail.com">chiaradivece@gmail.com</a>
-      <button class="icon-btn" type="button" data-copy="chiaradivece@gmail.com" aria-label="Copy email address">
+      <button class="icon-btn copy-btn" type="button" data-copy="chiaradivece@gmail.com" aria-label="Copy email address">
         <span class="when-idle"><span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z"/></svg></span></span>
         <span class="when-done"><span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg></span></span>
       </button>
     </div>
-    <div class="clocks" data-clocks aria-label="Local time">
-      <div class="clock">
-        <span class="clock-city">Seattle</span>
-        <time class="clock-time" data-tz="America/Los_Angeles">--:--</time>
-        <span class="clock-note" data-tz-day="America/Los_Angeles"></span>
-      </div>
-      <div class="clock">
-        <span class="clock-city">London</span>
-        <time class="clock-time" data-tz="Europe/London">--:--</time>
-        <span class="clock-note" data-tz-day="Europe/London"></span>
-      </div>
-    </div>
+    <p class="contact-time" data-clocks>
+      It's <time class="contact-clock" data-tz="America/Los_Angeles">--:--</time> in Seattle and <time class="contact-clock" data-tz="Europe/London">--:--</time> in London right now.
+    </p>
     <ul class="socials">
       <li><a href="https://scholar.google.com/citations?user=CStrr20AAAAJ" rel="noopener me"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg></span><span>Google Scholar</span></a></li>
       <li><a href="https://www.linkedin.com/in/chiaradivece/" rel="noopener me"><span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"/></svg></span><span>LinkedIn</span></a></li>
