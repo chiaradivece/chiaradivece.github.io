@@ -213,9 +213,21 @@ button { font: inherit; color: inherit; }
   -webkit-mask: radial-gradient(circle at 50% 4%, #000 0 95%, transparent 96%);
   mask: radial-gradient(circle at 50% 4%, #000 0 95%, transparent 96%);
 }
-.nav-links { display: flex; gap: 1.6rem; margin-left: auto; font-size: 0.925rem; }
-.nav-links a { text-decoration: none; color: var(--ink-2); padding: 0.4rem 0; }
-.nav-links a:hover { color: var(--ink); }
+.nav-links { position: relative; display: flex; gap: 1.6rem; margin-left: auto; font-size: 0.925rem; }
+.nav-links a { text-decoration: none; color: var(--ink-2); padding: 0.4rem 0; transition: color 200ms ease; }
+.nav-links a:hover, .nav-links a[aria-current="location"] { color: var(--ink); }
+/* A 1px-wide bar scaled to each link's width, so only transform ever animates */
+.nav-indicator {
+  position: absolute; left: 0; bottom: 0;
+  width: 1px; height: 2px;
+  background: var(--accent-mark);
+  transform-origin: 0 50%;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 300ms var(--ease-in-out), opacity 200ms ease;
+}
+.nav-indicator.is-on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .nav-indicator { transition: opacity 200ms ease; } }
 .nav-actions { display: flex; align-items: center; gap: 0.6rem; }
 .nav-menu { display: none; }
 .when-open { display: none; }
@@ -235,6 +247,7 @@ button { font: inherit; color: inherit; }
     transition: opacity 150ms var(--ease-out), transform 150ms var(--ease-out), visibility 0s 150ms;
   }
   .nav-links a { padding: 0.65rem 0; color: var(--ink); }
+  .nav-indicator { display: none; }
   .nav[data-menu-open] .nav-links {
     opacity: 1; transform: none; pointer-events: auto; visibility: visible;
     transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), visibility 0s;
@@ -253,13 +266,31 @@ button { font: inherit; color: inherit; }
   line-height: 1;
   margin-bottom: clamp(2rem, 4vw, 3.25rem);
 }
+/* One word per heading in italic: same family, lighter weight, room for descenders */
+.section-title i { font-weight: 400; display: inline-block; padding-bottom: 0.08em; }
 
-/* Scroll reveal, once per section (main.js). Reduced motion keeps the fade, drops the movement. */
+/* Reveals, once, when an element first scrolls into view (main.js).
+   [data-reveal]        a title or block rises 16px and fades in
+   [data-stagger]       its children do the same, --step apart (default 50ms)
+   [data-reveal-image]  a figure is uncovered from the top with clip-path
+   Reduced motion keeps the fades and drops the movement. */
 .js [data-reveal] { opacity: 0; transition: opacity 300ms ease; }
 .js [data-reveal].is-in { opacity: 1; }
+.js [data-stagger] > * { opacity: 0; transition: opacity 300ms ease; transition-delay: calc(var(--i, 0) * var(--step, 50ms)); }
+.js [data-stagger].is-in > * { opacity: 1; }
+.js [data-reveal-image] { opacity: 0; transition: opacity 300ms ease; }
+.js [data-reveal-image].is-in { opacity: 1; }
 @media (prefers-reduced-motion: no-preference) {
   .js [data-reveal] { transform: translateY(16px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
   .js [data-reveal].is-in { transform: none; }
+  .js [data-stagger] > * {
+    transform: translateY(12px);
+    transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
+    transition-delay: calc(var(--i, 0) * var(--step, 50ms));
+  }
+  .js [data-stagger].is-in > * { transform: none; }
+  .js [data-reveal-image] { opacity: 1; clip-path: inset(0 0 100% 0); transition: clip-path 800ms var(--ease-in-out); }
+  .js [data-reveal-image].is-in { clip-path: inset(0 0 0 0); }
 }
 
 /* ---------- Hero ---------- */
@@ -386,7 +417,7 @@ button { font: inherit; color: inherit; }
 }
 .about-text { display: grid; gap: 1.1rem; align-content: start; max-width: 60ch; color: var(--ink-2); }
 .about-text .section-title { margin-bottom: 0.4rem; color: var(--ink); }
-.about-text .section-title i { font-weight: 400; }
+
 .about-lead { font-size: clamp(1.25rem, 2vw, 1.5rem); line-height: 1.35; letter-spacing: -0.015em; color: var(--ink); }
 .about-text a { color: var(--ink); text-decoration-color: var(--accent-mark); }
 
@@ -497,8 +528,23 @@ button { font: inherit; color: inherit; }
 .news-link:hover { color: var(--accent-ink); border-color: currentColor; }
 .news-link .icon { width: 0.85em; height: 0.85em; }
 .news-older { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
-.news-older summary { cursor: pointer; font-weight: 550; width: max-content; }
+.news-older { interpolate-size: allow-keywords; }
+.news-older summary { cursor: pointer; font-weight: 550; width: max-content; list-style: none; display: inline-flex; align-items: center; gap: 0.6rem; }
+.news-older summary::-webkit-details-marker { display: none; }
+.news-older summary::after {
+  content: "+"; font-weight: 400; font-size: 1.25em; line-height: 1;
+  transition: transform 200ms var(--ease-out);
+}
+.news-older[open] summary::after { transform: rotate(45deg); }
 .news-older summary:hover { color: var(--accent-ink); }
+.news-older::details-content {
+  block-size: 0; opacity: 0; overflow: clip;
+  transition: block-size 250ms var(--ease-out), opacity 250ms var(--ease-out), content-visibility 250ms allow-discrete;
+}
+.news-older[open]::details-content { block-size: auto; opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .news-older::details-content { transition: opacity 200ms ease, content-visibility 200ms allow-discrete; }
+}
 .news-older .news-list { margin-top: 1.25rem; }
 
 /* ---------- Experience ---------- */
@@ -516,6 +562,23 @@ button { font: inherit; color: inherit; }
   padding: 1.5rem 0 1.5rem 1.25rem;
   border-left: 1px solid var(--line);
 }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .exp-list { position: relative; }
+    .exp-list::before {
+      content: "";
+      position: absolute; left: -0.5px; top: 0; bottom: 0; z-index: 1;
+      width: 2px;
+      background: var(--accent-mark);
+      transform-origin: top;
+      transform: scaleY(0);
+      animation: timeline-fill linear both;
+      animation-timeline: view();
+      animation-range: entry 30% cover 55%;
+    }
+  }
+}
+@keyframes timeline-fill { to { transform: scaleY(1); } }
 .job.is-current { border-left-color: var(--accent-mark); border-left-width: 2px; padding-left: calc(1.25rem - 1px); }
 .job-meta { display: flex; align-items: center; gap: 0.6rem; }
 .job-dates { font-size: 0.8rem; color: var(--ink-3); }
@@ -771,18 +834,16 @@ button { font: inherit; color: inherit; }
 
 /* ---------- Teaching ---------- */
 .teach-grid { display: grid; gap: clamp(2rem, 4vw, 3.5rem); }
-.modules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.modules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1.5rem; }
 @media (min-width: 900px) { .modules { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
 .module {
   display: grid; gap: 0.3rem; align-content: start;
-  padding: 1.25rem; min-height: 168px;
-  border-radius: var(--radius);
-  background: var(--surface);
-  border: 1px solid var(--line);
+  padding-top: 0.9rem;
+  border-top: 2px solid var(--ink);
 }
 .module:last-child:nth-child(odd) { grid-column: 1 / -1; }
 @media (min-width: 900px) { .module:last-child:nth-child(odd) { grid-column: auto; } }
-.module-code { font-size: 0.85rem; color: var(--accent-ink); margin-bottom: auto; padding-bottom: 1.5rem; }
+.module-code { font-size: 0.85rem; color: var(--accent-ink); padding-bottom: 1.25rem; }
 .module-name { font-weight: 600; line-height: 1.3; }
 .module-detail { font-size: 0.85rem; color: var(--ink-3); }
 
@@ -807,40 +868,34 @@ button { font: inherit; color: inherit; }
   padding-block: clamp(4rem, 9vw, 7.5rem) 2rem;
   border-top: 1px solid var(--line);
 }
-.contact-title {
-  font-size: clamp(3.2rem, 11vw, 9rem);
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: 0.9;
-}
-.contact-sub { margin-top: 1.25rem; color: var(--ink-2); font-size: 1.1rem; max-width: 46ch; }
-.contact-email { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-top: clamp(2rem, 4vw, 3rem); }
+.contact-label { font-size: 1rem; font-weight: 500; color: var(--ink-3); letter-spacing: 0; }
+.contact-email { display: flex; align-items: center; gap: 0.75rem 1rem; flex-wrap: wrap; margin-top: 1rem; }
 .contact-email-link {
-  font-size: clamp(1.35rem, 3.6vw, 2.6rem);
-  font-weight: 500; letter-spacing: -0.025em;
+  font-size: clamp(1.6rem, 6vw, 5rem);
+  font-weight: 700; letter-spacing: -0.045em; line-height: 1;
   text-decoration: none;
   background-image: linear-gradient(var(--accent-mark), var(--accent-mark));
-  background-size: 100% 3px; background-position: 0 100%; background-repeat: no-repeat;
-  padding-bottom: 0.1em;
+  background-size: 100% 4px; background-position: 0 100%; background-repeat: no-repeat;
+  padding-bottom: 0.12em;
   overflow-wrap: anywhere;
 }
 .contact-email-link:hover { color: var(--accent-ink); }
-.when-done { display: none; }
-[data-copied] .when-done { display: inline-flex; }
-[data-copied] .when-idle { display: none; }
 
-/* Local clocks: rendered by main.js, hidden without JS */
-.clocks { display: grid; grid-template-columns: repeat(2, minmax(0, max-content)); gap: 1.5rem clamp(2rem, 6vw, 4.5rem); margin-top: clamp(2.5rem, 5vw, 3.5rem); }
-html:not(.js) .clocks { display: none; }
-.clock { display: grid; gap: 0.3rem; }
-.clock-city { font-size: 0.8rem; color: var(--ink-3); }
-.clock-time {
-  font-size: clamp(2.1rem, 5vw, 3.4rem);
-  font-weight: 500; letter-spacing: -0.035em; line-height: 1;
-  font-variant-numeric: tabular-nums;
+/* Copy button: the two icons cross-fade, blurred and scaled, instead of swapping */
+.copy-btn { position: relative; }
+.copy-btn .when-idle, .copy-btn .when-done {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out), filter 160ms var(--ease-out);
 }
-.clock-ampm { font-size: 0.42em; letter-spacing: 0; margin-left: 0.3em; color: var(--ink-3); font-weight: 500; }
-.clock-note { font-size: 0.9rem; color: var(--ink-2); }
+.copy-btn .icon { width: 1.05em; height: 1.05em; }
+.copy-btn .when-done { opacity: 0; transform: scale(0.6); filter: blur(2px); }
+.copy-btn[data-copied] .when-done { opacity: 1; transform: none; filter: none; }
+.copy-btn[data-copied] .when-idle { opacity: 0; transform: scale(0.6); filter: blur(2px); }
+
+/* Local time, as a sentence. Rendered by main.js; hidden without JS. */
+.contact-time { margin-top: clamp(1.75rem, 3.5vw, 2.5rem); font-size: clamp(1.15rem, 2.2vw, 1.6rem); line-height: 1.4; color: var(--ink-2); max-width: 52ch; }
+html:not(.js) .contact-time { display: none; }
+.contact-clock { display: inline-block; color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
 
 .socials { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: clamp(2.5rem, 5vw, 4rem); }
 .socials a {

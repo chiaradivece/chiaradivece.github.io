@@ -19,6 +19,7 @@ layout: default
       <a href="#publications">Publications</a>
       <a href="#recognition">Recognition</a>
       <a href="#talks">Talks</a>
+      <span class="nav-indicator" aria-hidden="true" data-nav-indicator></span>
     </nav>
     <div class="nav-actions">
       <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle dark mode">
@@ -66,9 +67,9 @@ layout: default
 
   <!-- About: the hero figure comes back as a badge on a lanyard -->
   {%- assign scholar = site.data.scholar %}
-  <section class="section about wrap" id="about" data-reveal>
+  <section class="section about wrap" id="about">
     <div class="about-grid">
-      <div class="about-text">
+      <div class="about-text" data-reveal>
         <h2 class="section-title">Hi, I'm <i>Chiara</i>.</h2>
         <p class="about-lead">
           I'm a biomedical engineer turned AI scientist. I lead AI at
@@ -106,12 +107,12 @@ layout: default
       </div>
 
       <div class="about-facts">
-        <dl class="facts">
+        <dl class="facts" data-stagger>
           {%- for f in p.facts %}
           <div class="fact"><dt>{{ f.label }}</dt><dd>{{ f.value }}</dd></div>
           {%- endfor %}
         </dl>
-        <dl class="numbers">
+        <dl class="numbers" data-stagger>
           <div class="number"><dt>citations</dt><dd>{{ scholar.citations }}</dd></div>
           <div class="number"><dt>h-index</dt><dd>{{ scholar.h_index }}</dd></div>
           <div class="number"><dt>papers</dt><dd>{{ pubs.size }}</dd></div>
@@ -125,11 +126,11 @@ layout: default
   <!-- News: latest item large, next four as a list, the rest folded away -->
   {%- assign news = site.data.news %}
   {%- if news and news.size > 0 %}
-  <section class="section news wrap" id="news" data-reveal>
-    <h2 class="section-title">News</h2>
+  <section class="section news wrap" id="news">
+    <h2 class="section-title" data-reveal>Lately</h2>
     <div class="news-grid">
       {%- assign lead = news[0] %}
-      <article class="news-lead">
+      <article class="news-lead" data-reveal>
         <p class="news-date">{{ lead.date }}</p>
         <p class="news-lead-text">{{ lead.text }}</p>
         {%- if lead.link %}
@@ -137,7 +138,7 @@ layout: default
         {%- endif %}
       </article>
       {%- if news.size > 1 %}
-      <ol class="news-list">
+      <ol class="news-list" data-stagger>
         {%- for item in news offset: 1 limit: 4 %}
         <li class="news-item">
           <p class="news-date">{{ item.date }}</p>
@@ -164,14 +165,14 @@ layout: default
   {%- endif %}
 
   <!-- Experience: industry vs academia -->
-  <section class="section experience wrap" id="experience" data-reveal>
-    <h2 class="section-title">Experience</h2>
+  <section class="section experience wrap" id="experience">
+    <h2 class="section-title" data-reveal>Where I've <i>worked</i></h2>
     <div class="exp-grid">
       {%- assign groups = "industry,academia" | split: "," -%}
       {%- for g in groups %}
       <div class="exp-col">
         <h3 class="exp-heading">{% if g == "industry" %}Industry{% else %}Research and teaching{% endif %}</h3>
-        <ol class="exp-list">
+        <ol class="exp-list" data-stagger>
           {%- for job in site.data.experience[g] %}
           <li class="job{% if job.current %} is-current{% endif %}">
             <div class="job-meta">
@@ -192,7 +193,7 @@ layout: default
     </div>
     <div class="edu-block">
       <h3 class="exp-heading">Education</h3>
-      <ul class="edu">
+      <ul class="edu" data-stagger>
         {%- for e in p.education %}
         <li>
           <span class="edu-degree">{{ e.degree }}</span>
@@ -205,23 +206,23 @@ layout: default
   </section>
 
   <!-- Research: the scan lives here now, then the themes -->
-  <section class="section research wrap" id="research" data-reveal>
-    <h2 class="section-title">Research</h2>
+  <section class="section research wrap" id="research">
+    <h2 class="section-title" data-reveal>Research</h2>
     <div class="research-intro">
-      <div class="research-intro-text">
+      <div class="research-intro-text" data-reveal>
         <p class="research-lead">My PhD taught machines to find their way through fetal ultrasound. Now I build AI for soft robots.</p>
         <p>The scan brings the two together: a simulated soft actuator, shown as an ultrasound image.</p>
       </div>
       <figure class="scan" aria-label="Animated, simulated ultrasound scan of a soft robotic actuator">
-        <div class="scan-screen">
+        <div class="scan-screen" data-reveal-image>
           <canvas data-scan></canvas>
         </div>
         <figcaption class="scan-caption"><span class="caption-mouse">Move your pointer over it to push it around.</span><span class="caption-touch">Drag sideways across it to push it around.</span></figcaption>
       </figure>
     </div>
-    <div class="bento">
+    <div class="bento" data-stagger>
       <article class="cell cell-fetal">
-        <div class="cell-media cell-media-paper">
+        <div class="cell-media cell-media-paper" data-reveal-image>
           <img src="{{ '/assets/img/research/fetal-pipeline.jpg' | relative_url }}" alt="Pipeline figure: standard plane classification, 6D plane pose regression on a fetal head model, and distance to the standard plane over video frames" width="1600" height="431" loading="lazy" decoding="async">
         </div>
         <div class="cell-body">
@@ -265,7 +266,7 @@ layout: default
             <a href="https://doi.org/10.1007/978-3-031-91989-3_8" rel="noopener">Mismatched {% include icon.html name="arrow-up-right" %}</a>
           </p>
         </div>
-        <div class="cell-media">
+        <div class="cell-media" data-reveal-image>
           <img src="{{ '/assets/img/research/hykey.jpg' | relative_url }}" alt="Hyperspectral and RGB laparoscopic images of ex-vivo and in-vivo tissue from the HyKey dataset" width="909" height="339" loading="lazy" decoding="async">
         </div>
       </article>
@@ -273,14 +274,14 @@ layout: default
   </section>
 
   <!-- Publications -->
-  <section class="section pubs wrap" id="publications" data-reveal>
-    <div class="pubs-head">
-      <h2 class="section-title">Publications</h2>
+  <section class="section pubs wrap" id="publications">
+    <div class="pubs-head" data-reveal>
+      <h2 class="section-title">Things I've <i>written</i></h2>
       <p class="pubs-intro">The elements of my research. Pick one to light up the papers that use it.</p>
     </div>
 
     {%- assign els = site.data.elements %}
-    <div class="elements" role="group" aria-label="Filter papers by research element" data-element-grid>
+    <div class="elements" role="group" aria-label="Filter papers by research element" data-element-grid data-stagger style="--step: 25ms">
       {%- for el in els.elements %}
       {%- assign n = 0 %}
       {%- for pub in pubs %}{% if pub.elements contains el.symbol %}{% assign n = n | plus: 1 %}{% endif %}{% endfor %}
@@ -356,15 +357,15 @@ layout: default
   </section>
 
   <!-- Recognition rail -->
-  <section class="section recognition wrap" id="recognition" data-reveal>
-    <div class="rail-head">
-      <h2 class="section-title">Recognition</h2>
+  <section class="section recognition wrap" id="recognition">
+    <div class="rail-head" data-reveal>
+      <h2 class="section-title">Proud <i>moments</i></h2>
       <div class="rail-controls">
         <button class="icon-btn" type="button" data-rail-prev aria-label="Previous awards">{% include icon.html name="arrow-left" %}</button>
         <button class="icon-btn" type="button" data-rail-next aria-label="Next awards">{% include icon.html name="arrow-right" %}</button>
       </div>
     </div>
-    <ol class="rail" data-rail tabindex="0" aria-label="Awards, newest first">
+    <ol class="rail" data-rail data-stagger tabindex="0" aria-label="Awards, newest first">
       {%- for a in rec.awards %}
       <li class="award">
         <span class="award-year">{{ a.year }}</span>
@@ -376,9 +377,9 @@ layout: default
   </section>
 
   <!-- Talks + teaching -->
-  <section class="section talks wrap" id="talks" data-reveal>
-    <h2 class="section-title">Talks</h2>
-    <ol class="talk-list">
+  <section class="section talks wrap" id="talks">
+    <h2 class="section-title" data-reveal>On <i>stage</i></h2>
+    <ol class="talk-list" data-stagger>
       {%- for t in rec.talks %}
       <li class="talk">
         <span class="talk-date">{{ t.date }}</span>
@@ -389,10 +390,10 @@ layout: default
     </ol>
   </section>
 
-  <section class="section teaching wrap" id="teaching" data-reveal>
-    <h2 class="section-title">Teaching and mentoring</h2>
+  <section class="section teaching wrap" id="teaching">
+    <h2 class="section-title" data-reveal>Teaching and mentoring</h2>
     <div class="teach-grid">
-      <ul class="modules">
+      <ul class="modules" data-stagger>
         {%- for m in rec.teaching %}
         <li class="module">
           <span class="module-code">{{ m.code }}</span>
@@ -401,7 +402,7 @@ layout: default
         </li>
         {%- endfor %}
       </ul>
-      <div class="mentoring">
+      <div class="mentoring" data-reveal>
         {%- for m in rec.mentoring %}
         <div class="mentor">
           <p class="mentor-meta"><span>{{ m.dates }}</span></p>
@@ -410,7 +411,7 @@ layout: default
         </div>
         {%- endfor %}
       </div>
-      <div class="community">
+      <div class="community" data-reveal>
         <h3 class="community-title">Community</h3>
         <ul class="community-list">
           {%- for c in rec.community %}
@@ -425,24 +426,17 @@ layout: default
 
 <footer class="contact" id="contact">
   <div class="wrap">
-    <h2 class="contact-title">Get in touch</h2>
-    <p class="contact-sub">Open to research collaborations, speaking and conversations about physical AI.</p>
+    <h2 class="contact-label">Get in touch</h2>
     <div class="contact-email">
       <a class="contact-email-link" href="mailto:{{ p.email }}">{{ p.email }}</a>
-      <button class="icon-btn" type="button" data-copy="{{ p.email }}" aria-label="Copy email address">
+      <button class="icon-btn copy-btn" type="button" data-copy="{{ p.email }}" aria-label="Copy email address">
         <span class="when-idle">{% include icon.html name="copy" %}</span>
         <span class="when-done">{% include icon.html name="check" %}</span>
       </button>
     </div>
-    <div class="clocks" data-clocks aria-label="Local time">
-      {%- for c in p.clocks %}
-      <div class="clock">
-        <span class="clock-city">{{ c.city }}</span>
-        <time class="clock-time" data-tz="{{ c.tz }}">--:--</time>
-        <span class="clock-note" data-tz-day="{{ c.tz }}"></span>
-      </div>
-      {%- endfor %}
-    </div>
+    <p class="contact-time" data-clocks>
+      It's {% for c in p.clocks %}<time class="contact-clock" data-tz="{{ c.tz }}">--:--</time> in {{ c.city }}{% if forloop.rindex == 2 %} and {% endif %}{% endfor %} right now.
+    </p>
     <ul class="socials">
       {%- for l in p.links %}
       <li><a href="{{ l.url }}" rel="noopener me">{% include icon.html name=l.icon %}<span>{{ l.label }}</span></a></li>
