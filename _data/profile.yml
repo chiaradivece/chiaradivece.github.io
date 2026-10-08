@@ -18,24 +18,17 @@ tagline:
 
 # Quick facts next to the badge in About
 facts:
-  - label: Based in
-    value: Seattle, WA
-  - label: Team in
-    value: London, UK
   - label: Role
     value: AI Lead, morph
   - label: PhD
     value: Computer Science, UCL, 2026
-location: Seattle, WA
 
 # Local clocks shown in the contact section (IANA time zone names)
 clocks:
   - city: Seattle
     tz: America/Los_Angeles
-    note: Where I'm based
   - city: London
     tz: Europe/London
-    note: Where my team is
 
 links:
   - label: Google Scholar
