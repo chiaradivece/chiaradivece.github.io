@@ -14,11 +14,13 @@ layout: default
     <nav class="nav-links" id="nav-links" aria-label="Sections">
       <a href="#about">About</a>
       <a href="#news">News</a>
-      <a href="#experience">Experience</a>
       <a href="#research">Research</a>
       <a href="#publications">Publications</a>
-      <a href="#recognition">Recognition</a>
       <a href="#talks">Talks</a>
+      <a href="#experience">Experience</a>
+      <a href="#recognition">Awards</a>
+      <a class="nav-extra" href="#contact">Contact</a>
+      <a class="nav-extra" href="{{ p.cv | relative_url }}" download>Download CV</a>
       <span class="nav-indicator" aria-hidden="true" data-nav-indicator></span>
     </nav>
     <div class="nav-actions">
@@ -42,7 +44,8 @@ layout: default
     <div class="hero-inner wrap">
       <div class="hero-copy">
         <h1 class="hero-title">
-          <span class="hero-kicker">{{ p.name }}, PhD</span>
+          <span class="sr-only">{{ p.name }}: </span>
+          <span class="hero-kicker">{{ p.role_line }}</span>
           <span class="hero-line">
             {%- for line in p.tagline %}
             <span class="hero-line-part">{{ line }}{% if forloop.last %}<span class="hero-dot">.</span>{% endif %}</span>
@@ -53,19 +56,36 @@ layout: default
           <a class="btn btn-solid" href="{{ p.cv | relative_url }}" download>
             Download CV {% include icon.html name="download-simple" %}
           </a>
-          <a class="btn btn-ghost" href="#contact">Get in touch</a>
+          <a class="btn btn-ghost" href="#publications">Read the papers</a>
         </div>
       </div>
     </div>
-    <div class="hero-ghost" aria-hidden="true"><span class="hero-ghost-text" data-depth="-14" data-text="{{ p.first_name | upcase }}"></span></div>
     <div class="hero-figure">
+      <!-- A 68° ultrasound sector behind the portrait: the same fan as the nav mark and the scan -->
+      <svg class="hero-fan" data-depth="-5" viewBox="0 0 1118 1000" aria-hidden="true" focusable="false">
+        <defs>
+          <radialGradient id="fan-depth" cx="559" cy="0" r="1000" gradientUnits="userSpaceOnUse">
+            <stop offset="0" class="fan-stop-near"/>
+            <stop offset="1" class="fan-stop-far"/>
+          </radialGradient>
+          <clipPath id="fan-shape"><path d="M559 0 L0 829 A1000 1000 0 0 0 1118 829 Z"/></clipPath>
+        </defs>
+        <path class="fan-field" d="M559 0 L0 829 A1000 1000 0 0 0 1118 829 Z" fill="url(#fan-depth)"/>
+        <path class="fan-outline" d="M559 0 L0 829 A1000 1000 0 0 0 1118 829 Z" fill="none"/>
+        <g class="fan-depths" clip-path="url(#fan-shape)" fill="none">
+          <circle cx="559" cy="0" r="250"/><circle cx="559" cy="0" r="500"/><circle cx="559" cy="0" r="750"/>
+        </g>
+        <g class="fan-ticks">
+          <path d="M419 207 l-15 -10 M279 415 l-15 -10 M140 622 l-15 -10"/>
+        </g>
+      </svg>
       <div class="hero-figure-enter">
         <img class="hero-portrait" data-depth="9" src="{{ p.cutout | relative_url }}" alt="{{ p.name }}" width="892" height="680" fetchpriority="high" decoding="async">
       </div>
     </div>
   </section>
 
-  <!-- About: the hero figure comes back as a badge on a lanyard -->
+  <!-- About: who I am, then the role and the numbers -->
   {%- assign scholar = site.data.scholar %}
   <section class="section about wrap" id="about">
     <div class="about-grid">
@@ -84,28 +104,6 @@ layout: default
         </p>
       </div>
 
-      <div class="about-badge">
-        <div class="badge-rig" data-badge-rig>
-          <span class="badge-pin" aria-hidden="true"></span>
-          <div class="badge-drop" data-badge-drop>
-            <div class="badge-swing" data-badge-swing>
-              <span class="badge-strap" aria-hidden="true"></span>
-              <span class="badge-clip" aria-hidden="true"></span>
-              <div class="badge-card" data-badge-card role="img" aria-label="ID badge: {{ p.name }}, PhD, AI Lead at morph">
-                <div class="badge-top"><span class="badge-glyph"></span><span>Scientist ID</span></div>
-                <div class="badge-photo"><img src="{{ p.photo | relative_url }}" alt="" width="1024" height="1024" loading="lazy" decoding="async" draggable="false"></div>
-                <p class="badge-name">{{ p.name }}</p>
-                <p class="badge-role">PhD · AI Lead</p>
-                <div class="badge-fields">
-                  <span><small>Field</small>Physical AI</span>
-                  <span><small>PhD</small>UCL '26</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="about-facts">
         <dl class="facts" data-stagger>
           {%- for f in p.facts %}
@@ -116,7 +114,7 @@ layout: default
           <div class="number"><dt>citations</dt><dd>{{ scholar.citations }}</dd></div>
           <div class="number"><dt>h-index</dt><dd>{{ scholar.h_index }}</dd></div>
           <div class="number"><dt>papers</dt><dd>{{ pubs.size }}</dd></div>
-          <div class="number"><dt>awards</dt><dd>{{ rec.awards.size }}</dd></div>
+          <div class="number"><dt>awards and honours</dt><dd>{{ rec.awards.size }}</dd></div>
         </dl>
         <p class="facts-source">Citations and h-index from <a href="{{ scholar.profile | escape }}" rel="noopener">Google Scholar</a>, updated {{ scholar.updated | date: "%B %Y" }}.</p>
       </div>
@@ -127,20 +125,39 @@ layout: default
   {%- assign news = site.data.news %}
   {%- if news and news.size > 0 %}
   <section class="section news wrap" id="news">
-    <h2 class="section-title" data-reveal>Lately</h2>
+    <h2 class="section-title" data-reveal>News</h2>
     <div class="news-grid">
       {%- assign lead = news[0] %}
-      <article class="news-lead" data-reveal>
-        <p class="news-date">{{ lead.date }}</p>
-        <p class="news-lead-text">{{ lead.text }}</p>
-        {%- if lead.link %}
-        <a class="news-link" href="{{ lead.link }}" rel="noopener">{{ lead.label | default: "Read more" }} {% include icon.html name="arrow-up-right" %}</a>
+      {%- comment %} The newest photos among the visible items get a larger strip under the lead card {% endcomment %}
+      {%- assign featured = false %}
+      {%- for item in news limit: 5 %}{% if item.photos and featured == false %}{% assign featured = item %}{% endif %}{% endfor %}
+      <div class="news-main">
+        <article class="news-lead" data-reveal>
+          <p class="news-date">{{ lead.date }}</p>
+          <p class="news-lead-text">{{ lead.text }}</p>
+          {%- if lead.link %}
+          <a class="news-link" href="{{ lead.link }}" rel="noopener">{{ lead.label | default: "Read more" }} {% include icon.html name="arrow-up-right" %}</a>
+          {%- endif %}
+        </article>
+        {%- if featured %}
+        <figure class="news-feature" data-reveal>
+          <ul class="news-photos news-feature-photos">
+            {%- for ph in featured.photos %}
+            <li><a href="{{ ph.src | relative_url }}" data-lightbox-open data-caption="{{ ph.caption | default: ph.alt | escape }}"><img src="{{ ph.thumb | relative_url }}" alt="{{ ph.alt }}" width="{{ ph.w }}" height="{{ ph.h }}" loading="lazy" decoding="async"></a></li>
+            {%- endfor %}
+          </ul>
+          <figcaption class="news-feature-caption"><span class="news-date">{{ featured.date }}</span> {{ featured.photos_label | default: "Photos" }}</figcaption>
+        </figure>
         {%- endif %}
-      </article>
+      </div>
       {%- if news.size > 1 %}
       <ol class="news-list" data-stagger>
         {%- for item in news offset: 1 limit: 4 %}
+        {%- if featured and item.date == featured.date %}
+        {% include news-item.html item=item hide_photos=true %}
+        {%- else %}
         {% include news-item.html item=item %}
+        {%- endif %}
         {%- endfor %}
       </ol>
       {%- endif %}
@@ -158,48 +175,7 @@ layout: default
   </section>
   {%- endif %}
 
-  <!-- Experience: industry vs academia -->
-  <section class="section experience wrap" id="experience">
-    <h2 class="section-title" data-reveal>Where I've <i>worked</i></h2>
-    <div class="exp-grid">
-      {%- assign groups = "industry,academia" | split: "," -%}
-      {%- for g in groups %}
-      <div class="exp-col">
-        <h3 class="exp-heading">{% if g == "industry" %}Industry{% else %}Research and teaching{% endif %}</h3>
-        <ol class="exp-list" data-stagger>
-          {%- for job in site.data.experience[g] %}
-          <li class="job{% if job.current %} is-current{% endif %}">
-            <div class="job-meta">
-              <span class="job-dates">{{ job.dates }}</span>
-              {%- if job.current %}<span class="tag tag-accent">Now</span>{% endif %}
-            </div>
-            <h4 class="job-role">{{ job.role }}</h4>
-            <p class="job-org">
-              {%- if job.url %}<a href="{{ job.url }}" rel="noopener">{{ job.org }}</a>{% else %}{{ job.org }}{% endif %}
-              {%- if job.place %}<span class="job-place">{{ job.place }}</span>{% endif %}
-            </p>
-            <p class="job-summary">{{ job.summary }}</p>
-          </li>
-          {%- endfor %}
-        </ol>
-      </div>
-      {%- endfor %}
-    </div>
-    <div class="edu-block">
-      <h3 class="exp-heading">Education</h3>
-      <ul class="edu" data-stagger>
-        {%- for e in p.education %}
-        <li>
-          <span class="edu-degree">{{ e.degree }}</span>
-          <span class="edu-school">{{ e.school }}<span class="edu-dates">{{ e.dates }}</span></span>
-          <span class="edu-note">{{ e.note }}</span>
-        </li>
-        {%- endfor %}
-      </ul>
-    </div>
-  </section>
-
-  <!-- Research: the scan lives here now, then the themes -->
+  <!-- Research: the scan, the bridge in one picture, then the themes -->
   <section class="section research wrap" id="research">
     <h2 class="section-title" data-reveal>Research</h2>
     <div class="research-intro">
@@ -274,16 +250,33 @@ layout: default
   <!-- Publications -->
   <section class="section pubs wrap" id="publications">
     <div class="pubs-head" data-reveal>
-      <h2 class="section-title">Things I've <i>written</i></h2>
-      <p class="pubs-intro">The elements of my research. Pick one to light up the papers that use it.</p>
+      <h2 class="section-title">Publications</h2>
+      <p class="pubs-intro">Three to start with, then all {{ pubs.size }}. Pick an element to show only the papers that use it.</p>
     </div>
+
+    <ol class="picks" aria-label="Three papers to start with" data-stagger>
+      {%- for pub in pubs %}{% if pub.selected %}
+      {%- assign primary = pub.links.Paper | default: pub.links.arXiv -%}
+      {%- assign scholar_key = pub.title | slugify %}
+      {%- assign cited = site.data.scholar.papers[scholar_key] %}
+      <li class="pick">
+        <p class="pick-meta">{{ pub.year }} · {{ pub.venue }}</p>
+        <h3 class="pick-title"><a href="{{ primary }}" rel="noopener">{{ pub.title }}</a></h3>
+        <p class="pick-foot">
+          {%- if pub.status %}<span class="tag">{{ pub.status }}</span>{% endif %}
+          {%- if pub.note %}<span class="tag tag-accent">{{ pub.note }}</span>{% endif %}
+          {%- if cited and cited.cites > 0 %}<a class="pick-cited" href="{{ cited.url | escape }}" rel="noopener">Cited by {{ cited.cites }}</a>{% endif %}
+        </p>
+      </li>
+      {%- endif %}{% endfor %}
+    </ol>
 
     {%- assign els = site.data.elements %}
     <div class="elements" role="group" aria-label="Filter papers by research element" data-element-grid data-stagger style="--step: 25ms">
       {%- for el in els.elements %}
       {%- assign n = 0 %}
       {%- for pub in pubs %}{% if pub.elements contains el.symbol %}{% assign n = n | plus: 1 %}{% endif %}{% endfor %}
-      <button type="button" class="el" data-family="{{ el.family }}" data-element="{{ el.symbol }}" aria-pressed="false" aria-label="{{ el.name }}, {{ n }} {% if n == 1 %}paper{% else %}papers{% endif %}">
+      <button type="button" class="el" data-family="{{ el.family }}" data-element="{{ el.symbol }}" data-name="{{ el.name }}" aria-pressed="false" aria-label="{{ el.name }}, {{ n }} {% if n == 1 %}paper{% else %}papers{% endif %}">
         <span class="el-count" aria-hidden="true">{{ n }}</span>
         <span class="el-symbol" aria-hidden="true">{{ el.symbol }}</span>
         <span class="el-name" aria-hidden="true">{{ el.name }}</span>
@@ -302,10 +295,18 @@ layout: default
         <button type="button" class="chip" data-toggle="journal" aria-pressed="false">Journals</button>
         <button type="button" class="chip chip-clear" data-clear hidden>Clear</button>
       </div>
-      <p class="pub-status" data-pub-status aria-live="polite">Showing all {{ pubs.size }} papers</p>
     </div>
 
-    <div class="pub-years" data-pub-list>
+    <!-- While a filter is on, this bar pins under the nav: what is showing, and the way back -->
+    <div class="pub-bar" data-pub-bar>
+      <p class="pub-status" id="pub-status" tabindex="-1" data-pub-status aria-live="polite">Showing all {{ pubs.size }} papers</p>
+      <p class="pub-bar-actions" data-pub-bar-actions hidden>
+        <a class="pub-bar-link" href="#publications" data-pub-change>Change</a>
+        <button type="button" class="pub-bar-link" data-pub-bar-clear>Clear</button>
+      </p>
+    </div>
+
+    <div class="pub-years" id="paper-list" data-pub-list>
       {%- assign by_year = pubs | group_by: "year" -%}
       {%- for y in by_year %}
       <div class="pub-year" data-year-group>
@@ -336,53 +337,31 @@ layout: default
         </ol>
       </div>
       {%- endfor %}
-      <p class="pubs-empty" data-pub-empty hidden>No papers match this filter yet.</p>
+      <div class="pubs-empty" data-pub-empty hidden>
+        <p data-pub-empty-text>No papers match these filters.</p>
+        <button type="button" class="chip" data-pub-empty-fix>Show all papers</button>
+      </div>
     </div>
+    <a class="results-pill" href="#pub-status" data-results-pill hidden><span data-results-pill-text>Show papers</span> {% include icon.html name="arrow-right" %}</a>
     <p class="pubs-foot">* Equal contribution. Citation counts refresh weekly from <a href="{{ site.data.scholar.profile | escape }}" rel="noopener">Google Scholar</a>.</p>
   </section>
 
-  <!-- Reviewing: the one marquee on the page -->
-  <section class="reviewing" aria-labelledby="reviewing-title" data-reveal>
-    <div class="reviewing-head wrap">
-      <h2 class="reviewing-title" id="reviewing-title">15+ peer reviews for</h2>
-      <button class="icon-btn motion-toggle" type="button" data-marquee-toggle aria-pressed="false" aria-label="Pause the scrolling list of venues">
-        <span class="when-playing">{% include icon.html name="pause" %}</span>
-        <span class="when-paused">{% include icon.html name="play" %}</span>
-      </button>
-    </div>
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        {%- for round in (1..2) %}
-        {%- for v in rec.reviewing %}<span>{{ v }}</span>{% endfor %}
-        {%- endfor %}
-      </div>
-    </div>
-    <p class="sr-only">{{ rec.reviewing | join: ", " }}</p>
-  </section>
-
-  <!-- Recognition rail -->
-  <section class="section recognition wrap" id="recognition">
-    <div class="rail-head" data-reveal>
-      <h2 class="section-title">Proud <i>moments</i></h2>
-      <div class="rail-controls">
-        <button class="icon-btn" type="button" data-rail-prev aria-label="Previous awards">{% include icon.html name="arrow-left" %}</button>
-        <button class="icon-btn" type="button" data-rail-next aria-label="Next awards">{% include icon.html name="arrow-right" %}</button>
-      </div>
-    </div>
-    <ol class="rail" data-rail data-stagger tabindex="0" aria-label="Awards, newest first">
-      {%- for a in rec.awards %}
-      <li class="award">
-        <span class="award-year">{{ a.year }}</span>
-        <h3 class="award-title">{{ a.title }}</h3>
-        <p class="award-detail">{{ a.detail }}</p>
-      </li>
-      {%- endfor %}
-    </ol>
-  </section>
-
-  <!-- Talks + teaching -->
+  <!-- Talks and reviewing: what I speak on and how to invite me, past talks, then the review record -->
   <section class="section talks wrap" id="talks">
-    <h2 class="section-title" data-reveal>On <i>stage</i></h2>
+    <div class="talks-head" data-reveal>
+      <h2 class="section-title">Talks and reviewing</h2>
+      <div class="talks-invite">
+        <p>Happy to speak about real-time AI for ultrasound, physical AI and soft robotics, and to review or join programme committees.</p>
+        <div class="invite-actions">
+          <a class="btn btn-solid btn-small" href="mailto:{{ p.email }}?subject={{ 'Invitation to speak' | uri_escape }}">Invite me to speak</a>
+          <button class="icon-btn copy-btn" type="button" data-copy="{{ p.email }}" aria-label="Copy my email address">
+            <span class="when-idle">{% include icon.html name="copy" %}</span>
+            <span class="when-done">{% include icon.html name="check" %}</span>
+          </button>
+          <p class="copy-note" data-copy-note role="status"></p>
+        </div>
+      </div>
+    </div>
     <ol class="talk-list" data-stagger>
       {%- for t in rec.talks %}
       <li class="talk">
@@ -391,6 +370,96 @@ layout: default
         <p class="talk-event"><span>{{ t.role }}</span> {{ t.event }}</p>
       </li>
       {%- endfor %}
+    </ol>
+
+    <!-- The review record; the venue marquee runs edge to edge (the only marquee on the page) -->
+    <div class="reviewing" data-reveal>
+      <div class="reviewing-head">
+        <h3 class="reviewing-title" id="reviewing-title"><span class="reviewing-count">{{ rec.review_count }}</span> peer reviews</h3>
+        {%- for a in rec.awards %}{% if a.reviewing %}
+        <p class="reviewing-award">{{ a.title }} {{ a.year }}, {{ a.detail | split: "." | first | downcase }}</p>
+        {%- endif %}{% endfor %}
+        <button class="icon-btn motion-toggle" type="button" data-marquee-toggle aria-pressed="false" aria-label="Pause the scrolling list of venues">
+          <span class="when-playing">{% include icon.html name="pause" %}</span>
+          <span class="when-paused">{% include icon.html name="play" %}</span>
+        </button>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          {%- for round in (1..2) %}
+          {%- for v in rec.reviewing %}<span>{{ v }}</span>{% endfor %}
+          {%- endfor %}
+        </div>
+      </div>
+      <p class="sr-only">Reviewer for {{ rec.reviewing | join: ", " }}</p>
+    </div>
+  </section>
+
+  <!-- Experience: industry vs academia -->
+  <section class="section experience wrap" id="experience">
+    <h2 class="section-title" data-reveal>Experience</h2>
+    <div class="exp-grid">
+      {%- assign groups = "industry,academia" | split: "," -%}
+      {%- for g in groups %}
+      <div class="exp-col">
+        <h3 class="exp-heading">{% if g == "industry" %}Industry{% else %}Research and teaching{% endif %}</h3>
+        <ol class="exp-list" data-stagger>
+          {%- for job in site.data.experience[g] %}
+          <li class="job{% if job.current %} is-current{% endif %}">
+            <div class="job-meta">
+              <span class="job-dates">{{ job.dates }}</span>
+              {%- if job.current %}<span class="tag tag-accent">Now</span>{% endif %}
+            </div>
+            <h4 class="job-role">{{ job.role }}</h4>
+            <p class="job-org">
+              {%- if job.url %}<a href="{{ job.url }}" rel="noopener">{{ job.org }}</a>{% else %}{{ job.org }}{% endif %}
+              {%- if job.place %}<span class="job-place">{{ job.place }}</span>{% endif %}
+            </p>
+            {%- if job.brief %}
+            <details class="job-more">
+              <summary>What I did<span class="sr-only"> at {{ job.org }}</span></summary>
+              <p class="job-summary">{{ job.summary }}</p>
+            </details>
+            {%- else %}
+            <p class="job-summary">{{ job.summary }}</p>
+            {%- endif %}
+          </li>
+          {%- endfor %}
+        </ol>
+      </div>
+      {%- endfor %}
+    </div>
+    <div class="edu-block">
+      <h3 class="exp-heading">Education</h3>
+      <ul class="edu" data-stagger>
+        {%- for e in p.education %}
+        <li>
+          <span class="edu-degree">{{ e.degree }}</span>
+          <span class="edu-school">{{ e.school }}<span class="edu-dates">{{ e.dates }}</span></span>
+          <span class="edu-note">{{ e.note }}</span>
+        </li>
+        {%- endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Awards rail (the reviewer award sits with the review record above) -->
+  <section class="section recognition wrap" id="recognition">
+    <div class="rail-head" data-reveal>
+      <h2 class="section-title">Awards</h2>
+      <div class="rail-controls">
+        <button class="icon-btn" type="button" data-rail-prev aria-label="Previous awards">{% include icon.html name="arrow-left" %}</button>
+        <button class="icon-btn" type="button" data-rail-next aria-label="Next awards">{% include icon.html name="arrow-right" %}</button>
+      </div>
+    </div>
+    <ol class="rail" data-rail data-stagger tabindex="0" aria-label="Awards, newest first">
+      {%- for a in rec.awards %}{% unless a.reviewing %}
+      <li class="award">
+        <span class="award-year">{{ a.year }}</span>
+        <h3 class="award-title">{{ a.title }}</h3>
+        <p class="award-detail">{{ a.detail }}</p>
+      </li>
+      {%- endunless %}{% endfor %}
     </ol>
   </section>
 
@@ -437,11 +506,13 @@ layout: default
         <span class="when-idle">{% include icon.html name="copy" %}</span>
         <span class="when-done">{% include icon.html name="check" %}</span>
       </button>
+      <p class="copy-note" data-copy-note role="status"></p>
     </div>
     <p class="contact-time" data-clocks>
       It's {% for c in p.clocks %}<time class="contact-clock" data-tz="{{ c.tz }}">--:--</time> in {{ c.city }}{% if forloop.rindex == 2 %} and {% endif %}{% endfor %} right now.
     </p>
     <ul class="socials">
+      <li><a href="{{ p.cv | relative_url }}" type="application/pdf">{% include icon.html name="download-simple" %}<span>CV (PDF)</span></a></li>
       {%- for l in p.links %}
       <li><a href="{{ l.url }}" rel="noopener me">{% include icon.html name=l.icon %}<span>{{ l.label }}</span></a></li>
       {%- endfor %}
@@ -454,4 +525,9 @@ layout: default
   <form method="dialog" class="lightbox-bar">
     <button class="icon-btn lightbox-close" aria-label="Close photo">{% include icon.html name="x" %}</button>
   </form>
+  <div class="lightbox-stage" data-lightbox-stage>
+    <button class="icon-btn lightbox-nav lightbox-prev" type="button" data-lightbox-prev aria-label="Previous photo" hidden>{% include icon.html name="arrow-left" %}</button>
+    <button class="icon-btn lightbox-nav lightbox-next" type="button" data-lightbox-next aria-label="Next photo" hidden>{% include icon.html name="arrow-right" %}</button>
+  </div>
+  <p class="lightbox-caption" aria-live="polite"><span class="lightbox-count" data-lightbox-count></span><span class="sr-only">. </span><span data-lightbox-caption></span></p>
 </dialog>

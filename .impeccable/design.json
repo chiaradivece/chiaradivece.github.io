@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-08T19:35:35+00:00",
+  "generatedAt": "2026-10-08T21:02:46+00:00",
   "title": "Design System: Chiara Di Vece",
   "extensions": {
     "colorMeta": {
@@ -162,10 +162,6 @@
         "role": "neutral",
         "displayName": "Ink on Blue"
       },
-      "ghost": {
-        "role": "neutral",
-        "displayName": "Ghost"
-      },
       "paper": {
         "role": "neutral",
         "displayName": "Paper"
@@ -210,23 +206,37 @@
         "role": "primary",
         "displayName": "Ink Blue (dark)"
       },
-      "ghost-dark": {
-        "role": "neutral",
-        "displayName": "Ghost (dark)"
-      },
       "paper-dark": {
         "role": "neutral",
         "displayName": "Paper (dark)"
+      },
+      "el-sunk": {
+        "role": "neutral",
+        "displayName": "Deep Sunk",
+        "tonalRamp": [
+          "oklch(15% 0.011 252)",
+          "oklch(26% 0.011 252)",
+          "oklch(38% 0.011 252)",
+          "oklch(49% 0.011 252)",
+          "oklch(61% 0.011 252)",
+          "oklch(72% 0.011 252)",
+          "oklch(84% 0.011 252)",
+          "oklch(95% 0.011 252)"
+        ]
+      },
+      "el-sunk-dark": {
+        "role": "neutral",
+        "displayName": "Deep Sunk (dark)"
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "The hero headline, one phrase per line, ending in a Signal Blue full stop."
+        "purpose": "The hero headline, one phrase per line, ending in a Signal Blue full stop; the role line sits above it."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Section titles, with exactly one italic word (400) in the same family."
+        "purpose": "Section titles: plain words that match the nav, a step below the hero headline. Only About's title carries an italic word."
       },
       "title": {
         "displayName": "Title",
@@ -247,10 +257,6 @@
       "label": {
         "displayName": "Label",
         "purpose": "Dates, captions and metadata in Muted Ink."
-      },
-      "label-caps": {
-        "displayName": "Label Caps",
-        "purpose": "Only on the Scientist ID badge, where an ID card would use it."
       }
     },
     "shadows": [
@@ -267,7 +273,7 @@
       {
         "name": "lift",
         "value": "0 1px 0 rgb(16 20 26 / 0.04), 0 28px 48px -26px rgb(36 52 70 / 0.45)",
-        "purpose": "The Scientist ID badge, hanging in front of the page."
+        "purpose": "The floating \"Show N papers\" button."
       },
       {
         "name": "lift-dark",
@@ -324,7 +330,7 @@
       {
         "name": "view-transition",
         "value": "260ms ease-in-out; exits 150ms, entries 240ms",
-        "purpose": "Publication filtering; instant when keyboard-triggered."
+        "purpose": "Publication filtering; instant when keyboard-triggered; a new click skips the running transition, and the overlay never takes pointer events."
       },
       {
         "name": "dialog",
@@ -337,14 +343,14 @@
         "purpose": "Reviewing venues; pauses on hover and through a toggle."
       },
       {
-        "name": "badge-spring",
-        "value": "stiffness 60, damping 5, limit 28deg",
-        "purpose": "The Scientist ID badge pendulum (assets/js/motion.js)."
-      },
-      {
         "name": "parallax-spring",
         "value": "stiffness 90, damping 18",
         "purpose": "Hero portrait pointer parallax, fine pointers only."
+      },
+      {
+        "name": "results-pill",
+        "value": "fade + rise 8px over 200ms ease-out via @starting-style; exits the same way",
+        "purpose": "The floating results button in Publications; reduced motion keeps only the fade."
       }
     ],
     "breakpoints": [
@@ -419,9 +425,9 @@
       "name": "Element Tile",
       "kind": "custom",
       "refersTo": "element-learning",
-      "description": "Periodic-table filter tile. Families differ by value (Ink, Powder Blue, Sunk Surface, outline).",
-      "html": "<div class=\"ds-els\"><button class=\"ds-el ds-el-imaging\" type=\"button\" aria-pressed=\"false\"><span class=\"ds-el-count\">7</span><span class=\"ds-el-symbol\">Us</span><span class=\"ds-el-name\">Ultrasound</span></button><button class=\"ds-el ds-el-learning\" type=\"button\" aria-pressed=\"true\"><span class=\"ds-el-count\">9</span><span class=\"ds-el-symbol\">Dl</span><span class=\"ds-el-name\">Deep learning</span></button><button class=\"ds-el ds-el-geometry\" type=\"button\" aria-pressed=\"false\"><span class=\"ds-el-count\">4</span><span class=\"ds-el-symbol\">Sm</span><span class=\"ds-el-name\">Simulation</span></button><button class=\"ds-el ds-el-practice\" type=\"button\" aria-pressed=\"false\"><span class=\"ds-el-count\">3</span><span class=\"ds-el-symbol\">Ds</span><span class=\"ds-el-name\">Datasets</span></button></div>",
-      "css": ".ds-els { display: grid; grid-template-columns: repeat(4, 96px); gap: 8px; } .ds-el { aspect-ratio: 1; display: grid; grid-template-rows: auto 1fr 2.4em; align-items: start; padding: 8px 9px; text-align: left; border-radius: 10px; border: 1px solid transparent; font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); cursor: pointer; transition: transform 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)), box-shadow 200ms ease; } .ds-el-count { font-size: 0.68rem; opacity: 0.75; line-height: 1; } .ds-el-symbol { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1; align-self: center; } .ds-el-name { font-size: 0.69rem; line-height: 1.25; opacity: 0.85; align-self: end; } .ds-el-imaging { background: var(--ink, #10141a); color: var(--bg, #f4f6f8); } .ds-el-learning { background: var(--accent, #a8c8e8); color: var(--on-accent, #10141a); } .ds-el-geometry { background: var(--surface-2, #e7ecf1); color: var(--ink, #10141a); } .ds-el-practice { background: transparent; color: var(--ink, #10141a); border-color: var(--line, #d3dbe3); } .ds-el[aria-pressed=\"true\"] { box-shadow: 0 0 0 2px var(--bg, #f4f6f8), 0 0 0 4px var(--accent-mark, #5b8fc2); } .ds-el:hover { transform: translateY(-2px); box-shadow: var(--shadow, 0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)); } .ds-el[aria-pressed=\"true\"]:hover { box-shadow: 0 0 0 2px var(--bg, #f4f6f8), 0 0 0 4px var(--accent-mark, #5b8fc2), var(--shadow, 0 12px 32px -18px rgb(36 52 70 / 0.3)); } .ds-el:active { transform: scale(0.97); } .ds-el:focus-visible { outline: 2px solid var(--accent-mark, #5b8fc2); outline-offset: 3px; }"
+      "description": "Periodic-table filter tile. Families differ by value; unmatched tiles turn to outlines and zero-count tiles to dashed outlines, never faded.",
+      "html": "<div class=\"ds-els\"><button class=\"ds-el ds-el-imaging\" type=\"button\" aria-pressed=\"false\" data-unmatched><span class=\"ds-el-count\">5</span><span class=\"ds-el-symbol\">Us</span><span class=\"ds-el-name\">Ultrasound</span></button><button class=\"ds-el ds-el-learning\" type=\"button\" aria-pressed=\"true\"><span class=\"ds-el-count\">7</span><span class=\"ds-el-symbol\">Dl</span><span class=\"ds-el-name\">Deep learning</span></button><button class=\"ds-el ds-el-geometry\" type=\"button\" aria-pressed=\"false\"><span class=\"ds-el-count\">3</span><span class=\"ds-el-symbol\">Sm</span><span class=\"ds-el-name\">Simulation</span></button><button class=\"ds-el ds-el-practice\" type=\"button\" aria-pressed=\"false\" data-empty><span class=\"ds-el-count\">0</span><span class=\"ds-el-symbol\">Ws</span><span class=\"ds-el-name\">Wearable sensing</span></button></div>",
+      "css": ".ds-els { display: grid; grid-template-columns: repeat(4, 96px); gap: 8px; } .ds-el { aspect-ratio: 1; display: grid; grid-template-rows: auto 1fr 2.4em; align-items: start; padding: 8px 9px; text-align: left; border-radius: 10px; border: 1px solid transparent; font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); cursor: pointer; transition: transform 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)), box-shadow 200ms ease; } .ds-el-count { font-size: 0.68rem; opacity: 0.75; line-height: 1; } .ds-el-symbol { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1; align-self: center; } .ds-el-name { font-size: 0.69rem; line-height: 1.25; opacity: 0.85; align-self: end; } .ds-el-imaging { background: var(--ink, #10141a); color: var(--bg, #f4f6f8); } .ds-el-learning { background: var(--accent, #a8c8e8); color: var(--on-accent, #10141a); } .ds-el-geometry { background: var(--el-sunk, #d2d6dc); color: var(--ink, #10141a); } .ds-el-practice { background: transparent; color: var(--ink, #10141a); border-color: var(--line, #d3dbe3); } .ds-el[aria-pressed=\"true\"] { box-shadow: 0 0 0 2px var(--bg, #f4f6f8), 0 0 0 4px var(--accent-mark, #5b8fc2); } .ds-el:hover { transform: translateY(-2px); box-shadow: var(--shadow, 0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)); } .ds-el[aria-pressed=\"true\"]:hover { box-shadow: 0 0 0 2px var(--bg, #f4f6f8), 0 0 0 4px var(--accent-mark, #5b8fc2), var(--shadow, 0 12px 32px -18px rgb(36 52 70 / 0.3)); } .ds-el:active { transform: scale(0.97); } .ds-el:focus-visible { outline: 2px solid var(--accent-mark, #5b8fc2); outline-offset: 3px; } .ds-el[data-unmatched], .ds-el[data-empty] { background: transparent; color: var(--ink-2, #3f4852); border-color: var(--line, #d3dbe3); } .ds-el[data-empty] { color: var(--ink-3, #5c6773); border-style: dashed; }"
     },
     {
       "name": "Research Card",
@@ -440,17 +446,17 @@
       "css": ".ds-nav { display: flex; align-items: center; gap: 1.5rem; height: 64px; padding: 0 16px; background: var(--nav-bg, rgb(244 246 248 / 0.8)); backdrop-filter: blur(14px) saturate(140%); border-bottom: 1px solid var(--line, #d3dbe3); font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); } .ds-nav-mark { display: inline-flex; align-items: center; gap: 0.6rem; font-weight: 600; letter-spacing: -0.01em; color: var(--ink, #10141a); text-decoration: none; } .ds-nav-glyph { width: 22px; height: 22px; background: conic-gradient(from 146deg at 50% 4%, var(--accent-mark, #5b8fc2) 0deg 68deg, transparent 68deg); mask: radial-gradient(circle at 50% 4%, #000 0 95%, transparent 96%); } .ds-nav-links { display: flex; gap: 1.6rem; margin-left: auto; font-size: 0.925rem; } .ds-nav-links a { color: var(--ink-2, #3f4852); text-decoration: none; padding: 0.4rem 0; transition: color 200ms ease; } .ds-nav-links a:hover { color: var(--ink, #10141a); } .ds-nav-links a[aria-current] { color: var(--ink, #10141a); box-shadow: inset 0 -2px 0 var(--accent-mark, #5b8fc2); } .ds-nav a:focus-visible { outline: 2px solid var(--accent-mark, #5b8fc2); outline-offset: 3px; border-radius: 4px; }"
     },
     {
-      "name": "Scientist ID Badge",
-      "kind": "custom",
-      "refersTo": "badge-card",
-      "description": "Signature object: an ID card on a Signal Blue lanyard, swung by a damped pendulum in motion.js.",
-      "html": "<div class=\"ds-badge\"><div class=\"ds-badge-strap\"></div><div class=\"ds-badge-clip\"></div><div class=\"ds-badge-card\"><div class=\"ds-badge-top\"><span class=\"ds-badge-glyph\"></span>Scientist ID</div><div class=\"ds-badge-photo\"></div><div class=\"ds-badge-name\">Chiara Di Vece</div><div class=\"ds-badge-role\">AI Lead, morph</div><div class=\"ds-badge-fields\"><div><small>Field</small>Physical AI</div><div><small>PhD</small>UCL '26</div></div></div></div>",
-      "css": ".ds-badge { display: grid; justify-items: center; width: 248px; font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); } .ds-badge-strap { width: 20px; height: 56px; background: var(--accent-mark, #5b8fc2); } .ds-badge-clip { width: 30px; height: 22px; margin-top: -1px; border-radius: 5px 5px 8px 8px; background: linear-gradient(180deg, #d9dee4, #9aa3ad); } .ds-badge-card { width: 100%; margin-top: -3px; display: grid; gap: 10px; padding: 0 14px 16px; border-radius: 14px; background: var(--surface, #fcfdfe); border: 1px solid var(--line, #d3dbe3); box-shadow: var(--shadow-lift, 0 1px 0 rgb(16 20 26 / 0.04), 0 28px 48px -26px rgb(36 52 70 / 0.45)); color: var(--ink, #10141a); } .ds-badge-top { display: flex; align-items: center; gap: 8px; height: 34px; margin-inline: -14px; padding-inline: 14px; border-radius: 13px 13px 0 0; background: var(--accent, #a8c8e8); color: var(--on-accent, #10141a); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; } .ds-badge-glyph { width: 14px; height: 14px; background: conic-gradient(from 146deg at 50% 4%, currentColor 0deg 68deg, transparent 68deg); mask: radial-gradient(circle at 50% 4%, #000 0 95%, transparent 96%); } .ds-badge-photo { aspect-ratio: 1 / 1.04; border-radius: 10px; background: var(--surface-2, #e7ecf1); } .ds-badge-name { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; } .ds-badge-role { font-size: 0.85rem; color: var(--ink-3, #5c6773); margin-top: -6px; } .ds-badge-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-top: 10px; border-top: 1px solid var(--line, #d3dbe3); font-size: 0.82rem; font-weight: 600; } .ds-badge-fields small { display: block; font-size: 0.69rem; font-weight: 500; color: var(--ink-3, #5c6773); letter-spacing: 0.08em; text-transform: uppercase; }"
+      "name": "Results Pill",
+      "kind": "button",
+      "refersTo": "results-pill",
+      "description": "Floating Ink pill that appears while a filter is on and the paper list starts below the screen.",
+      "html": "<a class=\"ds-pill\" href=\"#\">Show 6 papers <svg viewBox=\"0 0 256 256\" width=\"16\" height=\"16\" aria-hidden=\"true\" fill=\"currentColor\" style=\"transform:rotate(90deg)\"><path d=\"M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z\"/></svg></a>",
+      "css": ".ds-pill { display: inline-flex; align-items: center; gap: 0.5rem; height: 44px; padding: 0 1.15rem; border-radius: 999px; background: var(--ink, #10141a); color: var(--bg, #f4f6f8); font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); font-size: 0.925rem; font-weight: 550; text-decoration: none; box-shadow: var(--shadow-lift, 0 1px 0 rgb(16 20 26 / 0.04), 0 28px 48px -26px rgb(36 52 70 / 0.45)); transition: transform 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)); } .ds-pill:active { transform: scale(0.97); } .ds-pill:focus-visible { outline: 2px solid var(--accent-mark, #5b8fc2); outline-offset: 3px; }"
     }
   ],
   "narrative": {
     "northStar": "Clean Signal",
-    "overview": "One clear signal on a quiet field. The page is a cool, near-white field of blue-grey neutrals. Across it runs a single powder-blue signal that marks what matters: the selected filter, the current job, the first number, the dot that ends the headline. Helvetica Neue carries everything, set tight and large where it speaks and loose and calm where it informs. The precision is technical. The warmth comes from a real person: the portrait, the swinging ID badge, the live local time, the photos from the viva.\n\nThe density is moderate and the rhythm is editorial: big section titles with one word in italic, hairline rules instead of boxes, and data laid out as lists and grids rather than dashboards. A few hand-made objects carry the personality, so the rest of the page can stay plain:\n\n- an ultrasound monitor that stays dark in both themes;\n- a periodic table of research elements;\n- an ID badge on a lanyard;\n- a marquee of reviewing venues.\n\nMotion is physical and brief: strong ease-out curves, springs for anything that hangs or follows the pointer, and nothing that moves without a way to pause it.\n\nThe mood is crisp, technical and human. The confirmed anti-reference is anything that reads as AI-generated: template typography, purple-blue glow gradients, stock imagery, generic same-size feature cards.",
+    "overview": "One clear signal on a quiet field. The page is a cool, near-white field of blue-grey neutrals. Across it runs a single powder-blue signal that marks what matters: the selected filter, the current job, the first number, the dot that ends the headline. Helvetica Neue carries everything, set tight and large where it speaks and loose and calm where it informs. The precision is technical. The warmth comes from a real person: the portrait, the live local time, the photos from the viva.\n\nThe density is moderate and the rhythm is editorial: big plain section titles that match the nav, hairline rules instead of boxes, and data laid out as lists and grids rather than dashboards. A few hand-made objects carry the personality, so the rest of the page can stay plain:\n\n- a faint ultrasound sector behind the hero portrait;\n- an ultrasound monitor that stays dark in both themes;\n- a periodic table of research elements;\n- a marquee of reviewing venues.\n\nMotion is physical and brief: strong ease-out curves, springs for anything that hangs or follows the pointer, and nothing that moves without a way to pause it.\n\nThe mood is crisp, technical and human. The confirmed anti-reference is anything that reads as AI-generated: template typography, purple-blue glow gradients, stock imagery, generic same-size feature cards.",
     "keyCharacteristics": [
       "One hue (powder blue) on cool blue-grey neutrals; every neutral leans toward the accent's hue.",
       "A single family, Helvetica Neue, with a self-hosted TeX Gyre Heros fallback.",
@@ -482,8 +488,13 @@
         "section": "typography"
       },
       {
-        "name": "The One Italic Rule",
-        "body": "A section title gets one italic word, in the same family at a lighter weight. Never two, never a different font.",
+        "name": "The One Personal Heading Rule",
+        "body": "Section titles are plain and say what the nav says. Only About's title, \"Hi, I'm *Chiara*.\", carries an italic word (same family, 400, with descender room). Never add a second.",
+        "section": "typography"
+      },
+      {
+        "name": "The Proof Outranks Outreach Rule",
+        "body": "Paper titles are never smaller than talk titles, and the contact email (at most 2.75rem) is never the largest type on the page.",
         "section": "typography"
       },
       {
@@ -493,7 +504,7 @@
       },
       {
         "name": "The Physical Object Rule",
-        "body": "A shadow at rest means \"this is an object\": the badge, the monitor. Nothing else casts one until it is hovered.",
+        "body": "A shadow at rest means \"this sits in front of the page\": the monitor, the floating results button. Nothing else casts one until it is hovered.",
         "section": "elevation"
       }
     ],
@@ -505,6 +516,7 @@
       "**Do** put a pause control on anything that moves continuously (WCAG 2.2.2).",
       "**Do** keep tap targets at 44px on coarse pointers.",
       "**Do** theme browser surfaces from the palette: text selection in Powder Blue; a 2px Signal Blue focus ring with a 3px offset; scrollbars tinted from Ink; tabular numerals.",
+      "**Do** keep paper titles at least as large as talk titles, and the contact email at most 2.75rem.",
       "**Do** use real photographs of the owner and real research figures."
     ],
     "donts": [
@@ -513,7 +525,8 @@
       "**Don't** introduce a second typeface. The earlier Bricolage Grotesque and Geist pairing was rejected for looking AI-generated, and no serif or monospace face belongs here either.",
       "**Don't** use `transition: all` or animate layout properties. Use transform, opacity, clip-path and box-shadow; `block-size` is allowed only for the details accordion.",
       "**Don't** lift anything on touch, or move anything under reduced motion.",
-      "**Don't** give a card a shadow at rest unless it is a physical object (the badge, the monitor).",
+      "**Don't** give a card a shadow at rest unless it sits in front of the page (the monitor, the floating results button).",
+      "**Don't** dim an active control with opacity; switch it to an outline so its text stays at 4.5:1 or more.",
       "**Don't** nest cards, or build a section out of same-size icon-and-heading cards.",
       "**Don't** use stock or generated imagery."
     ]

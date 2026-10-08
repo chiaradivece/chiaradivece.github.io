@@ -5,6 +5,7 @@ awards:
   - year: 2024
     title: Outstanding Reviewer Award, IPCAI
     detail: Top 7% of reviewers. Barcelona, Spain
+    reviewing: true  # also named next to the reviewing venues
   - year: 2024
     title: Women's Health Tech Grant
     detail: UCL EPSRC Impact Acceleration Account, £5,000
@@ -54,6 +55,8 @@ awards:
     title: Xilinx Open Hardware Contest
     detail: Finalist. Dublin, Ireland
 
+# Shown as "<review_count> peer reviews for" above the venue marquee
+review_count: 15+
 reviewing:
   - IEEE Transactions on Medical Imaging
   - Medical Image Analysis
