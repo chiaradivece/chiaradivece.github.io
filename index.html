@@ -30,7 +30,7 @@
       } catch (e) {}
     })();
   </script>
-  <link rel="stylesheet" href="/assets/css/main.css?v=1791496354">
+  <link rel="stylesheet" href="/assets/css/main.css?v=1791498311">
   <link rel="preload" as="image" href="/assets/img/chiara-cutout.webp" fetchpriority="high">
 
   <script type="application/ld+json">
@@ -178,6 +178,7 @@
         <dl class="facts" data-stagger>
           <div class="fact"><dt>Role</dt><dd>AI Lead, morph</dd></div>
           <div class="fact"><dt>PhD</dt><dd>Computer Science, UCL, 2026</dd></div>
+          <div class="fact"><dt>Previously</dt><dd>MathWorks (Deep Learning Toolbox) · AI SuitUp</dd></div>
         </dl>
         <dl class="numbers" data-stagger>
           <div class="number"><dt>citations</dt><dd>131</dd></div>
@@ -361,6 +362,8 @@
         </p>
       </li>
     </ol>
+    <details class="el-panel" data-el-panel open>
+      <summary class="el-panel-toggle"><span>Filter by element</span><span class="el-panel-state" data-el-panel-state></span></summary>
     <div class="elements" role="group" aria-label="Filter papers by research element" data-element-grid data-stagger style="--step: 25ms">
       <button type="button" class="el" data-family="imaging" data-element="Us" data-name="Ultrasound" aria-pressed="false" aria-label="Ultrasound, 6 papers">
         <span class="el-count" aria-hidden="true">6</span>
@@ -443,6 +446,18 @@
         <span class="el-name" aria-hidden="true">Wearable sensing</span>
       </button>
     </div>
+    </details>
+
+    <!-- The result line sits right under the tiles; while a filter is on it pins under the nav -->
+    <div class="pub-bar" data-pub-bar>
+      <p class="pub-status" id="pub-status" tabindex="-1" data-pub-status aria-live="polite">Showing all 13 papers</p>
+      <p class="pub-bar-actions" data-pub-bar-actions hidden>
+        <a class="pub-bar-link" href="#paper-list" data-pub-show>Show <span class="icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
+</a>
+        <a class="pub-bar-link" href="#publications" data-pub-change>Change</a>
+        <button type="button" class="pub-bar-link" data-pub-bar-clear>Clear</button>
+      </p>
+    </div>
 
     <div class="pub-controls">
       <ul class="el-legend" aria-label="Element families">
@@ -454,17 +469,7 @@
       <div class="chips" role="group" aria-label="More filters" data-pub-filters>
         <button type="button" class="chip" data-toggle="first" aria-pressed="false">First author</button>
         <button type="button" class="chip" data-toggle="journal" aria-pressed="false">Journals</button>
-        <button type="button" class="chip chip-clear" data-clear hidden>Clear</button>
       </div>
-    </div>
-
-    <!-- While a filter is on, this bar pins under the nav: what is showing, and the way back -->
-    <div class="pub-bar" data-pub-bar>
-      <p class="pub-status" id="pub-status" tabindex="-1" data-pub-status aria-live="polite">Showing all 13 papers</p>
-      <p class="pub-bar-actions" data-pub-bar-actions hidden>
-        <a class="pub-bar-link" href="#publications" data-pub-change>Change</a>
-        <button type="button" class="pub-bar-link" data-pub-bar-clear>Clear</button>
-      </p>
     </div>
 
     <div class="pub-years" id="paper-list" data-pub-list>
@@ -766,10 +771,7 @@
             <h4 class="job-role">Software Engineer Intern, Deep Learning Algorithms</h4>
             <p class="job-org"><a href="https://www.mathworks.com/" rel="noopener">MathWorks</a><span class="job-place">Cambridge, UK</span>
             </p>
-            <details class="job-more">
-              <summary>What I did<span class="sr-only"> at MathWorks</span></summary>
-              <p class="job-summary">Extended the Deep Learning Toolbox with a differentiable sort, fully supported by the automatic differentiation engine, so users can build custom layers that sort.</p>
-            </details>
+            <p class="job-summary">Extended the Deep Learning Toolbox with a differentiable sort, fully supported by the automatic differentiation engine, so users can build custom layers that sort.</p>
           </li>
         </ol>
       </div>
@@ -1055,8 +1057,8 @@
   <p class="lightbox-caption" aria-live="polite"><span class="lightbox-count" data-lightbox-count></span><span class="sr-only">. </span><span data-lightbox-caption></span></p>
 </dialog>
 
-  <script src="/assets/js/main.js?v=1791496354" defer></script>
-  <script src="/assets/js/scan.js?v=1791496354" defer></script>
-  <script src="/assets/js/motion.js?v=1791496354" defer></script>
+  <script src="/assets/js/main.js?v=1791498311" defer></script>
+  <script src="/assets/js/scan.js?v=1791498311" defer></script>
+  <script src="/assets/js/motion.js?v=1791498311" defer></script>
 </body>
 </html>
