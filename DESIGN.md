@@ -31,13 +31,13 @@ colors:
 typography:
   display:
     fontFamily: "\"Helvetica Neue\", Helvetica, \"TeX Gyre Heros\", Arial, sans-serif"
-    fontSize: "clamp(2.1rem, 4.3vw, 3.75rem)"
+    fontSize: "clamp(2.1rem, 4.6vw, 3.75rem)"
     fontWeight: 700
     lineHeight: 1
     letterSpacing: "-0.045em"
   headline:
     fontFamily: "\"Helvetica Neue\", Helvetica, \"TeX Gyre Heros\", Arial, sans-serif"
-    fontSize: "clamp(1.9rem, 3.9vw, 3.25rem)"
+    fontSize: "clamp(1.6rem, 3vw, 2.5rem)"
     fontWeight: 500
     lineHeight: 1
     letterSpacing: "-0.04em"
@@ -253,8 +253,8 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 **Character:** One Swiss grotesque doing every job. Large sizes are set tight (-0.04em to -0.045em) with solid line-height; body text breathes at 1.6. Emphasis comes from the same family, through italic, weight or size, never from a second face.
 
 ### Hierarchy
-- **Display** (700, clamp(2.1rem, 4.3vw, 3.75rem), 1): the hero headline, one phrase per line, ending in a Signal Blue full stop. Above it sits the role line ("AI Lead at morph · PhD, UCL", 1.05rem/500, Soft Ink).
-- **Headline** (500, clamp(1.9rem, 3.9vw, 3.25rem), 1): section titles, always a step below the hero headline. Plain words that match the nav label ("Publications", "Talks and reviewing", "Awards"). Sub-heads inside a section (Industry, Education, the review count) are 1.35rem/600 over a 1px Ink rule.
+- **Display** (700, clamp(2.1rem, 4.6vw, 3.75rem), 1): the hero headline, one phrase per line, ending in a Signal Blue full stop. Above it sits the role line ("AI Lead at morph · PhD, UCL", 1.05rem/500, Soft Ink).
+- **Headline** (500, clamp(1.6rem, 3vw, 2.5rem), 1): section titles. The hero headline stays about 1.5× this on wide screens (59 vs 38px at 1280), so the thesis line clearly leads. Plain words that match the nav label ("Publications", "Talks and reviewing", "Awards"). Sub-heads inside a section (Industry, Education, the review count) are 1.35rem/600 over a 1px Ink rule.
 - **Title** (600, clamp(1.4rem, 2.2vw, 1.85rem), 1.1): research card headings. Smaller titles step down: the current role 1.45rem/600, selected-paper titles 1.3rem/600, other job roles 1.12rem/600, paper titles 1.15–1.2rem/600, talk titles 1.1rem/600 (never above paper titles), award titles 1.05rem/600.
 - **Lead** (400–500, clamp(1.25rem, 2vw, 1.5rem), 1.35): the opening paragraph of About and Research, and the lead news item.
 - **Body** (400, 1rem, 1.6): paragraphs in Soft Ink, held to 58–62ch.
@@ -266,7 +266,7 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 
 **The One Personal Heading Rule.** Section titles are plain and say what the nav says. Only About's title, "Hi, I'm *Chiara*.", carries an italic word (same family, 400, with descender room). Never add a second.
 
-**The Proof Outranks Outreach Rule.** Paper titles are never smaller than talk titles, and the contact email (at most 2.75rem) is never the largest type on the page.
+**The Proof Outranks Outreach Rule.** Paper titles are never smaller than talk titles, and the contact email (at most 2.25rem) sits below the section titles, never the largest type on the page.
 
 ## Layout
 
@@ -342,15 +342,14 @@ Tactile and precise.
 - **Mobile:** below 1024px the links become a full-width sheet that fades and drops 6px. It opens in 200ms and closes in 150ms. The sheet adds Contact and Download CV under a hairline, and marks the current section in Ink Blue. Opening it moves focus to the first link; Tab cycles between the menu button and the sheet's links; Escape closes it and returns focus to the button; a tap outside closes it.
 
 ### Research elements table (signature)
-- **Tiles:** square tiles in a periodic-table grid (taller than square on phones, so names fit). Each shows a paper count (0.75rem/500), a two-letter symbol (700, tight) and a name (0.75rem). Long names break only where the data marks a soft hyphen (`&shy;`).
+- **Tiles:** a periodic-table grid. On wide screens the tiles are compact (about 76px tall): the symbol and the paper count share the top row and the name sits under them, so the filter stays lighter than the papers. On phones the tiles are taller than square so names fit, and the whole grid folds behind a 44px "Filter by element" toggle (open by default on wide screens, folded on phones) that names the current pick. Counts are 0.75rem/500, names 0.75rem; long names break only where the data marks a soft hyphen (`&shy;`).
 - **Focus:** keyboard focus is a 2px Ink outline 6px outside the tile, so it can never be mistaken for the Signal Blue selection ring.
 - **Families:** the four families are told apart by value alone, never by a new hue: Ink (Muted Ink in dark), Powder Blue, Deep Sunk, Hairline outline. The legend repeats them as 12px swatches.
 - **Counts:** each tile shows how many papers it would leave under the current First author / Journal chips. A tile that would leave none turns to a dashed outline with a 0.
 - **Selection:** a selected tile keeps its family fill and gets the Selection ring. The others turn to outlines (transparent, Soft Ink text, Hairline border): still readable, clearly still pressable. Never dim an active tile with opacity.
 - **Empty result:** names the combination ("No journal papers on Wearable sensing yet.") and offers the one change that helps, as a chip ("Show the Wearable sensing paper").
-- **Status bar:** under the chips, the status names what is showing ("7 of 13 papers on Deep learning", "2 of 13 first-author journal papers on Imaging"). While a filter is on, the bar pins under the nav for the length of the list, over a Hairline, with two Ink Blue text actions: Change (back to the tiles, focus on the selected one) and Clear. Year labels pin below it.
-- **Results button:** while a filter is on and the list starts below the screen, a floating Ink pill ("Show 6 papers ↓", 44px) rests 16px above the bottom of the viewport; when the chips scroll into that spot it rides 8px above them instead of covering them. On wide screens it never sits over the tile grid; if it would, it stays out (the list is a short scroll away there). It fades and rises 8px in, disappears once the filters leave the screen, and its jump lands on the status line just under the nav (focus moves there, no `#` in the address).
-- **Clear:** keeps its space while hidden, so the chips never move under the cursor.
+- **Status bar:** directly under the tiles, so a pick shows its result at once. The status names what is showing ("7 of 13 papers on Deep learning", "2 of 13 papers on Imaging · first author, journals"). While a filter is on, it pins under the nav for the length of the list, over a Hairline, with Ink Blue text actions that adapt: Show (while the list is still below), Change (once the tiles are out of view; opens the phone panel and focuses the selected tile) and Clear (the only Clear). On touch the actions are 44px tall.
+- **Results button:** while a filter is on and the list starts below the screen, a floating Ink pill ("Show 6 papers ↓", 44px) rests 16px above the bottom of the viewport; when the chips scroll into that spot it rides 8px above them instead of covering them. It stands down whenever the status bar is fully on screen, and on wide screens it never sits over the tile grid. It fades and rises 8px in, disappears once the filters leave the screen, and its jump lands on the status line just under the nav (focus moves there, no `#` in the address).
 - **List changes:** filtering the list uses same-document View Transitions over 260ms. It is instant when triggered from the keyboard, and a new click finishes a running transition at once (the transition overlay never takes pointer events), so no click is lost.
 
 ### Scan monitor (signature)
@@ -397,7 +396,7 @@ Tactile and precise.
   - a 2px Signal Blue focus ring with a 3px offset;
   - scrollbars tinted from Ink;
   - tabular numerals.
-- **Do** keep paper titles at least as large as talk titles, and the contact email at most 2.75rem.
+- **Do** keep paper titles at least as large as talk titles, and the contact email at most 2.25rem (below the section titles).
 - **Do** use real photographs of the owner and real research figures.
 
 ### Don't:

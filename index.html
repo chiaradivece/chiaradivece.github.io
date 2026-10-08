@@ -272,6 +272,8 @@ layout: default
     </ol>
 
     {%- assign els = site.data.elements %}
+    <details class="el-panel" data-el-panel open>
+      <summary class="el-panel-toggle"><span>Filter by element</span><span class="el-panel-state" data-el-panel-state></span></summary>
     <div class="elements" role="group" aria-label="Filter papers by research element" data-element-grid data-stagger style="--step: 25ms">
       {%- for el in els.elements %}
       {%- assign n = 0 %}
@@ -283,6 +285,17 @@ layout: default
       </button>
       {%- endfor %}
     </div>
+    </details>
+
+    <!-- The result line sits right under the tiles; while a filter is on it pins under the nav -->
+    <div class="pub-bar" data-pub-bar>
+      <p class="pub-status" id="pub-status" tabindex="-1" data-pub-status aria-live="polite">Showing all {{ pubs.size }} papers</p>
+      <p class="pub-bar-actions" data-pub-bar-actions hidden>
+        <a class="pub-bar-link" href="#paper-list" data-pub-show>Show {% include icon.html name="arrow-right" %}</a>
+        <a class="pub-bar-link" href="#publications" data-pub-change>Change</a>
+        <button type="button" class="pub-bar-link" data-pub-bar-clear>Clear</button>
+      </p>
+    </div>
 
     <div class="pub-controls">
       <ul class="el-legend" aria-label="Element families">
@@ -293,17 +306,7 @@ layout: default
       <div class="chips" role="group" aria-label="More filters" data-pub-filters>
         <button type="button" class="chip" data-toggle="first" aria-pressed="false">First author</button>
         <button type="button" class="chip" data-toggle="journal" aria-pressed="false">Journals</button>
-        <button type="button" class="chip chip-clear" data-clear hidden>Clear</button>
       </div>
-    </div>
-
-    <!-- While a filter is on, this bar pins under the nav: what is showing, and the way back -->
-    <div class="pub-bar" data-pub-bar>
-      <p class="pub-status" id="pub-status" tabindex="-1" data-pub-status aria-live="polite">Showing all {{ pubs.size }} papers</p>
-      <p class="pub-bar-actions" data-pub-bar-actions hidden>
-        <a class="pub-bar-link" href="#publications" data-pub-change>Change</a>
-        <button type="button" class="pub-bar-link" data-pub-bar-clear>Clear</button>
-      </p>
     </div>
 
     <div class="pub-years" id="paper-list" data-pub-list>

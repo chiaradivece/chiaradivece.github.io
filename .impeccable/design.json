@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-08T21:02:46+00:00",
+  "generatedAt": "2026-10-08T22:24:34+00:00",
   "title": "Design System: Chiara Di Vece",
   "extensions": {
     "colorMeta": {
@@ -494,7 +494,7 @@
       },
       {
         "name": "The Proof Outranks Outreach Rule",
-        "body": "Paper titles are never smaller than talk titles, and the contact email (at most 2.75rem) is never the largest type on the page.",
+        "body": "Paper titles are never smaller than talk titles, and the contact email (at most 2.25rem) sits below the section titles, never the largest type on the page.",
         "section": "typography"
       },
       {
@@ -516,7 +516,7 @@
       "**Do** put a pause control on anything that moves continuously (WCAG 2.2.2).",
       "**Do** keep tap targets at 44px on coarse pointers.",
       "**Do** theme browser surfaces from the palette: text selection in Powder Blue; a 2px Signal Blue focus ring with a 3px offset; scrollbars tinted from Ink; tabular numerals.",
-      "**Do** keep paper titles at least as large as talk titles, and the contact email at most 2.75rem.",
+      "**Do** keep paper titles at least as large as talk titles, and the contact email at most 2.25rem (below the section titles).",
       "**Do** use real photographs of the owner and real research figures."
     ],
     "donts": [

@@ -1,6 +1,7 @@
 # Roles, newest first, in two columns.
 #   current: true  marks the role held now
-#   brief: true    folds the summary behind a "What I did" toggle (internships, short roles)
+#   brief: true    folds the summary behind a "What I did" toggle; use it only for
+#                  summaries of two or more sentences (one sentence always shows)
 
 industry:
   - role: AI Lead and Founding Applied Scientist
@@ -26,7 +27,6 @@ industry:
     url: https://www.mathworks.com/
     place: Cambridge, UK
     dates: Jun 2023 - Sep 2023
-    brief: true
     summary: >-
       Extended the Deep Learning Toolbox with a differentiable sort, fully supported by
       the automatic differentiation engine, so users can build custom layers that sort.

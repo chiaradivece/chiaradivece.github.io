@@ -275,7 +275,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 /* ---------- Sections ---------- */
 .section { padding-block: clamp(3.5rem, 6vw, 5.5rem); }
 .section-title {
-  font-size: clamp(1.9rem, 3.9vw, 3.25rem);
+  font-size: clamp(1.6rem, 3vw, 2.5rem); /* the hero headline stays about 1.5x this */
   font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 1;
@@ -322,7 +322,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .hero-title { display: grid; gap: 1rem; margin-bottom: 2.25rem; font-weight: 700; }
 .hero-kicker { font-size: 1.05rem; font-weight: 500; color: var(--ink-2); letter-spacing: 0; line-height: 1.3; }
 .hero-line {
-  font-size: clamp(2.1rem, 4.3vw, 3.75rem);
+  font-size: clamp(2.1rem, 4.6vw, 3.75rem);
   letter-spacing: -0.045em;
   line-height: 1;
 }
@@ -454,7 +454,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 @media (min-width: 900px) { .news-main { position: sticky; top: calc(var(--nav-h) + 24px); } }
 .news-feature { margin: 0; display: grid; gap: 0.6rem; }
 .news-feature-photos { margin-top: 0; }
-.news-feature-photos img { height: clamp(140px, 16vw, 180px); }
+.news-feature .news-photos img { height: clamp(140px, 16vw, 180px); }
 .news-feature-caption { font-size: 0.875rem; color: var(--ink-2); }
 .news-feature-caption .news-date { margin-right: 0.4rem; }
 @media (min-width: 900px) { .news-grid { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(2.5rem, 5vw, 5rem); align-items: start; } }
@@ -540,7 +540,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
   .lightbox, .lightbox[open] { transform: none; }
   @starting-style { .lightbox[open] { transform: none; } }
 }
-.news-older, .job-more { interpolate-size: allow-keywords; }
+.news-older, .job-more, .el-panel { interpolate-size: allow-keywords; }
 .news-older summary, .job-more summary { cursor: pointer; font-weight: 550; width: max-content; min-height: 24px; list-style: none; display: inline-flex; align-items: center; gap: 0.6rem; }
 .news-older summary::-webkit-details-marker, .job-more summary::-webkit-details-marker { display: none; }
 .news-older summary::after, .job-more summary::after {
@@ -549,13 +549,13 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 }
 .news-older[open] summary::after, .job-more[open] summary::after { transform: rotate(45deg); }
 .news-older summary:hover, .job-more summary:hover { color: var(--accent-ink); }
-.news-older::details-content, .job-more::details-content {
+.news-older::details-content, .job-more::details-content, .el-panel::details-content {
   block-size: 0; opacity: 0; overflow: clip;
   transition: block-size 250ms var(--ease-out), opacity 250ms var(--ease-out), content-visibility 250ms allow-discrete;
 }
-.news-older[open]::details-content, .job-more[open]::details-content { block-size: auto; opacity: 1; }
+.news-older[open]::details-content, .job-more[open]::details-content, .el-panel[open]::details-content { block-size: auto; opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
-  .news-older::details-content, .job-more::details-content { transition: opacity 200ms ease, content-visibility 200ms allow-discrete; }
+  .news-older::details-content, .job-more::details-content, .el-panel::details-content { transition: opacity 200ms ease, content-visibility 200ms allow-discrete; }
 }
 .news-older .news-list { margin-top: 1.25rem; }
 
@@ -696,6 +696,18 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .el-count { font-size: 0.75rem; font-weight: 500; opacity: 0.8; line-height: 1; }
 .el-symbol { font-size: clamp(1.3rem, 2.3vw, 1.95rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; align-self: center; }
 .el-name { font-size: 0.75rem; line-height: 1.25; opacity: 0.9; align-self: end; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; hyphens: manual; }
+/* Wide screens: half-height tiles, so the papers lead the section and the filter follows */
+@media (min-width: 640px) {
+  .el {
+    aspect-ratio: auto; min-height: 76px;
+    grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto 1fr;
+    grid-template-areas: "symbol count" "name name";
+    gap: 4px 6px; padding: 8px 10px;
+  }
+  .el-symbol { grid-area: symbol; font-size: clamp(1.15rem, 1.6vw, 1.4rem); align-self: start; }
+  .el-count { grid-area: count; align-self: start; padding-top: 2px; }
+  .el-name { grid-area: name; }
+}
 /* Phones: tiles grow to fit the whole name instead of cutting it off */
 @media (max-width: 639px) {
   .el { aspect-ratio: auto; min-height: 88px; grid-template-rows: auto auto 1fr; gap: 6px; padding: 8px 7px; }
@@ -719,6 +731,22 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
   .el:active { transform: scale(0.97); }
 }
 
+.el-panel { margin-bottom: 1.25rem; }
+.el-panel > .elements { margin-bottom: 0; }
+.el-panel-toggle {
+  display: none; align-items: center; justify-content: space-between; gap: 1rem;
+  min-height: 44px; padding: 0 1rem; border: 1px solid var(--line); border-radius: 999px;
+  font-size: 0.95rem; font-weight: 550; cursor: pointer; list-style: none;
+}
+.el-panel-toggle::-webkit-details-marker { display: none; }
+.el-panel-toggle::after { content: "+"; font-weight: 400; font-size: 1.25em; line-height: 1; transition: transform 200ms var(--ease-out); }
+.el-panel[open] > .el-panel-toggle::after { transform: rotate(45deg); }
+.el-panel-state { margin-left: auto; color: var(--accent-ink); font-weight: 500; }
+@media (max-width: 639px) {
+  .el-panel-toggle { display: flex; }
+  .el-panel[open] > .el-panel-toggle { margin-bottom: 0.75rem; }
+  .el-panel:not([open]) ~ .pub-controls .el-legend { display: none; }
+}
 .pub-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 1.5rem; margin-bottom: clamp(1.5rem, 3vw, 2.25rem); }
 .el-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; font-size: 0.8rem; color: var(--ink-3); }
 .el-key { display: inline-flex; align-items: center; gap: 0.45rem; }
@@ -742,6 +770,8 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
   text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent-ink) 40%, transparent); text-underline-offset: 0.2em;
 }
 .pub-bar-link:hover { text-decoration-color: currentColor; }
+.pub-bar-link[hidden] { display: none; }
+.pub-bar-link .icon { width: 0.85em; height: 0.85em; transform: rotate(90deg); vertical-align: -0.1em; }
 /* Filtered: the bar sticks under the nav for the whole list, with a hairline under it */
 .pubs[data-filtered] .pub-bar {
   position: sticky; top: var(--nav-h); z-index: 6;
@@ -760,7 +790,6 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .chip:active { transform: scale(0.97); }
 .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .chip[hidden] { display: none; }
-.chip-clear[hidden] { display: inline-flex; visibility: hidden; }
 
 .pub-years { display: grid; }
 .pub-years { border-top: 1px solid var(--line); }
@@ -994,7 +1023,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .contact-label { font-size: 1rem; font-weight: 500; color: var(--ink-3); letter-spacing: 0; }
 .contact-email { display: flex; align-items: center; gap: 0.75rem 1rem; flex-wrap: wrap; margin-top: 1rem; }
 .contact-email-link {
-  font-size: clamp(1.5rem, 4.2vw, 2.75rem);
+  font-size: clamp(1.5rem, 3.4vw, 2.25rem); /* below the section titles: outreach never outranks proof */
   font-weight: 700; letter-spacing: -0.035em; line-height: 1.05;
   text-decoration: none;
   background-image: linear-gradient(var(--accent-mark), var(--accent-mark));
@@ -1045,6 +1074,7 @@ html:not(.js) .contact-time { display: none; }
   .chip, .btn-small, .socials a { height: 44px; }
   .icon-btn, .motion-toggle { width: 44px; height: 44px; }
   .news-older summary, .job-more summary { min-height: 44px; }
+  .pub-bar-link { display: inline-flex; align-items: center; min-height: 44px; }
   .nav-mark { padding-block: 9px; }
   .cell-links { row-gap: 1rem; }
   /* Small inline links keep their look; an invisible box extends what a thumb can hit */
