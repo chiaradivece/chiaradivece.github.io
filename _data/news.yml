@@ -5,6 +5,7 @@
 #   text:  one or two sentences
 #   link:  optional URL (the LinkedIn or X post, a paper, a repo)
 #   label: optional link text, defaults to "Read more"
+#   photos: optional list of { src, thumb, w, h, alt }; thumbnails open in a lightbox
 
 - date: Sep 2026
   text: >-
@@ -31,6 +32,22 @@
     I defended my PhD at UCL and passed with minor corrections. Thank you to my supervisors
     Dan Stoyanov and Francisco Vasconcelos, and to my examiners Ester Bonmati and George
     Mylonas.
+  photos:
+    - src: /assets/img/news/viva-screen.webp
+      thumb: /assets/img/news/viva-screen-thumb.webp
+      w: 405
+      h: 720
+      alt: Chiara next to the title slide of her PhD viva, Real-Time Deep Learning-Based Plane Pose Estimation and Navigation in Freehand Fetal Brain Ultrasound
+    - src: /assets/img/news/viva-ucl.webp
+      thumb: /assets/img/news/viva-ucl-thumb.webp
+      w: 405
+      h: 720
+      alt: Chiara in front of the UCL main building on the day of her viva
+    - src: /assets/img/news/viva-group.webp
+      thumb: /assets/img/news/viva-group-thumb.webp
+      w: 720
+      h: 405
+      alt: Chiara with colleagues from the Surgical Robot Vision group at the UCL Hawkes Institute after the viva
 
 - date: May 2025
   text: >-

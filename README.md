@@ -54,3 +54,4 @@ Pushing to `master` runs `.github/workflows/deploy.yml`, which builds the site a
 - `assets/img/chiara-cutout.webp`: the hero portrait, cut out of `chiara.jpg` on-device with macOS Vision and cropped above the original frame edges
 - `_redirects/`: keeps old al-folio URLs (`/publications/`, `/cv/`, ...) working
 - `bin/update_scholar.py`: the Scholar updater used by the weekly workflow
+- `bin/build_icon_sprite.py`: rebuilds `_includes/icon-sprite.html` from `_includes/icons/`; run it after adding or removing an icon
