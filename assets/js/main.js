@@ -71,43 +71,42 @@
     revealEls.forEach(function (el) { el.classList.add('is-in'); });
   }
 
-  /* ---------- Publication filters ---------- */
+  /* ---------- Publications: research elements + filters ---------- */
 
-  // Decide whether one publication should be visible under the active filter chip.
-  //
-  //   pub.type   'journal' | 'conference' | 'preprint'
-  //   pub.first  'sole' (first author) | 'joint' (equal contribution) | 'none'
-  //   pub.topics array, e.g. ['ultrasound'] or ['surgical-vision']
-  //   filter     'all' | 'first' | 'journal' | 'ultrasound' | 'surgical-vision' | 'simulation'
-  function matchesFilter(pub, filter) {
-    if (filter === 'all') return true;
-    // Equal-contribution (co-first) papers count as first author
-    if (filter === 'first') return pub.first === 'sole' || pub.first === 'joint';
-    // Journal papers, including ones under review at a journal (public on arXiv)
-    if (filter === 'journal') return pub.type === 'journal';
-    return pub.topics.indexOf(filter) !== -1;
+  // A paper is shown when it matches every active filter:
+  //   element  the research element picked in the periodic table, if any
+  //   first    first-author papers; equal-contribution (co-first) papers count too
+  //   journal  journal papers, including ones under review at a journal (public on arXiv)
+  function matchesFilter(pub, state) {
+    if (state.element && pub.elements.indexOf(state.element) === -1) return false;
+    if (state.first && pub.first !== 'sole' && pub.first !== 'joint') return false;
+    if (state.journal && pub.type !== 'journal') return false;
+    return true;
   }
 
-  var filterGroup = document.querySelector('[data-pub-filters]');
-  if (filterGroup) {
-    var chips = filterGroup.querySelectorAll('[data-filter]');
-    var pubEls = document.querySelectorAll('[data-pub]');
-    var yearGroups = document.querySelectorAll('[data-year-group]');
+  var elementGrid = document.querySelector('[data-element-grid]');
+  var pubList = document.querySelector('[data-pub-list]');
+  if (elementGrid && pubList) {
+    var tiles = elementGrid.querySelectorAll('[data-element]');
+    var toggles = document.querySelectorAll('[data-toggle]');
+    var clearBtn = document.querySelector('[data-clear]');
+    var statusEl = document.querySelector('[data-pub-status]');
     var emptyMsg = document.querySelector('[data-pub-empty]');
-
-    var pubs = Array.prototype.map.call(pubEls, function (el) {
+    var yearGroups = pubList.querySelectorAll('[data-year-group]');
+    var pubs = Array.prototype.map.call(pubList.querySelectorAll('[data-pub]'), function (el) {
       return {
         el: el,
         type: el.dataset.type,
         first: el.dataset.first,
-        topics: (el.dataset.topics || '').split(' ').filter(Boolean)
+        elements: (el.dataset.elements || '').split(' ').filter(Boolean)
       };
     });
+    var state = { element: null, first: false, journal: false };
 
-    function applyFilter(filter) {
+    function render() {
       var shown = 0;
       pubs.forEach(function (pub) {
-        var ok = matchesFilter(pub, filter);
+        var ok = matchesFilter(pub, state);
         pub.el.hidden = !ok;
         if (ok) shown++;
       });
@@ -115,16 +114,64 @@
         group.hidden = !group.querySelector('[data-pub]:not([hidden])');
       });
       if (emptyMsg) emptyMsg.hidden = shown !== 0;
-      chips.forEach(function (chip) {
-        var active = chip.dataset.filter === filter;
-        chip.classList.toggle('is-active', active);
-        chip.setAttribute('aria-pressed', String(active));
+      tiles.forEach(function (tile) {
+        tile.setAttribute('aria-pressed', String(tile.dataset.element === state.element));
+      });
+      elementGrid.toggleAttribute('data-active', !!state.element);
+      toggles.forEach(function (btn) {
+        btn.setAttribute('aria-pressed', String(!!state[btn.dataset.toggle]));
+      });
+      var filtered = !!(state.element || state.first || state.journal);
+      if (clearBtn) {
+        if (!filtered && document.activeElement === clearBtn && tiles[0]) tiles[0].focus();
+        clearBtn.hidden = !filtered;
+      }
+      if (statusEl) {
+        statusEl.textContent = filtered
+          ? 'Showing ' + shown + ' of ' + pubs.length + ' papers'
+          : 'Showing all ' + pubs.length + ' papers';
+      }
+    }
+
+    // Pointer-driven changes animate the list with a View Transition; keyboard-driven
+    // ones (click events with detail 0) apply instantly, as do browsers without support
+    // and anyone who prefers reduced motion.
+    var canTransition = typeof document.startViewTransition === 'function' &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function nameForTransition(on) {
+      pubs.forEach(function (pub, i) { pub.el.style.viewTransitionName = on ? 'pub-' + i : ''; });
+      yearGroups.forEach(function (group, i) {
+        var label = group.querySelector('.pub-year-label');
+        if (label) label.style.viewTransitionName = on ? 'year-' + i : '';
       });
     }
 
-    chips.forEach(function (chip) {
-      chip.addEventListener('click', function () { applyFilter(chip.dataset.filter); });
+    function update(event) {
+      if (!canTransition || (event && event.detail === 0)) { render(); return; }
+      nameForTransition(true);
+      var transition = document.startViewTransition(render);
+      transition.finished.finally(function () { nameForTransition(false); });
+    }
+
+    tiles.forEach(function (tile) {
+      tile.addEventListener('click', function (e) {
+        state.element = state.element === tile.dataset.element ? null : tile.dataset.element;
+        update(e);
+      });
     });
+    toggles.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        state[btn.dataset.toggle] = !state[btn.dataset.toggle];
+        update(e);
+      });
+    });
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function (e) {
+        state = { element: null, first: false, journal: false };
+        update(e);
+      });
+    }
   }
 
   /* ---------- Awards rail ---------- */

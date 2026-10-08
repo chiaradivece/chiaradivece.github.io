@@ -31,6 +31,7 @@
     })();
   </script>
   <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="preload" as="image" href="/assets/img/chiara-cutout.webp" fetchpriority="high">
 
   <script type="application/ld+json">
   {
@@ -79,99 +80,90 @@
 
 <main id="main">
 
-  <!-- Hero: name + scan simulation -->
-  <section class="hero wrap" id="top">
-    <div class="hero-copy">
-      <h1 class="hero-name" aria-label="Chiara Di Vece">
-        <span class="hero-line" aria-hidden="true">Chiara</span>
-        <span class="hero-line" aria-hidden="true">Di Vece<span class="hero-dot">.</span></span>
-      </h1>
-      <p class="hero-sub">
-        AI Lead at <a href="https://morph.inc/" rel="noopener">morph</a>, building physical AI for soft robots.
-        My UCL PhD taught machines to navigate fetal ultrasound.
-      </p>
-      <div class="hero-ctas">
-        <a class="btn btn-solid" href="/assets/pdf/Chiara_Di_Vece_CV.pdf" download>
-          Download CV <span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></span>
-        </a>
-        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+  <!-- Hero: Chiara herself, the line, and the way in -->
+  <section class="hero" id="top" data-hero>
+    <div class="hero-inner wrap">
+      <div class="hero-copy">
+        <h1 class="hero-title">
+          <span class="hero-kicker">Chiara Di Vece, PhD</span>
+          <span class="hero-line">
+            <span class="hero-line-part">From computer vision</span>
+            <span class="hero-line-part">for fetal ultrasound</span>
+            <span class="hero-line-part">to soft robotics<span class="hero-dot">.</span></span>
+          </span>
+        </h1>
+        <div class="hero-ctas">
+          <a class="btn btn-solid" href="/assets/pdf/Chiara_Di_Vece_CV.pdf" download>
+            Download CV <span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></span>
+          </a>
+          <a class="btn btn-ghost" href="#contact">Get in touch</a>
+        </div>
       </div>
     </div>
-
-    <figure class="scan" aria-label="Animated, simulated ultrasound scan of a soft robotic actuator">
-      <div class="scan-screen">
-        <canvas data-scan></canvas>
+    <div class="hero-ghost" aria-hidden="true"><span class="hero-ghost-text" data-depth="-14">CHIARA</span></div>
+    <div class="hero-figure">
+      <div class="hero-figure-enter">
+        <img class="hero-portrait" data-depth="9" src="/assets/img/chiara-cutout.webp" alt="Chiara Di Vece" width="892" height="680" fetchpriority="high" decoding="async">
       </div>
-      <figcaption class="scan-caption">Simulated ultrasound of a soft actuator. <span class="caption-mouse">Move your pointer over it to push it around.</span><span class="caption-touch">Drag sideways across it to push it around.</span></figcaption>
-    </figure>
+    </div>
   </section>
 
-  <!-- About -->
+  <!-- About: the hero figure comes back as a badge on a lanyard -->
   <section class="section about wrap" id="about" data-reveal>
-    <h2 class="section-title">About</h2>
     <div class="about-grid">
-      <div class="about-photo">
-        <img src="/assets/img/chiara.jpg" alt="Portrait of Chiara Di Vece" width="800" height="1000" loading="lazy" decoding="async">
-      </div>
-
-      <div class="about-body">
-        <p class="lead">
-          I'm a biomedical engineer turned AI scientist, drawn to problems where
-          learning systems meet the physical world.
+      <div class="about-text">
+        <h2 class="section-title">Hi, I'm <i>Chiara</i>.</h2>
+        <p class="about-lead">
+          I'm a biomedical engineer turned AI scientist. I lead AI at
+          <a href="https://morph.inc/" rel="noopener">morph</a>, a soft robotics startup still in
+          stealth, across computer vision, physical AI, robotics and AI agents.
         </p>
         <p>
-          I lead AI at <a href="https://morph.inc/" rel="noopener">morph</a>, a soft robotics
-          startup still in stealth, working across computer vision, physical AI, robotics and AI
-          agents. I'm based in Seattle and work closely with our team in London.
+          My PhD at UCL taught deep learning models to guide sonographers to the right views in
+          fetal brain ultrasound, without any tracking hardware, in real time on NVIDIA's Clara AGX.
+          Before that I built surgical simulators with haptics and VR in Milan and Chicago. I also
+          trained in ballet for fifteen years.
         </p>
-        <p>
-          My PhD at UCL asked whether deep learning could guide sonographers to the right
-          diagnostic views in freehand fetal brain ultrasound, with no external tracking hardware.
-          It ended with a real-time navigation pipeline running on NVIDIA's Clara AGX clinical
-          platform. Before that, I built surgical simulators with haptics and virtual reality in
-          Milan and Chicago, after fifteen years of ballet training.
-        </p>
-
-        <ul class="edu" aria-label="Education">
-          <li>
-            <span class="edu-degree">PhD in Computer Science</span>
-            <span class="edu-school">University College London<span class="edu-dates">2020 - 2026</span></span>
-            <span class="edu-note">Thesis: Real-time deep learning-based plane pose estimation and navigation in freehand fetal brain ultrasound</span>
-          </li>
-          <li>
-            <span class="edu-degree">MSc Biomedical Engineering</span>
-            <span class="edu-school">Politecnico di Milano<span class="edu-dates">2017 - 2019</span></span>
-            <span class="edu-note">Summa cum laude. Double degree with UIC and Politecnico di Torino</span>
-          </li>
-          <li>
-            <span class="edu-degree">MSc Bioengineering</span>
-            <span class="edu-school">University of Illinois Chicago<span class="edu-dates">2018 - 2019</span></span>
-            <span class="edu-note">GPA 4.00/4.00, summa cum laude</span>
-          </li>
-          <li>
-            <span class="edu-degree">Alta Scuola Politecnica</span>
-            <span class="edu-school">Politecnico di Milano and Politecnico di Torino<span class="edu-dates">2017 - 2020</span></span>
-            <span class="edu-note">Top 1% honours programme, diploma with merit</span>
-          </li>
-          <li>
-            <span class="edu-degree">BSc Biomedical Engineering</span>
-            <span class="edu-school">Politecnico di Milano<span class="edu-dates">2014 - 2017</span></span>
-            <span class="edu-note">Thesis: FPGA-based brain injury evaluation through pupillometry</span>
-          </li>
-          <li>
-            <span class="edu-degree">Licensed Industrial Engineer</span>
-            <span class="edu-school">Italy<span class="edu-dates">2021</span></span>
-            <span class="edu-note">Professional licence to practise</span>
-          </li>
-        </ul>
       </div>
-      <dl class="stats">
-        <div class="stat"><dt>citations</dt><dd>131</dd></div>
-        <div class="stat"><dt>h-index</dt><dd>7</dd></div>
-        <div class="stat"><dt>papers</dt><dd>13</dd></div>
-        <div class="stat"><dt>awards</dt><dd>18</dd></div>
-        <p class="stats-source">Citations and h-index from <a href="https://scholar.google.com/citations?user=CStrr20AAAAJ&amp;hl=en" rel="noopener">Google Scholar</a>, updated October 2026</p>
-      </dl>
+
+      <div class="about-badge">
+        <div class="badge-rig" data-badge-rig>
+          <span class="badge-pin" aria-hidden="true"></span>
+          <div class="badge-drop" data-badge-drop>
+            <div class="badge-swing" data-badge-swing>
+              <span class="badge-strap" aria-hidden="true"></span>
+              <span class="badge-clip" aria-hidden="true"></span>
+              <div class="badge-card" data-badge-card role="img" aria-label="ID badge: Chiara Di Vece, PhD, AI Lead at morph">
+                <div class="badge-top"><span class="badge-glyph"></span><span>Scientist ID</span></div>
+                <div class="badge-photo"><img src="/assets/img/chiara.jpg" alt="" width="1024" height="1024" loading="lazy" decoding="async" draggable="false"></div>
+                <p class="badge-name">Chiara Di Vece</p>
+                <p class="badge-role">PhD · AI Lead</p>
+                <div class="badge-fields">
+                  <span><small>Field</small>Physical AI</span>
+                  <span><small>PhD</small>UCL '26</span>
+                  <span><small>Base</small>Seattle</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-facts">
+        <dl class="facts">
+          <div class="fact"><dt>Based in</dt><dd>Seattle, WA</dd></div>
+          <div class="fact"><dt>Team in</dt><dd>London, UK</dd></div>
+          <div class="fact"><dt>Role</dt><dd>AI Lead, morph</dd></div>
+          <div class="fact"><dt>PhD</dt><dd>Computer Science, UCL, 2026</dd></div>
+        </dl>
+        <dl class="numbers">
+          <div class="number"><dt>citations</dt><dd>131</dd></div>
+          <div class="number"><dt>h-index</dt><dd>7</dd></div>
+          <div class="number"><dt>papers</dt><dd>13</dd></div>
+          <div class="number"><dt>awards</dt><dd>18</dd></div>
+        </dl>
+        <p class="facts-source">Citations and h-index from <a href="https://scholar.google.com/citations?user=CStrr20AAAAJ&amp;hl=en" rel="noopener">Google Scholar</a>, updated October 2026.</p>
+      </div>
     </div>
   </section>
 
@@ -292,11 +284,58 @@
         </ol>
       </div>
     </div>
+    <div class="edu-block">
+      <h3 class="exp-heading">Education</h3>
+      <ul class="edu">
+        <li>
+          <span class="edu-degree">PhD in Computer Science</span>
+          <span class="edu-school">University College London<span class="edu-dates">2020 - 2026</span></span>
+          <span class="edu-note">Thesis: Real-time deep learning-based plane pose estimation and navigation in freehand fetal brain ultrasound</span>
+        </li>
+        <li>
+          <span class="edu-degree">MSc Biomedical Engineering</span>
+          <span class="edu-school">Politecnico di Milano<span class="edu-dates">2017 - 2019</span></span>
+          <span class="edu-note">Summa cum laude. Double degree with UIC and Politecnico di Torino</span>
+        </li>
+        <li>
+          <span class="edu-degree">MSc Bioengineering</span>
+          <span class="edu-school">University of Illinois Chicago<span class="edu-dates">2018 - 2019</span></span>
+          <span class="edu-note">GPA 4.00/4.00, summa cum laude</span>
+        </li>
+        <li>
+          <span class="edu-degree">Alta Scuola Politecnica</span>
+          <span class="edu-school">Politecnico di Milano and Politecnico di Torino<span class="edu-dates">2017 - 2020</span></span>
+          <span class="edu-note">Top 1% honours programme, diploma with merit</span>
+        </li>
+        <li>
+          <span class="edu-degree">BSc Biomedical Engineering</span>
+          <span class="edu-school">Politecnico di Milano<span class="edu-dates">2014 - 2017</span></span>
+          <span class="edu-note">Thesis: FPGA-based brain injury evaluation through pupillometry</span>
+        </li>
+        <li>
+          <span class="edu-degree">Licensed Industrial Engineer</span>
+          <span class="edu-school">Italy<span class="edu-dates">2021</span></span>
+          <span class="edu-note">Professional licence to practise</span>
+        </li>
+      </ul>
+    </div>
   </section>
 
-  <!-- Research themes (bento) -->
+  <!-- Research: the scan lives here now, then the themes -->
   <section class="section research wrap" id="research" data-reveal>
     <h2 class="section-title">Research</h2>
+    <div class="research-intro">
+      <div class="research-intro-text">
+        <p class="research-lead">My PhD taught machines to find their way through fetal ultrasound. Now I build AI for soft robots.</p>
+        <p>The scan brings the two together: a simulated soft actuator, shown as an ultrasound image.</p>
+      </div>
+      <figure class="scan" aria-label="Animated, simulated ultrasound scan of a soft robotic actuator">
+        <div class="scan-screen">
+          <canvas data-scan></canvas>
+        </div>
+        <figcaption class="scan-caption"><span class="caption-mouse">Move your pointer over it to push it around.</span><span class="caption-touch">Drag sideways across it to push it around.</span></figcaption>
+      </figure>
+    </div>
     <div class="bento">
       <article class="cell cell-fetal">
         <div class="cell-media cell-media-paper">
@@ -315,12 +354,6 @@
             <a href="https://doi.org/10.1038/s41598-026-47854-3" rel="noopener">Scientific Reports <span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg></span></a>
           </p>
         </div>
-      </article>
-
-      <article class="cell cell-now">
-        <span class="tag tag-accent">Now</span>
-        <h3>Physical AI at morph</h3>
-        <p>Computer vision, robotics and AI agents for soft robotics. We're in stealth, so more on this soon.</p>
       </article>
 
       <article class="cell cell-sim">
@@ -360,20 +393,110 @@
   <section class="section pubs wrap" id="publications" data-reveal>
     <div class="pubs-head">
       <h2 class="section-title">Publications</h2>
-      <div class="chips" role="group" aria-label="Filter publications" data-pub-filters>
-        <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All <span class="chip-count">13</span></button>
-        <button type="button" class="chip" data-filter="first" aria-pressed="false">First author</button>
-        <button type="button" class="chip" data-filter="journal" aria-pressed="false">Journals</button>
-        <button type="button" class="chip" data-filter="ultrasound" aria-pressed="false">Ultrasound</button>
-        <button type="button" class="chip" data-filter="surgical-vision" aria-pressed="false">Surgical vision</button>
-        <button type="button" class="chip" data-filter="simulation" aria-pressed="false">Simulation</button>
+      <p class="pubs-intro">The elements of my research. Pick one to light up the papers that use it.</p>
+    </div>
+    <div class="elements" role="group" aria-label="Filter papers by research element" data-element-grid>
+      <button type="button" class="el" data-family="imaging" data-element="Us" aria-pressed="false" aria-label="Ultrasound, 6 papers">
+        <span class="el-count" aria-hidden="true">6</span>
+        <span class="el-symbol" aria-hidden="true">Us</span>
+        <span class="el-name" aria-hidden="true">Ultrasound</span>
+      </button>
+      <button type="button" class="el" data-family="imaging" data-element="Hs" aria-pressed="false" aria-label="Hyperspectral, 1 paper">
+        <span class="el-count" aria-hidden="true">1</span>
+        <span class="el-symbol" aria-hidden="true">Hs</span>
+        <span class="el-name" aria-hidden="true">Hyperspectral</span>
+      </button>
+      <button type="button" class="el" data-family="imaging" data-element="Lp" aria-pressed="false" aria-label="Laparoscopy, 3 papers">
+        <span class="el-count" aria-hidden="true">3</span>
+        <span class="el-symbol" aria-hidden="true">Lp</span>
+        <span class="el-name" aria-hidden="true">Laparoscopy</span>
+      </button>
+      <button type="button" class="el" data-family="imaging" data-element="Ir" aria-pressed="false" aria-label="Infrared, 1 paper">
+        <span class="el-count" aria-hidden="true">1</span>
+        <span class="el-symbol" aria-hidden="true">Ir</span>
+        <span class="el-name" aria-hidden="true">Infrared</span>
+      </button>
+      <button type="button" class="el" data-family="learning" data-element="Dl" aria-pressed="false" aria-label="Deep learning, 7 papers">
+        <span class="el-count" aria-hidden="true">7</span>
+        <span class="el-symbol" aria-hidden="true">Dl</span>
+        <span class="el-name" aria-hidden="true">Deep learning</span>
+      </button>
+      <button type="button" class="el" data-family="learning" data-element="Ps" aria-pressed="false" aria-label="Pose estimation, 6 papers">
+        <span class="el-count" aria-hidden="true">6</span>
+        <span class="el-symbol" aria-hidden="true">Ps</span>
+        <span class="el-name" aria-hidden="true">Pose estimation</span>
+      </button>
+      <button type="button" class="el" data-family="learning" data-element="Km" aria-pressed="false" aria-label="Keypoint matching, 2 papers">
+        <span class="el-count" aria-hidden="true">2</span>
+        <span class="el-symbol" aria-hidden="true">Km</span>
+        <span class="el-name" aria-hidden="true">Keypoint matching</span>
+      </button>
+      <button type="button" class="el" data-family="learning" data-element="Lm" aria-pressed="false" aria-label="Landmarks and segmentation, 2 papers">
+        <span class="el-count" aria-hidden="true">2</span>
+        <span class="el-symbol" aria-hidden="true">Lm</span>
+        <span class="el-name" aria-hidden="true">Landmarks and segmentation</span>
+      </button>
+      <button type="button" class="el" data-family="geometry" data-element="3d" aria-pressed="false" aria-label="3D reconstruction, 3 papers">
+        <span class="el-count" aria-hidden="true">3</span>
+        <span class="el-symbol" aria-hidden="true">3d</span>
+        <span class="el-name" aria-hidden="true">3D reconstruction</span>
+      </button>
+      <button type="button" class="el" data-family="geometry" data-element="Sm" aria-pressed="false" aria-label="Simulation, 3 papers">
+        <span class="el-count" aria-hidden="true">3</span>
+        <span class="el-symbol" aria-hidden="true">Sm</span>
+        <span class="el-name" aria-hidden="true">Simulation</span>
+      </button>
+      <button type="button" class="el" data-family="geometry" data-element="Vr" aria-pressed="false" aria-label="VR and haptics, 1 paper">
+        <span class="el-count" aria-hidden="true">1</span>
+        <span class="el-symbol" aria-hidden="true">Vr</span>
+        <span class="el-name" aria-hidden="true">VR and haptics</span>
+      </button>
+      <button type="button" class="el" data-family="geometry" data-element="Rb" aria-pressed="false" aria-label="Robotics, 2 papers">
+        <span class="el-count" aria-hidden="true">2</span>
+        <span class="el-symbol" aria-hidden="true">Rb</span>
+        <span class="el-name" aria-hidden="true">Robotics</span>
+      </button>
+      <button type="button" class="el" data-family="practice" data-element="Ds" aria-pressed="false" aria-label="Datasets and benchmarks, 4 papers">
+        <span class="el-count" aria-hidden="true">4</span>
+        <span class="el-symbol" aria-hidden="true">Ds</span>
+        <span class="el-name" aria-hidden="true">Datasets and benchmarks</span>
+      </button>
+      <button type="button" class="el" data-family="practice" data-element="Cs" aria-pressed="false" aria-label="Clinical studies, 3 papers">
+        <span class="el-count" aria-hidden="true">3</span>
+        <span class="el-symbol" aria-hidden="true">Cs</span>
+        <span class="el-name" aria-hidden="true">Clinical studies</span>
+      </button>
+      <button type="button" class="el" data-family="practice" data-element="Ns" aria-pressed="false" aria-label="Neurosurgery, 1 paper">
+        <span class="el-count" aria-hidden="true">1</span>
+        <span class="el-symbol" aria-hidden="true">Ns</span>
+        <span class="el-name" aria-hidden="true">Neurosurgery</span>
+      </button>
+      <button type="button" class="el" data-family="practice" data-element="Ws" aria-pressed="false" aria-label="Wearable sensing, 1 paper">
+        <span class="el-count" aria-hidden="true">1</span>
+        <span class="el-symbol" aria-hidden="true">Ws</span>
+        <span class="el-name" aria-hidden="true">Wearable sensing</span>
+      </button>
+    </div>
+
+    <div class="pub-controls">
+      <ul class="el-legend" aria-label="Element families">
+        <li class="el-key" data-family="imaging"><span class="el-swatch" aria-hidden="true"></span>Imaging</li>
+        <li class="el-key" data-family="learning"><span class="el-swatch" aria-hidden="true"></span>Learning</li>
+        <li class="el-key" data-family="geometry"><span class="el-swatch" aria-hidden="true"></span>3D and simulation</li>
+        <li class="el-key" data-family="practice"><span class="el-swatch" aria-hidden="true"></span>Data and clinic</li>
+      </ul>
+      <div class="chips" role="group" aria-label="More filters" data-pub-filters>
+        <button type="button" class="chip" data-toggle="first" aria-pressed="false">First author</button>
+        <button type="button" class="chip" data-toggle="journal" aria-pressed="false">Journals</button>
+        <button type="button" class="chip chip-clear" data-clear hidden>Clear</button>
       </div>
+      <p class="pub-status" data-pub-status aria-live="polite">Showing all 13 papers</p>
     </div>
 
     <div class="pub-years" data-pub-list>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2026</h3>
-        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="sole" data-topics="ultrasound">
+        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="sole" data-elements="Us Dl Ps Lm">
             <h4 class="pub-title"><a href="https://arxiv.org/abs/2404.07124" rel="noopener">Measuring proximity to standard planes during fetal brain ultrasound scanning</a></h4>
             <p class="pub-authors"><strong>C. Di Vece</strong>, A. Cirigliano, M. Le Lous, R. Napolitano, A. L. David, D. Peebles, P. Jannin, F. Vasconcelos, D. Stoyanov</p>
             <p class="pub-venue">
@@ -383,7 +506,7 @@
               <a href="https://arxiv.org/abs/2404.07124" rel="noopener">arXiv <span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg></span></a>
               <a class="pub-cited" href="https://scholar.google.com/scholar?oi=bibs&amp;hl=en&amp;cites=15047813065327009074" rel="noopener">Cited by 4</a>
             </p>
-          </li><li class="pub" data-pub data-type="journal" data-first="none" data-topics="surgical-vision">
+          </li><li class="pub" data-pub data-type="journal" data-first="none" data-elements="Hs Lp Dl Km Ps 3d Ds">
             <h4 class="pub-title"><a href="https://doi.org/10.1007/s11548-026-03633-z" rel="noopener">HyKey: hyperspectral keypoint detection and matching in minimally invasive surgery</a></h4>
             <p class="pub-authors">A. Saikia, <strong>C. Di Vece</strong>, Z. Mao, S. Bonilla, C. He, J. Ramalhinho, T. Czempiel, S. Bano, D. Stoyanov</p>
             <p class="pub-venue">
@@ -394,7 +517,7 @@
               <a href="https://arxiv.org/abs/2604.17446" rel="noopener">arXiv <span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg></span></a>
               <a href="https://github.com/alexsaikia/HyKey-Hyperspectral-Keypoint-Detection" rel="noopener">Code <span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg></span></a>
             </p>
-          </li><li class="pub" data-pub data-type="journal" data-first="sole" data-topics="ultrasound">
+          </li><li class="pub" data-pub data-type="journal" data-first="sole" data-elements="Us Dl Lm Ds Cs">
             <h4 class="pub-title"><a href="https://doi.org/10.1038/s41598-026-47854-3" rel="noopener">A multicentre benchmark dataset for comprehensive landmark-based fetal ultrasound biometry</a></h4>
             <p class="pub-authors"><strong>C. Di Vece</strong>, Z. Mao, N. Avisdris, B. Dromey, R. Napolitano, D. Ben Bashat, F. Vasconcelos, D. Stoyanov, L. Joskowicz, S. Bano</p>
             <p class="pub-venue">
@@ -411,7 +534,7 @@
       </div>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2025</h3>
-        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="none" data-topics="surgical-vision">
+        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="none" data-elements="Lp 3d Rb Ds">
             <h4 class="pub-title"><a href="https://doi.org/10.1109/LRA.2025.3540529" rel="noopener">Robotic arm platform for multi-view image acquisition and 3D reconstruction in minimally invasive surgery</a></h4>
             <p class="pub-authors">A. Saikia, <strong>C. Di Vece</strong>, S. Bonilla, C. He, M. Magbagbeola, L. Mennillo, T. Czempiel, S. Bano, D. Stoyanov</p>
             <p class="pub-venue">
@@ -422,7 +545,7 @@
               <a href="https://arxiv.org/abs/2410.11703" rel="noopener">arXiv <span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg></span></a>
               <a class="pub-cited" href="https://scholar.google.com/scholar?oi=bibs&amp;hl=en&amp;cites=18055705067697277225" rel="noopener">Cited by 9</a>
             </p>
-          </li><li class="pub" data-pub data-type="conference" data-first="joint" data-topics="surgical-vision">
+          </li><li class="pub" data-pub data-type="conference" data-first="joint" data-elements="Dl Km Ps 3d Ds">
             <h4 class="pub-title"><a href="https://doi.org/10.1007/978-3-031-91989-3_8" rel="noopener">Mismatched: evaluating the limits of image matching approaches and benchmarks</a></h4>
             <p class="pub-authors">S. Bonilla*, <strong>C. Di Vece</strong>*, R. Daher*, X. Ju*, D. Stoyanov, F. Vasconcelos, S. Bano</p>
             <p class="pub-venue">
@@ -439,7 +562,7 @@
       </div>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2024</h3>
-        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="none" data-topics="ultrasound">
+        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="none" data-elements="Us Cs">
             <h4 class="pub-title"><a href="https://doi.org/10.1016/j.ejogrb.2024.04.042" rel="noopener">Probe motion during mid-trimester fetal anomaly scan in the clinical setting: a prospective observational study</a></h4>
             <p class="pub-authors">M. Le Lous, F. Vasconcelos, <strong>C. Di Vece</strong>, B. Dromey, R. Napolitano, S. Yoo, E. Edwards, A. Huaulme, D. Peebles, D. Stoyanov, P. Jannin</p>
             <p class="pub-venue">
@@ -453,7 +576,7 @@
       </div>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2023</h3>
-        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="sole" data-topics="ultrasound">
+        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="sole" data-elements="Us Dl Ps">
             <h4 class="pub-title"><a href="https://doi.org/10.1109/TMRB.2023.3328638" rel="noopener">Ultrasound plane pose regression: assessing generalized pose coordinates in the fetal brain</a></h4>
             <p class="pub-authors"><strong>C. Di Vece</strong>, M. Le Lous, B. Dromey, F. Vasconcelos, A. L. David, D. Peebles, D. Stoyanov</p>
             <p class="pub-venue">
@@ -468,7 +591,7 @@
       </div>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2022</h3>
-        <ol class="pub-items"><li class="pub" data-pub data-type="conference" data-first="sole" data-topics="ultrasound">
+        <ol class="pub-items"><li class="pub" data-pub data-type="conference" data-first="sole" data-elements="Us Dl Ps">
             <h4 class="pub-title"><a href="https://doi.org/10.31256/HSMR2022.24" rel="noopener">Deep learning-based plane pose regression towards training in freehand obstetric ultrasound</a></h4>
             <p class="pub-authors"><strong>C. Di Vece</strong>, B. Dromey, F. Vasconcelos, A. L. David, D. Peebles, D. Stoyanov</p>
             <p class="pub-venue">
@@ -478,7 +601,7 @@
               <a href="https://doi.org/10.31256/HSMR2022.24" rel="noopener">Paper <span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg></span></a>
               <a class="pub-cited" href="https://scholar.google.com/scholar?oi=bibs&amp;hl=en&amp;cites=6967800236117292899" rel="noopener">Cited by 1</a>
             </p>
-          </li><li class="pub" data-pub data-type="journal" data-first="sole" data-topics="ultrasound">
+          </li><li class="pub" data-pub data-type="journal" data-first="sole" data-elements="Us Dl Ps Sm">
             <h4 class="pub-title"><a href="https://doi.org/10.1007/s11548-022-02609-z" rel="noopener">Deep learning-based plane pose regression in obstetric ultrasound</a></h4>
             <p class="pub-authors"><strong>C. Di Vece</strong>, B. Dromey, F. Vasconcelos, A. L. David, D. Peebles, D. Stoyanov</p>
             <p class="pub-venue">
@@ -493,7 +616,7 @@
       </div>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2021</h3>
-        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="joint" data-topics="simulation">
+        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="joint" data-elements="Sm Rb Ns">
             <h4 class="pub-title"><a href="https://doi.org/10.1109/LRA.2021.3090016" rel="noopener">Position-based dynamics simulator of brain deformations for path planning and intra-operative control in keyhole neurosurgery</a></h4>
             <p class="pub-authors">A. Segato*, <strong>C. Di Vece</strong>*, S. Zucchelli, M. Di Marzo, T. Wendler, M. F. Azampour, S. Galvan, R. Secoli, E. De Momi</p>
             <p class="pub-venue">
@@ -503,7 +626,7 @@
               <a href="https://doi.org/10.1109/LRA.2021.3090016" rel="noopener">Paper <span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg></span></a>
               <a class="pub-cited" href="https://scholar.google.com/scholar?oi=bibs&amp;hl=en&amp;cites=14857822219483592939" rel="noopener">Cited by 24</a>
             </p>
-          </li><li class="pub" data-pub data-type="journal" data-first="sole" data-topics="simulation">
+          </li><li class="pub" data-pub data-type="journal" data-first="sole" data-elements="Lp Vr Sm Cs">
             <h4 class="pub-title"><a href="https://doi.org/10.1007/s11548-021-02341-0" rel="noopener">Psychomotor skills development for Veress needle placement using a virtual reality and haptics-based simulator</a></h4>
             <p class="pub-authors"><strong>C. Di Vece</strong>, C. Luciano, E. De Momi</p>
             <p class="pub-venue">
@@ -518,7 +641,7 @@
       </div>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2019</h3>
-        <ol class="pub-items"><li class="pub" data-pub data-type="conference" data-first="joint" data-topics="sensing">
+        <ol class="pub-items"><li class="pub" data-pub data-type="conference" data-first="joint" data-elements="Ws">
             <h4 class="pub-title"><a href="https://doi.org/10.1109/EMBC.2019.8857927" rel="noopener">GLOS: GLOve for speech recognition</a></h4>
             <p class="pub-authors">G. Crocioni*, <strong>C. Di Vece</strong>*, H. Esmailbeigi</p>
             <p class="pub-venue">
@@ -533,7 +656,7 @@
       </div>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2017</h3>
-        <ol class="pub-items"><li class="pub" data-pub data-type="conference" data-first="joint" data-topics="sensing">
+        <ol class="pub-items"><li class="pub" data-pub data-type="conference" data-first="joint" data-elements="Ir">
             <h4 class="pub-title"><a href="https://doi.org/10.1109/RTSI.2017.8065976" rel="noopener">BIE-PInCS: brain injury evaluation with pupillometer based on infrared camera system</a></h4>
             <p class="pub-authors">F. Bracco*, <strong>C. Di Vece</strong>*, L. Cerina, M. D. Santambrogio</p>
             <p class="pub-venue">
@@ -551,7 +674,7 @@
     <p class="pubs-foot">* Equal contribution. Citation counts refresh weekly from <a href="https://scholar.google.com/citations?user=CStrr20AAAAJ&amp;hl=en" rel="noopener">Google Scholar</a>.</p>
   </section>
 
-  <!-- Reviewing marquee -->
+  <!-- Reviewing: the one marquee on the page -->
   <section class="reviewing" aria-labelledby="reviewing-title" data-reveal>
     <h2 class="reviewing-title wrap" id="reviewing-title">15+ peer reviews for</h2>
     <div class="marquee" aria-hidden="true">
@@ -784,5 +907,6 @@
 
   <script src="/assets/js/main.js" defer></script>
   <script src="/assets/js/scan.js" defer></script>
+  <script src="/assets/js/motion.js" defer></script>
 </body>
 </html>
