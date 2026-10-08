@@ -311,7 +311,10 @@
       if (statusEl) statusEl.textContent = filtered ? describe(shown) : 'Showing all ' + pubs.length + ' papers';
       if (pubSection) pubSection.toggleAttribute('data-filtered', filtered);
       if (barActions) barActions.hidden = !filtered;
-      if (panelState) panelState.textContent = state.element ? elementName(state.element).replace(/\u00ad/g, '') : '';
+      if (panelState) {
+        panelState.textContent = [state.element ? elementName(state.element).replace(/\u00ad/g, '') : '',
+          state.first ? 'first author' : '', state.journal ? 'journals' : ''].filter(Boolean).join(' · ');
+      }
       updateBarActions();
       if (pillText) pillText.textContent = shown ? 'Show ' + plural(shown, 'paper') : 'No papers match';
       updatePill();
@@ -321,6 +324,7 @@
     // below it (always the case on a phone), a button at the bottom takes you there.
     var listBelow = false;
     var gridInView = false;
+    var tilesInView = false;
     var chipsRow = document.querySelector('[data-pub-filters]');
     var bar = document.querySelector('[data-pub-bar]');
     var barInView = false;
@@ -337,7 +341,7 @@
     // Show while the list is still below; Change once the tiles are out of view; Clear always
     function updateBarActions() {
       if (showLink) showLink.hidden = !listBelow;
-      if (changeLink) changeLink.hidden = gridInView && !(panel && !panel.open);
+      if (changeLink) changeLink.hidden = tilesInView && !(panel && !panel.open);
     }
     // Resting 16px above the bottom edge; when the chips scroll into that spot, the button
     // rides 8px above them instead, so it never covers a control and never disappears.
@@ -385,6 +389,7 @@
           if (e.isIntersecting) partsInView.add(e.target); else partsInView.delete(e.target);
         });
         gridInView = partsInView.size > 0;
+        tilesInView = partsInView.has(elementGrid);
         updatePill();
       });
       filterParts.forEach(function (el) { filterIO.observe(el); });

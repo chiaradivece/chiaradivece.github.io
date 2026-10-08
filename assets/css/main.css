@@ -670,7 +670,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .pubs-intro { color: var(--ink-2); font-size: 1.05rem; max-width: 52ch; }
 
 /* Three papers to start with, before the filters */
-.picks { display: grid; gap: 1.5rem 2rem; margin-bottom: clamp(2.5rem, 5vw, 3.75rem); }
+.picks { display: grid; gap: 1.5rem 2rem; margin-bottom: clamp(2rem, 3.5vw, 2.5rem); }
 @media (min-width: 900px) { .picks { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .pick { display: grid; gap: 0.6rem; align-content: start; padding-top: 1rem; border-top: 2px solid var(--ink); }
 .pick-meta { font-size: 0.85rem; color: var(--ink-3); line-height: 1.4; }
@@ -683,7 +683,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .pick-cited:hover { text-decoration: underline; }
 
 /* Research elements, periodic-table style. Families differ by value, not by new colours. */
-.elements { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-bottom: 1.25rem; }
+.elements { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 1.25rem; }
 @media (min-width: 640px) { .elements { grid-template-columns: repeat(8, minmax(0, 1fr)); } }
 .el {
   aspect-ratio: 1;
@@ -720,7 +720,10 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .el[data-family="practice"] { background: transparent; color: var(--ink); border-color: var(--line); }
 .el[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent-mark); }
 /* Keyboard focus is an Ink outline outside the selection ring, so the two never look alike */
-.el:focus-visible { outline: 2px solid var(--ink); outline-offset: 6px; border-radius: var(--radius-sm); }
+/* the 3px of page colour between tile and outline keeps it off the tile's own edge and,
+   in a 10px gap, off the neighbour; a selected tile pushes it outside its ring */
+.el:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: var(--radius-sm); }
+.el[aria-pressed="true"]:focus-visible { outline-offset: 6px; }
 .elements[data-active] .el[aria-pressed="false"],
 .el[data-empty] { background: transparent; color: var(--ink-2); border-color: var(--line); }
 .el[data-empty] { color: var(--ink-3); border-style: dashed; }
@@ -731,7 +734,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
   .el:active { transform: scale(0.97); }
 }
 
-.el-panel { margin-bottom: 1.25rem; }
+.el-panel { margin-bottom: 0.5rem; }
 .el-panel > .elements { margin-bottom: 0; }
 .el-panel-toggle {
   display: none; align-items: center; justify-content: space-between; gap: 1rem;
@@ -745,9 +748,8 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 @media (max-width: 639px) {
   .el-panel-toggle { display: flex; }
   .el-panel[open] > .el-panel-toggle { margin-bottom: 0.75rem; }
-  .el-panel:not([open]) ~ .pub-controls .el-legend { display: none; }
 }
-.pub-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 1.5rem; margin-bottom: clamp(1.5rem, 3vw, 2.25rem); }
+.pub-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1.5rem; margin-bottom: 0.75rem; } /* sits above the tiles, inside the filter panel */
 .el-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; font-size: 0.8rem; color: var(--ink-3); }
 .el-key { display: inline-flex; align-items: center; gap: 0.45rem; }
 .el-swatch { width: 12px; height: 12px; border-radius: 3px; border: 1px solid transparent; }
