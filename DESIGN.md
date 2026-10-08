@@ -13,7 +13,7 @@ colors:
   ink-2: "#3f4852"
   ink-3: "#5c6773"
   line: "#d3dbe3"
-  ghost: "#e2e8ef"
+  el-sunk: "#d2d6dc"
   screen: "#0a0d11"
   paper: "#fdfdfd"
   nav-bg: "rgb(244 246 248 / 0.8)"
@@ -26,7 +26,7 @@ colors:
   line-dark: "#26303a"
   accent-mark-dark: "#a8c8e8"
   accent-ink-dark: "#bcd7f0"
-  ghost-dark: "#151b23"
+  el-sunk-dark: "#2f353c"
   paper-dark: "#eef2f5"
 typography:
   display:
@@ -37,7 +37,7 @@ typography:
     letterSpacing: "-0.045em"
   headline:
     fontFamily: "\"Helvetica Neue\", Helvetica, \"TeX Gyre Heros\", Arial, sans-serif"
-    fontSize: "clamp(2.4rem, 5.4vw, 4.25rem)"
+    fontSize: "clamp(1.9rem, 3.9vw, 3.25rem)"
     fontWeight: 500
     lineHeight: 1
     letterSpacing: "-0.04em"
@@ -70,12 +70,6 @@ typography:
     fontSize: "0.8rem"
     fontWeight: 400
     lineHeight: 1.4
-  label-caps:
-    fontFamily: "\"Helvetica Neue\", Helvetica, \"TeX Gyre Heros\", Arial, sans-serif"
-    fontSize: "0.72rem"
-    fontWeight: 700
-    lineHeight: 1
-    letterSpacing: "0.12em"
 rounded:
   pill: "999px"
   md: "14px"
@@ -153,7 +147,7 @@ components:
     rounded: "{rounded.sm}"
     padding: "8px 9px"
   element-geometry:
-    backgroundColor: "{colors.surface-2}"
+    backgroundColor: "{colors.el-sunk}"
     textColor: "{colors.ink}"
     rounded: "{rounded.sm}"
     padding: "8px 9px"
@@ -162,15 +156,15 @@ components:
     textColor: "{colors.ink}"
     rounded: "{rounded.sm}"
     padding: "8px 9px"
-  badge-card:
-    backgroundColor: "{colors.surface}"
-    rounded: "{rounded.md}"
-    width: "248px"
-  badge-header:
-    backgroundColor: "{colors.accent}"
-    textColor: "{colors.on-accent}"
-    typography: "{typography.label-caps}"
-    height: "34px"
+  element-unmatched:
+    backgroundColor: "transparent"
+    textColor: "{colors.ink-2}"
+  results-pill:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.bg}"
+    rounded: "{rounded.pill}"
+    height: "44px"
+    padding: "0 1.15rem"
   scan-monitor:
     backgroundColor: "{colors.screen}"
     rounded: "{rounded.md}"
@@ -185,13 +179,13 @@ components:
 
 **Creative North Star: "Clean Signal"**
 
-One clear signal on a quiet field. The page is a cool, near-white field of blue-grey neutrals. Across it runs a single powder-blue signal that marks what matters: the selected filter, the current job, the first number, the dot that ends the headline. Helvetica Neue carries everything, set tight and large where it speaks and loose and calm where it informs. The precision is technical. The warmth comes from a real person: the portrait, the swinging ID badge, the live local time, the photos from the viva.
+One clear signal on a quiet field. The page is a cool, near-white field of blue-grey neutrals. Across it runs a single powder-blue signal that marks what matters: the selected filter, the current job, the first number, the dot that ends the headline. Helvetica Neue carries everything, set tight and large where it speaks and loose and calm where it informs. The precision is technical. The warmth comes from a real person: the portrait, the live local time, the photos from the viva.
 
-The density is moderate and the rhythm is editorial: big section titles with one word in italic, hairline rules instead of boxes, and data laid out as lists and grids rather than dashboards. A few hand-made objects carry the personality, so the rest of the page can stay plain:
+The density is moderate and the rhythm is editorial: big plain section titles that match the nav, hairline rules instead of boxes, and data laid out as lists and grids rather than dashboards. A few hand-made objects carry the personality, so the rest of the page can stay plain:
 
+- a faint ultrasound sector behind the hero portrait;
 - an ultrasound monitor that stays dark in both themes;
 - a periodic table of research elements;
-- an ID badge on a lanyard;
 - a marquee of reviewing venues.
 
 Motion is physical and brief: strong ease-out curves, springs for anything that hangs or follows the pointer, and nothing that moves without a way to pause it.
@@ -214,7 +208,6 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 ### Primary
 - **Powder Blue** (#a8c8e8): the owner's chosen accent and the only hue on the page. Used as a fill:
   - the lead news card;
-  - the header strip of the Scientist ID badge;
   - the "Learning" family of element tiles;
   - the solid button's hover state;
   - text selection.
@@ -224,7 +217,6 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
   - focus rings;
   - the nav underline;
   - link underlines and the timeline fill;
-  - the badge lanyard;
   - the marquee's triangle separators;
   - the full stop after the hero headline;
   - the selected element tile's ring.
@@ -236,13 +228,13 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 
 ### Neutral
 - **Cool Paper** (#f4f6f8 / #0c0f13): the page background.
-- **Surface** (#fcfdfe / #141920): research cards, award cards, the badge.
+- **Surface** (#fcfdfe / #141920): research cards and award cards.
 - **Sunk Surface** (#e7ecf1 / #1a2028): the "3D and simulation" element tiles, the simulation card's dot grid, photo placeholders.
-- **Ink** (#10141a / #e8edf2): headings, primary text, the solid button, the "Imaging" element tiles.
+- **Ink** (#10141a / #e8edf2): headings, primary text, the solid button, the "Imaging" element tiles in light. In dark those tiles use Muted Ink (#8a95a1) with background-coloured text, because near-white would sit at almost the same value as Powder Blue.
 - **Soft Ink** (#3f4852 / #b0bac4): body copy in paragraphs and lists.
 - **Muted Ink** (#5c6773 / #8a95a1): dates, labels, captions, secondary metadata.
 - **Hairline** (#d3dbe3 / #26303a): 1px rules, card borders, outlines for chips and ghost buttons.
-- **Ghost** (#e2e8ef / #151b23): the giant name behind the hero portrait, a whisper above the background.
+- **Deep Sunk** (#d2d6dc / #2f353c): the "3D and simulation" element tiles and their legend swatch. In CSS it is `--el-sunk`, a 10% mix of Ink into Sunk Surface, so the tiles read against the page in both themes.
 - **Monitor Black** (#0a0d11): the scan screen and the lightbox, in both themes.
 
 ### Named Rules
@@ -261,29 +253,31 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 **Character:** One Swiss grotesque doing every job. Large sizes are set tight (-0.04em to -0.045em) with solid line-height; body text breathes at 1.6. Emphasis comes from the same family, through italic, weight or size, never from a second face.
 
 ### Hierarchy
-- **Display** (700, clamp(2.1rem, 4.3vw, 3.75rem), 1): the hero headline, one phrase per line, ending in a Signal Blue full stop. The giant ghost name behind the portrait (700, up to 21rem, -0.06em) is decoration, not text.
-- **Headline** (500, clamp(2.4rem, 5.4vw, 4.25rem), 1): section titles. Exactly one word is italic (400, with descender room), as in "Things I've *written*".
-- **Title** (600, clamp(1.4rem, 2.2vw, 1.85rem), 1.1): research card headings. Smaller titles step down: job role 1.12rem/600, paper title 1.1rem/600, award title 1.05rem/600.
+- **Display** (700, clamp(2.1rem, 4.3vw, 3.75rem), 1): the hero headline, one phrase per line, ending in a Signal Blue full stop. Above it sits the role line ("AI Lead at morph · PhD, UCL", 1.05rem/500, Soft Ink).
+- **Headline** (500, clamp(1.9rem, 3.9vw, 3.25rem), 1): section titles, always a step below the hero headline. Plain words that match the nav label ("Publications", "Talks and reviewing", "Awards"). Sub-heads inside a section (Industry, Education, the review count) are 1.35rem/600 over a 1px Ink rule.
+- **Title** (600, clamp(1.4rem, 2.2vw, 1.85rem), 1.1): research card headings. Smaller titles step down: the current role 1.45rem/600, selected-paper titles 1.3rem/600, other job roles 1.12rem/600, paper titles 1.15–1.2rem/600, talk titles 1.1rem/600 (never above paper titles), award titles 1.05rem/600.
 - **Lead** (400–500, clamp(1.25rem, 2vw, 1.5rem), 1.35): the opening paragraph of About and Research, and the lead news item.
 - **Body** (400, 1rem, 1.6): paragraphs in Soft Ink, held to 58–62ch.
 - **Numeral** (500, clamp(2rem, 3vw, 2.6rem), 1): Scholar numbers; the first one in Ink Blue.
-- **Label** (400, 0.75–0.85rem): dates, captions, metadata in Muted Ink.
-- **Label Caps** (700, 0.72rem, 0.12em, uppercase): used only on the ID badge (its header and field labels), where an ID card would use it.
+- **Label** (400, 0.75–0.875rem): dates, captions, metadata in Muted Ink. Links that are actions (paper links, "Read more", research card links) are never below 0.875rem.
 
 ### Named Rules
 **The One Family Rule.** Helvetica Neue only. No serif, no monospace, no display face from a template library.
 
-**The One Italic Rule.** A section title gets one italic word, in the same family at a lighter weight. Never two, never a different font.
+**The One Personal Heading Rule.** Section titles are plain and say what the nav says. Only About's title, "Hi, I'm *Chiara*.", carries an italic word (same family, 400, with descender room). Never add a second.
+
+**The Proof Outranks Outreach Rule.** Paper titles are never smaller than talk titles, and the contact email (at most 2.75rem) is never the largest type on the page.
 
 ## Layout
 
 - **Container:** one 1240px column, with 16px side gutters on phones and 32px from 768px up.
 - **Section spacing:** sections are separated by `clamp(3.5rem, 6vw, 5.5rem)` of padding. Contact gets more, up to 7.5rem above.
 - **Composition:** asymmetric grids carry each section rather than centred stacks:
-  - About is 5 : 4 : 3 (text, badge, facts);
+  - About is 7 : 5 (text, then facts and numbers);
   - News is 6 : 5;
   - Research is 5 : 6, then a 6-column grid of research cards;
   - Experience is two equal columns.
+- **Page order:** About, News, Research, Publications (three selected papers before the filtered list), Talks and reviewing (topics, invitation, past talks, then the review record and venue marquee), Experience, Awards, Teaching and mentoring, Contact. Papers and speaking come before career history; short roles fold their details away.
 - **Grid gaps:** cards and rails sit 16px apart; element tiles 8px apart.
 - **Hero:** fills the viewport under the nav. The copy is left-aligned in the lower left; the cut-out portrait is anchored bottom-right and fades out at its lower edge.
 - **Responsive changes:**
@@ -295,34 +289,34 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 
 ## Elevation & Depth
 
-Flat at rest, lifted on hover. Surfaces are separated by tone and 1px hairlines, not by shadow. Cards and tiles that respond to the pointer rise 2px onto a soft, offset shadow when hovered. Only objects that are physical in the metaphor carry a shadow at rest: the ID badge hanging on its lanyard and the scan monitor. Shadows are tinted toward the page's blue-grey in light mode and pure black in dark mode.
+Flat at rest, lifted on hover. Surfaces are separated by tone and 1px hairlines, not by shadow. Cards and tiles that respond to the pointer rise 2px onto a soft, offset shadow when hovered. Only things that sit in front of the page carry a shadow at rest: the scan monitor and the floating "Show N papers" button. Shadows are tinted toward the page's blue-grey in light mode and pure black in dark mode.
 
 ### Shadow Vocabulary
 - **Soft** (`0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)`): hover lift for research cards, award cards and element tiles; the scan monitor at rest.
-- **Lift** (`0 1px 0 rgb(16 20 26 / 0.04), 0 28px 48px -26px rgb(36 52 70 / 0.45)`): the ID badge, which hangs in front of the page.
+- **Lift** (`0 1px 0 rgb(16 20 26 / 0.04), 0 28px 48px -26px rgb(36 52 70 / 0.45)`): the floating "Show N papers" button.
 - **Selection ring** (`0 0 0 2px bg, 0 0 0 4px Signal Blue`): a selected element tile; combined with Soft on hover.
 
 ### Named Rules
 **The Lift-on-Hover Rule.** Cards are flat until a fine pointer reaches them; then they rise 2px onto the Soft shadow over 200ms. Touch never lifts. Reduced motion keeps the shadow and drops the rise.
 
-**The Physical Object Rule.** A shadow at rest means "this is an object": the badge, the monitor. Nothing else casts one until it is hovered.
+**The Physical Object Rule.** A shadow at rest means "this sits in front of the page": the monitor, the floating results button. Nothing else casts one until it is hovered.
 
 ## Shapes
 
 - **Corner families:**
   - Full pills (999px) for everything pressable: buttons, chips, tags, icon buttons, social links.
-  - 14px for containers: cards, the badge, the news lead, the monitor, the lightbox.
-  - 10px for things inside them, or small on their own: element tiles, photos in the badge and news.
+  - 14px for containers: cards, the news lead, the monitor, the lightbox.
+  - 10px for things inside them, or small on their own: element tiles, news photos.
   - 8px for media inset inside a card.
-- **Borders:** always 1px Hairline. A 2px Ink top rule marks teaching modules; a 1px Ink rule marks section sub-heads (Experience columns, the facts list, the talks list).
-- **Signature geometry:** the ultrasound sector, a 68° fan drawn from a point at the top. It appears in the nav mark, in the badge header glyph and in the scan itself. The marquee separators are small Signal Blue triangles.
+- **Borders:** always 1px Hairline. A 2px Ink top rule marks teaching modules and the three selected papers; a 1px Ink rule marks section sub-heads (Experience columns, the facts list, the talks list).
+- **Signature geometry:** the ultrasound sector, a 68° fan drawn from a point at the top. It appears in the nav mark, behind the hero portrait and in the scan itself. The marquee separators are small Signal Blue triangles.
 
 ## Components
 
 ### Buttons
 Tactile and precise.
 - **Shape:** full pill (999px), 48px tall, 38px for the small variant.
-- **Solid:** Ink fill, background-coloured text, weight 550. On hover it turns Powder Blue with Ink text.
+- **Solid:** Ink fill, background-coloured text, weight 550. On hover it turns Powder Blue with Ink text. The hero pairs "Download CV" (solid) with "Read the papers" (ghost): proof before outreach.
 - **Ghost:** transparent with a Hairline border; on hover the border turns Ink.
 - **Press:** every button scales to 0.97 on `:active` (160ms, strong ease-out). Colour changes take 200ms with `ease`.
 - **Icon button:** a 40px circle with a Hairline border that scales to 0.95 on press. It is used for the theme toggle, the menu, the rail arrows and the pause controls.
@@ -345,32 +339,45 @@ Tactile and precise.
 - **Bar:** a sticky 64px bar on 80% Cool Paper with a 14px backdrop blur. A Hairline border appears once the page has scrolled.
 - **Mark:** the ultrasound-sector glyph next to the owner's name.
 - **Links:** 0.925rem in Soft Ink, turning Ink on hover or when current. A 2px Signal Blue underline follows the current section; it moves by transform alone, over 300ms with strong ease-in-out.
-- **Mobile:** below 1024px the links become a full-width sheet that fades and drops 6px. It opens in 200ms and closes in 150ms.
-
-### Scientist ID badge (signature)
-- **Card:** a 248px Surface card with the Lift shadow.
-- **Header:** a Powder Blue strip with the sector glyph and "SCIENTIST ID" in Label Caps.
-- **Contents:** a photo, the name, the role, and two labelled fields.
-- **Lanyard:** the badge hangs from a pin by a Signal Blue strap and a metal clip.
-- **Motion:** a damped pendulum with stiffness 60, damping 5 and a 28° limit:
-  - it drops in when About first scrolls into view;
-  - it can be dragged and thrown, with rising friction past the limit;
-  - a passing mouse gives it a small nudge.
-- **Reduced motion:** the badge hangs still.
+- **Mobile:** below 1024px the links become a full-width sheet that fades and drops 6px. It opens in 200ms and closes in 150ms. The sheet adds Contact and Download CV under a hairline, and marks the current section in Ink Blue. Opening it moves focus to the first link; Tab cycles between the menu button and the sheet's links; Escape closes it and returns focus to the button; a tap outside closes it.
 
 ### Research elements table (signature)
-- **Tiles:** square tiles in a periodic-table grid. Each shows a paper count, a two-letter symbol (700, tight) and a name.
-- **Families:** the four families are told apart by value alone (Ink, Powder Blue, Sunk Surface, Hairline outline), never by a new hue. The legend repeats them as 12px swatches.
-- **Selection:** a selected tile gets the Selection ring, and unselected tiles dim to 32% opacity.
-- **List changes:** filtering the list uses same-document View Transitions over 260ms. It is instant when triggered from the keyboard.
+- **Tiles:** square tiles in a periodic-table grid (taller than square on phones, so names fit). Each shows a paper count (0.75rem/500), a two-letter symbol (700, tight) and a name (0.75rem). Long names break only where the data marks a soft hyphen (`&shy;`).
+- **Focus:** keyboard focus is a 2px Ink outline 6px outside the tile, so it can never be mistaken for the Signal Blue selection ring.
+- **Families:** the four families are told apart by value alone, never by a new hue: Ink (Muted Ink in dark), Powder Blue, Deep Sunk, Hairline outline. The legend repeats them as 12px swatches.
+- **Counts:** each tile shows how many papers it would leave under the current First author / Journal chips. A tile that would leave none turns to a dashed outline with a 0.
+- **Selection:** a selected tile keeps its family fill and gets the Selection ring. The others turn to outlines (transparent, Soft Ink text, Hairline border): still readable, clearly still pressable. Never dim an active tile with opacity.
+- **Empty result:** names the combination ("No journal papers on Wearable sensing yet.") and offers the one change that helps, as a chip ("Show the Wearable sensing paper").
+- **Status bar:** under the chips, the status names what is showing ("7 of 13 papers on Deep learning", "2 of 13 first-author journal papers on Imaging"). While a filter is on, the bar pins under the nav for the length of the list, over a Hairline, with two Ink Blue text actions: Change (back to the tiles, focus on the selected one) and Clear. Year labels pin below it.
+- **Results button:** while a filter is on and the list starts below the screen, a floating Ink pill ("Show 6 papers ↓", 44px) rests 16px above the bottom of the viewport; when the chips scroll into that spot it rides 8px above them instead of covering them. On wide screens it never sits over the tile grid; if it would, it stays out (the list is a short scroll away there). It fades and rises 8px in, disappears once the filters leave the screen, and its jump lands on the status line just under the nav (focus moves there, no `#` in the address).
+- **Clear:** keeps its space while hidden, so the chips never move under the cursor.
+- **List changes:** filtering the list uses same-document View Transitions over 260ms. It is instant when triggered from the keyboard, and a new click finishes a running transition at once (the transition overlay never takes pointer events), so no click is lost.
 
 ### Scan monitor (signature)
 - **Screen:** a Monitor Black screen with a 14px radius, an inner 1px white hairline at 7% and the Soft shadow. A canvas simulation of a soft actuator runs on it, shown as an ultrasound image.
 - **Controls:** it pauses offscreen, and a pause button sits in its corner.
 
+### News
+- **Layout:** two columns from 900px. The left column holds the lead card (Powder Blue) and, under it, the newest photo set among the visible items as a larger strip (140–180px tall) with a short label; that column stays in view while the list scrolls past. The photos open in the photo viewer and are not repeated in the list.
+
+### Selected papers
+- **Style:** three papers in a row above the filters, each under a 2px Ink rule: year and venue as a Label, the title at 1.3rem/600 with the Signal Blue underline that grows on hover, then status, award and "Cited by" in Ink Blue. Chosen with `selected: true` in the data.
+
+### Hero sector (signature)
+- **Shape:** the 68° ultrasound fan, drawn as an SVG behind the cut-out portrait and outlined in 1px Signal Blue. On wide screens it ends 12% above the hero's bottom edge, so its arc wraps the shoulders; on stacked layouts the portrait gets room above it, so the tip shows above the head and never reaches the buttons.
+- **Fill:** Powder Blue fading with depth, like a real B-mode field: 50% at the tip to 4% at the arc in light, 30% to 2% in dark. Three depth arcs and three edge ticks in Signal Blue at about 30%, 1px.
+- **Motion:** fades in with the portrait; drifts slightly against the portrait's parallax (depth -5); lifts with the hero on scroll.
+
 ### Reviewing marquee
-- **Track:** venue names in large weight-500 type, separated by Signal Blue triangles. It runs linearly over 60s, with faded edges.
+- **Place:** inside "Talks and reviewing", under its own sub-head; the track still runs edge to edge (it is clipped by the marquee, never by the page).
+- **Track:** venue names at 1rem/500 in Soft Ink, below the count and the award, separated by Signal Blue triangles. It runs linearly over 60s, with faded edges.
+- **Heading:** the count leads as a Numeral ("15+", 2–2.6rem/500, Ink Blue) followed by "peer reviews" at 1.35rem/600, over an Ink rule. The Outstanding Reviewer award follows at 1.05rem/600 in Ink. That award is shown here only, not again in the Awards rail.
 - **Pausing:** hover pauses it and a pause control sits beside the heading. Under reduced motion it becomes a static wrapped list.
+
+### Photo viewer
+- **Style:** a native `<dialog>` on Monitor Black with a 14px radius, one fixed frame (up to 1200×800) in which every photo is pinned and fitted (`object-fit: contain`), so the arrows never move between portrait and landscape shots, then a caption line ("2 of 3" in Ink-on-dark 600, then the caption at 85%).
+- **Moving through a set:** the photos of one news item form a set. Round arrow buttons sit over the photo's edges (same dark translucent style as the close button); the arrow keys and a sideways swipe also work, wrapping round. With a pointer the next photo fades in from the side it comes from (16px, 220ms, strong ease-out), after it has decoded; keyboard steps and reduced motion swap it without movement.
+- **Opening and closing:** opens in 220ms from 96% scale, closes in 150ms; Escape or a click on the backdrop closes it, and focus returns to the thumbnail of the photo last viewed.
 
 ### Reveals
 - **Entrance:** blocks rise 16px and fade in over 600ms on first view. Groups stagger by 50ms. Figures are uncovered from the top with `clip-path` over 800ms.
@@ -390,6 +397,7 @@ Tactile and precise.
   - a 2px Signal Blue focus ring with a 3px offset;
   - scrollbars tinted from Ink;
   - tabular numerals.
+- **Do** keep paper titles at least as large as talk titles, and the contact email at most 2.75rem.
 - **Do** use real photographs of the owner and real research figures.
 
 ### Don't:
@@ -398,6 +406,7 @@ Tactile and precise.
 - **Don't** introduce a second typeface. The earlier Bricolage Grotesque and Geist pairing was rejected for looking AI-generated, and no serif or monospace face belongs here either.
 - **Don't** use `transition: all` or animate layout properties. Use transform, opacity, clip-path and box-shadow; `block-size` is allowed only for the details accordion.
 - **Don't** lift anything on touch, or move anything under reduced motion.
-- **Don't** give a card a shadow at rest unless it is a physical object (the badge, the monitor).
+- **Don't** give a card a shadow at rest unless it sits in front of the page (the monitor, the floating results button).
+- **Don't** dim an active control with opacity; switch it to an outline so its text stays at 4.5:1 or more.
 - **Don't** nest cards, or build a section out of same-size icon-and-heading cards.
 - **Don't** use stock or generated imagery.

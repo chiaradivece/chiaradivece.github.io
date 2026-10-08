@@ -45,18 +45,17 @@ Three claims, in this order of weight (confirmed):
 
 ## Capabilities and Constraints
 
-- **Sections:**
-  - hero
-  - About (ID badge, facts, numbers)
+- **Sections, in page order:**
+  - hero (role line, headline, photo inside a faint ultrasound sector)
+  - About (text, facts, Scholar numbers)
   - News
-  - Experience and education
-  - Research (a simulated ultrasound scan, then the research tiles)
-  - Publications (filter by research element, first author, journal)
-  - Reviewing-venues marquee
-  - Recognition
-  - Talks
+  - Research (a simulated ultrasound scan, then the research cards)
+  - Publications (three selected papers, then the full list filtered by research element, first author, journal)
+  - Talks and reviewing (topics and an invitation link, past talks, the review count and reviewer award, the venue marquee)
+  - Experience and education (short roles fold their details away)
+  - Awards
   - Teaching and mentoring
-  - Contact (with local clocks)
+  - Contact (email, CV, local clocks)
 - **Terminology:**
   - "Elements" are the research topics in the periodic-table-style filter (`_data/elements.yml`).
   - "First author" includes co-first authorship.
@@ -74,7 +73,6 @@ Three claims, in this order of weight (confirmed):
   - "From computer vision for fetal ultrasound to soft robotics."
   - "My PhD taught machines to find their way through fetal ultrasound. Now I build AI for soft robots."
   - "The scan brings the two together: a simulated soft actuator, shown as an ultrasound image."
-  - The badge label "Scientist ID".
 - **Binding visual constraints set by the owner** (recorded, not expanded):
   - a powder-blue accent
   - Helvetica Neue
@@ -90,8 +88,7 @@ Three claims, in this order of weight (confirmed):
 - **Recognition:** awards, reviewing venues, talks, teaching, mentoring and community roles in `_data/recognition.yml`.
 - **Research images:** `assets/img/research/fetal-pipeline.jpg` and `assets/img/research/hykey.jpg`.
 - **Viva photos:** `assets/img/news/viva-*.webp`.
-  - The group photo shows about 25 colleagues.
-  - Their consent to publication is the owner's call. It was flagged and is still unresolved.
+  - The group photo shows about 25 colleagues; the owner confirmed their consent to publish it (October 2026).
 - **Key dates:**
   - PhD viva: 27 February 2026, passed with minor corrections.
   - PhD awarded: 28 September 2026.

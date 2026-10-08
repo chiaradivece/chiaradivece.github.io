@@ -1,10 +1,10 @@
 <li class="news-item">
   <p class="news-date">{{ include.item.date }}</p>
   <p class="news-text">{{ include.item.text }}{% if include.item.link %} <a class="news-link" href="{{ include.item.link }}" rel="noopener">{{ include.item.label | default: "Read more" }} {% include icon.html name="arrow-up-right" %}</a>{% endif %}</p>
-  {%- if include.item.photos %}
+  {%- if include.item.photos and include.hide_photos != true %}
   <ul class="news-photos">
     {%- for ph in include.item.photos %}
-    <li><a href="{{ ph.src | relative_url }}" data-lightbox-open><img src="{{ ph.thumb | relative_url }}" alt="{{ ph.alt }}" width="{{ ph.w }}" height="{{ ph.h }}" loading="lazy" decoding="async"></a></li>
+    <li><a href="{{ ph.src | relative_url }}" data-lightbox-open data-caption="{{ ph.caption | default: ph.alt | escape }}"><img src="{{ ph.thumb | relative_url }}" alt="{{ ph.alt }}" width="{{ ph.w }}" height="{{ ph.h }}" loading="lazy" decoding="async"></a></li>
     {%- endfor %}
   </ul>
   {%- endif %}

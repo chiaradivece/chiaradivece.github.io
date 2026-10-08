@@ -10,6 +10,9 @@ cv: /assets/pdf/Chiara_Di_Vece_CV.pdf
 photo: /assets/img/chiara.jpg
 cutout: /assets/img/chiara-cutout.webp
 
+# Hero: the line above the headline, then the headline, one entry per line
+role_line: AI Lead at morph · PhD, UCL
+
 # Hero headline, one entry per line (the page adds the full stop)
 tagline:
   - From computer vision

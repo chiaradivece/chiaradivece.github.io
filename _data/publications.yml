@@ -5,12 +5,13 @@
 #   elements: symbols from elements.yml (drives the research-elements filter)
 #   links:   label -> url (Paper, arXiv, Code, Data)
 #   note:    optional short highlight (award, acceptance)
-#   featured: true to pin in the research section
+#   selected: true to show the paper in the short "start here" list above the filters (keep it to three)
 
 - title: Measuring proximity to standard planes during fetal brain ultrasound scanning
   authors: C. Di Vece, A. Cirigliano, M. Le Lous, R. Napolitano, A. L. David, D. Peebles, P. Jannin, F. Vasconcelos, D. Stoyanov
   venue: IEEE Transactions on Medical Imaging
   year: 2026
+  selected: true
   type: journal
   status: Under review
   first: sole
@@ -46,6 +47,7 @@
   authors: A. Saikia, C. Di Vece, S. Bonilla, C. He, M. Magbagbeola, L. Mennillo, T. Czempiel, S. Bano, D. Stoyanov
   venue: IEEE Robotics and Automation Letters
   year: 2025
+  selected: true
   type: journal
   first: none
   elements: [Lp, 3d, Rb, Ds]
@@ -99,6 +101,7 @@
   authors: C. Di Vece, B. Dromey, F. Vasconcelos, A. L. David, D. Peebles, D. Stoyanov
   venue: International Journal of Computer Assisted Radiology and Surgery (IPCAI 2022)
   year: 2022
+  selected: true
   type: journal
   first: sole
   elements: [Us, Dl, Ps, Sm]

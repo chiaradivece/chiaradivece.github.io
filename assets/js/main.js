@@ -16,10 +16,26 @@
     return darkQuery.matches ? 'dark' : 'light';
   }
 
+  // Picking the theme the device already uses isn't an override: the saved choice is
+  // forgotten and the site goes back to following the device, including when the device
+  // switches later (at sunset, say). Only a theme that differs from the device is saved.
   function applyTheme(next) {
-    root.setAttribute('data-theme', next);
-    try { localStorage.setItem('theme', next); } catch (e) {}
+    var deviceTheme = darkQuery.matches ? 'dark' : 'light';
+    if (next === deviceTheme) {
+      root.removeAttribute('data-theme');
+      try { localStorage.removeItem('theme'); } catch (e) {}
+    } else {
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    }
     themeBtn.setAttribute('aria-pressed', String(next === 'dark'));
+  }
+
+  // While following the device, keep the button's pressed state in step with it
+  if (themeBtn && darkQuery.addEventListener) {
+    darkQuery.addEventListener('change', function () {
+      if (!root.hasAttribute('data-theme')) themeBtn.setAttribute('aria-pressed', String(darkQuery.matches));
+    });
   }
 
   if (themeBtn) {
@@ -41,13 +57,17 @@
           { clipPath: ['circle(0px at ' + x + 'px ' + y + 'px)', 'circle(' + radius + 'px at ' + x + 'px ' + y + 'px)'] },
           { duration: 500, easing: 'cubic-bezier(0.77, 0, 0.175, 1)', pseudoElement: '::view-transition-new(root)' }
         );
-      });
+      }, function () {}); // skipped (hidden tab, a second click): the theme still changed
     });
     themeBtn.setAttribute('aria-pressed', String(currentTheme() === 'dark'));
   }
 
   /* ---------- Mobile menu ---------- */
+  // While the sheet is open, keyboard focus cycles through the menu button and the sheet's
+  // links only, so it can't wander onto the page hidden behind it.
   var menuBtn = document.querySelector('[data-menu-toggle]');
+  var menuLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+  function menuOpen() { return !!nav && nav.hasAttribute('data-menu-open'); }
   function setMenu(open) {
     if (!nav || !menuBtn) return;
     nav.toggleAttribute('data-menu-open', open);
@@ -56,13 +76,30 @@
   }
   if (menuBtn) {
     menuBtn.addEventListener('click', function () {
-      setMenu(!nav.hasAttribute('data-menu-open'));
+      var open = !menuOpen();
+      setMenu(open);
+      if (open && menuLinks[0]) menuLinks[0].focus();
     });
-    document.querySelectorAll('.nav-links a').forEach(function (a) {
+    menuLinks.forEach(function (a) {
       a.addEventListener('click', function () { setMenu(false); });
     });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') setMenu(false);
+      if (!menuOpen()) return;
+      if (e.key === 'Escape') {
+        setMenu(false);
+        menuBtn.focus();
+        return;
+      }
+      if (e.key === 'Tab') {
+        var cycle = [menuBtn].concat(menuLinks);
+        var at = cycle.indexOf(document.activeElement);
+        e.preventDefault();
+        var nextAt = at === -1 ? 1 : (at + (e.shiftKey ? -1 : 1) + cycle.length) % cycle.length;
+        cycle[nextAt].focus();
+      }
+    });
+    document.addEventListener('click', function (e) {
+      if (nav.hasAttribute('data-menu-open') && !nav.contains(e.target)) setMenu(false);
     });
   }
 
@@ -128,7 +165,7 @@
   var indicator = document.querySelector('[data-nav-indicator]');
   if (indicator && 'IntersectionObserver' in window) {
     var linkFor = {};
-    document.querySelectorAll('.nav-links a[href^="#"]').forEach(function (a) {
+    document.querySelectorAll('.nav-links a[href^="#"]:not(.nav-extra)').forEach(function (a) {
       linkFor[a.getAttribute('href').slice(1)] = a;
     });
     var activeLink = null;
@@ -188,7 +225,11 @@
     var toggles = document.querySelectorAll('[data-toggle]');
     var clearBtn = document.querySelector('[data-clear]');
     var statusEl = document.querySelector('[data-pub-status]');
-    var emptyMsg = document.querySelector('[data-pub-empty]');
+    var emptyBox = document.querySelector('[data-pub-empty]');
+    var emptyText = document.querySelector('[data-pub-empty-text]');
+    var emptyFix = document.querySelector('[data-pub-empty-fix]');
+    var pill = document.querySelector('[data-results-pill]');
+    var pillText = document.querySelector('[data-results-pill-text]');
     var yearGroups = pubList.querySelectorAll('[data-year-group]');
     var pubs = Array.prototype.map.call(pubList.querySelectorAll('[data-pub]'), function (el) {
       return {
@@ -200,6 +241,56 @@
     });
     var state = { element: null, first: false, journal: false };
 
+    function plural(n, word) { return n + ' ' + word + (n === 1 ? '' : 's'); }
+    var pubSection = elementGrid.closest('section');
+    var barActions = document.querySelector('[data-pub-bar-actions]');
+    // "7 of 13 papers on Deep learning", "2 of 13 first-author journal papers on Imaging"
+    function describe(n) {
+      var kind = (state.first ? 'first-author ' : '') + (state.journal ? 'journal ' : '');
+      var topic = state.element ? ' on ' + elementName(state.element).replace(/\u00ad/g, '') : '';
+      return n + ' of ' + pubs.length + ' ' + kind + 'papers' + topic;
+    }
+    function countFor(s) {
+      var n = 0;
+      pubs.forEach(function (pub) { if (matchesFilter(pub, s)) n++; });
+      return n;
+    }
+    function elementName(symbol) {
+      for (var i = 0; i < tiles.length; i++) if (tiles[i].dataset.element === symbol) return tiles[i].dataset.name;
+      return symbol;
+    }
+
+    // Under the chips, each tile shows how many papers it would leave, so a dead end is
+    // visible before anyone clicks it (dashed outline, count 0).
+    function renderTiles() {
+      tiles.forEach(function (tile) {
+        var n = countFor({ element: tile.dataset.element, first: state.first, journal: state.journal });
+        var countEl = tile.querySelector('.el-count');
+        if (countEl) countEl.textContent = n;
+        tile.toggleAttribute('data-empty', n === 0 && tile.dataset.element !== state.element);
+        tile.setAttribute('aria-pressed', String(tile.dataset.element === state.element));
+        tile.setAttribute('aria-label', tile.dataset.name + ', ' + plural(n, 'paper'));
+      });
+    }
+
+    // An empty result says which combination caused it and offers the one change that helps
+    function renderEmpty(shown) {
+      if (!emptyBox) return;
+      emptyBox.hidden = shown !== 0;
+      if (shown !== 0 || !emptyText || !emptyFix) return;
+      var kind = (state.first ? 'first-author ' : '') + (state.journal ? 'journal ' : '');
+      var name = state.element ? elementName(state.element) : '';
+      emptyText.textContent = 'No ' + kind + 'papers' + (name ? ' on ' + name : '') + ' yet.';
+      if (state.element && (state.first || state.journal)) {
+        var all = countFor({ element: state.element, first: false, journal: false });
+        emptyFix.textContent = all === 1 ? 'Show the ' + name + ' paper' : 'Show all ' + all + ' ' + name + ' papers';
+        emptyFix.dataset.fix = 'chips';
+      } else {
+        emptyFix.textContent = 'Show all papers';
+        emptyFix.dataset.fix = 'all';
+      }
+    }
+
     function render() {
       var shown = 0;
       pubs.forEach(function (pub) {
@@ -210,10 +301,8 @@
       yearGroups.forEach(function (group) {
         group.hidden = !group.querySelector('[data-pub]:not([hidden])');
       });
-      if (emptyMsg) emptyMsg.hidden = shown !== 0;
-      tiles.forEach(function (tile) {
-        tile.setAttribute('aria-pressed', String(tile.dataset.element === state.element));
-      });
+      renderTiles();
+      renderEmpty(shown);
       elementGrid.toggleAttribute('data-active', !!state.element);
       toggles.forEach(function (btn) {
         btn.setAttribute('aria-pressed', String(!!state[btn.dataset.toggle]));
@@ -223,18 +312,87 @@
         if (!filtered && document.activeElement === clearBtn && tiles[0]) tiles[0].focus();
         clearBtn.hidden = !filtered;
       }
-      if (statusEl) {
-        statusEl.textContent = filtered
-          ? 'Showing ' + shown + ' of ' + pubs.length + ' papers'
-          : 'Showing all ' + pubs.length + ' papers';
+      if (statusEl) statusEl.textContent = filtered ? describe(shown) : 'Showing all ' + pubs.length + ' papers';
+      if (pubSection) pubSection.toggleAttribute('data-filtered', filtered);
+      if (barActions) barActions.hidden = !filtered;
+      if (pillText) pillText.textContent = shown ? 'Show ' + plural(shown, 'paper') : 'No papers match';
+      updatePill();
+    }
+
+    // "Show 6 papers": while a filter is on, the filters are on screen and the list starts
+    // below it (always the case on a phone), a button at the bottom takes you there.
+    var listBelow = false;
+    var gridInView = false;
+    var chipsRow = document.querySelector('[data-pub-filters]');
+    function updatePill() {
+      if (!pill) return;
+      var filtered = !!(state.element || state.first || state.journal);
+      pill.hidden = !(filtered && gridInView && listBelow);
+      placePill();
+    }
+    // Resting 16px above the bottom edge; when the chips scroll into that spot, the button
+    // rides 8px above them instead, so it never covers a control and never disappears.
+    var placing = 0;
+    var wide = window.matchMedia('(min-width: 900px)');
+    function placePill() {
+      if (!pill || !chipsRow) return;
+      var filtered = !!(state.element || state.first || state.journal);
+      if (!(filtered && gridInView && listBelow)) return;
+      var vh = window.innerHeight;
+      if (wide.matches) {
+        // Desktop: the list is a short scroll away; if the button would cover tiles, leave it out
+        var grid = elementGrid.getBoundingClientRect();
+        var coversGrid = grid.bottom > vh - 16 - 52 && grid.top < vh - 16;
+        pill.hidden = coversGrid;
+        if (coversGrid) return;
       }
+      var chips = chipsRow.getBoundingClientRect();
+      var restingTop = vh - 16 - pill.offsetHeight;
+      // lift only while the chips overlap the spot where the button rests
+      var overlaps = chips.top < vh - 16 && chips.bottom > restingTop - 8;
+      var lift = overlaps ? (vh - chips.top) + 8 - 16 : 0;
+      pill.style.bottom = 'calc(max(16px, env(safe-area-inset-bottom)) + ' + Math.max(0, lift) + 'px)';
+    }
+    window.addEventListener('scroll', function () {
+      if (pill && !placing) placing = requestAnimationFrame(function () { placing = 0; placePill(); });
+    }, { passive: true });
+    window.addEventListener('resize', function () { placePill(); });
+    if (pill && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        var e = entries[0];
+        listBelow = !e.isIntersecting && e.boundingClientRect.top > 0;
+        updatePill();
+      }, { rootMargin: '0px 0px -15% 0px' }).observe(pubList);
+      // "The filters" = the element grid plus the chips under it; either on screen counts
+      var filterParts = [elementGrid, document.querySelector('.pub-controls')].filter(Boolean);
+      var partsInView = new Set();
+      var filterIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) partsInView.add(e.target); else partsInView.delete(e.target);
+        });
+        gridInView = partsInView.size > 0;
+        updatePill();
+      });
+      filterParts.forEach(function (el) { filterIO.observe(el); });
+      // The jump lands on the status line ("Showing 6 of 13 papers") just below the nav, with
+      // the list right under it, and moves focus there without adding a #hash to the address
+      pill.addEventListener('click', function (e) {
+        e.preventDefault();
+        pill.hidden = true;
+        if (statusEl) {
+          statusEl.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+          statusEl.focus({ preventScroll: true });
+        }
+      });
     }
 
     // Pointer-driven changes animate the list with a View Transition; keyboard-driven
     // ones (click events with detail 0) apply instantly, as do browsers without support
-    // and anyone who prefers reduced motion.
+    // and anyone who prefers reduced motion. A new click while one is still running
+    // finishes the running one at once, so no click is ever lost.
     var canTransition = typeof document.startViewTransition === 'function' &&
       !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var running = null;
 
     function nameForTransition(on) {
       pubs.forEach(function (pub, i) { pub.el.style.viewTransitionName = on ? 'pub-' + i : ''; });
@@ -245,10 +403,15 @@
     }
 
     function update(event) {
+      if (running) running.skipTransition();
       if (!canTransition || (event && event.detail === 0)) { render(); return; }
       nameForTransition(true);
       var transition = document.startViewTransition(render);
-      transition.finished.finally(function () { nameForTransition(false); });
+      running = transition;
+      transition.ready.catch(function () {}); // skipped transitions reject `ready`; the list still updated
+      transition.finished.finally(function () {
+        if (running === transition) { running = null; nameForTransition(false); }
+      }).catch(function () {});
     }
 
     tiles.forEach(function (tile) {
@@ -267,6 +430,33 @@
       clearBtn.addEventListener('click', function (e) {
         state = { element: null, first: false, journal: false };
         update(e);
+      });
+    }
+    var changeLink = document.querySelector('[data-pub-change]');
+    var barClear = document.querySelector('[data-pub-bar-clear]');
+    if (changeLink) {
+      changeLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        elementGrid.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        var selected = elementGrid.querySelector('[aria-pressed="true"]') || tiles[0];
+        if (selected) selected.focus({ preventScroll: true });
+      });
+    }
+    if (barClear) {
+      barClear.addEventListener('click', function (e) {
+        state = { element: null, first: false, journal: false };
+        update(e);
+        if (statusEl) statusEl.focus({ preventScroll: true }); // the button hides; focus stays on the result
+      });
+    }
+    if (emptyFix) {
+      emptyFix.addEventListener('click', function (e) {
+        if (emptyFix.dataset.fix === 'chips') { state.first = false; state.journal = false; }
+        else state = { element: null, first: false, journal: false };
+        update(e);
+        // the fix button disappears with the empty state, so focus needs a new home
+        var selected = elementGrid.querySelector('[aria-pressed="true"]') || tiles[0];
+        if (selected) selected.focus({ preventScroll: true });
       });
     }
   }
@@ -341,41 +531,158 @@
   }
 
   /* ---------- Photo lightbox ---------- */
+  // One <dialog> for every thumbnail. The photos of one news item form a set: the arrows,
+  // the arrow keys or a sideways swipe move through it (wrapping round), and the caption
+  // says where you are. With a pointer, the next photo fades in from the side it comes
+  // from; keyboard steps and reduced motion swap it straight away.
   var lightbox = document.querySelector('[data-lightbox]');
   if (lightbox && typeof lightbox.showModal === 'function') {
+    var stage = lightbox.querySelector('[data-lightbox-stage]');
+    var prevPhoto = lightbox.querySelector('[data-lightbox-prev]');
+    var nextPhoto = lightbox.querySelector('[data-lightbox-next]');
+    var countEl = lightbox.querySelector('[data-lightbox-count]');
+    var captionEl = lightbox.querySelector('[data-lightbox-caption]');
     // The image is created on first use, so the page never ships an <img> without a source
     var lightboxImg = document.createElement('img');
     lightboxImg.className = 'lightbox-img';
-    var lightboxReady = false;
+    lightboxImg.decoding = 'async';
+    var photoSet = [];
+    var photoIndex = 0;
+    var photoToken = 0;
+
+    var photoAt = function (i) {
+      var link = photoSet[(i + photoSet.length) % photoSet.length];
+      var thumb = link.querySelector('img');
+      var alt = thumb ? thumb.alt : '';
+      return { src: link.getAttribute('href'), alt: alt, caption: link.getAttribute('data-caption') || alt };
+    };
+    var preload = function (i) { if (photoSet.length > 1) new Image().src = photoAt(i).src; };
+
+    // dir: 1 = next, -1 = previous, 0 = no movement (opening, keyboard)
+    var showPhoto = function (i, dir) {
+      photoIndex = (i + photoSet.length) % photoSet.length;
+      var photo = photoAt(photoIndex);
+      var mine = ++photoToken;
+      var apply = function () {
+        if (mine !== photoToken) return; // a newer step already won
+        lightboxImg.src = photo.src;
+        lightboxImg.alt = photo.alt;
+        lightbox.setAttribute('aria-label', photo.alt || 'Photo');
+        countEl.textContent = photoSet.length > 1 ? (photoIndex + 1) + ' of ' + photoSet.length : '';
+        captionEl.textContent = photo.caption;
+        if (dir) {
+          lightboxImg.animate(
+            reduceMotion
+              ? [{ opacity: 0 }, { opacity: 1 }]
+              : [{ opacity: 0, transform: 'translateX(' + (dir * 16) + 'px)' }, { opacity: 1, transform: 'none' }],
+            { duration: 220, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }
+          );
+        }
+        preload(photoIndex + 1);
+        preload(photoIndex - 1);
+      };
+      if (!dir) { apply(); return; }
+      // Keep the current photo until the next one has decoded, so nothing flashes empty
+      var next = new Image();
+      next.src = photo.src;
+      (next.decode ? next.decode() : Promise.resolve()).then(apply, apply);
+    };
+    var step = function (dir, animated) {
+      if (photoSet.length > 1) showPhoto(photoIndex + dir, animated ? dir : 0);
+    };
+
     document.querySelectorAll('[data-lightbox-open]').forEach(function (link) {
       link.addEventListener('click', function (e) {
         e.preventDefault();
-        var thumb = link.querySelector('img');
-        if (!lightboxReady) { lightbox.appendChild(lightboxImg); lightboxReady = true; }
-        lightboxImg.src = link.getAttribute('href');
-        lightboxImg.alt = thumb ? thumb.alt : '';
-        lightbox.setAttribute('aria-label', thumb ? thumb.alt : 'Photo');
+        var group = link.closest('.news-photos');
+        photoSet = Array.prototype.slice.call((group || document).querySelectorAll('[data-lightbox-open]'));
+        var several = photoSet.length > 1;
+        prevPhoto.hidden = !several;
+        nextPhoto.hidden = !several;
+        if (!lightboxImg.isConnected) stage.prepend(lightboxImg);
+        showPhoto(photoSet.indexOf(link), 0);
         lightbox.showModal();
       });
     });
-    // Clicking the dimmed backdrop (the dialog itself, outside the image) closes it
+
+    prevPhoto.addEventListener('click', function (e) { step(-1, e.detail !== 0); });
+    nextPhoto.addEventListener('click', function (e) { step(1, e.detail !== 0); });
+    lightbox.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1, false); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); step(1, false); }
+    });
+
+    // Swipe sideways on a touch screen: a clear horizontal move of 40px or more
+    var swipe = null;
+    stage.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse' && e.isPrimary) swipe = { x: e.clientX, y: e.clientY };
+    });
+    stage.addEventListener('pointerup', function (e) {
+      if (!swipe) return;
+      var dx = e.clientX - swipe.x;
+      var dy = e.clientY - swipe.y;
+      swipe = null;
+      if (Math.abs(dx) >= 40 && Math.abs(dx) > Math.abs(dy) * 1.5) step(dx < 0 ? 1 : -1, true);
+    });
+    stage.addEventListener('pointercancel', function () { swipe = null; });
+
+    // Clicking the dimmed backdrop (the dialog itself, outside the photo) closes it
     lightbox.addEventListener('click', function (e) { if (e.target === lightbox) lightbox.close(); });
+    // The dialog restores focus to the thumbnail that opened it; move it to the one last viewed
+    lightbox.addEventListener('close', function () {
+      var last = photoSet[photoIndex];
+      if (last) last.focus({ preventScroll: true });
+    });
   }
 
   /* ---------- Copy email ---------- */
+  // Success swaps the icon and says "Copied" (announced politely). If the clipboard is
+  // unavailable or refused, the address is selected and the note says how to copy it.
+  var isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
   document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    var note = btn.parentElement.querySelector('[data-copy-note]');
+    var link = btn.parentElement.querySelector('a[href^="mailto:"]');
+    var timer = 0;
+    function say(text, sticky) {
+      if (!note) return;
+      note.textContent = text;
+      clearTimeout(timer);
+      if (!sticky) timer = setTimeout(function () { note.textContent = ''; }, 4000);
+    }
     btn.addEventListener('click', function () {
       var text = btn.getAttribute('data-copy');
       var done = function () {
         btn.setAttribute('data-copied', '');
-        btn.setAttribute('aria-label', 'Email address copied');
-        setTimeout(function () {
-          btn.removeAttribute('data-copied');
-          btn.setAttribute('aria-label', 'Copy email address');
-        }, 1800);
+        say('Copied');
+        setTimeout(function () { btn.removeAttribute('data-copied'); }, 1800);
       };
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(text).then(done, function () {});
+      var fallback = function () {
+        var touch = window.matchMedia('(pointer: coarse)').matches;
+        var keys = isMac ? '⌘C' : 'Ctrl+C';
+        var target = link && link.textContent.trim() === text ? link : null;
+        if (!target && note) {
+          // e.g. beside "Invite me to speak": spell the address out in the note and select it
+          note.textContent = touch ? 'Your browser blocked copying. Press and hold to copy ' : 'Your browser blocked copying. Press ' + keys + ' to copy ';
+          target = document.createElement('span');
+          target.className = 'copy-address';
+          target.textContent = text;
+          note.appendChild(target);
+          clearTimeout(timer);
+        } else {
+          say(touch ? 'Your browser blocked copying. Press and hold the address to copy it.' : 'Your browser blocked copying. The address is selected: press ' + keys + '.', true);
+        }
+        if (target && window.getSelection) {
+          var range = document.createRange();
+          range.selectNodeContents(target);
+          var sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+        }
+      };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else {
+        fallback();
       }
     });
   });
