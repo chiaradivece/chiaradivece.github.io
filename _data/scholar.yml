@@ -1,0 +1,40 @@
+# Written by bin/update_scholar.py (weekly GitHub Action). Edits by hand get overwritten.
+profile: "https://scholar.google.com/citations?user=CStrr20AAAAJ&hl=en"
+updated: 2026-10-08
+citations: 131
+h_index: 7
+i10_index: 4
+papers:
+  a-multicentre-benchmark-dataset-for-comprehensive-landmark-based-fetal-ultrasound-biometry:
+    cites: 6
+    url: "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=6596536388082564959,9434264423739749077,43715665575982787"
+  bie-pincs-brain-injury-evaluation-with-pupillometer-based-on-infrared-camera-system:
+    cites: 3
+    url: "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=14574649181828619203"
+  deep-learning-based-plane-pose-regression-in-obstetric-ultrasound:
+    cites: 25
+    url: "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=13085558872664317052"
+  deep-learning-based-plane-pose-regression-towards-training-in-freehand-obstetric-ultrasound:
+    cites: 1
+    url: "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=6967800236117292899"
+  glos-glove-for-speech-recognition:
+    cites: 9
+    url: "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=3432595772844014388"
+  measuring-proximity-to-standard-planes-during-fetal-brain-ultrasound-scanning:
+    cites: 4
+    url: "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=15047813065327009074"
+  mismatched-evaluating-the-limits-of-image-matching-approaches-and-benchmarks:
+    cites: 12
+    url: "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=4347266433441423429"
+  position-based-dynamics-simulator-of-brain-deformations-for-path-planning-and-intra-operative-control-in-keyhole-neurosurgery:
+    cites: 24
+    url: "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=14857822219483592939"
+  psychomotor-skills-development-for-veress-needle-placement-using-a-virtual-reality-and-haptics-based-simulator:
+    cites: 30
+    url: "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=16359219011138023970"
+  robotic-arm-platform-for-multi-view-image-acquisition-and-3d-reconstruction-in-minimally-invasive-surgery:
+    cites: 9
+    url: "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=18055705067697277225"
+  ultrasound-plane-pose-regression-assessing-generalized-pose-coordinates-in-the-fetal-brain:
+    cites: 8
+    url: "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=518781513546765572"
