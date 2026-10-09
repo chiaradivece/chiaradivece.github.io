@@ -50,7 +50,6 @@
   --paper: #fdfdfd;
   --nav-bg: rgb(244 246 248 / 0.8);
   --shadow: 0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3);
-  --shadow-lift: 0 1px 0 rgb(16 20 26 / 0.04), 0 28px 48px -26px rgb(36 52 70 / 0.45);
   --show-light: inline-flex;
   --show-dark: none;
 
@@ -81,7 +80,6 @@
     --paper: #eef2f5;
     --nav-bg: rgb(12 15 19 / 0.8);
     --shadow: 0 1px 0 rgb(255 255 255 / 0.03), 0 18px 40px -20px rgb(0 0 0 / 0.7);
-    --shadow-lift: 0 1px 0 rgb(255 255 255 / 0.03), 0 28px 48px -24px rgb(0 0 0 / 0.75);
     --show-light: none;
     --show-dark: inline-flex;
     color-scheme: dark;
@@ -102,7 +100,6 @@
   --paper: #eef2f5;
   --nav-bg: rgb(12 15 19 / 0.8);
   --shadow: 0 1px 0 rgb(255 255 255 / 0.03), 0 18px 40px -20px rgb(0 0 0 / 0.7);
-  --shadow-lift: 0 1px 0 rgb(255 255 255 / 0.03), 0 28px 48px -24px rgb(0 0 0 / 0.75);
   --show-light: none;
   --show-dark: inline-flex;
   color-scheme: dark;
@@ -507,6 +504,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 }
 .lightbox-count { flex: none; color: #e8edf2; font-weight: 600; font-variant-numeric: tabular-nums; }
 .lightbox-count:empty { display: none; }
+.lightbox-count:empty + .sr-only { display: none; } /* a single photo has no count, so no separator to read */
 .lightbox-bar { position: absolute; top: 12px; right: 12px; z-index: 2; }
 .lightbox-close { background: rgb(10 13 17 / 0.6); color: #e8edf2; border-color: rgb(255 255 255 / 0.25); }
 @media (prefers-reduced-motion: reduce) {
@@ -516,11 +514,13 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .news-older, .job-more, .fold { interpolate-size: allow-keywords; }
 .news-older summary, .job-more summary, .fold > summary { cursor: pointer; font-weight: 550; width: max-content; min-height: 24px; list-style: none; display: inline-flex; align-items: center; gap: 0.6rem; }
 .news-older summary::-webkit-details-marker, .job-more summary::-webkit-details-marker, .fold > summary::-webkit-details-marker { display: none; }
-.news-older summary::after, .job-more summary::after, .fold > summary::after {
-  content: "+"; font-weight: 400; font-size: 1.25em; line-height: 1;
-  transition: transform 200ms var(--ease-out);
+/* One disclosure glyph across the page: a chevron that flips (the filter toggle uses it too) */
+.news-older summary::after, .job-more summary::after, .fold > summary::after, .edu-notes-toggle::after {
+  content: ""; flex: none; width: 0.45em; height: 0.45em; margin: -0.25em 0 0 0.1rem;
+  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg); transition: transform 200ms var(--ease-out);
 }
-.news-older[open] summary::after, .job-more[open] summary::after, .fold[open] > summary::after { transform: rotate(45deg); }
+.news-older[open] summary::after, .job-more[open] summary::after, .fold[open] > summary::after, .edu-notes-toggle[aria-expanded="true"]::after { transform: translateY(0.25em) rotate(-135deg); }
 .news-older summary:hover, .job-more summary:hover, .fold > summary:hover { color: var(--accent-ink); }
 .news-older::details-content, .job-more::details-content, .fold::details-content {
   block-size: 0; opacity: 0; overflow: clip;
@@ -537,6 +537,8 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .news-older .news-list { margin-top: 1.25rem; }
 
 /* ---------- Experience ---------- */
+.bridge-key { display: flex; align-items: center; gap: 0.6rem; margin: -0.75rem 0 clamp(1.5rem, 3vw, 2rem); font-size: 0.875rem; color: var(--ink-2); }
+.bridge-glyph { flex: none; width: 9px; height: 8px; background: var(--accent-mark); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
 .exp-grid { display: grid; gap: 3rem; }
 @media (min-width: 900px) { .exp-grid { grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 5vw, 5rem); } }
 .exp-heading {
@@ -587,7 +589,6 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .job.is-current .job-summary { color: var(--ink); font-size: 1rem; }
 .job-more { margin-top: 0.15rem; }
 .job-more summary { font-size: 0.875rem; font-weight: 500; color: var(--ink-2); gap: 0.45rem; }
-.job-more summary::after { font-size: 1.1em; }
 .job-more .job-summary { margin-top: 0.5rem; }
 
 .edu-block { margin-top: clamp(2.5rem, 5vw, 4rem); }
@@ -605,8 +606,6 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
   font: inherit; font-size: 0.875rem; font-weight: 500; color: var(--ink-2); background: none; border: 0; padding: 0; cursor: pointer;
 }
 .edu-notes-toggle[hidden] { display: none; }
-.edu-notes-toggle::after { content: "+"; font-weight: 400; font-size: 1.2em; line-height: 1; transition: transform 200ms var(--ease-out); }
-.edu-notes-toggle[aria-expanded="true"]::after { transform: rotate(45deg); }
 .edu-notes-toggle:hover { color: var(--accent-ink); }
 @media (max-width: 639px) {
   .edu { gap: 0.9rem; padding-top: 0.5rem; }
@@ -642,9 +641,13 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .cell-media img { width: 100%; height: 100%; object-fit: contain; }
 .cell-media-paper { padding: clamp(0.75rem, 2vw, 1.5rem); }
 
-/* Beside the fetal card, Simulation fills the column with its links at the foot */
-.cell-sim { grid-template-rows: auto auto 1fr; }
+/* Beside the fetal card, Simulation leads with a figure from the paper (credited, CC BY),
+   then its text, with its links at the foot of the column */
+.cell-sim { grid-template-rows: auto auto auto 1fr; }
 .cell-sim .cell-links { align-self: end; }
+.cell-figure { margin: 0; display: grid; gap: 0.4rem; }
+.cell-credit { font-size: 0.75rem; color: var(--ink-3); }
+.cell-credit a { color: inherit; text-underline-offset: 0.2em; }
 /* What the work is now, as one hairline row under the cards (name, link and role only:
    morph is in stealth) */
 .research-now {
@@ -828,26 +831,6 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .pubs-empty[hidden] { display: none; }
 .pubs-foot { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--ink-3); }
 
-/* "Show 6 papers": appears while a filter is on and the list is below the screen */
-.results-pill {
-  position: fixed; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); z-index: 15;
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  height: 44px; padding: 0 1.15rem; border-radius: 999px;
-  background: var(--ink); color: var(--bg);
-  font-size: 0.925rem; font-weight: 550; text-decoration: none; white-space: nowrap;
-  box-shadow: var(--shadow-lift);
-  transform: translateX(-50%);
-  transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), display 200ms allow-discrete;
-}
-.results-pill:hover { color: var(--bg); background: color-mix(in srgb, var(--ink) 88%, var(--accent)); }
-.results-pill:active { transform: translateX(-50%) scale(0.97); }
-.results-pill .icon { transform: rotate(90deg); }
-.results-pill[hidden] { display: none; opacity: 0; transform: translateX(-50%) translateY(8px); }
-@starting-style { .results-pill:not([hidden]) { opacity: 0; transform: translateX(-50%) translateY(8px); } }
-@media (prefers-reduced-motion: reduce) {
-  .results-pill, .results-pill[hidden] { transform: translateX(-50%); }
-  @starting-style { .results-pill:not([hidden]) { transform: translateX(-50%); } }
-}
 
 /* Filtering runs inside a same-document View Transition (main.js): papers that stay
    glide to their new place, papers that leave fade out faster than new ones arrive. */
@@ -1003,7 +986,8 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 }
 .talk-event { color: var(--ink-2); font-size: 0.95rem; max-width: 60ch; }
 .talk-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.875rem; }
-@media (min-width: 768px) { .talk-links { grid-column: 2; } }
+@media (min-width: 768px) { .talk-links, .talk-photos { grid-column: 2; } }
+.talk-photos { margin-top: 0.5rem; }
 .talk-links a { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--ink); text-decoration-color: var(--accent-mark); text-underline-offset: 0.2em; }
 .talk-links .icon { width: 0.85em; height: 0.85em; }
 .talk-event span { color: var(--ink); font-weight: 550; margin-right: 0.35rem; }

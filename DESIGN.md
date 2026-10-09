@@ -139,12 +139,6 @@ components:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.bg}"
     rounded: "{rounded.md}"
-  results-pill:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.bg}"
-    rounded: "{rounded.pill}"
-    height: "44px"
-    padding: "0 1.15rem"
   nav:
     backgroundColor: "{colors.nav-bg}"
     height: "64px"
@@ -248,7 +242,7 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 - **Composition:** asymmetric grids carry each section rather than centred stacks:
   - About is 7 : 5 (text, then facts and numbers);
   - News is 6 : 5;
-  - Research is a two-line intro (up to 40rem wide, no second column), then a 6-column grid of research cards; beside the fetal card sits the simulation card, as tall as it with its links at the foot; under the grid a hairline "Now" row gives the current role (the accent "Now" tag, role, morph link and start date only, from `_data/experience.yml`);
+  - Research is a two-line intro (up to 40rem wide, no second column), then a 6-column grid of research cards; beside the fetal card sits the simulation card, led by a figure from its paper (the segmented brain and its particle model, Segato, Di Vece et al., RA-L 2021, CC BY 4.0, credited under the figure) with its links at the foot; under the grid a hairline "Now" row gives the current role (the accent "Now" tag, role, morph link and start date only, from `_data/experience.yml`);
   - Experience is two equal columns.
 - **Page order:** About, News, Research, Publications (three selected papers before the filtered list), Talks and reviewing (invitation, past talks, speaker kit, then the review record and venue marquee), Experience, Awards, Teaching and mentoring, Contact. Papers and speaking come before career history; short roles fold their details away.
 - **Grid gaps:** cards sit 16px apart; pipeline stages 40px apart (22px stacked on phones), with the arrow in the gap.
@@ -266,16 +260,15 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 
 ## Elevation & Depth
 
-Flat at rest, lifted on hover. Surfaces are separated by tone and 1px hairlines, not by shadow. Cards and pipeline stages that respond to the pointer rise 2px onto a soft, offset shadow when hovered. Only things that sit in front of the page carry a shadow at rest: the floating "Show N papers" button. Shadows are tinted toward the page's blue-grey in light mode and pure black in dark mode.
+Flat at rest, lifted on hover. Surfaces are separated by tone and 1px hairlines, not by shadow. Cards and pipeline stages that respond to the pointer rise 2px onto a soft, offset shadow when hovered. Nothing carries a shadow at rest. Shadows are tinted toward the page's blue-grey in light mode and pure black in dark mode.
 
 ### Shadow Vocabulary
 - **Soft** (`0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)`): hover lift for research cards and pipeline stages.
-- **Lift** (`0 1px 0 rgb(16 20 26 / 0.04), 0 28px 48px -26px rgb(36 52 70 / 0.45)`): the floating "Show N papers" button.
 
 ### Named Rules
 **The Lift-on-Hover Rule.** Cards are flat until a fine pointer reaches them; then they rise 2px onto the Soft shadow over 200ms. Touch never lifts. Reduced motion keeps the shadow and drops the rise.
 
-**The Physical Object Rule.** A shadow at rest means "this sits in front of the page": the floating results button. Nothing else casts one until it is hovered.
+**The Physical Object Rule.** A shadow means "this responds to you": cards and pipeline stages get one only while a fine pointer hovers them. Nothing casts a shadow at rest.
 
 ## Shapes
 
@@ -285,7 +278,7 @@ Flat at rest, lifted on hover. Surfaces are separated by tone and 1px hairlines,
   - 10px for things inside them, or small on their own: news photos, the speaker-kit photo.
   - 8px for media inset inside a card.
 - **Borders:** always 1px Hairline. A 2px Ink top rule marks teaching modules and the three selected papers; a 1px Ink rule marks section sub-heads (Experience columns, the facts list, the talks list).
-- **Signature geometry:** the ultrasound sector, a 68° fan drawn from a point at the top. It appears in the nav mark and behind the hero portrait. The marquee separators are small Signal Blue triangles, and the same triangle marks the two ends of the bridge on the Experience timeline (the PhD, `bridge: true`, and the current role).
+- **Signature geometry:** the ultrasound sector, a 68° fan drawn from a point at the top. It appears in the nav mark and behind the hero portrait. The marquee separators are small Signal Blue triangles, and the same triangle marks the two ends of the bridge on the Experience timeline (the PhD, `bridge: true`, and the current role), keyed by one line under the Experience title ("Where the work began, and where it is now.") and read to screen readers on each role ("Where the work began." on the PhD, "Where the work is now." on the current role).
 
 ## Components
 
@@ -321,13 +314,12 @@ Tactile and precise.
 ### Perception pipeline (signature filter)
 - **Shape:** the papers are filtered by where they sit in a perception pipeline, drawn like a model diagram: four stages, Perceive → Learn → Simulate → Deploy (`_data/pipeline.yml`), joined by Signal Blue arrows. Each stage is a 14px card-shaped button on Surface with a Hairline border: the name at 1.05rem/600, the paper count as an Ink Blue numeral (1.6rem/500, tabular) and, in Muted Ink at 0.8rem, what its papers share and what its chips narrow by ("Every paper: deep learning, pose estimation. Narrow by ultrasound."), or, when neither applies, what it includes ("Includes laparoscopy, infrared, wearable sensing."). The line always matches the chips on offer. Screen readers hear that line as the stage's description. Every paper has one primary stage (`stage:` in `_data/publications.yml`), so the four counts add up to the total and each stage really splits the list. From 900px the stages sit in one row 40px apart with the arrows in the gaps; below that they stack 22px apart and the arrows point down.
 - **Picking:** a picked stage fills with Ink, like a pressed chip, and the topics its papers share appear under the row as chips with counts, from any stage's topic list ("Narrow to: Ultrasound 4" under Learn). Only a stage with 4 or more papers offers chips, and a topic appears only when 2 or more of its papers use it and not all of them; under First author or Journals a chip that would no longer narrow anything steps aside, and an empty row hides. Picking a topic narrows the stage; picking the stage again clears both. On screens below 900px the unpicked stages then shrink to one line (name and count), so the topics land on screen. First author and Journals sit under the pipeline and preview their counts too ("First author 4"), turning dashed at 0.
-- **Panel:** stages, topics and chips sit in one panel that folds behind a 44px "Filter papers" toggle on phones (open on wide screens) and names the current filter ("Pose estimation · journals"). On phones a stage pick keeps the panel open (its topics just appeared); a topic or chip pick folds it, so the result line sits right under the toggle, and if the folded control had focus, focus moves to the toggle. Change reopens the panel and, once it has rendered, focuses the picked topic or stage. Its toggle ends in a chevron that flips (never a ×, which read as "remove filter"), set apart from the filter label. Opened low on a phone screen, the panel scrolls up under the nav. The panel never clips (it fades rather than growing), so focus outlines and the hover lift show in full.
+- **Panel:** stages, topics and chips sit in one panel that folds behind a 44px "Filter papers" toggle on phones (open on wide screens) and names the current filter ("Pose estimation · journals"). On phones a stage pick keeps the panel open (its topics just appeared); a topic or chip pick folds it, so the result line sits right under the toggle, and if the folded control had focus, focus moves to the toggle. Change reopens the panel and, once it has rendered, focuses the picked topic or stage. Its toggle ends in a chevron that flips (never a ×, which read as "remove filter"), set apart from the filter label; every disclosure on the page (Older news, What I did, Community, Education notes) uses the same chevron. Opened low on a phone screen, the panel scrolls up under the nav. The panel never clips (it fades rather than growing), so focus outlines and the hover lift show in full.
 - **Focus and hover:** keyboard focus is a 2px Ink outline 3px outside the stage. Stages follow the Lift-on-Hover rule (fine pointers only); a picked or empty stage does not lift.
 - **Counts:** every stage and topic shows how many papers it would leave under the current chips. One that would leave none turns to a dashed outline in Muted Ink.
 - **Empty result:** names the combination ("No first-author papers on Hyperspectral yet.") and offers the one change that helps, as a chip ("Show the Hyperspectral paper").
 - **Status bar:** directly under the filters, so a pick shows its result at once. The status names what is showing, always with the stage and one separator, the middle dot ("5 of 13 papers in Learn", "4 of 13 papers in Learn · ultrasound · journals"); the toggle reads "Learn · Ultrasound" and the empty state "No first-author papers in Learn on ultrasound yet.", so a topic count is never mistaken for the whole record.
-- **Address:** the filter lives in the URL (`?stage=learn&topic=ultrasound&first=1&journal=1`); a shared link opens that view, and each change is a history step, so Back undoes it. While a filter is on, it pins under the nav for the length of the list, over a Hairline, with Ink Blue text actions that adapt: Show (while the list is still below), Change (whenever the pipeline is out of view or under the nav, or the phone panel is folded; it opens the panel, brings it into view, and focuses the picked topic or stage) and Clear (the only Clear). On touch the actions are 44px tall.
-- **Results button:** while a filter is on and the list starts below the screen, a floating Ink pill ("Show 6 papers ↓", 44px) rests 16px above the bottom of the viewport; when the chips scroll into that spot it rides 8px above them instead of covering them. It stands down whenever the status bar is fully on screen, and it never sits over the pipeline or the phone toggle, judged at the place it would actually land (after any lift), at any width. It fades and rises 8px in, disappears once the filters leave the screen, and its jump lands on the status line just under the nav (focus moves there, no `#` in the address).
+- **Address:** the filter lives in the URL (`?stage=learn&topic=ultrasound&first=1&journal=1`). A shared link opens that view and lands on the status line under the nav. The first change from the unfiltered list adds a history entry and later tweaks replace it, so one Back returns to the unfiltered list. While a filter is on, it pins under the nav for the length of the list, over a Hairline, with Ink Blue text actions that adapt: Show (while the list is still below), Change (whenever the pipeline is out of view or under the nav, or the phone panel is folded; it opens the panel, brings it into view, and focuses the picked topic or stage) and Clear (the only Clear). On touch the actions are 44px tall.
 - **List changes:** filtering the list uses same-document View Transitions over 260ms. It is instant when triggered from the keyboard, and a new click finishes a running transition at once (the transition overlay never takes pointer events), so no click is lost.
 
 ### News
@@ -348,7 +340,7 @@ Tactile and precise.
 - **Motion:** fades in with the portrait; drifts slightly against the portrait's parallax (depth -5); lifts with the hero on scroll.
 
 ### Speaker kit
-- **Place:** in "Talks and reviewing", first in the markup, so phones and screen readers get it right after the invitation and before the past talks; from 900px grid placement puts it in the right-hand column beside the talks (sticky under the nav), with no visual reordering. Each talk can carry optional Slides and Video links (`slides`, `video` in `recognition.yml`), shown only when present.
+- **Place:** in "Talks and reviewing", first in the markup, so phones and screen readers get it right after the invitation and before the past talks; from 900px grid placement puts it in the right-hand column beside the talks (sticky under the nav), with no visual reordering. Each talk can carry optional Slides and Video links (`slides`, `video` in `recognition.yml`), shown only when present, and photos (`photos`, as in news), shown as 112px-tall thumbnails under the event line that open in the photo viewer.
 - **Style:** a Hairline-bordered 14px box, flat (no shadow, no fill), the photo as it will download (64px beside the title on phones, 112px beside the text on tablets, 80px beside the title in the column beside the talks; 8px radius), "Speaker kit" at 1.05rem/600, the third-person bio in Soft Ink (up to 62ch), then "Copy bio" and "Download photo" ("JPG, 1024 px" in Muted Ink inside the button) as small ghost buttons directly under the bio. A successful copy shows only the check on the button and is announced; a refused copy shows its instruction in a line under the buttons. The photo is the hero portrait, `assets/img/chiara.jpg`, downloaded as `chiara-di-vece.jpg`.
 
 ### Reviewing marquee
@@ -389,7 +381,7 @@ Tactile and precise.
 - **Don't** introduce a second typeface. The earlier Bricolage Grotesque and Geist pairing was rejected for looking AI-generated, and no serif or monospace face belongs here either.
 - **Don't** use `transition: all` or animate layout properties. Use transform, opacity, clip-path and box-shadow; `block-size` is allowed only for the details accordion.
 - **Don't** lift anything on touch, or move anything under reduced motion.
-- **Don't** give a card a shadow at rest unless it sits in front of the page (the floating results button).
+- **Don't** give anything a shadow at rest.
 - **Don't** dim an active control with opacity; switch it to an outline so its text stays at 4.5:1 or more.
 - **Don't** nest cards, or build a section out of same-size icon-and-heading cards.
 - **Don't** use stock or generated imagery. The one exception is the owner's own portrait, made with AI SuitUp, which the owner chose and keeps.

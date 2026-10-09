@@ -86,12 +86,20 @@ reviewing:
   - EMBC
 
 # Talks, newest first. Optional per talk: slides and video (URLs), shown as links
-# under the talk only when present.
+# under the talk only when present; photos, a list of { src, thumb, w, h, alt, caption }
+# shown as thumbnails that open in the photo viewer (as in news.yml).
 talks:
   - date: Mar 2025
     title: "FETUS: Freehand Echographic Training for Ultrasound System"
     role: Invited presenter
     event: Innovation in Women's Health Tech 2025, Impact Hub London
+    photos:
+      - src: /assets/img/talks/fetus-talk.webp
+        thumb: /assets/img/talks/fetus-talk-thumb.webp
+        w: 670
+        h: 1072
+        alt: Chiara speaking into a microphone while presenting FETUS at Innovation in Women's Health Tech 2025, Impact Hub London
+        caption: Presenting FETUS at Innovation in Women's Health Tech 2025
   - date: Jul 2022
     title: Deep reinforcement learning-based guidance in freehand obstetric ultrasound training
     role: Invited presenter

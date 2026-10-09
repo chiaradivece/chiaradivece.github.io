@@ -253,16 +253,6 @@
         "purpose": "Soft, in the dark theme."
       },
       {
-        "name": "lift",
-        "value": "0 1px 0 rgb(16 20 26 / 0.04), 0 28px 48px -26px rgb(36 52 70 / 0.45)",
-        "purpose": "The floating \"Show N papers\" button."
-      },
-      {
-        "name": "lift-dark",
-        "value": "0 1px 0 rgb(255 255 255 / 0.03), 0 28px 48px -24px rgb(0 0 0 / 0.75)",
-        "purpose": "Lift, in the dark theme."
-      },
-      {
         "name": "focus-ring",
         "value": "outline: 2px solid var(--accent-mark); outline-offset: 3px",
         "purpose": "Every :focus-visible element."
@@ -323,11 +313,6 @@
         "name": "parallax-spring",
         "value": "stiffness 90, damping 18",
         "purpose": "Hero portrait pointer parallax, fine pointers only."
-      },
-      {
-        "name": "results-pill",
-        "value": "fade + rise 8px over 200ms ease-out via @starting-style; exits the same way",
-        "purpose": "The floating results button in Publications; reduced motion keeps only the fade."
       }
     ],
     "breakpoints": [
@@ -423,14 +408,6 @@
       "css": ".ds-nav { display: flex; align-items: center; gap: 1.5rem; height: 64px; padding: 0 16px; background: var(--nav-bg, rgb(244 246 248 / 0.8)); backdrop-filter: blur(14px) saturate(140%); border-bottom: 1px solid var(--line, #d3dbe3); font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); } .ds-nav-mark { display: inline-flex; align-items: center; gap: 0.6rem; font-weight: 600; letter-spacing: -0.01em; color: var(--ink, #10141a); text-decoration: none; } .ds-nav-glyph { width: 22px; height: 22px; background: conic-gradient(from 146deg at 50% 4%, var(--accent-mark, #5b8fc2) 0deg 68deg, transparent 68deg); mask: radial-gradient(circle at 50% 4%, #000 0 95%, transparent 96%); } .ds-nav-links { display: flex; gap: 1.6rem; margin-left: auto; font-size: 0.925rem; } .ds-nav-links a { color: var(--ink-2, #3f4852); text-decoration: none; padding: 0.4rem 0; transition: color 200ms ease; } .ds-nav-links a:hover { color: var(--ink, #10141a); } .ds-nav-links a[aria-current] { color: var(--ink, #10141a); box-shadow: inset 0 -2px 0 var(--accent-mark, #5b8fc2); } .ds-nav a:focus-visible { outline: 2px solid var(--accent-mark, #5b8fc2); outline-offset: 3px; border-radius: 4px; }"
     },
     {
-      "name": "Results Pill",
-      "kind": "button",
-      "refersTo": "results-pill",
-      "description": "Floating Ink pill that appears while a filter is on and the paper list starts below the screen.",
-      "html": "<a class=\"ds-pill\" href=\"#\">Show 6 papers <svg viewBox=\"0 0 256 256\" width=\"16\" height=\"16\" aria-hidden=\"true\" fill=\"currentColor\" style=\"transform:rotate(90deg)\"><path d=\"M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z\"/></svg></a>",
-      "css": ".ds-pill { display: inline-flex; align-items: center; gap: 0.5rem; height: 44px; padding: 0 1.15rem; border-radius: 999px; background: var(--ink, #10141a); color: var(--bg, #f4f6f8); font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); font-size: 0.925rem; font-weight: 550; text-decoration: none; box-shadow: var(--shadow-lift, 0 1px 0 rgb(16 20 26 / 0.04), 0 28px 48px -26px rgb(36 52 70 / 0.45)); transition: transform 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)); } .ds-pill:active { transform: scale(0.97); } .ds-pill:focus-visible { outline: 2px solid var(--accent-mark, #5b8fc2); outline-offset: 3px; }"
-    },
-    {
       "name": "Copy Button",
       "kind": "button",
       "refersTo": "button",
@@ -489,7 +466,7 @@
       },
       {
         "name": "The Physical Object Rule",
-        "body": "A shadow at rest means \"this sits in front of the page\": the floating results button. Nothing else casts one until it is hovered.",
+        "body": "A shadow means \"this responds to you\": cards and pipeline stages get one only while a fine pointer hovers them. Nothing casts a shadow at rest.",
         "section": "elevation"
       }
     ],
@@ -510,7 +487,7 @@
       "**Don't** introduce a second typeface. The earlier Bricolage Grotesque and Geist pairing was rejected for looking AI-generated, and no serif or monospace face belongs here either.",
       "**Don't** use `transition: all` or animate layout properties. Use transform, opacity, clip-path and box-shadow; `block-size` is allowed only for the details accordion.",
       "**Don't** lift anything on touch, or move anything under reduced motion.",
-      "**Don't** give a card a shadow at rest unless it sits in front of the page (the floating results button).",
+      "**Don't** give anything a shadow at rest.",
       "**Don't** dim an active control with opacity; switch it to an outline so its text stays at 4.5:1 or more.",
       "**Don't** nest cards, or build a section out of same-size icon-and-heading cards.",
       "**Don't** use stock or generated imagery."
