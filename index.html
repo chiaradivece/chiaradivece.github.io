@@ -109,6 +109,7 @@ layout: default
           {%- for f in p.facts %}
           <div class="fact"><dt>{{ f.label }}</dt><dd>{{ f.value }}</dd></div>
           {%- endfor %}
+          <div class="fact"><dt>Reviewer</dt><dd><a href="#talks">{{ rec.review_count }} reviews for {{ rec.review_highlight | join: ", " }}</a></dd></div>
         </dl>
         <dl class="numbers" data-stagger>
           <div class="number"><dt>citations</dt><dd>{{ scholar.citations }}</dd></div>
@@ -446,21 +447,18 @@ layout: default
     </div>
   </section>
 
-  <!-- Awards rail (the reviewer award sits with the review record above) -->
+  <!-- Awards: every one visible, newest first; honours are labelled and not counted in About
+       (the reviewer award sits with the review record above) -->
   <section class="section recognition wrap" id="recognition">
-    <div class="rail-head" data-reveal>
-      <h2 class="section-title">Awards</h2>
-      <div class="rail-controls">
-        <button class="icon-btn" type="button" data-rail-prev aria-label="Previous awards">{% include icon.html name="arrow-left" %}</button>
-        <button class="icon-btn" type="button" data-rail-next aria-label="Next awards">{% include icon.html name="arrow-right" %}</button>
-      </div>
-    </div>
-    <ol class="rail" data-rail data-stagger tabindex="0" aria-label="Awards, newest first">
+    <h2 class="section-title" data-reveal>Awards</h2>
+    <ol class="awards" data-stagger style="--step: 30ms">
       {%- for a in rec.awards %}{% unless a.reviewing %}
-      <li class="award">
+      <li class="award-row">
         <span class="award-year">{{ a.year }}</span>
-        <h3 class="award-title">{{ a.title }}</h3>
-        <p class="award-detail">{{ a.detail }}</p>
+        <span class="award-body">
+          <span class="award-title">{{ a.title }}{% if a.honour %} <span class="tag">Honour</span>{% endif %}</span>
+          <span class="award-detail">{{ a.detail }}</span>
+        </span>
       </li>
       {%- endunless %}{% endfor %}
     </ol>

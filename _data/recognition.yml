@@ -13,11 +13,11 @@ awards:
     title: AURIS/IPCAI Young Investigator Travel Award
     detail: 1st place. Tokyo, Japan
   - year: 2022
-    title: Invited IJCARS journal paper
-    detail: Selected from the best papers of IPCAI 2022
-  - year: 2022
     title: Women in MICCAI Inspirational Leadership Legacy
     detail: 1st place. Singapore
+  - year: 2022
+    title: Invited IJCARS journal paper
+    detail: Selected from the best papers of IPCAI 2022
   - year: 2022
     title: Microsoft/MathWorks WiMIUA Best Poster
     detail: 2nd place. Cambridge, UK
@@ -31,22 +31,18 @@ awards:
     title: Alta Scuola Politecnica, top 3 thesis projects
     detail: Turin, Italy
   - year: 2019
-    title: MSc with honours
-    detail: Politecnico di Milano and Politecnico di Torino
-    honour: true  # shown in the rail, not counted in "awards"
-  - year: 2019
     title: Rare Disease Hackathon
     detail: 3rd place. Florence, Italy
-  - year: 2018
+  - year: 2019
     title: MSc with honours
-    detail: University of Illinois Chicago
-    honour: true
+    detail: Politecnico di Milano and Politecnico di Torino
+    honour: true  # listed with an "Honour" label, not counted in "awards"
   - year: 2018
     title: IEEE Computer Society Lance Stafford Larson Writing Award
     detail: 3rd place, undergraduate competition
-  - year: 2017
-    title: Admitted to Alta Scuola Politecnica
-    detail: Top 1% of students at PoliMi and PoliTo
+  - year: 2018
+    title: MSc with honours
+    detail: University of Illinois Chicago
     honour: true
   - year: 2017
     title: Rare Disease Hackathon
@@ -57,9 +53,14 @@ awards:
   - year: 2017
     title: Xilinx Open Hardware Contest
     detail: Finalist. Dublin, Ireland
-
-# Shown as "<review_count> peer reviews for" above the venue marquee
+  - year: 2017
+    title: Admitted to Alta Scuola Politecnica
+    detail: Top 1% of students at PoliMi and PoliTo
+    honour: true
+# Shown as "<review_count> peer reviews" above the venue marquee, and in About as
+# "<review_count> reviews for <review_highlight>"
 review_count: 15+
+review_highlight: [CVPR, ECCV, MICCAI, ICRA]
 reviewing:
   - IEEE Transactions on Medical Imaging
   - Medical Image Analysis

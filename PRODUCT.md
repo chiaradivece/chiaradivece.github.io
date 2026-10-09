@@ -47,13 +47,13 @@ Three claims, in this order of weight (confirmed):
 
 - **Sections, in page order:**
   - hero (role line, headline, photo inside a faint ultrasound sector)
-  - About (text, facts, Scholar numbers)
+  - About (text; facts: role, PhD, reviewer record; Scholar numbers)
   - News
   - Research (a simulated ultrasound scan, then the research cards)
   - Publications (three selected papers, then the full list filtered by research element, first author, journal)
   - Talks and reviewing (topics and an invitation link, past talks, the review count and reviewer award, the venue marquee)
   - Experience and education (short roles fold their details away)
-  - Awards
+  - Awards (a full list; honours labelled and not counted)
   - Teaching and mentoring
   - Contact (email, CV, local clocks)
 - **Terminology:**

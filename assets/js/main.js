@@ -446,6 +446,15 @@
       tile.addEventListener('click', function (e) {
         state.element = state.element === tile.dataset.element ? null : tile.dataset.element;
         update(e);
+        // Phones: a pick folds the panel (its toggle names the filter), so the result line and
+        // Show sit right under it and nothing has to float over the tiles
+        if (phone.matches && panel && panel.open && state.element) {
+          panel.open = false;
+          var top = panel.getBoundingClientRect().top;
+          if (top < (nav ? nav.offsetHeight : 0)) panel.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+          var toggle = panel.querySelector('summary');
+          if (toggle && e.detail === 0) toggle.focus({ preventScroll: true }); // keyboard: focus stays on the filter
+        }
       });
     });
     toggles.forEach(function (btn) {
@@ -481,26 +490,6 @@
         if (selected) selected.focus({ preventScroll: true });
       });
     }
-  }
-
-  /* ---------- Awards rail ---------- */
-  var rail = document.querySelector('[data-rail]');
-  var prev = document.querySelector('[data-rail-prev]');
-  var next = document.querySelector('[data-rail-next]');
-  if (rail && prev && next) {
-    var step = function () {
-      var card = rail.querySelector('li');
-      return card ? card.getBoundingClientRect().width + 16 : rail.clientWidth * 0.8;
-    };
-    var updateButtons = function () {
-      prev.disabled = rail.scrollLeft <= 4;
-      next.disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 4;
-    };
-    prev.addEventListener('click', function () { rail.scrollBy({ left: -step() * 2, behavior: 'smooth' }); });
-    next.addEventListener('click', function () { rail.scrollBy({ left: step() * 2, behavior: 'smooth' }); });
-    rail.addEventListener('scroll', function () { window.requestAnimationFrame(updateButtons); }, { passive: true });
-    window.addEventListener('resize', updateButtons);
-    updateButtons();
   }
 
   /* ---------- Local time (Seattle + London), shown as a sentence ---------- */
