@@ -1,4 +1,5 @@
 # Awards: newest first. place: optional placing, shown as a tag on the title line.
+#   slides: optional link to the slides (e.g. a PDF in assets/pdf), shown as "Slides" after the detail.
 awards:
   - year: 2025
     title: Women's Health Tech Grant, top 3 project
@@ -29,6 +30,7 @@ awards:
     title: Best group project, UCL MedICSS
     place: 1st place
     detail: London, UK
+    slides: /assets/pdf/medicss-2021-fetreg-slides.pdf  # FetReg: placental vessel segmentation and registration
   - year: 2020
     title: UCL Research Studentship
     detail: Department of Computer Science
