@@ -1,3 +1,4 @@
+# Awards: newest first. place: optional placing, shown as a tag on the title line.
 awards:
   - year: 2025
     title: Women's Health Tech Grant, top 3 project
@@ -11,19 +12,23 @@ awards:
     detail: UCL EPSRC Impact Acceleration Account, £5,000
   - year: 2022
     title: AURIS/IPCAI Young Investigator Travel Award
-    detail: 1st place. Tokyo, Japan
+    place: 1st place
+    detail: Tokyo, Japan
   - year: 2022
     title: Women in MICCAI Inspirational Leadership Legacy
-    detail: 1st place. Singapore
+    place: 1st place
+    detail: Singapore
   - year: 2022
     title: Invited IJCARS journal paper
     detail: Selected from the best papers of IPCAI 2022
   - year: 2022
     title: Microsoft/MathWorks WiMIUA Best Poster
-    detail: 2nd place. Cambridge, UK
+    place: 2nd place
+    detail: Cambridge, UK
   - year: 2021
     title: Best group project, UCL MedICSS
-    detail: 1st place. London, UK
+    place: 1st place
+    detail: London, UK
   - year: 2020
     title: UCL Research Studentship
     detail: Department of Computer Science
@@ -32,27 +37,32 @@ awards:
     detail: Turin, Italy
   - year: 2019
     title: Rare Disease Hackathon
-    detail: 3rd place. Florence, Italy
+    place: 3rd place
+    detail: Florence, Italy
   - year: 2019
     title: MSc with honours
     detail: Politecnico di Milano and Politecnico di Torino
     honour: true  # listed with an "Honour" label, not counted in "awards"
   - year: 2018
     title: IEEE Computer Society Lance Stafford Larson Writing Award
-    detail: 3rd place, undergraduate competition
+    place: 3rd place
+    detail: undergraduate competition
   - year: 2018
     title: MSc with honours
     detail: University of Illinois Chicago
     honour: true
   - year: 2017
     title: Rare Disease Hackathon
-    detail: 1st place. Florence, Italy
+    place: 1st place
+    detail: Florence, Italy
   - year: 2017
     title: IEEE RTSI Young Professional Demo Competition
-    detail: 1st place. Modena, Italy
+    place: 1st place
+    detail: Modena, Italy
   - year: 2017
     title: Xilinx Open Hardware Contest
-    detail: Finalist. Dublin, Ireland
+    place: Finalist
+    detail: Dublin, Ireland
   - year: 2017
     title: Admitted to Alta Scuola Politecnica
     detail: Top 1% of students at PoliMi and PoliTo
