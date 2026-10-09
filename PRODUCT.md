@@ -49,9 +49,9 @@ Three claims, in this order of weight (confirmed):
   - hero (role line, headline, photo inside a faint ultrasound sector)
   - About (text; facts: role, PhD, reviewer record; Scholar numbers)
   - News
-  - Research (one line on the move from fetal ultrasound to soft robots, then the research cards)
+  - Research (one line on the move from fetal ultrasound to soft robots and one on the thread across the cards, then the research cards)
   - Publications (three selected papers, then the full list filtered by research element, first author, journal)
-  - Talks and reviewing (topics and an invitation link, past talks, the review count and reviewer award, the venue marquee)
+  - Talks and reviewing (an invitation line with email and copy buttons, past talks, a speaker kit with a copyable bio and the portrait to download, the review count and reviewer award, the venue marquee)
   - Experience and education (short roles fold their details away)
   - Awards (a full list; honours labelled and not counted)
   - Teaching and mentoring
@@ -73,6 +73,9 @@ Three claims, in this order of weight (confirmed):
   - "From computer vision for fetal ultrasound to soft robotics."
   - About: "I build real-time perception for things that move: first an ultrasound probe over a fetal brain, now soft robots. I lead AI at morph, a soft robotics startup still in stealth."
   - "My PhD taught machines to find their way through fetal ultrasound. Now I build AI for soft robots."
+  - Research: "The thread across all three: real-time perception, in imaging, in surgery and in simulation."
+  - Talks: "Looking for a speaker, reviewer or committee member?" (no topic list).
+  - Speaker bio, third person, in `_data/profile.yml` as `speaker_bio`: "Chiara Di Vece builds real-time perception for things that move, from ultrasound probes to soft robots. Chiara is AI Lead at morph and holds a PhD in Computer Science from UCL."
 - **Binding visual constraints set by the owner** (recorded, not expanded):
   - a powder-blue accent
   - Helvetica Neue
@@ -82,16 +85,20 @@ Three claims, in this order of weight (confirmed):
 
 ## Evidence on Hand
 
-- **Portrait:** `assets/img/chiara.jpg`, plus a cutout at `assets/img/chiara-cutout.webp`.
+- **Portrait:** `assets/img/chiara.jpg`, plus a cutout at `assets/img/chiara-cutout.webp`. The portrait was made with AI SuitUp; the owner chose it and it stays. `chiara.jpg` is also the speaker-kit photo.
 - **CV:** the short CV at `assets/pdf/Chiara_Di_Vece_CV.pdf`. An extended CV exists but is not published.
 - **Publications:** 13 papers with links and notes in `_data/publications.yml`. Live Scholar numbers are in `_data/scholar.yml`.
-- **Recognition:** awards, reviewing venues, talks, teaching, mentoring and community roles in `_data/recognition.yml`. The "awards" number counts competitive awards only; degree honours and admissions carry `honour: true`, stay in the Awards row and are not counted.
+- **Recognition:** awards, reviewing venues, talks, teaching, mentoring and community roles in `_data/recognition.yml`. The "awards" number counts competitive awards only; degree honours and admissions carry `honour: true`, stay in the Awards row and are not counted. The Awards count line reads "15 competitive awards, plus 3 degree honours." (both numbers computed from the data).
 - **Research images:** `assets/img/research/fetal-pipeline.jpg` and `assets/img/research/hykey.jpg`.
 - **Viva photos:** `assets/img/news/viva-*.webp`.
   - The group photo shows about 25 colleagues; the owner confirmed their consent to publish it (October 2026).
 - **Key dates:**
   - PhD viva: 27 February 2026, passed with minor corrections.
   - PhD awarded: 28 September 2026.
+- **Settled in review (October 2026), not to reopen:**
+  - The periodic table is a filter for the papers, not a portrait of the research.
+  - "Cited by" stays the first blue number on a paper.
+  - Date ranges use an en dash ("Sep 2020 – Jan 2025").
 - **Absent, never fabricate:**
   - testimonials or quotes
   - morph product details or metrics

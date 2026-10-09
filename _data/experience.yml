@@ -7,7 +7,7 @@ industry:
   - role: AI Lead and Founding Applied Scientist
     org: morph
     url: https://morph.inc/
-    dates: Oct 2024 - Present
+    dates: Oct 2024 – Present
     current: true
     summary: >-
       Leading AI development at a stealth-stage soft robotics startup, with a focus on
@@ -16,7 +16,7 @@ industry:
   - role: AI Researcher
     org: AI SuitUp
     place: Remote (Albuquerque, US)
-    dates: Jan 2023 - Jan 2025
+    dates: Jan 2023 – Jan 2025
     summary: >-
       Research and prototyping for generative AI headshots. Optimised face detection,
       alignment and style transfer pipelines across diverse demographics, and cut
@@ -26,7 +26,7 @@ industry:
     org: MathWorks
     url: https://www.mathworks.com/
     place: Cambridge, UK
-    dates: Jun 2023 - Sep 2023
+    dates: Jun 2023 – Sep 2023
     summary: >-
       Extended the Deep Learning Toolbox with a differentiable sort, fully supported by
       the automatic differentiation engine, so users can build custom layers that sort.
@@ -34,7 +34,7 @@ industry:
 academia:
   - role: PhD Researcher and Teaching Assistant
     org: University College London
-    dates: Sep 2020 - Jan 2025 (studentship) · Jan 2025 - Feb 2026 (writing up, completing research status)
+    dates: Sep 2020 – Jan 2025 (studentship) · Jan 2025 – Feb 2026 (writing up, completing research status)
     summary: >-
       Sole researcher on the AI-guided fetal brain ultrasound line in the Surgical Robot
       Vision group and UCL Hawkes Institute, supervised by Danail Stoyanov and Francisco
@@ -46,7 +46,7 @@ academia:
   - role: Research Intern
     org: Politecnico di Milano, NEARLab
     place: Milan, Italy
-    dates: Mar 2020 - Sep 2020
+    dates: Mar 2020 – Sep 2020
     brief: true
     summary: >-
       NeuroEngineering and Medical Robotics Lab, EU project EDEN2020. Built a real-time,
@@ -57,7 +57,7 @@ academia:
   - role: Graduate Researcher and Teaching Assistant
     org: University of Illinois Chicago
     place: Chicago, US
-    dates: Jan 2019 - May 2019
+    dates: Jan 2019 – May 2019
     brief: true
     summary: >-
       Developed a haptics and VR simulator for Veress needle insertion training, rated

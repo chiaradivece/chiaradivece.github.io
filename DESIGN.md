@@ -220,7 +220,7 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 ### Neutral
 - **Cool Paper** (#f4f6f8 / #0c0f13): the page background.
 - **Surface** (#fcfdfe / #141920): research cards.
-- **Sunk Surface** (#e7ecf1 / #1a2028): the "3D and simulation" element tiles, the simulation card's dot grid, photo placeholders.
+- **Sunk Surface** (#e7ecf1 / #1a2028): the "3D and simulation" element tiles, photo placeholders.
 - **Ink** (#10141a / #e8edf2): headings, primary text, the solid button, the "Imaging" element tiles in light. In dark those tiles use Muted Ink (#8a95a1) with background-coloured text, because near-white would sit at almost the same value as Powder Blue.
 - **Soft Ink** (#3f4852 / #b0bac4): body copy in paragraphs and lists.
 - **Muted Ink** (#5c6773 / #8a95a1): dates, labels, captions, secondary metadata.
@@ -247,7 +247,7 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 - **Display** (700, clamp(2.1rem, 4.6vw, 3.75rem), 1): the hero headline, one phrase per line, ending in a Signal Blue full stop. Above it sits the role line ("AI Lead at morph · PhD, UCL", 1.05rem/500, Soft Ink).
 - **Headline** (500, clamp(1.6rem, 3vw, 2.5rem), 1): section titles. The hero headline stays about 1.5× this on wide screens (59 vs 38px at 1280), so the thesis line clearly leads. Plain words that match the nav label ("Publications", "Talks and reviewing", "Awards"). Sub-heads inside a section (Industry, Education, the review count) are 1.35rem/600 over a 1px Ink rule.
 - **Title** (600, clamp(1.4rem, 2.2vw, 1.85rem), 1.1): research card headings. Smaller titles step down: the current role 1.45rem/600, selected-paper titles 1.3rem/600, other job roles 1.12rem/600, paper titles 1.15–1.2rem/600, talk titles 1.1rem/600 (never above paper titles), award titles 1.05rem/600.
-- **Lead** (400–500, clamp(1.25rem, 2vw, 1.5rem), 1.35): the opening paragraph of About and Research, and the lead news item.
+- **Lead** (400–500, clamp(1.25rem, 2vw, 1.5rem), 1.35): the opening paragraph of About and Research, and the lead news item. Under the Research lead, one plain line in Soft Ink (1.05rem) says what links the cards.
 - **Body** (400, 1rem, 1.6): paragraphs in Soft Ink, held to 58–62ch.
 - **Numeral** (500, clamp(2rem, 3vw, 2.6rem), 1): Scholar numbers; the first one in Ink Blue.
 - **Label** (400, 0.75–0.875rem): dates, captions, metadata in Muted Ink. Links that are actions (paper links, "Read more", research card links) are never below 0.875rem.
@@ -266,9 +266,9 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 - **Composition:** asymmetric grids carry each section rather than centred stacks:
   - About is 7 : 5 (text, then facts and numbers);
   - News is 6 : 5;
-  - Research is 5 : 6, then a 6-column grid of research cards;
+  - Research is a two-line intro (up to 40rem wide, no second column), then a 6-column grid of research cards; the simulation card sits beside the fetal card and is only as tall as its text;
   - Experience is two equal columns.
-- **Page order:** About, News, Research, Publications (three selected papers before the filtered list), Talks and reviewing (topics, invitation, past talks, then the review record and venue marquee), Experience, Awards, Teaching and mentoring, Contact. Papers and speaking come before career history; short roles fold their details away.
+- **Page order:** About, News, Research, Publications (three selected papers before the filtered list), Talks and reviewing (invitation, past talks, speaker kit, then the review record and venue marquee), Experience, Awards, Teaching and mentoring, Contact. Papers and speaking come before career history; short roles fold their details away.
 - **Grid gaps:** cards sit 16px apart; element tiles 10px apart.
 - **Hero:** fills the viewport under the nav. The copy is left-aligned in the lower left; the cut-out portrait is anchored bottom-right and fades out at its lower edge.
 - **Responsive changes:**
@@ -310,7 +310,8 @@ Tactile and precise.
 - **Solid:** Ink fill, background-coloured text, weight 550. On hover it turns Powder Blue with Ink text. The hero pairs "Download CV" (solid) with "Read the papers" (ghost): proof before outreach.
 - **Ghost:** transparent with a Hairline border; on hover the border turns Ink.
 - **Press:** every button scales to 0.97 on `:active` (160ms, strong ease-out). Colour changes take 200ms with `ease`.
-- **Icon button:** a 40px circle with a Hairline border that scales to 0.95 on press. It is used for the theme toggle, the menu, the photo viewer and the pause controls.
+- **Icon button:** a 40px circle with a Hairline border that scales to 0.95 on press. It is used for the theme toggle, the menu, the photo viewer and the pause controls (all 40px).
+- **Copy button:** a small ghost button with a visible label ("Copy email", "Copy bio"); its copy icon cross-fades to a check (160ms, blurred and scaled). The status line under it ("Copied") never moves the page: under the Talks invite it hangs below the buttons, in the speaker kit its line is reserved. If the browser refuses the clipboard, the text is selected and the line says how to copy it. The footer keeps the 40px icon-only version beside the address.
 
 ### Chips
 - **Style:** transparent, a Hairline pill, Soft Ink text, 38px tall.
@@ -347,18 +348,22 @@ Tactile and precise.
 - **Layout:** two columns from 900px. The left column holds the lead card (Powder Blue) and, under it, the newest photo set among the visible items as a larger strip (140–180px tall) with a short label; that column stays in view while the list scrolls past. The photos open in the photo viewer and are not repeated in the list.
 
 ### Awards
-- **Style:** one fully visible list under a 1px Ink rule, newest year first and, within a year, first places first; it fills column by column (two columns from 900px), so years read top to bottom. A count line above it says what the About number counts ("15 awards · the reviewer award is listed under Talks and reviewing · 3 honours, marked and not counted"). Each row: the year as a Label, the title at 1rem/600 with its placing as an accent tag ("1st place") and honours as a plain "Honour" tag, the detail in Muted Ink.
+- **Style:** one fully visible list under a 1px Ink rule, newest year first and, within a year, first places first; it fills column by column (two columns from 900px), so years read top to bottom. A count line above it says what the About number counts ("15 competitive awards, plus 3 degree honours.", both computed from the data). Each row: the year as a Label, the title at 1rem/600 with its placing as an accent tag ("1st place") and honours as a plain "Honour" tag, the detail in Muted Ink.
 
 ### Paper list
 - **Style:** compact rows under small inline year headings (0.875rem/600, Muted Ink), each row three lines over a Hairline: the title (1.15–1.2rem/600, Signal Blue underline grows on hover, fine pointers only); then venue, status/award tags, links and "Cited by" (Ink Blue) on one line; then every author on one smaller line (0.8rem, Muted Ink) with the owner's name bold.
 
 ### Selected papers
-- **Style:** three papers in a row above the filters, each under a 2px Ink rule: year and venue as a Label, the title at 1.3rem/600 with the Signal Blue underline that grows on hover, then status, award and "Cited by" in Ink Blue. Chosen with `selected: true` in the data.
+- **Style:** three papers in a row above the filters, each under a 2px Ink rule: year and venue as a Label, the title at 1.3rem/600 with the Signal Blue underline that grows on hover, then status, award and "Cited by" in Ink Blue. From 900px the three share rows through subgrid, so the titles start on one line even when a venue wraps. Chosen with `selected: true` in the data.
 
 ### Hero sector (signature)
 - **Shape:** the 68° ultrasound fan, drawn as an SVG behind the cut-out portrait and outlined in 1px Signal Blue. On wide screens it ends 12% above the hero's bottom edge, so its arc wraps the shoulders; on stacked layouts the portrait gets room above it, so the tip shows above the head and never reaches the buttons.
 - **Fill:** Powder Blue fading with depth, like a real B-mode field: 50% at the tip to 4% at the arc in light, 30% to 2% in dark. Three depth arcs and three edge ticks in Signal Blue at about 30%, 1px.
 - **Motion:** fades in with the portrait; drifts slightly against the portrait's parallax (depth -5); lifts with the hero on scroll.
+
+### Speaker kit
+- **Place:** in "Talks and reviewing", between the past talks and the review record.
+- **Style:** a Hairline-bordered 14px box, flat (no shadow, no fill): "Speaker kit" at 1.05rem/600, the third-person bio in Soft Ink (up to 62ch), then "Copy bio" and "Download photo" as small ghost buttons, to the right of the bio from 900px. The photo is the hero portrait, `assets/img/chiara.jpg`, downloaded as `chiara-di-vece.jpg`.
 
 ### Reviewing marquee
 - **Place:** inside "Talks and reviewing", under its own sub-head; the track still runs edge to edge (it is clipped by the marquee, never by the page).
@@ -401,4 +406,4 @@ Tactile and precise.
 - **Don't** give a card a shadow at rest unless it sits in front of the page (the floating results button).
 - **Don't** dim an active control with opacity; switch it to an outline so its text stays at 4.5:1 or more.
 - **Don't** nest cards, or build a section out of same-size icon-and-heading cards.
-- **Don't** use stock or generated imagery.
+- **Don't** use stock or generated imagery. The one exception is the owner's own portrait, made with AI SuitUp, which the owner chose and keeps.

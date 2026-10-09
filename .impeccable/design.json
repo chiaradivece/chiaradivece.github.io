@@ -401,7 +401,7 @@
       "name": "Icon Button",
       "kind": "button",
       "refersTo": "icon-button",
-      "description": "40px circle for the theme toggle, the menu, rail arrows and pause controls.",
+      "description": "40px circle for the theme toggle, the menu, the photo viewer and the pause controls.",
       "html": "<button class=\"ds-icon-btn\" type=\"button\" aria-label=\"Next\"><svg viewBox=\"0 0 256 256\" width=\"18\" height=\"18\" aria-hidden=\"true\" fill=\"currentColor\"><path d=\"M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z\"/></svg></button>",
       "css": ".ds-icon-btn { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 999px; border: 1px solid var(--line, #d3dbe3); background: transparent; color: var(--ink, #10141a); cursor: pointer; transition: transform 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)), border-color 200ms ease; } .ds-icon-btn:hover { border-color: var(--ink, #10141a); } .ds-icon-btn:active { transform: scale(0.95); } .ds-icon-btn:focus-visible { outline: 2px solid var(--accent-mark, #5b8fc2); outline-offset: 3px; }"
     },
@@ -452,6 +452,14 @@
       "description": "Floating Ink pill that appears while a filter is on and the paper list starts below the screen.",
       "html": "<a class=\"ds-pill\" href=\"#\">Show 6 papers <svg viewBox=\"0 0 256 256\" width=\"16\" height=\"16\" aria-hidden=\"true\" fill=\"currentColor\" style=\"transform:rotate(90deg)\"><path d=\"M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z\"/></svg></a>",
       "css": ".ds-pill { display: inline-flex; align-items: center; gap: 0.5rem; height: 44px; padding: 0 1.15rem; border-radius: 999px; background: var(--ink, #10141a); color: var(--bg, #f4f6f8); font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); font-size: 0.925rem; font-weight: 550; text-decoration: none; box-shadow: var(--shadow-lift, 0 1px 0 rgb(16 20 26 / 0.04), 0 28px 48px -26px rgb(36 52 70 / 0.45)); transition: transform 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)); } .ds-pill:active { transform: scale(0.97); } .ds-pill:focus-visible { outline: 2px solid var(--accent-mark, #5b8fc2); outline-offset: 3px; }"
+    },
+    {
+      "name": "Copy Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "Small ghost button with a visible label; the copy icon cross-fades to a check (160ms, blur and scale). Its status line never shifts the layout; on a refused clipboard it selects the text instead.",
+      "html": "<button class=\"ds-copy\" type=\"button\"><span class=\"ds-copy-glyph\" aria-hidden=\"true\">⧉</span>Copy bio</button>",
+      "css": ".ds-copy { display: inline-flex; align-items: center; gap: 0.5rem; height: 38px; padding: 0 1rem; border-radius: 999px; border: 1px solid var(--line, #d3dbe3); background: transparent; color: var(--ink, #10141a); font: 550 0.875rem var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); cursor: pointer; transition: transform 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)), border-color 200ms ease; } .ds-copy:hover { border-color: var(--ink, #10141a); } .ds-copy:active { transform: scale(0.97); }"
     }
   ],
   "narrative": {
