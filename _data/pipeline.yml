@@ -1,7 +1,8 @@
 # The perception pipeline: the filter above the publication list.
-# Four stages, read left to right; picking a stage shows every paper with any of its
-# topics, and its topics appear as chips to narrow further. Papers list topic ids in
-# publications.yml (`topics:`). Paper counts are computed from publications.yml.
+# Four stages, read left to right. Each paper has one primary stage (`stage:` in
+# publications.yml), so picking a stage shows its papers and the counts add up to the total.
+# A picked stage's topics (below) appear as chips to narrow it; a stage card and its chips
+# only show topics its papers use, and a chip that would keep every paper is left out.
 
 stages:
   - id: perceive
@@ -31,7 +32,7 @@ stages:
   - id: deploy
     name: Deploy
     topics:
-      - { id: robotics, name: Robotics }
+      - { id: robotics, name: Robot platforms }
       - { id: neurosurgery, name: Neurosurgery }
       - { id: clinical-studies, name: Clinical studies }
-      - { id: datasets, name: Datasets and benchmarks }
+      - { id: datasets, name: Benchmarks }
