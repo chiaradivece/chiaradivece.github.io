@@ -127,10 +127,6 @@ components:
     backgroundColor: "{colors.surface}"
     rounded: "{rounded.md}"
     padding: "clamp(1.4rem, 2.5vw, 2rem)"
-  award-card:
-    backgroundColor: "{colors.surface}"
-    rounded: "{rounded.md}"
-    padding: "1.25rem"
   news-lead:
     backgroundColor: "{colors.accent}"
     textColor: "{colors.on-accent}"
@@ -223,12 +219,11 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 - **Ink Blue** (#2b5f8c; #bcd7f0 in dark): text-safe blue at 4.5:1 or more. Used for:
   - link hover;
   - the citation count in About;
-  - the most recent award year;
   - module codes.
 
 ### Neutral
 - **Cool Paper** (#f4f6f8 / #0c0f13): the page background.
-- **Surface** (#fcfdfe / #141920): research cards and award cards.
+- **Surface** (#fcfdfe / #141920): research cards.
 - **Sunk Surface** (#e7ecf1 / #1a2028): the "3D and simulation" element tiles, the simulation card's dot grid, photo placeholders.
 - **Ink** (#10141a / #e8edf2): headings, primary text, the solid button, the "Imaging" element tiles in light. In dark those tiles use Muted Ink (#8a95a1) with background-coloured text, because near-white would sit at almost the same value as Powder Blue.
 - **Soft Ink** (#3f4852 / #b0bac4): body copy in paragraphs and lists.
@@ -278,13 +273,13 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
   - Research is 5 : 6, then a 6-column grid of research cards;
   - Experience is two equal columns.
 - **Page order:** About, News, Research, Publications (three selected papers before the filtered list), Talks and reviewing (topics, invitation, past talks, then the review record and venue marquee), Experience, Awards, Teaching and mentoring, Contact. Papers and speaking come before career history; short roles fold their details away.
-- **Grid gaps:** cards and rails sit 16px apart; element tiles 8px apart.
+- **Grid gaps:** cards sit 16px apart; element tiles 10px apart.
 - **Hero:** fills the viewport under the nav. The copy is left-aligned in the lower left; the cut-out portrait is anchored bottom-right and fades out at its lower edge.
 - **Responsive changes:**
   - The nav collapses into a menu below 1024px.
   - The hero stacks below 900px.
   - Element tiles go from 4 columns to 8 at 640px.
-  - The awards rail shows about 1.3, then 2.4, then 4 cards.
+  - Awards is a full list: one column on phones, two from 900px.
 - **Touch:** on coarse pointers every control grows to a 44px target.
 
 ## Elevation & Depth
@@ -292,7 +287,7 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 Flat at rest, lifted on hover. Surfaces are separated by tone and 1px hairlines, not by shadow. Cards and tiles that respond to the pointer rise 2px onto a soft, offset shadow when hovered. Only things that sit in front of the page carry a shadow at rest: the scan monitor and the floating "Show N papers" button. Shadows are tinted toward the page's blue-grey in light mode and pure black in dark mode.
 
 ### Shadow Vocabulary
-- **Soft** (`0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)`): hover lift for research cards, award cards and element tiles; the scan monitor at rest.
+- **Soft** (`0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)`): hover lift for research cards and element tiles; the scan monitor at rest.
 - **Lift** (`0 1px 0 rgb(16 20 26 / 0.04), 0 28px 48px -26px rgb(36 52 70 / 0.45)`): the floating "Show N papers" button.
 - **Selection ring** (`0 0 0 2px bg, 0 0 0 4px Signal Blue`): a selected element tile; combined with Soft on hover.
 
@@ -319,7 +314,7 @@ Tactile and precise.
 - **Solid:** Ink fill, background-coloured text, weight 550. On hover it turns Powder Blue with Ink text. The hero pairs "Download CV" (solid) with "Read the papers" (ghost): proof before outreach.
 - **Ghost:** transparent with a Hairline border; on hover the border turns Ink.
 - **Press:** every button scales to 0.97 on `:active` (160ms, strong ease-out). Colour changes take 200ms with `ease`.
-- **Icon button:** a 40px circle with a Hairline border that scales to 0.95 on press. It is used for the theme toggle, the menu, the rail arrows and the pause controls.
+- **Icon button:** a 40px circle with a Hairline border that scales to 0.95 on press. It is used for the theme toggle, the menu, the photo viewer and the pause controls.
 
 ### Chips
 - **Style:** transparent, a Hairline pill, Soft Ink text, 38px tall.
@@ -332,7 +327,7 @@ Tactile and precise.
 - **Corner Style:** 14px.
 - **Background:** Surface, with a 1px Hairline border. The lead news item is the exception: a Powder Blue fill with no border.
 - **Shadow Strategy:** flat at rest, lifting on hover (see Elevation & Depth).
-- **Internal Padding:** `clamp(1.4rem, 2.5vw, 2rem)` for research cards, 1.25rem for award cards.
+- **Internal Padding:** `clamp(1.4rem, 2.5vw, 2rem)` for research cards.
 - **Never nested.** Media inside a card sits on Paper with an 8px radius.
 
 ### Navigation
@@ -342,11 +337,11 @@ Tactile and precise.
 - **Mobile:** below 1024px the links become a full-width sheet that fades and drops 6px. It opens in 200ms and closes in 150ms. The sheet adds Contact and Download CV under a hairline, and marks the current section in Ink Blue. Opening it moves focus to the first link; Tab cycles between the menu button and the sheet's links; Escape closes it and returns focus to the button; a tap outside closes it.
 
 ### Research elements table (signature)
-- **Tiles:** a periodic-table grid with 10px gaps, inside one filter panel that also holds the legend and the First author / Journals chips (above the tiles), so every filter control sits together. On wide screens the tiles are compact (about 76px tall): the symbol and the paper count share the top row and the name sits under them. On phones the tiles are taller than square so names fit, and the whole panel folds behind a 44px "Filter papers" toggle (open on wide screens, folded on phones) that names the current filter ("Pose estimation · journals"). Counts are 0.75rem/500, names 0.75rem; long names break only where the data marks a soft hyphen (`&shy;`).
+- **Tiles:** a periodic-table grid with 10px gaps, inside one filter panel that also holds the legend and the First author / Journals chips (above the tiles), so every filter control sits together. On wide screens the tiles are compact (about 76px tall): the symbol and the paper count share the top row and the name sits under them. On phones the tiles are taller than square so names fit, and the whole panel folds behind a 44px "Filter papers" toggle (open on wide screens, folded on phones) that names the current filter ("Pose estimation · journals"). On phones a pick folds the panel again, so the result line sits right under the toggle and nothing floats over the tiles. The panel never clips its content (it fades rather than growing), so selection rings and focus outlines always show in full. Counts are 0.75rem/500, names 0.75rem; long names break only where the data marks a soft hyphen (`&shy;`).
 - **Focus:** keyboard focus is a 2px Ink outline 3px outside the tile (6px on a selected tile, outside its ring). The 3px of page colour keeps it off the tile's edge, and the 10px gap keeps it off the neighbour, so it can never be mistaken for the Signal Blue selection ring or fuse with an Ink tile next to it.
 - **Families:** the four families are told apart by value alone, never by a new hue: Ink (Muted Ink in dark), Powder Blue, Deep Sunk, Hairline outline. The legend repeats them as 12px swatches.
 - **Counts:** each tile shows how many papers it would leave under the current First author / Journal chips. A tile that would leave none turns to a dashed outline with a 0.
-- **Selection:** a selected tile keeps its family fill and gets the Selection ring. The others turn to outlines (transparent, Soft Ink text, Hairline border): still readable, clearly still pressable. Never dim an active tile with opacity.
+- **Selection:** a selected tile keeps its family fill and gets the Selection ring. The others turn to outlines (transparent, Soft Ink text, Hairline border) that keep a 3px family-coloured top edge (none for the outline family), so the legend still describes what is on screen: still readable, clearly still pressable. Never dim an active tile with opacity.
 - **Empty result:** names the combination ("No journal papers on Wearable sensing yet.") and offers the one change that helps, as a chip ("Show the Wearable sensing paper").
 - **Status bar:** directly under the tiles, so a pick shows its result at once. The status names what is showing ("7 of 13 papers on Deep learning", "2 of 13 papers on Imaging · first author, journals"). While a filter is on, it pins under the nav for the length of the list, over a Hairline, with Ink Blue text actions that adapt: Show (while the list is still below), Change (whenever the tiles themselves are out of view, or the phone panel is folded; it opens the panel and focuses the selected tile) and Clear (the only Clear). On touch the actions are 44px tall.
 - **Results button:** while a filter is on and the list starts below the screen, a floating Ink pill ("Show 6 papers ↓", 44px) rests 16px above the bottom of the viewport; when the chips scroll into that spot it rides 8px above them instead of covering them. It stands down whenever the status bar is fully on screen, and on wide screens it never sits over the tile grid. It fades and rises 8px in, disappears once the filters leave the screen, and its jump lands on the status line just under the nav (focus moves there, no `#` in the address).
@@ -359,6 +354,9 @@ Tactile and precise.
 ### News
 - **Layout:** two columns from 900px. The left column holds the lead card (Powder Blue) and, under it, the newest photo set among the visible items as a larger strip (140–180px tall) with a short label; that column stays in view while the list scrolls past. The photos open in the photo viewer and are not repeated in the list.
 
+### Awards
+- **Style:** one fully visible list under a 1px Ink rule, newest year first and, within a year, first places before the rest; one column on phones, two from 900px. Each row: the year as a Label, the title at 1rem/600, the detail in Muted Ink, a Hairline between rows. Degree honours and admissions carry a small "Honour" tag and are not counted in About's "awards" number, so the visible list and the count agree. The reviewer award sits with the review record instead.
+
 ### Selected papers
 - **Style:** three papers in a row above the filters, each under a 2px Ink rule: year and venue as a Label, the title at 1.3rem/600 with the Signal Blue underline that grows on hover, then status, award and "Cited by" in Ink Blue. Chosen with `selected: true` in the data.
 
@@ -370,7 +368,7 @@ Tactile and precise.
 ### Reviewing marquee
 - **Place:** inside "Talks and reviewing", under its own sub-head; the track still runs edge to edge (it is clipped by the marquee, never by the page).
 - **Track:** venue names at 1rem/500 in Soft Ink, below the count and the award, separated by Signal Blue triangles. It runs linearly over 60s, with faded edges.
-- **Heading:** the count leads as a Numeral ("15+", 2–2.6rem/500, Ink Blue) followed by "peer reviews" at 1.35rem/600, over an Ink rule. The Outstanding Reviewer award follows at 1.05rem/600 in Ink. That award is shown here only, not again in the Awards rail.
+- **Heading:** the count leads as a Numeral ("15+", 2–2.6rem/500, Ink Blue) followed by "peer reviews" at 1.35rem/600, over an Ink rule. The Outstanding Reviewer award follows at 1.05rem/600 in Ink. That award is shown here only, not again in the Awards list.
 - **Pausing:** hover pauses it and a pause control sits beside the heading. Under reduced motion it becomes a static wrapped list.
 
 ### Photo viewer

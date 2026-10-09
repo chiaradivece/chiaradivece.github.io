@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-08T22:24:34+00:00",
+  "generatedAt": "2026-10-09T07:00:37+00:00",
   "title": "Design System: Chiara Di Vece",
   "extensions": {
     "colorMeta": {
@@ -263,7 +263,7 @@
       {
         "name": "soft",
         "value": "0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)",
-        "purpose": "Hover lift for research cards, award cards and element tiles; the scan monitor at rest."
+        "purpose": "Hover lift for research cards and element tiles; the scan monitor at rest."
       },
       {
         "name": "soft-dark",
