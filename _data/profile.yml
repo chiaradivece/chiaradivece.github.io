@@ -19,7 +19,10 @@ tagline:
   - for fetal ultrasound
   - to soft robotics
 
-# Quick facts next to the badge in About
+# Speaker kit in Talks: a third-person bio organisers can copy (the photo offered is `photo` above)
+speaker_bio: Chiara Di Vece builds real-time perception for things that move, from ultrasound probes to soft robots. Chiara is AI Lead at morph and holds a PhD in Computer Science from UCL.
+
+# Quick facts in About
 facts:
   - label: Role
     value: AI Lead, morph
@@ -56,23 +59,23 @@ links:
 education:
   - degree: PhD in Computer Science
     school: University College London
-    dates: 2020 - 2026
+    dates: 2020 – 2026
     note: "Thesis: Real-time deep learning-based plane pose estimation and navigation in freehand fetal brain ultrasound"
   - degree: MSc Biomedical Engineering
     school: Politecnico di Milano
-    dates: 2017 - 2019
+    dates: 2017 – 2019
     note: Summa cum laude. Double degree with UIC and Politecnico di Torino
   - degree: MSc Bioengineering
     school: University of Illinois Chicago
-    dates: 2018 - 2019
+    dates: 2018 – 2019
     note: GPA 4.00/4.00, summa cum laude
   - degree: Alta Scuola Politecnica
     school: Politecnico di Milano and Politecnico di Torino
-    dates: 2017 - 2020
+    dates: 2017 – 2020
     note: Top 1% honours programme, diploma with merit
   - degree: BSc Biomedical Engineering
     school: Politecnico di Milano
-    dates: 2014 - 2017
+    dates: 2014 – 2017
     note: "Thesis: FPGA-based brain injury evaluation through pupillometry"
   - degree: Licensed Industrial Engineer
     school: Italy

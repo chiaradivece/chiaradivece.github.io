@@ -180,10 +180,9 @@ layout: default
   <!-- Research: the bridge in one line, then the themes -->
   <section class="section research wrap" id="research">
     <h2 class="section-title" data-reveal>Research</h2>
-    <div class="research-intro">
-      <div class="research-intro-text" data-reveal>
-        <p class="research-lead">My PhD taught machines to find their way through fetal ultrasound. Now I build AI for soft robots.</p>
-      </div>
+    <div class="research-intro" data-reveal>
+      <p class="research-lead">My PhD taught machines to find their way through fetal ultrasound. Now I build AI for soft robots.</p>
+      <p class="research-thread">The thread across all three: real-time perception, in imaging, in surgery and in simulation.</p>
     </div>
     <div class="bento" data-stagger>
       <article class="cell cell-fetal">
@@ -346,10 +345,10 @@ layout: default
       <div class="talks-invite">
         <p>Looking for a speaker, reviewer or committee member?</p>
         <div class="invite-actions">
-          <a class="btn btn-solid btn-small" href="mailto:{{ p.email }}?subject={{ 'Invitation to speak' | uri_escape }}">Invite me to speak</a>
-          <button class="icon-btn copy-btn" type="button" data-copy="{{ p.email }}" aria-label="Copy my email address">
-            <span class="when-idle">{% include icon.html name="copy" %}</span>
-            <span class="when-done">{% include icon.html name="check" %}</span>
+          <a class="btn btn-solid btn-small" href="mailto:{{ p.email }}?subject={{ 'Invitation' | uri_escape }}">Email an invitation</a>
+          <button class="btn btn-ghost btn-small copy-btn" type="button" data-copy="{{ p.email }}">
+            <span class="copy-glyph"><span class="when-idle">{% include icon.html name="copy" %}</span><span class="when-done">{% include icon.html name="check" %}</span></span>
+            Copy email
           </button>
           <p class="copy-note" data-copy-note role="status"></p>
         </div>
@@ -364,6 +363,18 @@ layout: default
       </li>
       {%- endfor %}
     </ol>
+    <div class="speaker-kit" data-reveal>
+      <h3 class="speaker-kit-title">Speaker kit</h3>
+      <p class="speaker-bio" id="speaker-bio">{{ p.speaker_bio }}</p>
+      <div class="speaker-kit-actions">
+        <button class="btn btn-ghost btn-small copy-btn" type="button" data-copy="{{ p.speaker_bio | escape }}" data-copy-source="speaker-bio">
+          <span class="copy-glyph"><span class="when-idle">{% include icon.html name="copy" %}</span><span class="when-done">{% include icon.html name="check" %}</span></span>
+          Copy bio
+        </button>
+        <a class="btn btn-ghost btn-small" href="{{ p.photo | relative_url }}" download="chiara-di-vece.jpg">{% include icon.html name="download-simple" %} Download photo</a>
+        <p class="copy-note" data-copy-note role="status"></p>
+      </div>
+    </div>
 
     <!-- The review record; the venue marquee runs edge to edge (the only marquee on the page) -->
     <div class="reviewing" data-reveal>
@@ -442,7 +453,7 @@ layout: default
     <h2 class="section-title" data-reveal>Awards</h2>
     {%- assign counted = rec.awards | where_exp: "a", "a.honour != true" %}
     {%- assign honours = rec.awards | where_exp: "a", "a.honour == true" %}
-    <p class="awards-count">{{ counted.size }} awards · the reviewer award is listed under <a href="#reviewing-title">Talks and reviewing</a> · {{ honours.size }} honours, marked and not counted</p>
+    <p class="awards-count">{{ counted.size }} competitive awards, plus {{ honours.size }} degree honours.</p>
     <ol class="awards" data-stagger style="--step: 30ms">
       {%- for a in rec.awards %}{% unless a.reviewing %}
       <li class="award-row">
