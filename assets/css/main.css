@@ -750,7 +750,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .filter-panel { margin-bottom: 0.5rem; }
 .filter-panel-toggle {
   display: none; align-items: center; justify-content: space-between; gap: 1rem;
-  min-height: 44px; padding: 0 1rem; border: 1px solid var(--line); border-radius: 999px;
+  min-height: 44px; padding: 0.55rem 1.1rem; border: 1px solid var(--line); border-radius: 22px;
   font-size: 0.95rem; font-weight: 550; cursor: pointer; list-style: none;
 }
 .filter-panel-toggle::-webkit-details-marker { display: none; }
@@ -761,6 +761,11 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 }
 .filter-panel[open] > .filter-panel-toggle::after { transform: translateY(0.25em) rotate(-135deg); }
 .filter-panel-state { margin-left: auto; color: var(--accent-ink); font-weight: 500; }
+/* Phones: the folded toggle carries the pipeline in miniature, so the signature isn't hidden */
+.toggle-text { display: grid; gap: 0.15rem; min-width: 0; }
+.toggle-pipe { display: flex; flex-wrap: wrap; align-items: center; gap: 0.1rem 0.3rem; font-size: 0.75rem; font-weight: 500; color: var(--ink-3); }
+.toggle-pipe .icon { width: 0.85em; height: 0.85em; color: var(--accent-mark); }
+.filter-panel[open] .toggle-pipe { display: none; } /* open, the real pipeline is right below */
 @media (max-width: 639px) {
   .filter-panel-toggle { display: flex; }
   .filter-panel[open] > .filter-panel-toggle { margin-bottom: 0.75rem; }
@@ -787,6 +792,12 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .pubs[data-filtered] .pub-bar {
   position: sticky; top: var(--nav-h); z-index: 6;
   border-bottom: 1px solid var(--line);
+}
+/* Phones: one row (a shorter status, the actions never wrap under it) */
+@media (max-width: 639px) {
+  .pub-bar { flex-wrap: nowrap; gap: 0.75rem; }
+  .pub-status { min-width: 0; font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pub-bar-actions { flex: none; gap: 0.9rem; }
 }
 #pub-status:focus { outline: none; }
 #pub-status:focus-visible { outline: 2px solid var(--accent-mark); outline-offset: 4px; border-radius: 4px; }
@@ -1109,6 +1120,7 @@ html:not(.js) .contact-time { display: none; }
   .award-detail a::after { inset-block: -14px; }
   .facts-source a::after, .pubs-foot a::after { inset-block: -15px; }
   .research-now a::after { inset-block: -13px; }
+  .number a::after { inset-inline: -14px; } /* a one-digit number is only ~17px wide */
 }
 
 /* ---------- 404 ---------- */
