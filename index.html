@@ -238,7 +238,7 @@ layout: default
     {%- assign now = site.data.experience.industry | where: "current", true | first %}
     <p class="research-now" data-reveal>
       <span class="tag tag-accent">Now</span>
-      <span>{{ now.role }} at <a href="{{ now.url }}" rel="noopener">{{ now.org }} {% include icon.html name="arrow-up-right" %}</a>, since {{ now.dates | split: " – " | first }}.</span>
+      <span>{{ now.role }} at {% capture arrow %}{% include icon.html name="arrow-up-right" %}{% endcapture %}<a href="{{ now.url }}" rel="noopener">{{ now.org }} {{ arrow | strip }}</a>, since {{ now.dates | split: " – " | first }}.</span>
     </p>
   </section>
 
@@ -272,32 +272,42 @@ layout: default
       <div class="pipeline" data-pipeline>
         <ol class="stages" aria-label="Filter papers by stage of the perception pipeline">
           {%- for st in pl.stages %}
-          {%- assign ids = st.topics | map: "id" %}
-          {%- assign n = 0 %}
-          {%- for pub in pubs %}{% assign hit = false %}{% for t in ids %}{% if pub.topics contains t %}{% assign hit = true %}{% endif %}{% endfor %}{% if hit %}{% assign n = n | plus: 1 %}{% endif %}{% endfor %}
+          {%- assign st_pubs = pubs | where: "stage", st.id %}
+          {%- assign n = st_pubs.size %}
+          {%- capture used %}{% for t in st.topics %}{% assign c = 0 %}{% for pub in st_pubs %}{% if pub.topics contains t.id %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}{% if c > 0 %}{{ t.name | downcase | replace: "3d", "3D" | replace: "vr ", "VR " }}|{% endif %}{% endfor %}{% endcapture %}
           <li class="stage-item">
-            <button type="button" class="stage" data-stage="{{ st.id }}" data-name="{{ st.name }}" data-topics="{{ ids | join: ' ' }}" aria-pressed="false" aria-label="{{ st.name }}, {{ n }} {% if n == 1 %}paper{% else %}papers{% endif %}">
+            <button type="button" class="stage" data-stage="{{ st.id }}" data-name="{{ st.name }}" aria-pressed="false" aria-label="{{ st.name }}, {{ n }} {% if n == 1 %}paper{% else %}papers{% endif %}">
               <span class="stage-name" aria-hidden="true">{{ st.name }}</span>
               <span class="stage-count" aria-hidden="true">{{ n }}</span>
-              <span class="stage-topics" aria-hidden="true">{{ st.topics | map: "name" | join: ", " | downcase | replace: "3d", "3D" | replace: "vr ", "VR " }}</span>
+              <span class="stage-topics" aria-hidden="true">{{ used | split: "|" | join: ", " }}</span>
             </button>
             {%- unless forloop.last %}<span class="stage-arrow" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>{% endunless %}
           </li>
           {%- endfor %}
         </ol>
         {%- for st in pl.stages %}
+        {%- assign st_pubs = pubs | where: "stage", st.id %}
+        {%- capture chips %}
+          {%- for t in st.topics %}
+          {%- assign c = 0 %}{% for pub in st_pubs %}{% if pub.topics contains t.id %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}
+          {%- if c > 0 and c < st_pubs.size %}
+          <button type="button" class="chip topic" data-topic="{{ t.id }}" data-name="{{ t.name }}" aria-pressed="false" aria-label="{{ t.name }}, {{ c }} {% if c == 1 %}paper{% else %}papers{% endif %}"><span aria-hidden="true">{{ t.name }}</span><span class="chip-count" aria-hidden="true">{{ c }}</span></button>
+          {%- endif %}
+          {%- endfor %}
+        {%- endcapture %}
+        {%- if chips contains "data-topic" %}
         <div class="topics" role="group" aria-label="Narrow {{ st.name }} to one topic" data-topics-for="{{ st.id }}" hidden>
           <span class="topics-label">Narrow to</span>
-          {%- for t in st.topics %}
-          {%- assign c = 0 %}{% for pub in pubs %}{% if pub.topics contains t.id %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}
-          <button type="button" class="chip topic" data-topic="{{ t.id }}" data-name="{{ t.name }}" aria-pressed="false" aria-label="{{ t.name }}, {{ c }} {% if c == 1 %}paper{% else %}papers{% endif %}"><span aria-hidden="true">{{ t.name }}</span><span class="chip-count" aria-hidden="true">{{ c }}</span></button>
-          {%- endfor %}
+          {{- chips }}
         </div>
+        {%- endif %}
         {%- endfor %}
       </div>
       <div class="chips pub-controls" role="group" aria-label="More filters" data-pub-filters>
-        <button type="button" class="chip" data-toggle="first" aria-pressed="false">First author</button>
-        <button type="button" class="chip" data-toggle="journal" aria-pressed="false">Journals</button>
+        {%- assign n_first = 0 %}{% for pub in pubs %}{% if pub.first != "none" %}{% assign n_first = n_first | plus: 1 %}{% endif %}{% endfor %}
+        {%- assign n_journal = pubs | where: "type", "journal" %}
+        <button type="button" class="chip" data-toggle="first" data-name="First author" aria-pressed="false" aria-label="First author, {{ n_first }} papers"><span aria-hidden="true">First author</span><span class="chip-count" aria-hidden="true">{{ n_first }}</span></button>
+        <button type="button" class="chip" data-toggle="journal" data-name="Journals" aria-pressed="false" aria-label="Journals, {{ n_journal.size }} papers"><span aria-hidden="true">Journals</span><span class="chip-count" aria-hidden="true">{{ n_journal.size }}</span></button>
       </div>
     </details>
 
@@ -319,7 +329,7 @@ layout: default
         <ol class="pub-items">
           {%- for pub in y.items %}
           {%- assign primary = pub.links.Paper | default: pub.links.arXiv -%}
-          <li class="pub" data-pub data-type="{{ pub.type }}" data-first="{{ pub.first }}" data-topics="{{ pub.topics | join: ' ' }}">
+          <li class="pub" data-pub data-type="{{ pub.type }}" data-first="{{ pub.first }}" data-topics="{{ pub.topics | join: ' ' }}" data-stage="{{ pub.stage }}">
             {%- assign scholar_key = pub.title | slugify %}
             {%- assign cited = site.data.scholar.papers[scholar_key] %}
             <h4 class="pub-title"><a href="{{ primary }}" rel="noopener">{{ pub.title }}</a></h4>
@@ -435,12 +445,13 @@ layout: default
               {%- if job.url %}<a href="{{ job.url }}" rel="noopener">{{ job.org }}</a>{% else %}{{ job.org }}{% endif %}
               {%- if job.place %}<span class="job-place">{{ job.place }}</span>{% endif %}
             </p>
+            {%- assign sentences = job.summary | split: ". " | size %}
             {%- if job.brief %}
             <details class="job-more">
               <summary>What I did<span class="sr-only"> at {{ job.org }}</span></summary>
               <p class="job-summary">{{ job.summary }}</p>
             </details>
-            {%- elsif job.current %}
+            {%- elsif job.current or job.keep_open or sentences < 2 %}
             <p class="job-summary">{{ job.summary }}</p>
             {%- else %}
             <details class="job-more" data-fold-phone open>

@@ -57,7 +57,7 @@ Three claims, in this order of weight (confirmed):
   - Teaching and mentoring
   - Contact (email, CV, local clocks)
 - **Terminology:**
-  - The publications filter is a perception pipeline: four stages (Perceive, Learn, Simulate, Deploy), each with its topics, in `_data/pipeline.yml`. It replaced a periodic-table filter in October 2026 because the owner works in AI and the table did not speak to the field.
+  - The publications filter is a perception pipeline: four stages (Perceive, Learn, Simulate, Deploy), each with its topics, in `_data/pipeline.yml`. Each paper has one primary stage (`stage:` in `publications.yml`), approved by the owner in October 2026: Perceive 3, Learn 5, Simulate 2, Deploy 3. Ultrasound papers sit under Learn, because they are mainly about learning. It replaced a periodic-table filter in October 2026 because the owner works in AI and the table did not speak to the field.
   - "First author" includes co-first authorship.
   - The TMI paper under review counts as a journal paper (it is on arXiv).
 - **morph is in stealth.** The site shows the name, the link and Chiara's role only. No product, customer, funding or technical details.

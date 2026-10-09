@@ -1,5 +1,7 @@
 # Roles, newest first, in two columns.
 #   current: true  marks the role held now
+#   keep_open: true  never folds the summary on phones (other summaries of two or more
+#                  sentences fold there, except the current role's)
 #   brief: true    folds the summary behind a "What I did" toggle; use it only for
 #                  summaries of two or more sentences (one sentence always shows)
 
@@ -34,6 +36,7 @@ industry:
 academia:
   - role: PhD Researcher and Teaching Assistant
     org: University College London
+    keep_open: true  # the PhD is the bridge's evidence
     dates: Sep 2020 – Jan 2025 (studentship) · Jan 2025 – Feb 2026 (writing up, completing research status)
     summary: >-
       Sole researcher on the AI-guided fetal brain ultrasound line in the Surgical Robot

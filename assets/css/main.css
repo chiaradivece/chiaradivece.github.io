@@ -696,6 +696,14 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
   .stage[aria-pressed="true"]:hover, .stage[data-empty]:hover { box-shadow: none; }
   .stage:active { transform: scale(0.98); }
 }
+/* Phones: once a stage is picked, the others shrink to one line (name and count), so the
+   picked stage's topics land on screen instead of below it */
+@media (max-width: 899px) {
+  .pipeline[data-active] .stage[aria-pressed="false"] { padding-block: 0.6rem; align-items: center; }
+  .pipeline[data-active] .stage[aria-pressed="false"] .stage-topics { display: none; }
+  .pipeline[data-active] .stage[aria-pressed="false"] .stage-count { grid-row: 1; font-size: 1.15rem; }
+  .pipeline[data-active] .stages { gap: 18px; }
+}
 /* The arrow sits in the gap: under each stage on phones, between stages from 900px */
 .stage-arrow {
   position: absolute; left: 50%; top: 100%; display: grid; place-items: center;
@@ -1083,6 +1091,7 @@ html:not(.js) .contact-time { display: none; }
   .award-detail a::after { inset-block: -14px; }
   .facts-source a::after, .pubs-foot a::after { inset-block: -15px; }
   .research-now a::after { inset-block: -13px; }
+  .job-org:has(a) + .job-more { margin-top: 0.35rem; } /* the employer link's reach clears the toggle below */
 }
 
 /* ---------- 404 ---------- */
