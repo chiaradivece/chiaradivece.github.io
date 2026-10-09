@@ -648,12 +648,13 @@
     lightboxImg.decoding = 'async';
     var photoSet = [];
     var photoIndex = 0;
+    var returnTo = null; // where focus goes on close when the set has no thumbnails (slides)
     var photoToken = 0;
 
     var photoAt = function (i) {
       var link = photoSet[(i + photoSet.length) % photoSet.length];
       var thumb = link.querySelector('img');
-      var alt = thumb ? thumb.alt : '';
+      var alt = thumb ? thumb.alt : (link.getAttribute('data-alt') || ''); // slides have no thumbnail
       return { src: link.getAttribute('href'), alt: alt, caption: link.getAttribute('data-caption') || alt };
     };
     var preload = function (i) { if (photoSet.length > 1) new Image().src = photoAt(i).src; };
@@ -694,6 +695,7 @@
     document.querySelectorAll('[data-lightbox-open]').forEach(function (link) {
       link.addEventListener('click', function (e) {
         e.preventDefault();
+        returnTo = null;
         var group = link.closest('.news-photos');
         photoSet = Array.prototype.slice.call((group || document).querySelectorAll('[data-lightbox-open]'));
         var several = photoSet.length > 1;
@@ -731,7 +733,22 @@
     // The dialog restores focus to the thumbnail that opened it; move it to the one last viewed
     lightbox.addEventListener('close', function () {
       var last = photoSet[photoIndex];
-      if (last) last.focus({ preventScroll: true });
+      var target = returnTo || last;
+      returnTo = null;
+      if (target) target.focus({ preventScroll: true });
+    });
+
+    // Slides: "Slides" opens a deck's images in the same viewer, from the first slide; without
+    // JavaScript the link is the PDF. Focus comes back to "Slides" on close.
+    document.querySelectorAll('[data-deck-open]').forEach(function (opener) {
+      var deck = opener.closest('li, .award-row').querySelector('[data-deck]');
+      var first = deck && deck.querySelector('[data-lightbox-open]');
+      if (!first) return;
+      opener.addEventListener('click', function (e) {
+        e.preventDefault();
+        first.click();
+        returnTo = opener;
+      });
     });
   }
 

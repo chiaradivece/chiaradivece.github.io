@@ -512,8 +512,17 @@ layout: default
         <span class="award-body">
           {%- assign words = a.title | split: " " %}{% assign keep = words.size | minus: 1 %}
           <span class="award-title">{% for w in words limit: keep %}{{ w }} {% endfor %}<span class="nowrap">{{ words | last }}{% if a.place %} <span class="tag tag-accent">{{ a.place }}</span>{% endif %}{% if a.honour %} <span class="tag">Honour</span>{% endif %}</span></span>
-          {%- if a.detail %}<span class="award-detail">{{ a.detail }}{% if a.reviewing %} · <a href="#reviewing-title">The review record</a>{% endif %}{% if a.slides %} · {% capture out_arrow %}{% include icon.html name="arrow-up-right" %}{% endcapture %}<a href="{{ a.slides | relative_url }}" rel="noopener">Slides<span class="sr-only">: {{ a.title }}</span> {{ out_arrow | strip }}</a>{% endif %}</span>{% endif %}
+          {%- if a.detail %}<span class="award-detail">{{ a.detail }}{% if a.reviewing %} · <a href="#reviewing-title">The review record</a>{% endif %}{% if a.slides %}{% capture out_arrow %}{% include icon.html name="arrow-up-right" %}{% endcapture %}
+            {%- if a.deck %} · <a href="{{ a.slides | relative_url }}" data-deck-open aria-haspopup="dialog">Slides<span class="sr-only">: {{ a.title }}, {{ a.deck.count }} slides</span></a>{% endif %} · <a href="{{ a.slides | relative_url }}" rel="noopener">PDF<span class="sr-only">: slides for {{ a.title }}</span> {{ out_arrow | strip }}</a>{% endif %}</span>{% endif %}
+
         </span>
+        {%- if a.deck %}
+        <ul class="news-photos" data-deck hidden>
+          {%- for i in (1..a.deck.count) %}{% assign num = i | prepend: "0" | slice: -2, 2 %}
+          <li><a href="{{ a.deck.dir | append: '/' | append: num | append: '.webp' | relative_url }}" data-lightbox-open data-caption="{{ a.deck.caption | escape }}" data-alt="Slide {{ i }} of {{ a.deck.count }}, {{ a.deck.caption | escape }}" tabindex="-1"></a></li>
+          {%- endfor %}
+        </ul>
+        {%- endif %}
       </li>
       {%- endfor %}
     </ol>

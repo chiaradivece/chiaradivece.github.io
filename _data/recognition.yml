@@ -1,5 +1,7 @@
 # Awards: newest first. place: optional placing, shown as a tag on the title line.
-#   slides: optional link to the slides (e.g. a PDF in assets/pdf), shown as "Slides" after the detail.
+#   slides: optional link to the slides (a PDF in assets/pdf), shown as "PDF" after the detail.
+#   deck:   optional { dir, count, w, h, caption }: the slides as images (dir/01.webp …), so
+#           "Slides" opens them in the photo viewer on the page; slides is the PDF fallback.
 awards:
   - year: 2025
     title: Women's Health Tech Grant, top 3 project
@@ -31,6 +33,12 @@ awards:
     place: 1st place
     detail: London, UK
     slides: /assets/pdf/medicss-2021-fetreg-slides.pdf  # FetReg: placental vessel segmentation and registration
+    deck:
+      dir: /assets/img/slides/medicss-2021
+      count: 18
+      w: 1600
+      h: 900
+      caption: "FetReg: placental vessel segmentation and registration in fetoscopy, MedICSS 2021"
   - year: 2020
     title: UCL Research Studentship
     detail: Department of Computer Science
