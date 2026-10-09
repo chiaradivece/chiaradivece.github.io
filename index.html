@@ -30,7 +30,7 @@
       } catch (e) {}
     })();
   </script>
-  <link rel="stylesheet" href="/assets/css/main.css?v=1791534876">
+  <link rel="stylesheet" href="/assets/css/main.css?v=1791535772">
   <link rel="preload" as="image" href="/assets/img/chiara-cutout.webp" fetchpriority="high">
 
   <script type="application/ld+json">
@@ -353,58 +353,49 @@
       </li>
     </ol>
     <details class="filter-panel" data-filter-panel open>
-      <summary class="filter-panel-toggle"><span>Filter papers</span><span class="filter-panel-state" data-filter-panel-state></span></summary>
+      <summary class="filter-panel-toggle"><span>Filter papers</span><span class="sr-only">: </span><span class="filter-panel-state" data-filter-panel-state></span></summary>
       <div class="pipeline" data-pipeline>
         <ol class="stages" aria-label="Filter papers by stage of the perception pipeline">
           <li class="stage-item">
-            <button type="button" class="stage" data-stage="perceive" data-name="Perceive" aria-pressed="false" aria-label="Perceive, 3 papers">
+            <button type="button" class="stage" data-stage="perceive" data-name="Perceive" aria-pressed="false" aria-label="Perceive, 3 papers" aria-describedby="stage-perceive-topics">
               <span class="stage-name" aria-hidden="true">Perceive</span>
               <span class="stage-count" aria-hidden="true">3</span>
-              <span class="stage-topics" aria-hidden="true">laparoscopy, infrared, wearable sensing</span>
+              <span class="stage-topics" id="stage-perceive-topics" aria-hidden="true">Includes laparoscopy, infrared, wearable sensing</span>
             </button><span class="stage-arrow" aria-hidden="true"><span class="icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
 </span>
           </li>
           <li class="stage-item">
-            <button type="button" class="stage" data-stage="learn" data-name="Learn" aria-pressed="false" aria-label="Learn, 5 papers">
+            <button type="button" class="stage" data-stage="learn" data-name="Learn" aria-pressed="false" aria-label="Learn, 5 papers" aria-describedby="stage-learn-topics">
               <span class="stage-name" aria-hidden="true">Learn</span>
               <span class="stage-count" aria-hidden="true">5</span>
-              <span class="stage-topics" aria-hidden="true">deep learning, pose estimation, keypoint matching, landmarks and segmentation</span>
+              <span class="stage-topics" id="stage-learn-topics" aria-hidden="true">Every paper: deep learning, pose estimation</span>
             </button><span class="stage-arrow" aria-hidden="true"><span class="icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
 </span>
           </li>
           <li class="stage-item">
-            <button type="button" class="stage" data-stage="simulate" data-name="Simulate" aria-pressed="false" aria-label="Simulate, 2 papers">
+            <button type="button" class="stage" data-stage="simulate" data-name="Simulate" aria-pressed="false" aria-label="Simulate, 2 papers" aria-describedby="stage-simulate-topics">
               <span class="stage-name" aria-hidden="true">Simulate</span>
               <span class="stage-count" aria-hidden="true">2</span>
-              <span class="stage-topics" aria-hidden="true">simulation, VR and haptics</span>
+              <span class="stage-topics" id="stage-simulate-topics" aria-hidden="true">Every paper: simulation</span>
             </button><span class="stage-arrow" aria-hidden="true"><span class="icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
 </span>
           </li>
           <li class="stage-item">
-            <button type="button" class="stage" data-stage="deploy" data-name="Deploy" aria-pressed="false" aria-label="Deploy, 3 papers">
+            <button type="button" class="stage" data-stage="deploy" data-name="Deploy" aria-pressed="false" aria-label="Deploy, 3 papers" aria-describedby="stage-deploy-topics">
               <span class="stage-name" aria-hidden="true">Deploy</span>
               <span class="stage-count" aria-hidden="true">3</span>
-              <span class="stage-topics" aria-hidden="true">clinical studies, benchmarks</span>
+              <span class="stage-topics" id="stage-deploy-topics" aria-hidden="true">Includes clinical studies, benchmarks</span>
             </button>
           </li>
         </ol>
-        <div class="topics" role="group" aria-label="Narrow Perceive to one topic" data-topics-for="perceive" hidden>
-          <span class="topics-label">Narrow to</span>
-          <button type="button" class="chip topic" data-topic="laparoscopy" data-name="Laparoscopy" aria-pressed="false" aria-label="Laparoscopy, 1 paper"><span aria-hidden="true">Laparoscopy</span><span class="chip-count" aria-hidden="true">1</span></button>
-          <button type="button" class="chip topic" data-topic="infrared" data-name="Infrared" aria-pressed="false" aria-label="Infrared, 1 paper"><span aria-hidden="true">Infrared</span><span class="chip-count" aria-hidden="true">1</span></button>
-          <button type="button" class="chip topic" data-topic="wearable-sensing" data-name="Wearable sensing" aria-pressed="false" aria-label="Wearable sensing, 1 paper"><span aria-hidden="true">Wearable sensing</span><span class="chip-count" aria-hidden="true">1</span></button>
-        </div>
         <div class="topics" role="group" aria-label="Narrow Learn to one topic" data-topics-for="learn" hidden>
           <span class="topics-label">Narrow to</span>
-          <button type="button" class="chip topic" data-topic="keypoint-matching" data-name="Keypoint matching" aria-pressed="false" aria-label="Keypoint matching, 1 paper"><span aria-hidden="true">Keypoint matching</span><span class="chip-count" aria-hidden="true">1</span></button>
-          <button type="button" class="chip topic" data-topic="segmentation" data-name="Landmarks and segmentation" aria-pressed="false" aria-label="Landmarks and segmentation, 1 paper"><span aria-hidden="true">Landmarks and segmentation</span><span class="chip-count" aria-hidden="true">1</span></button>
-        </div>
-        <div class="topics" role="group" aria-label="Narrow Simulate to one topic" data-topics-for="simulate" hidden>
-          <span class="topics-label">Narrow to</span>
-          <button type="button" class="chip topic" data-topic="vr-haptics" data-name="VR and haptics" aria-pressed="false" aria-label="VR and haptics, 1 paper"><span aria-hidden="true">VR and haptics</span><span class="chip-count" aria-hidden="true">1</span></button>
+          <button type="button" class="chip topic" data-topic="ultrasound" data-name="Ultrasound" aria-pressed="false" aria-label="Ultrasound, 4 papers"><span aria-hidden="true">Ultrasound</span><span class="chip-count" aria-hidden="true">4</span></button>
         </div>
         <div class="topics" role="group" aria-label="Narrow Deploy to one topic" data-topics-for="deploy" hidden>
           <span class="topics-label">Narrow to</span>
+          <button type="button" class="chip topic" data-topic="ultrasound" data-name="Ultrasound" aria-pressed="false" aria-label="Ultrasound, 2 papers"><span aria-hidden="true">Ultrasound</span><span class="chip-count" aria-hidden="true">2</span></button>
+          <button type="button" class="chip topic" data-topic="deep-learning" data-name="Deep learning" aria-pressed="false" aria-label="Deep learning, 2 papers"><span aria-hidden="true">Deep learning</span><span class="chip-count" aria-hidden="true">2</span></button>
           <button type="button" class="chip topic" data-topic="clinical-studies" data-name="Clinical studies" aria-pressed="false" aria-label="Clinical studies, 2 papers"><span aria-hidden="true">Clinical studies</span><span class="chip-count" aria-hidden="true">2</span></button>
           <button type="button" class="chip topic" data-topic="datasets" data-name="Benchmarks" aria-pressed="false" aria-label="Benchmarks, 2 papers"><span aria-hidden="true">Benchmarks</span><span class="chip-count" aria-hidden="true">2</span></button>
         </div>
@@ -769,7 +760,7 @@
             <h4 class="job-role">Research Intern</h4>
             <p class="job-org">Politecnico di Milano, NEARLab<span class="job-place">Milan, Italy</span>
             </p>
-            <details class="job-more">
+            <details class="job-more" data-fold-phone open>
               <summary>What I did<span class="sr-only"> at Politecnico di Milano, NEARLab</span></summary>
               <p class="job-summary">NeuroEngineering and Medical Robotics Lab, EU project EDEN2020. Built a real-time, position-based dynamics simulator of brain deformation for keyhole neurosurgery in Unity, validated against in-vivo animal data (mean mismatch 4.73 ± 2.15%). Published in IEEE RA-L and presented at IROS.</p>
             </details>
@@ -781,7 +772,7 @@
             <h4 class="job-role">Graduate Researcher and Teaching Assistant</h4>
             <p class="job-org">University of Illinois Chicago<span class="job-place">Chicago, US</span>
             </p>
-            <details class="job-more">
+            <details class="job-more" data-fold-phone open>
               <summary>What I did<span class="sr-only"> at University of Illinois Chicago</span></summary>
               <p class="job-summary">Developed a haptics and VR simulator for Veress needle insertion training, rated "good" on the System Usability Scale by experienced clinicians. TA for Biological Systems Analysis.</p>
             </details>
@@ -794,32 +785,32 @@
       <ul class="edu" data-stagger>
         <li>
           <span class="edu-degree">PhD in Computer Science</span>
-          <span class="edu-school">University College London<span class="edu-dates">2020 – 2026</span></span>
+          <span class="edu-school">University College London<span class="sr-only">, </span><span class="edu-dates">2020 – 2026</span></span>
           <span class="edu-note">Thesis: Real-time deep learning-based plane pose estimation and navigation in freehand fetal brain ultrasound</span>
         </li>
         <li>
           <span class="edu-degree">MSc Biomedical Engineering</span>
-          <span class="edu-school">Politecnico di Milano<span class="edu-dates">2017 – 2019</span></span>
+          <span class="edu-school">Politecnico di Milano<span class="sr-only">, </span><span class="edu-dates">2017 – 2019</span></span>
           <span class="edu-note">Summa cum laude. Double degree with UIC and Politecnico di Torino</span>
         </li>
         <li>
           <span class="edu-degree">MSc Bioengineering</span>
-          <span class="edu-school">University of Illinois Chicago<span class="edu-dates">2018 – 2019</span></span>
+          <span class="edu-school">University of Illinois Chicago<span class="sr-only">, </span><span class="edu-dates">2018 – 2019</span></span>
           <span class="edu-note">GPA 4.00/4.00, summa cum laude</span>
         </li>
         <li>
           <span class="edu-degree">Alta Scuola Politecnica</span>
-          <span class="edu-school">Politecnico di Milano and Politecnico di Torino<span class="edu-dates">2017 – 2020</span></span>
+          <span class="edu-school">Politecnico di Milano and Politecnico di Torino<span class="sr-only">, </span><span class="edu-dates">2017 – 2020</span></span>
           <span class="edu-note">Top 1% honours programme, diploma with merit</span>
         </li>
         <li>
           <span class="edu-degree">BSc Biomedical Engineering</span>
-          <span class="edu-school">Politecnico di Milano<span class="edu-dates">2014 – 2017</span></span>
+          <span class="edu-school">Politecnico di Milano<span class="sr-only">, </span><span class="edu-dates">2014 – 2017</span></span>
           <span class="edu-note">Thesis: FPGA-based brain injury evaluation through pupillometry</span>
         </li>
         <li>
           <span class="edu-degree">Licensed Industrial Engineer</span>
-          <span class="edu-school">Italy<span class="edu-dates">2021</span></span>
+          <span class="edu-school">Italy<span class="sr-only">, </span><span class="edu-dates">2021</span></span>
           <span class="edu-note">Professional licence to practise</span>
         </li>
       </ul>
@@ -1052,7 +1043,7 @@
   <p class="lightbox-caption" aria-live="polite"><span class="lightbox-count" data-lightbox-count></span><span class="sr-only">. </span><span data-lightbox-caption></span></p>
 </dialog>
 
-  <script src="/assets/js/main.js?v=1791534876" defer></script>
-  <script src="/assets/js/motion.js?v=1791534876" defer></script>
+  <script src="/assets/js/main.js?v=1791535772" defer></script>
+  <script src="/assets/js/motion.js?v=1791535772" defer></script>
 </body>
 </html>
