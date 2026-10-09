@@ -599,9 +599,9 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .edu-dates { font-size: 0.75rem; color: var(--ink-3); margin-left: 0.5rem; white-space: nowrap; }
 
 /* ---------- Research ---------- */
-.research-intro { margin-bottom: clamp(2rem, 4vw, 3rem); }
-.research-intro-text { max-width: 46ch; }
+.research-intro { display: grid; gap: 0.75rem; max-width: 40rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
 .research-lead { font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 500; line-height: 1.35; letter-spacing: -0.015em; color: var(--ink); }
+.research-thread { color: var(--ink-2); font-size: 1.05rem; }
 
 .bento { display: grid; gap: 16px; }
 .cell {
@@ -627,12 +627,8 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .cell-media img { width: 100%; height: 100%; object-fit: contain; }
 .cell-media-paper { padding: clamp(0.75rem, 2vw, 1.5rem); }
 
-.cell-sim {
-  background-color: var(--surface-2);
-  background-image: radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--ink) 18%, transparent) 1px, transparent 0);
-  background-size: 14px 14px;
-  align-content: end;
-}
+/* The simulation card is only as tall as its text: no image to show, so no filler */
+.cell-sim { align-self: start; align-content: start; }
 
 .cell-surgical { align-items: center; }
 .cell-fetal { grid-template-rows: 1fr auto; align-content: stretch; }
@@ -652,7 +648,10 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 
 /* Three papers to start with, before the filters */
 .picks { display: grid; gap: 1.5rem 2rem; margin-bottom: clamp(2rem, 3.5vw, 2.5rem); }
-@media (min-width: 900px) { .picks { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 900px) {
+  .picks { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 0.6rem; }
+  .pick { grid-row: span 3; grid-template-rows: subgrid; }
+}
 .pick { display: grid; gap: 0.6rem; align-content: start; padding-top: 1rem; border-top: 2px solid var(--ink); }
 .pick-meta { font-size: 0.85rem; color: var(--ink-3); line-height: 1.4; }
 .pick-title { font-size: clamp(1.15rem, 1.6vw, 1.3rem); font-weight: 600; letter-spacing: -0.015em; line-height: 1.35; }
@@ -845,7 +844,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .marquee.is-paused .marquee-track { animation-play-state: paused; }
 
 /* Pause/play controls for anything that keeps moving (WCAG 2.2.2) */
-.motion-toggle { width: 32px; height: 32px; font-size: 0.9rem; }
+.motion-toggle { width: 40px; height: 40px; font-size: 0.95rem; }
 .motion-toggle .when-paused { display: none; }
 .motion-toggle[aria-pressed="true"] .when-paused { display: inline-flex; }
 .motion-toggle[aria-pressed="true"] .when-playing { display: none; }
@@ -921,7 +920,26 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 @media (min-width: 900px) { .talks-head { grid-template-columns: minmax(0, 1fr) minmax(0, 26rem); align-items: end; } }
 .talks-invite { display: grid; gap: 1rem; justify-items: start; color: var(--ink-2); }
 .invite-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.6rem; }
-.invite-actions .copy-note { flex-basis: 100%; }
+.speaker-kit-actions .copy-note { flex-basis: 100%; }
+/* "Copied" never moves the page: under the invite it hangs below the buttons (the head's
+   bottom margin has room for it); in the speaker kit its line is reserved */
+.invite-actions { position: relative; }
+.invite-actions .copy-note { position: absolute; top: calc(100% + 0.35rem); left: 0; right: 0; }
+.speaker-kit-actions .copy-note:empty { display: block; }
+
+/* Speaker kit: the bio organisers paste into a programme, and the photo */
+.speaker-kit {
+  display: grid; gap: 0.75rem 3rem; margin-top: clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem); border: 1px solid var(--line); border-radius: var(--radius);
+}
+.speaker-kit-title { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; }
+.speaker-bio { color: var(--ink-2); max-width: 62ch; }
+.speaker-kit-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.6rem; }
+@media (min-width: 900px) {
+  .speaker-kit { grid-template-columns: minmax(0, 1fr) auto; align-items: start; }
+  .speaker-kit-title, .speaker-bio { grid-column: 1; }
+  .speaker-kit-actions { grid-column: 2; grid-row: 1 / span 2; justify-content: flex-end; max-width: 20rem; }
+}
 .talk-list { border-top: 1px solid var(--ink); }
 .talk {
   display: grid; gap: 0.3rem 2rem;
@@ -994,6 +1012,8 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
   transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out), filter 160ms var(--ease-out);
 }
 .copy-btn .icon { width: 1.05em; height: 1.05em; }
+/* Labelled copy buttons keep the cross-fade inside a 1em glyph box */
+.copy-glyph { position: relative; display: inline-block; width: 1.05em; height: 1.05em; }
 .copy-btn .when-done { opacity: 0; transform: scale(0.6); filter: blur(2px); }
 .copy-btn[data-copied] .when-done { opacity: 1; transform: none; filter: none; }
 .copy-btn[data-copied] .when-idle { opacity: 0; transform: scale(0.6); filter: blur(2px); }

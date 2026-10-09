@@ -649,7 +649,7 @@
 
   /* ---------- Copy email ---------- */
   // Success swaps the icon and says "Copied" (announced politely). If the clipboard is
-  // unavailable or refused, the address is selected and the note says how to copy it.
+  // unavailable or refused, the text (address or bio) is selected and the note says how to copy it.
   var isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
   document.querySelectorAll('[data-copy]').forEach(function (btn) {
     var note = btn.parentElement.querySelector('[data-copy-note]');
@@ -671,9 +671,13 @@
       var fallback = function () {
         var touch = window.matchMedia('(pointer: coarse)').matches;
         var keys = isMac ? '⌘C' : 'Ctrl+C';
-        var target = link && link.textContent.trim() === text ? link : null;
-        if (!target && note) {
-          // e.g. beside "Invite me to speak": spell the address out in the note and select it
+        var source = document.getElementById(btn.getAttribute('data-copy-source') || '');
+        var target = source || (link && link.textContent.trim() === text ? link : null);
+        if (source) {
+          // e.g. the speaker bio: it is already on the page, so select it where it is
+          say(touch ? 'Your browser blocked copying. Press and hold the bio to copy it.' : 'Your browser blocked copying. The bio is selected: press ' + keys + '.', true);
+        } else if (!target && note) {
+          // e.g. beside "Email an invitation": spell the address out in the note and select it
           note.textContent = touch ? 'Your browser blocked copying. Press and hold to copy ' : 'Your browser blocked copying. Press ' + keys + ' to copy ';
           target = document.createElement('span');
           target.className = 'copy-address';
