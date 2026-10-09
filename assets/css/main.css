@@ -1,7 +1,7 @@
 /* ==========================================================================
    Chiara Di Vece: site styles
    Shape system: buttons, chips and tags are full pills; cards, images and the
-   scan screen use --radius (14px); element tiles and news photos use
+   photo viewer use --radius (14px); element tiles and news photos use
    --radius-sm (10px); legend swatches are 3px squares.
    Motion: --ease-out for entrances and presses, --ease-in-out for things
    moving on screen, plain ease for hover colour changes (Emil Kowalski's rules).
@@ -399,30 +399,6 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 }
 @keyframes hero-lift { to { transform: translateY(-14%) scale(0.95); opacity: 0.2; } }
 
-/* The scan screen stays dark in both themes, like a real monitor */
-.scan { margin: 0; }
-.scan-screen {
-  position: relative;
-  aspect-ratio: 1 / 0.92;
-  background: var(--screen);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.07), var(--shadow);
-  touch-action: pan-y;
-}
-.scan-screen canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.caption-touch { display: none; }
-@media (hover: none) and (pointer: coarse) {
-  .caption-touch { display: inline; }
-  .caption-mouse { display: none; }
-}
-.scan-caption {
-  margin-top: 0.85rem;
-  font-size: 0.875rem;
-  color: var(--ink-3);
-  max-width: 48ch;
-}
-
 /* ---------- About ---------- */
 .about-grid { display: grid; gap: clamp(2.5rem, 5vw, 4rem); align-items: start; }
 @media (min-width: 900px) {
@@ -623,9 +599,8 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .edu-dates { font-size: 0.75rem; color: var(--ink-3); margin-left: 0.5rem; white-space: nowrap; }
 
 /* ---------- Research ---------- */
-.research-intro { display: grid; gap: 2rem; align-items: center; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
-@media (min-width: 900px) { .research-intro { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 5vw, 5rem); } }
-.research-intro-text { display: grid; gap: 1rem; max-width: 46ch; color: var(--ink-2); }
+.research-intro { margin-bottom: clamp(2rem, 4vw, 3rem); }
+.research-intro-text { max-width: 46ch; }
 .research-lead { font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 500; line-height: 1.35; letter-spacing: -0.015em; color: var(--ink); }
 
 .bento { display: grid; gap: 16px; }
@@ -875,11 +850,6 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .motion-toggle[aria-pressed="true"] .when-paused { display: inline-flex; }
 .motion-toggle[aria-pressed="true"] .when-playing { display: none; }
 @media (prefers-reduced-motion: reduce) { .motion-toggle { display: none; } } /* nothing moves, nothing to pause */
-.scan-toggle {
-  position: absolute; right: 12px; bottom: 12px; z-index: 1;
-  background: rgb(10 13 17 / 0.6); color: #e8edf2; border-color: rgb(255 255 255 / 0.25);
-}
-.scan-toggle:hover { border-color: #e8edf2; }
 .marquee {
   -webkit-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
@@ -1049,9 +1019,6 @@ html:not(.js) .contact-time { display: none; }
 .fineprint { margin-top: clamp(3rem, 6vw, 5rem); font-size: 0.75rem; color: var(--ink-3); }
 
 /* ---------- Small screens ---------- */
-@media (max-width: 767px) {
-  .scan-screen { aspect-ratio: 1 / 0.86; }
-}
 
 /* ---------- Touch screens: 44px tap targets ---------- */
 @media (pointer: coarse) {
