@@ -208,16 +208,14 @@
   /* ---------- Publications: the perception pipeline + filters ---------- */
 
   // A paper is shown when it matches every active filter:
-  //   stage    a pipeline stage (Perceive, Learn, Simulate, Deploy): any of its topics
-  //   topic    one topic inside the picked stage, which narrows the stage
+  //   stage    a pipeline stage (Perceive, Learn, Simulate, Deploy): the paper's primary
+  //            stage, so every paper sits in exactly one
+  //   topic    one topic inside the picked stage, which narrows it
   //   first    first-author papers; equal-contribution (co-first) papers count too
   //   journal  journal papers, including ones under review at a journal (public on arXiv)
   function matchesFilter(pub, state) {
-    if (state.topic) {
-      if (pub.topics.indexOf(state.topic) === -1) return false;
-    } else if (state.stage) {
-      if (!state.stage.topics.some(function (t) { return pub.topics.indexOf(t) > -1; })) return false;
-    }
+    if (state.stage && pub.stage !== state.stage.id) return false;
+    if (state.topic && pub.topics.indexOf(state.topic) === -1) return false;
     if (state.first && pub.first !== 'sole' && pub.first !== 'joint') return false;
     if (state.journal && pub.type !== 'journal') return false;
     return true;
@@ -231,7 +229,6 @@
         btn: btn,
         id: btn.dataset.stage,
         name: btn.dataset.name,
-        topics: btn.dataset.topics.split(' '),
         row: pipeline.querySelector('[data-topics-for="' + btn.dataset.stage + '"]')
       };
     });
@@ -249,6 +246,7 @@
         el: el,
         type: el.dataset.type,
         first: el.dataset.first,
+        stage: el.dataset.stage,
         topics: (el.dataset.topics || '').split(' ').filter(Boolean)
       };
     });
@@ -292,12 +290,24 @@
         if (st.row) st.row.hidden = !on;
       });
       topicChips.forEach(function (chip) {
-        var n = countFor({ stage: null, topic: chip.dataset.topic, first: state.first, journal: state.journal });
+        var chipStage = stageFor(chip.closest('[data-topics-for]').dataset.topicsFor);
+        var n = countFor({ stage: chipStage, topic: chip.dataset.topic, first: state.first, journal: state.journal });
         var on = chip.dataset.topic === state.topic;
         chip.querySelector('.chip-count').textContent = n;
         chip.toggleAttribute('data-empty', n === 0 && !on);
         chip.setAttribute('aria-pressed', String(on));
         chip.setAttribute('aria-label', chip.dataset.name + ', ' + plural(n, 'paper'));
+      });
+      // First author and Journals preview too: what the list would show with the chip on
+      toggles.forEach(function (btn) {
+        var key = btn.dataset.toggle;
+        var preview = { stage: state.stage, topic: state.topic, first: state.first, journal: state.journal };
+        preview[key] = true;
+        var n = countFor(preview);
+        var countEl = btn.querySelector('.chip-count');
+        if (countEl) countEl.textContent = n;
+        btn.toggleAttribute('data-empty', n === 0 && !state[key]);
+        btn.setAttribute('aria-label', btn.dataset.name + ', ' + plural(n, 'paper'));
       });
     }
 
@@ -312,7 +322,7 @@
       emptyText.textContent = 'No ' + kind + 'papers' + where + ' yet.';
       if (name && (state.first || state.journal)) {
         var all = countFor({ stage: state.stage, topic: state.topic, first: false, journal: false });
-        var phrase = state.topic ? name + ' paper' : 'paper in ' + name;
+        var phrase = state.topic ? name + ' paper' : 'paper in ' + name; // e.g. "Show the paper in Simulate"
         emptyFix.textContent = all === 1 ? 'Show the ' + phrase : 'Show all ' + all + ' ' + (state.topic ? name + ' papers' : 'papers in ' + name);
         emptyFix.dataset.fix = 'chips';
       } else {
@@ -376,7 +386,6 @@
     // Resting 16px above the bottom edge; when the chips scroll into that spot, the button
     // rides 8px above them instead, so it never covers a control and never disappears.
     var placing = 0;
-    var wide = window.matchMedia('(min-width: 900px)');
     var phone = window.matchMedia('(max-width: 639px)');
     function syncPanel() { if (panel) panel.open = !phone.matches; }
     syncPanel();
@@ -387,13 +396,12 @@
       var filtered = !!(state.stage || state.first || state.journal);
       if (!(filtered && gridInView && listBelow && !barInView)) return;
       var vh = window.innerHeight;
-      if (wide.matches) {
-        // Desktop: the list is a short scroll away; if the button would cover the pipeline, leave it out
-        var box = pipeline.getBoundingClientRect();
-        var coversPipeline = box.bottom > vh - 16 - 52 && box.top < vh - 16;
-        pill.hidden = coversPipeline;
-        if (coversPipeline) return;
-      }
+      // If the button would cover the pipeline (its stages or topics), leave it out: the status
+      // bar's Show does the same job once the pipeline scrolls on
+      var box = pipeline.getBoundingClientRect();
+      var coversPipeline = box.bottom > vh - 16 - 52 && box.top < vh - 16;
+      pill.hidden = coversPipeline;
+      if (coversPipeline) return;
       var chips = chipsRow.getBoundingClientRect();
       var restingTop = vh - 16 - pill.offsetHeight;
       // lift only while the chips overlap the spot where the button rests
@@ -475,13 +483,16 @@
     // Phones: a final pick (a topic, or a chip) folds the panel; its toggle names the filter,
     // so the result line and Show sit right under it and nothing floats over the controls.
     // A stage pick keeps the panel open, because its topics have just appeared.
-    function foldOnPhone(e) {
+    function foldOnPhone() {
       if (!(phone.matches && panel && panel.open)) return;
+      var hadFocus = panel.contains(document.activeElement);
       panel.open = false;
       var top = panel.getBoundingClientRect().top;
       if (top < (nav ? nav.offsetHeight : 0)) panel.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      // the control that had focus is now folded away (keyboard, pointer or screen-reader tap
+      // alike), so focus moves to the toggle that names the filter
       var toggle = panel.querySelector('summary');
-      if (toggle && e.detail === 0) toggle.focus({ preventScroll: true }); // keyboard: focus stays on the filter
+      if (toggle && hadFocus) toggle.focus({ preventScroll: true });
     }
     stages.forEach(function (st) {
       st.btn.addEventListener('click', function (e) {
@@ -494,14 +505,14 @@
       chip.addEventListener('click', function (e) {
         state.topic = state.topic === chip.dataset.topic ? null : chip.dataset.topic;
         update(e);
-        if (state.topic) foldOnPhone(e);
+        if (state.topic) foldOnPhone();
       });
     });
     toggles.forEach(function (btn) {
       btn.addEventListener('click', function (e) {
         state[btn.dataset.toggle] = !state[btn.dataset.toggle];
         update(e);
-        foldOnPhone(e);
+        foldOnPhone();
       });
     });
     function focusPick() {
@@ -513,9 +524,12 @@
     if (changeLink) {
       changeLink.addEventListener('click', function (e) {
         e.preventDefault();
-        if (panel && !panel.open) panel.open = true;
+        var opening = panel && !panel.open;
+        if (opening) panel.open = true;
         (panel || pipeline).scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }); // stages and chips too
-        focusPick();
+        // a panel that was folded can't take focus inside it until it has rendered open
+        if (opening) requestAnimationFrame(function () { requestAnimationFrame(focusPick); });
+        else focusPick();
       });
     }
     if (barClear) {
