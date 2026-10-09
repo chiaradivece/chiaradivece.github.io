@@ -1,5 +1,7 @@
 # Roles, newest first, in two columns.
 #   current: true  marks the role held now
+#   bridge: true   marks the role the current one grew out of (the PhD); both carry a small
+#                  Signal Blue sector mark on the timeline
 #   keep_open: true  never folds the summary on phones. Otherwise summaries of two or more
 #                  sentences fold behind "What I did" on phones (never the current role's);
 #                  on wider screens every summary shows in full
@@ -36,6 +38,7 @@ academia:
   - role: PhD Researcher and Teaching Assistant
     org: University College London
     keep_open: true  # the PhD is the bridge's evidence
+    bridge: true     # with the current role, marked on the timeline as the two ends of the bridge
     dates: Sep 2020 – Jan 2025 (studentship) · Jan 2025 – Feb 2026 (writing up, completing research status)
     summary: >-
       Sole researcher on the AI-guided fetal brain ultrasound line in the Surgical Robot

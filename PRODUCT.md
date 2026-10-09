@@ -52,7 +52,7 @@ Three claims, in this order of weight (confirmed):
   - Research (one line on the move from fetal ultrasound to soft robots and one on the thread across the cards, then the three research cards and a one-line "Now" row with the role, morph's link and the start date)
   - Publications (three selected papers, then the full list filtered by stage of the perception pipeline, first author, journal)
   - Talks and reviewing (an invitation line with email and copy buttons, past talks with the speaker kit beside them on desktop and before them on phones (a copyable bio and the portrait to download), optional slides and video links per talk, the review count and reviewer award, the venue marquee)
-  - Experience and education (on phones, longer role summaries fold behind "What I did"; the current role and the PhD stay open)
+  - Experience and education (on phones, longer role summaries fold behind "What I did" and Education notes fold behind one toggle; the current role and the PhD stay open, and both carry a small Signal Blue triangle on the timeline as the two ends of the bridge)
   - Awards (a full list; honours labelled and not counted)
   - Teaching and mentoring
   - Contact (email, CV, local clocks)
