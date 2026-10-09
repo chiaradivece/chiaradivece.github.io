@@ -30,7 +30,7 @@
       } catch (e) {}
     })();
   </script>
-  <link rel="stylesheet" href="/assets/css/main.css?v=1791533046">
+  <link rel="stylesheet" href="/assets/css/main.css?v=1791534038">
   <link rel="preload" as="image" href="/assets/img/chiara-cutout.webp" fetchpriority="high">
 
   <script type="application/ld+json">
@@ -181,10 +181,10 @@
           <div class="fact"><dt>Reviewer</dt><dd><a href="#reviewing-title">15+ reviews for CVPR, ECCV, MICCAI, ICRA</a></dd></div>
         </dl>
         <dl class="numbers" data-stagger>
-          <div class="number"><dt>citations</dt><dd>131</dd></div>
-          <div class="number"><dt>h-index</dt><dd>7</dd></div>
-          <div class="number"><dt>papers</dt><dd>13</dd></div>
-          <div class="number"><dt>awards</dt><dd>15</dd></div>
+          <div class="number"><dt>citations</dt><dd><a href="https://scholar.google.com/citations?user=CStrr20AAAAJ&amp;hl=en" rel="noopener">131<span class="sr-only"> citations on Google Scholar</span></a></dd></div>
+          <div class="number"><dt>h-index</dt><dd><a href="https://scholar.google.com/citations?user=CStrr20AAAAJ&amp;hl=en" rel="noopener">7<span class="sr-only"> h-index on Google Scholar</span></a></dd></div>
+          <div class="number"><dt>papers</dt><dd><a href="#publications">13<span class="sr-only"> papers, the list</span></a></dd></div>
+          <div class="number"><dt>awards</dt><dd><a href="#recognition">15<span class="sr-only"> awards, the list</span></a></dd></div>
         </dl>
         <p class="facts-source">Citations and h-index from <a href="https://scholar.google.com/citations?user=CStrr20AAAAJ&amp;hl=en" rel="noopener">Google Scholar</a>, updated October 2026.</p>
       </div>
@@ -296,14 +296,6 @@
 </a>
         </p>
       </article>
-      <article class="cell cell-now">
-        <h3>Now: AI for soft robots</h3>
-        <p>AI Lead and Founding Applied Scientist at morph since Oct 2024.</p>
-        <p class="cell-links">
-          <a href="https://morph.inc/" rel="noopener">morph <span class="icon" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span>
-</a>
-        </p>
-      </article>
 
       <article class="cell cell-surgical">
         <div class="cell-body">
@@ -327,13 +319,18 @@
         </div>
       </article>
     </div>
+    <p class="research-now" data-reveal>
+      <span class="tag tag-accent">Now</span>
+      <span>AI Lead and Founding Applied Scientist at <a href="https://morph.inc/" rel="noopener">morph <span class="icon" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span>
+</a>, since Oct 2024.</span>
+    </p>
   </section>
 
   <!-- Publications -->
   <section class="section pubs wrap" id="publications">
     <div class="pubs-head" data-reveal>
       <h2 class="section-title">Publications</h2>
-      <p class="pubs-intro">Three to start with, then all 13, which you can filter by research element, first author or journal.</p>
+      <p class="pubs-intro">Three to start with, then all 13, which you can filter by stage of the perception pipeline, first author or journal.</p>
     </div>
 
     <ol class="picks" aria-label="Three papers to start with" data-stagger>
@@ -356,102 +353,75 @@
         </p>
       </li>
     </ol>
-    <details class="el-panel" data-el-panel open>
-      <summary class="el-panel-toggle"><span>Filter papers</span><span class="el-panel-state" data-el-panel-state></span></summary>
-      <div class="pub-controls">
-        <ul class="el-legend" aria-label="Element families">
-          <li class="el-key" data-family="imaging"><span class="el-swatch" aria-hidden="true"></span>Imaging</li>
-          <li class="el-key" data-family="learning"><span class="el-swatch" aria-hidden="true"></span>Learning</li>
-          <li class="el-key" data-family="geometry"><span class="el-swatch" aria-hidden="true"></span>3D and simulation</li>
-          <li class="el-key" data-family="practice"><span class="el-swatch" aria-hidden="true"></span>Data and clinic</li>
-        </ul>
-        <div class="chips" role="group" aria-label="More filters" data-pub-filters>
-          <button type="button" class="chip" data-toggle="first" aria-pressed="false">First author</button>
-          <button type="button" class="chip" data-toggle="journal" aria-pressed="false">Journals</button>
+    <details class="filter-panel" data-filter-panel open>
+      <summary class="filter-panel-toggle"><span>Filter papers</span><span class="filter-panel-state" data-filter-panel-state></span></summary>
+      <div class="pipeline" data-pipeline>
+        <ol class="stages" aria-label="Filter papers by stage of the perception pipeline">
+          <li class="stage-item">
+            <button type="button" class="stage" data-stage="perceive" data-name="Perceive" data-topics="ultrasound hyperspectral laparoscopy infrared wearable-sensing" aria-pressed="false" aria-label="Perceive, 11 papers">
+              <span class="stage-name" aria-hidden="true">Perceive</span>
+              <span class="stage-count" aria-hidden="true">11</span>
+              <span class="stage-topics" aria-hidden="true">ultrasound, hyperspectral, laparoscopy, infrared, wearable sensing</span>
+            </button><span class="stage-arrow" aria-hidden="true"><span class="icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
+</span>
+          </li>
+          <li class="stage-item">
+            <button type="button" class="stage" data-stage="learn" data-name="Learn" data-topics="deep-learning pose-estimation keypoint-matching segmentation" aria-pressed="false" aria-label="Learn, 7 papers">
+              <span class="stage-name" aria-hidden="true">Learn</span>
+              <span class="stage-count" aria-hidden="true">7</span>
+              <span class="stage-topics" aria-hidden="true">deep learning, pose estimation, keypoint matching, landmarks and segmentation</span>
+            </button><span class="stage-arrow" aria-hidden="true"><span class="icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
+</span>
+          </li>
+          <li class="stage-item">
+            <button type="button" class="stage" data-stage="simulate" data-name="Simulate" data-topics="3d-reconstruction simulation vr-haptics" aria-pressed="false" aria-label="Simulate, 6 papers">
+              <span class="stage-name" aria-hidden="true">Simulate</span>
+              <span class="stage-count" aria-hidden="true">6</span>
+              <span class="stage-topics" aria-hidden="true">3D reconstruction, simulation, VR and haptics</span>
+            </button><span class="stage-arrow" aria-hidden="true"><span class="icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
+</span>
+          </li>
+          <li class="stage-item">
+            <button type="button" class="stage" data-stage="deploy" data-name="Deploy" data-topics="robotics neurosurgery clinical-studies datasets" aria-pressed="false" aria-label="Deploy, 7 papers">
+              <span class="stage-name" aria-hidden="true">Deploy</span>
+              <span class="stage-count" aria-hidden="true">7</span>
+              <span class="stage-topics" aria-hidden="true">robotics, neurosurgery, clinical studies, datasets and benchmarks</span>
+            </button>
+          </li>
+        </ol>
+        <div class="topics" role="group" aria-label="Narrow Perceive to one topic" data-topics-for="perceive" hidden>
+          <span class="topics-label">Narrow to</span>
+          <button type="button" class="chip topic" data-topic="ultrasound" data-name="Ultrasound" aria-pressed="false" aria-label="Ultrasound, 6 papers"><span aria-hidden="true">Ultrasound</span><span class="chip-count" aria-hidden="true">6</span></button>
+          <button type="button" class="chip topic" data-topic="hyperspectral" data-name="Hyperspectral" aria-pressed="false" aria-label="Hyperspectral, 1 paper"><span aria-hidden="true">Hyperspectral</span><span class="chip-count" aria-hidden="true">1</span></button>
+          <button type="button" class="chip topic" data-topic="laparoscopy" data-name="Laparoscopy" aria-pressed="false" aria-label="Laparoscopy, 3 papers"><span aria-hidden="true">Laparoscopy</span><span class="chip-count" aria-hidden="true">3</span></button>
+          <button type="button" class="chip topic" data-topic="infrared" data-name="Infrared" aria-pressed="false" aria-label="Infrared, 1 paper"><span aria-hidden="true">Infrared</span><span class="chip-count" aria-hidden="true">1</span></button>
+          <button type="button" class="chip topic" data-topic="wearable-sensing" data-name="Wearable sensing" aria-pressed="false" aria-label="Wearable sensing, 1 paper"><span aria-hidden="true">Wearable sensing</span><span class="chip-count" aria-hidden="true">1</span></button>
+        </div>
+        <div class="topics" role="group" aria-label="Narrow Learn to one topic" data-topics-for="learn" hidden>
+          <span class="topics-label">Narrow to</span>
+          <button type="button" class="chip topic" data-topic="deep-learning" data-name="Deep learning" aria-pressed="false" aria-label="Deep learning, 7 papers"><span aria-hidden="true">Deep learning</span><span class="chip-count" aria-hidden="true">7</span></button>
+          <button type="button" class="chip topic" data-topic="pose-estimation" data-name="Pose estimation" aria-pressed="false" aria-label="Pose estimation, 6 papers"><span aria-hidden="true">Pose estimation</span><span class="chip-count" aria-hidden="true">6</span></button>
+          <button type="button" class="chip topic" data-topic="keypoint-matching" data-name="Keypoint matching" aria-pressed="false" aria-label="Keypoint matching, 2 papers"><span aria-hidden="true">Keypoint matching</span><span class="chip-count" aria-hidden="true">2</span></button>
+          <button type="button" class="chip topic" data-topic="segmentation" data-name="Landmarks and segmentation" aria-pressed="false" aria-label="Landmarks and segmentation, 2 papers"><span aria-hidden="true">Landmarks and segmentation</span><span class="chip-count" aria-hidden="true">2</span></button>
+        </div>
+        <div class="topics" role="group" aria-label="Narrow Simulate to one topic" data-topics-for="simulate" hidden>
+          <span class="topics-label">Narrow to</span>
+          <button type="button" class="chip topic" data-topic="3d-reconstruction" data-name="3D reconstruction" aria-pressed="false" aria-label="3D reconstruction, 3 papers"><span aria-hidden="true">3D reconstruction</span><span class="chip-count" aria-hidden="true">3</span></button>
+          <button type="button" class="chip topic" data-topic="simulation" data-name="Simulation" aria-pressed="false" aria-label="Simulation, 3 papers"><span aria-hidden="true">Simulation</span><span class="chip-count" aria-hidden="true">3</span></button>
+          <button type="button" class="chip topic" data-topic="vr-haptics" data-name="VR and haptics" aria-pressed="false" aria-label="VR and haptics, 1 paper"><span aria-hidden="true">VR and haptics</span><span class="chip-count" aria-hidden="true">1</span></button>
+        </div>
+        <div class="topics" role="group" aria-label="Narrow Deploy to one topic" data-topics-for="deploy" hidden>
+          <span class="topics-label">Narrow to</span>
+          <button type="button" class="chip topic" data-topic="robotics" data-name="Robotics" aria-pressed="false" aria-label="Robotics, 2 papers"><span aria-hidden="true">Robotics</span><span class="chip-count" aria-hidden="true">2</span></button>
+          <button type="button" class="chip topic" data-topic="neurosurgery" data-name="Neurosurgery" aria-pressed="false" aria-label="Neurosurgery, 1 paper"><span aria-hidden="true">Neurosurgery</span><span class="chip-count" aria-hidden="true">1</span></button>
+          <button type="button" class="chip topic" data-topic="clinical-studies" data-name="Clinical studies" aria-pressed="false" aria-label="Clinical studies, 3 papers"><span aria-hidden="true">Clinical studies</span><span class="chip-count" aria-hidden="true">3</span></button>
+          <button type="button" class="chip topic" data-topic="datasets" data-name="Datasets and benchmarks" aria-pressed="false" aria-label="Datasets and benchmarks, 4 papers"><span aria-hidden="true">Datasets and benchmarks</span><span class="chip-count" aria-hidden="true">4</span></button>
         </div>
       </div>
-    <div class="elements" role="group" aria-label="Filter papers by research element" data-element-grid data-stagger style="--step: 25ms">
-      <button type="button" class="el" data-family="imaging" data-element="Us" data-name="Ultrasound" aria-pressed="false" aria-label="Ultrasound, 6 papers">
-        <span class="el-count" aria-hidden="true">6</span>
-        <span class="el-symbol" aria-hidden="true">Us</span>
-        <span class="el-name" aria-hidden="true">Ultrasound</span>
-      </button>
-      <button type="button" class="el" data-family="imaging" data-element="Hs" data-name="Hyper&shy;spectral" aria-pressed="false" aria-label="Hyperspectral, 1 paper">
-        <span class="el-count" aria-hidden="true">1</span>
-        <span class="el-symbol" aria-hidden="true">Hs</span>
-        <span class="el-name" aria-hidden="true">Hyper&shy;spectral</span>
-      </button>
-      <button type="button" class="el" data-family="imaging" data-element="Lp" data-name="Laparo&shy;scopy" aria-pressed="false" aria-label="Laparoscopy, 3 papers">
-        <span class="el-count" aria-hidden="true">3</span>
-        <span class="el-symbol" aria-hidden="true">Lp</span>
-        <span class="el-name" aria-hidden="true">Laparo&shy;scopy</span>
-      </button>
-      <button type="button" class="el" data-family="imaging" data-element="Ir" data-name="Infrared" aria-pressed="false" aria-label="Infrared, 1 paper">
-        <span class="el-count" aria-hidden="true">1</span>
-        <span class="el-symbol" aria-hidden="true">Ir</span>
-        <span class="el-name" aria-hidden="true">Infrared</span>
-      </button>
-      <button type="button" class="el" data-family="learning" data-element="Dl" data-name="Deep learning" aria-pressed="false" aria-label="Deep learning, 7 papers">
-        <span class="el-count" aria-hidden="true">7</span>
-        <span class="el-symbol" aria-hidden="true">Dl</span>
-        <span class="el-name" aria-hidden="true">Deep learning</span>
-      </button>
-      <button type="button" class="el" data-family="learning" data-element="Ps" data-name="Pose estimation" aria-pressed="false" aria-label="Pose estimation, 6 papers">
-        <span class="el-count" aria-hidden="true">6</span>
-        <span class="el-symbol" aria-hidden="true">Ps</span>
-        <span class="el-name" aria-hidden="true">Pose estimation</span>
-      </button>
-      <button type="button" class="el" data-family="learning" data-element="Km" data-name="Keypoint matching" aria-pressed="false" aria-label="Keypoint matching, 2 papers">
-        <span class="el-count" aria-hidden="true">2</span>
-        <span class="el-symbol" aria-hidden="true">Km</span>
-        <span class="el-name" aria-hidden="true">Keypoint matching</span>
-      </button>
-      <button type="button" class="el" data-family="learning" data-element="Lm" data-name="Landmarks and segmen&shy;tation" aria-pressed="false" aria-label="Landmarks and segmentation, 2 papers">
-        <span class="el-count" aria-hidden="true">2</span>
-        <span class="el-symbol" aria-hidden="true">Lm</span>
-        <span class="el-name" aria-hidden="true">Landmarks and segmen&shy;tation</span>
-      </button>
-      <button type="button" class="el" data-family="geometry" data-element="3d" data-name="3D recon&shy;struction" aria-pressed="false" aria-label="3D reconstruction, 3 papers">
-        <span class="el-count" aria-hidden="true">3</span>
-        <span class="el-symbol" aria-hidden="true">3d</span>
-        <span class="el-name" aria-hidden="true">3D recon&shy;struction</span>
-      </button>
-      <button type="button" class="el" data-family="geometry" data-element="Sm" data-name="Simulation" aria-pressed="false" aria-label="Simulation, 3 papers">
-        <span class="el-count" aria-hidden="true">3</span>
-        <span class="el-symbol" aria-hidden="true">Sm</span>
-        <span class="el-name" aria-hidden="true">Simulation</span>
-      </button>
-      <button type="button" class="el" data-family="geometry" data-element="Vr" data-name="VR and haptics" aria-pressed="false" aria-label="VR and haptics, 1 paper">
-        <span class="el-count" aria-hidden="true">1</span>
-        <span class="el-symbol" aria-hidden="true">Vr</span>
-        <span class="el-name" aria-hidden="true">VR and haptics</span>
-      </button>
-      <button type="button" class="el" data-family="geometry" data-element="Rb" data-name="Robotics" aria-pressed="false" aria-label="Robotics, 2 papers">
-        <span class="el-count" aria-hidden="true">2</span>
-        <span class="el-symbol" aria-hidden="true">Rb</span>
-        <span class="el-name" aria-hidden="true">Robotics</span>
-      </button>
-      <button type="button" class="el" data-family="practice" data-element="Ds" data-name="Datasets and bench&shy;marks" aria-pressed="false" aria-label="Datasets and benchmarks, 4 papers">
-        <span class="el-count" aria-hidden="true">4</span>
-        <span class="el-symbol" aria-hidden="true">Ds</span>
-        <span class="el-name" aria-hidden="true">Datasets and bench&shy;marks</span>
-      </button>
-      <button type="button" class="el" data-family="practice" data-element="Cs" data-name="Clinical studies" aria-pressed="false" aria-label="Clinical studies, 3 papers">
-        <span class="el-count" aria-hidden="true">3</span>
-        <span class="el-symbol" aria-hidden="true">Cs</span>
-        <span class="el-name" aria-hidden="true">Clinical studies</span>
-      </button>
-      <button type="button" class="el" data-family="practice" data-element="Ns" data-name="Neuro&shy;surgery" aria-pressed="false" aria-label="Neurosurgery, 1 paper">
-        <span class="el-count" aria-hidden="true">1</span>
-        <span class="el-symbol" aria-hidden="true">Ns</span>
-        <span class="el-name" aria-hidden="true">Neuro&shy;surgery</span>
-      </button>
-      <button type="button" class="el" data-family="practice" data-element="Ws" data-name="Wearable sensing" aria-pressed="false" aria-label="Wearable sensing, 1 paper">
-        <span class="el-count" aria-hidden="true">1</span>
-        <span class="el-symbol" aria-hidden="true">Ws</span>
-        <span class="el-name" aria-hidden="true">Wearable sensing</span>
-      </button>
-    </div>
+      <div class="chips pub-controls" role="group" aria-label="More filters" data-pub-filters>
+        <button type="button" class="chip" data-toggle="first" aria-pressed="false">First author</button>
+        <button type="button" class="chip" data-toggle="journal" aria-pressed="false">Journals</button>
+      </div>
     </details>
 
     <!-- The result line sits right under the tiles; while a filter is on it pins under the nav -->
@@ -468,7 +438,7 @@
     <div class="pub-years" id="paper-list" data-pub-list>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2026</h3>
-        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="sole" data-elements="Us Dl Ps Lm">
+        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="sole" data-topics="ultrasound deep-learning pose-estimation segmentation">
             <h4 class="pub-title"><a href="https://arxiv.org/abs/2404.07124" rel="noopener">Measuring proximity to standard planes during fetal brain ultrasound scanning</a></h4>
             <p class="pub-meta">
               <em>IEEE Transactions on Medical Imaging</em><span class="tag">Under review</span>
@@ -479,7 +449,7 @@
               </span>
             </p>
             <p class="pub-authors"><strong>C. Di Vece</strong>, A. Cirigliano, M. Le Lous, R. Napolitano, A. L. David, D. Peebles, P. Jannin, F. Vasconcelos, D. Stoyanov</p>
-          </li><li class="pub" data-pub data-type="journal" data-first="none" data-elements="Hs Lp Dl Km Ps 3d Ds">
+          </li><li class="pub" data-pub data-type="journal" data-first="none" data-topics="hyperspectral laparoscopy deep-learning keypoint-matching pose-estimation 3d-reconstruction datasets">
             <h4 class="pub-title"><a href="https://doi.org/10.1007/s11548-026-03633-z" rel="noopener">HyKey: hyperspectral keypoint detection and matching in minimally invasive surgery</a></h4>
             <p class="pub-meta">
               <em>International Journal of Computer Assisted Radiology and Surgery (IPCAI 2026)</em>
@@ -493,7 +463,7 @@
               </span>
             </p>
             <p class="pub-authors">A. Saikia, <strong>C. Di Vece</strong>, Z. Mao, S. Bonilla, C. He, J. Ramalhinho, T. Czempiel, S. Bano, D. Stoyanov</p>
-          </li><li class="pub" data-pub data-type="journal" data-first="sole" data-elements="Us Dl Lm Ds Cs">
+          </li><li class="pub" data-pub data-type="journal" data-first="sole" data-topics="ultrasound deep-learning segmentation datasets clinical-studies">
             <h4 class="pub-title"><a href="https://doi.org/10.1038/s41598-026-47854-3" rel="noopener">A multicentre benchmark dataset for comprehensive landmark-based fetal ultrasound biometry</a></h4>
             <p class="pub-meta">
               <em>Scientific Reports</em>
@@ -513,7 +483,7 @@
       </div>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2025</h3>
-        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="none" data-elements="Lp 3d Rb Ds">
+        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="none" data-topics="laparoscopy 3d-reconstruction robotics datasets">
             <h4 class="pub-title"><a href="https://doi.org/10.1109/LRA.2025.3540529" rel="noopener">Robotic arm platform for multi-view image acquisition and 3D reconstruction in minimally invasive surgery</a></h4>
             <p class="pub-meta">
               <em>IEEE Robotics and Automation Letters</em>
@@ -526,7 +496,7 @@
               </span>
             </p>
             <p class="pub-authors">A. Saikia, <strong>C. Di Vece</strong>, S. Bonilla, C. He, M. Magbagbeola, L. Mennillo, T. Czempiel, S. Bano, D. Stoyanov</p>
-          </li><li class="pub" data-pub data-type="conference" data-first="joint" data-elements="Dl Km Ps 3d Ds">
+          </li><li class="pub" data-pub data-type="conference" data-first="joint" data-topics="deep-learning keypoint-matching pose-estimation 3d-reconstruction datasets">
             <h4 class="pub-title"><a href="https://doi.org/10.1007/978-3-031-91989-3_8" rel="noopener">Mismatched: evaluating the limits of image matching approaches and benchmarks</a></h4>
             <p class="pub-meta">
               <em>ECCV 2024 Workshops</em>
@@ -546,7 +516,7 @@
       </div>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2024</h3>
-        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="none" data-elements="Us Cs">
+        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="none" data-topics="ultrasound clinical-studies">
             <h4 class="pub-title"><a href="https://doi.org/10.1016/j.ejogrb.2024.04.042" rel="noopener">Probe motion during mid-trimester fetal anomaly scan in the clinical setting: a prospective observational study</a></h4>
             <p class="pub-meta">
               <em>European Journal of Obstetrics & Gynecology and Reproductive Biology</em>
@@ -561,7 +531,7 @@
       </div>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2023</h3>
-        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="sole" data-elements="Us Dl Ps">
+        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="sole" data-topics="ultrasound deep-learning pose-estimation">
             <h4 class="pub-title"><a href="https://doi.org/10.1109/TMRB.2023.3328638" rel="noopener">Ultrasound plane pose regression: assessing generalized pose coordinates in the fetal brain</a></h4>
             <p class="pub-meta">
               <em>IEEE Transactions on Medical Robotics and Bionics</em>
@@ -577,7 +547,7 @@
       </div>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2022</h3>
-        <ol class="pub-items"><li class="pub" data-pub data-type="conference" data-first="sole" data-elements="Us Dl Ps">
+        <ol class="pub-items"><li class="pub" data-pub data-type="conference" data-first="sole" data-topics="ultrasound deep-learning pose-estimation">
             <h4 class="pub-title"><a href="https://doi.org/10.31256/HSMR2022.24" rel="noopener">Deep learning-based plane pose regression towards training in freehand obstetric ultrasound</a></h4>
             <p class="pub-meta">
               <em>Hamlyn Symposium on Medical Robotics</em>
@@ -588,7 +558,7 @@
               </span>
             </p>
             <p class="pub-authors"><strong>C. Di Vece</strong>, B. Dromey, F. Vasconcelos, A. L. David, D. Peebles, D. Stoyanov</p>
-          </li><li class="pub" data-pub data-type="journal" data-first="sole" data-elements="Us Dl Ps Sm">
+          </li><li class="pub" data-pub data-type="journal" data-first="sole" data-topics="ultrasound deep-learning pose-estimation simulation">
             <h4 class="pub-title"><a href="https://doi.org/10.1007/s11548-022-02609-z" rel="noopener">Deep learning-based plane pose regression in obstetric ultrasound</a></h4>
             <p class="pub-meta">
               <em>International Journal of Computer Assisted Radiology and Surgery (IPCAI 2022)</em><span class="tag tag-accent">AURIS/IPCAI Young Investigator Travel Award, 1st place</span>
@@ -604,7 +574,7 @@
       </div>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2021</h3>
-        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="joint" data-elements="Sm Rb Ns">
+        <ol class="pub-items"><li class="pub" data-pub data-type="journal" data-first="joint" data-topics="simulation robotics neurosurgery">
             <h4 class="pub-title"><a href="https://doi.org/10.1109/LRA.2021.3090016" rel="noopener">Position-based dynamics simulator of brain deformations for path planning and intra-operative control in keyhole neurosurgery</a></h4>
             <p class="pub-meta">
               <em>IEEE Robotics and Automation Letters (IROS 2021)</em>
@@ -615,7 +585,7 @@
               </span>
             </p>
             <p class="pub-authors">A. Segato*, <strong>C. Di Vece</strong>*, S. Zucchelli, M. Di Marzo, T. Wendler, M. F. Azampour, S. Galvan, R. Secoli, E. De Momi</p>
-          </li><li class="pub" data-pub data-type="journal" data-first="sole" data-elements="Lp Vr Sm Cs">
+          </li><li class="pub" data-pub data-type="journal" data-first="sole" data-topics="laparoscopy vr-haptics simulation clinical-studies">
             <h4 class="pub-title"><a href="https://doi.org/10.1007/s11548-021-02341-0" rel="noopener">Psychomotor skills development for Veress needle placement using a virtual reality and haptics-based simulator</a></h4>
             <p class="pub-meta">
               <em>International Journal of Computer Assisted Radiology and Surgery</em>
@@ -631,7 +601,7 @@
       </div>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2019</h3>
-        <ol class="pub-items"><li class="pub" data-pub data-type="conference" data-first="joint" data-elements="Ws">
+        <ol class="pub-items"><li class="pub" data-pub data-type="conference" data-first="joint" data-topics="wearable-sensing">
             <h4 class="pub-title"><a href="https://doi.org/10.1109/EMBC.2019.8857927" rel="noopener">GLOS: GLOve for speech recognition</a></h4>
             <p class="pub-meta">
               <em>IEEE Engineering in Medicine and Biology Conference (EMBC)</em>
@@ -647,7 +617,7 @@
       </div>
       <div class="pub-year" data-year-group>
         <h3 class="pub-year-label">2017</h3>
-        <ol class="pub-items"><li class="pub" data-pub data-type="conference" data-first="joint" data-elements="Ir">
+        <ol class="pub-items"><li class="pub" data-pub data-type="conference" data-first="joint" data-topics="infrared">
             <h4 class="pub-title"><a href="https://doi.org/10.1109/RTSI.2017.8065976" rel="noopener">BIE-PInCS: brain injury evaluation with pupillometer based on infrared camera system</a></h4>
             <p class="pub-meta">
               <em>IEEE Forum on Research and Technologies for Society and Industry (RTSI)</em>
@@ -689,6 +659,7 @@
         </div>
       </div>
     </div>
+    <div class="talks-body">
     <ol class="talk-list" data-stagger>
       <li class="talk">
         <span class="talk-date">Mar 2025</span>
@@ -726,6 +697,7 @@
  Download photo <span class="btn-note">JPG, 1024 px</span></a>
         <p class="copy-note" data-copy-note data-quiet-success role="status"></p>
       </div>
+    </div>
     </div>
 
     <!-- The review record; the venue marquee runs edge to edge (the only marquee on the page) -->
@@ -771,7 +743,10 @@
             <h4 class="job-role">AI Researcher</h4>
             <p class="job-org">AI SuitUp<span class="job-place">Remote (Albuquerque, US)</span>
             </p>
-            <p class="job-summary">Research and prototyping for generative AI headshots. Optimised face detection, alignment and style transfer pipelines across diverse demographics, and cut inference time for web-scale deployment.</p>
+            <details class="job-more" data-fold-phone open>
+              <summary>What I did<span class="sr-only"> at AI SuitUp</span></summary>
+              <p class="job-summary">Research and prototyping for generative AI headshots. Optimised face detection, alignment and style transfer pipelines across diverse demographics, and cut inference time for web-scale deployment.</p>
+            </details>
           </li>
           <li class="job">
             <div class="job-meta">
@@ -780,7 +755,10 @@
             <h4 class="job-role">Software Engineer Intern, Deep Learning Algorithms</h4>
             <p class="job-org"><a href="https://www.mathworks.com/" rel="noopener">MathWorks</a><span class="job-place">Cambridge, UK</span>
             </p>
-            <p class="job-summary">Extended the Deep Learning Toolbox with a differentiable sort, fully supported by the automatic differentiation engine, so users can build custom layers that sort.</p>
+            <details class="job-more" data-fold-phone open>
+              <summary>What I did<span class="sr-only"> at MathWorks</span></summary>
+              <p class="job-summary">Extended the Deep Learning Toolbox with a differentiable sort, fully supported by the automatic differentiation engine, so users can build custom layers that sort.</p>
+            </details>
           </li>
         </ol>
       </div>
@@ -794,7 +772,10 @@
             <h4 class="job-role">PhD Researcher and Teaching Assistant</h4>
             <p class="job-org">University College London
             </p>
-            <p class="job-summary">Sole researcher on the AI-guided fetal brain ultrasound line in the Surgical Robot Vision group and UCL Hawkes Institute, supervised by Danail Stoyanov and Francisco Vasconcelos. Took sensorless 6D plane pose estimation from first principles to a real-time navigation pipeline (3&nbsp;ms latency) on NVIDIA's Clara AGX clinical platform, with NVIDIA's Holoscan team. TA for Reinforcement Learning (with Google DeepMind), Robotic Systems, Machine Learning and Mathematical Modelling.</p>
+            <details class="job-more" data-fold-phone open>
+              <summary>What I did<span class="sr-only"> at University College London</span></summary>
+              <p class="job-summary">Sole researcher on the AI-guided fetal brain ultrasound line in the Surgical Robot Vision group and UCL Hawkes Institute, supervised by Danail Stoyanov and Francisco Vasconcelos. Took sensorless 6D plane pose estimation from first principles to a real-time navigation pipeline (3&nbsp;ms latency) on NVIDIA's Clara AGX clinical platform, with NVIDIA's Holoscan team. TA for Reinforcement Learning (with Google DeepMind), Robotic Systems, Machine Learning and Mathematical Modelling.</p>
+            </details>
           </li>
           <li class="job">
             <div class="job-meta">
@@ -869,109 +850,109 @@
       <li class="award-row">
         <span class="award-year">2025</span>
         <span class="award-body">
-          <span class="award-title">Women's Health Tech Grant, top 3 project</span><span class="award-detail">London, UK</span>
+          <span class="award-title">Women's Health Tech Grant, top 3 <span class="nowrap">project</span></span><span class="award-detail">London, UK</span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2024</span>
         <span class="award-body">
-          <span class="award-title">Outstanding Reviewer Award, IPCAI</span><span class="award-detail">Top 7% of reviewers. Barcelona, Spain · <a href="#reviewing-title">The review record</a></span>
+          <span class="award-title">Outstanding Reviewer Award, <span class="nowrap">IPCAI</span></span><span class="award-detail">Top 7% of reviewers. Barcelona, Spain · <a href="#reviewing-title">The review record</a></span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2024</span>
         <span class="award-body">
-          <span class="award-title">Women's Health Tech Grant</span><span class="award-detail">UCL EPSRC Impact Acceleration Account, £5,000</span>
+          <span class="award-title">Women's Health Tech <span class="nowrap">Grant</span></span><span class="award-detail">UCL EPSRC Impact Acceleration Account, £5,000</span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2022</span>
         <span class="award-body">
-          <span class="award-title">AURIS/IPCAI Young Investigator Travel Award <span class="tag tag-accent">1st place</span></span><span class="award-detail">Tokyo, Japan</span>
+          <span class="award-title">AURIS/IPCAI Young Investigator Travel <span class="nowrap">Award <span class="tag tag-accent">1st place</span></span></span><span class="award-detail">Tokyo, Japan</span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2022</span>
         <span class="award-body">
-          <span class="award-title">Women in MICCAI Inspirational Leadership Legacy <span class="tag tag-accent">1st place</span></span><span class="award-detail">Singapore</span>
+          <span class="award-title">Women in MICCAI Inspirational Leadership <span class="nowrap">Legacy <span class="tag tag-accent">1st place</span></span></span><span class="award-detail">Singapore</span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2022</span>
         <span class="award-body">
-          <span class="award-title">Invited IJCARS journal paper</span><span class="award-detail">Selected from the best papers of IPCAI 2022</span>
+          <span class="award-title">Invited IJCARS journal <span class="nowrap">paper</span></span><span class="award-detail">Selected from the best papers of IPCAI 2022</span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2022</span>
         <span class="award-body">
-          <span class="award-title">Microsoft/MathWorks WiMIUA Best Poster <span class="tag tag-accent">2nd place</span></span><span class="award-detail">Cambridge, UK</span>
+          <span class="award-title">Microsoft/MathWorks WiMIUA Best <span class="nowrap">Poster <span class="tag tag-accent">2nd place</span></span></span><span class="award-detail">Cambridge, UK</span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2021</span>
         <span class="award-body">
-          <span class="award-title">Best group project, UCL MedICSS <span class="tag tag-accent">1st place</span></span><span class="award-detail">London, UK</span>
+          <span class="award-title">Best group project, UCL <span class="nowrap">MedICSS <span class="tag tag-accent">1st place</span></span></span><span class="award-detail">London, UK</span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2020</span>
         <span class="award-body">
-          <span class="award-title">UCL Research Studentship</span><span class="award-detail">Department of Computer Science</span>
+          <span class="award-title">UCL Research <span class="nowrap">Studentship</span></span><span class="award-detail">Department of Computer Science</span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2020</span>
         <span class="award-body">
-          <span class="award-title">Alta Scuola Politecnica, top 3 thesis projects</span><span class="award-detail">Turin, Italy</span>
+          <span class="award-title">Alta Scuola Politecnica, top 3 thesis <span class="nowrap">projects</span></span><span class="award-detail">Turin, Italy</span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2019</span>
         <span class="award-body">
-          <span class="award-title">Rare Disease Hackathon <span class="tag tag-accent">3rd place</span></span><span class="award-detail">Florence, Italy</span>
+          <span class="award-title">Rare Disease <span class="nowrap">Hackathon <span class="tag tag-accent">3rd place</span></span></span><span class="award-detail">Florence, Italy</span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2019</span>
         <span class="award-body">
-          <span class="award-title">MSc with honours <span class="tag">Honour</span></span><span class="award-detail">Politecnico di Milano and Politecnico di Torino</span>
+          <span class="award-title">MSc with <span class="nowrap">honours <span class="tag">Honour</span></span></span><span class="award-detail">Politecnico di Milano and Politecnico di Torino</span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2018</span>
         <span class="award-body">
-          <span class="award-title">IEEE Computer Society Lance Stafford Larson Writing Award <span class="tag tag-accent">3rd place</span></span><span class="award-detail">undergraduate competition</span>
+          <span class="award-title">IEEE Computer Society Lance Stafford Larson Writing <span class="nowrap">Award <span class="tag tag-accent">3rd place</span></span></span><span class="award-detail">undergraduate competition</span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2018</span>
         <span class="award-body">
-          <span class="award-title">MSc with honours <span class="tag">Honour</span></span><span class="award-detail">University of Illinois Chicago</span>
+          <span class="award-title">MSc with <span class="nowrap">honours <span class="tag">Honour</span></span></span><span class="award-detail">University of Illinois Chicago</span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2017</span>
         <span class="award-body">
-          <span class="award-title">Rare Disease Hackathon <span class="tag tag-accent">1st place</span></span><span class="award-detail">Florence, Italy</span>
+          <span class="award-title">Rare Disease <span class="nowrap">Hackathon <span class="tag tag-accent">1st place</span></span></span><span class="award-detail">Florence, Italy</span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2017</span>
         <span class="award-body">
-          <span class="award-title">IEEE RTSI Young Professional Demo Competition <span class="tag tag-accent">1st place</span></span><span class="award-detail">Modena, Italy</span>
+          <span class="award-title">IEEE RTSI Young Professional Demo <span class="nowrap">Competition <span class="tag tag-accent">1st place</span></span></span><span class="award-detail">Modena, Italy</span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2017</span>
         <span class="award-body">
-          <span class="award-title">Xilinx Open Hardware Contest <span class="tag tag-accent">Finalist</span></span><span class="award-detail">Dublin, Ireland</span>
+          <span class="award-title">Xilinx Open Hardware <span class="nowrap">Contest <span class="tag tag-accent">Finalist</span></span></span><span class="award-detail">Dublin, Ireland</span>
         </span>
       </li>
       <li class="award-row">
         <span class="award-year">2017</span>
         <span class="award-body">
-          <span class="award-title">Admitted to Alta Scuola Politecnica <span class="tag">Honour</span></span><span class="award-detail">Top 1% of students at PoliMi and PoliTo</span>
+          <span class="award-title">Admitted to Alta Scuola <span class="nowrap">Politecnica <span class="tag">Honour</span></span></span><span class="award-detail">Top 1% of students at PoliMi and PoliTo</span>
         </span>
       </li>
     </ol>
@@ -1019,15 +1000,18 @@
           <p>Advised eight MSc, visiting and summer students on ultrasound pose estimation, haptic ultrasound simulators, clinical video tracking and surgical teleoperation.</p>
         </div>
       </div>
-      <details class="community fold" data-fold-phone open data-reveal>
-        <summary><h3 class="community-title">Community</h3></summary>
+      <div class="community" data-reveal>
+        <h3 class="community-title">Community</h3>
+        <details class="fold" data-fold-phone open>
+        <summary>4 roles</summary>
         <ul class="community-list">
           <li><span class="community-role">PhD Students Representative</span> <span class="community-org">UCL Hawkes Institute</span> <span class="community-dates">2021 – 2025</span></li>
           <li><span class="community-role">Volunteer Mentor</span> <span class="community-org">Alta Scuola Politecnica</span> <span class="community-dates">2021 – Present</span></li>
           <li><span class="community-role">Executive Board, IEEE Women in Engineering</span> <span class="community-org">Politecnico di Milano</span> <span class="community-dates">2018 – 2020</span></li>
           <li><span class="community-role">Volunteer Tutor</span> <span class="community-org">San Filippo Neri Association</span> <span class="community-dates">2016 – 2018</span></li>
         </ul>
-      </details>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -1083,7 +1067,7 @@
   <p class="lightbox-caption" aria-live="polite"><span class="lightbox-count" data-lightbox-count></span><span class="sr-only">. </span><span data-lightbox-caption></span></p>
 </dialog>
 
-  <script src="/assets/js/main.js?v=1791533046" defer></script>
-  <script src="/assets/js/motion.js?v=1791533046" defer></script>
+  <script src="/assets/js/main.js?v=1791534038" defer></script>
+  <script src="/assets/js/motion.js?v=1791534038" defer></script>
 </body>
 </html>
