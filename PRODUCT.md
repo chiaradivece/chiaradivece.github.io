@@ -49,7 +49,7 @@ Three claims, in this order of weight (confirmed):
   - hero (role line, headline, photo inside a faint ultrasound sector)
   - About (text; facts: role, PhD, reviewer record; Scholar numbers)
   - News
-  - Research (a simulated ultrasound scan, then the research cards)
+  - Research (one line on the move from fetal ultrasound to soft robots, then the research cards)
   - Publications (three selected papers, then the full list filtered by research element, first author, journal)
   - Talks and reviewing (topics and an invitation link, past talks, the review count and reviewer award, the venue marquee)
   - Experience and education (short roles fold their details away)
@@ -73,7 +73,6 @@ Three claims, in this order of weight (confirmed):
   - "From computer vision for fetal ultrasound to soft robotics."
   - About: "I build real-time perception for things that move: first an ultrasound probe over a fetal brain, now soft robots. I lead AI at morph, a soft robotics startup still in stealth."
   - "My PhD taught machines to find their way through fetal ultrasound. Now I build AI for soft robots."
-  - "The scan brings the two together: a simulated soft actuator, shown as an ultrasound image."
 - **Binding visual constraints set by the owner** (recorded, not expanded):
   - a powder-blue accent
   - Helvetica Neue
@@ -110,5 +109,5 @@ Three claims, in this order of weight (confirmed):
 ## Accessibility & Inclusion
 
 - WCAG 2.2 AA is the bar. The page was audited against it with axe-core at the owner's request in October 2026.
-- Moving content (the scan, the marquee) has pause controls, per WCAG 2.2.2.
+- Moving content (the marquee) has a pause control, per WCAG 2.2.2.
 - Under reduced motion, fades stay and movement goes.

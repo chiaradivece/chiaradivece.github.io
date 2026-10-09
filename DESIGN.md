@@ -161,9 +161,6 @@ components:
     rounded: "{rounded.pill}"
     height: "44px"
     padding: "0 1.15rem"
-  scan-monitor:
-    backgroundColor: "{colors.screen}"
-    rounded: "{rounded.md}"
   nav:
     backgroundColor: "{colors.nav-bg}"
     height: "64px"
@@ -180,7 +177,6 @@ One clear signal on a quiet field. The page is a cool, near-white field of blue-
 The density is moderate and the rhythm is editorial: big plain section titles that match the nav, hairline rules instead of boxes, and data laid out as lists and grids rather than dashboards. A few hand-made objects carry the personality, so the rest of the page can stay plain:
 
 - a faint ultrasound sector behind the hero portrait;
-- an ultrasound monitor that stays dark in both themes;
 - a periodic table of research elements;
 - a marquee of reviewing venues.
 
@@ -194,7 +190,7 @@ The mood is crisp, technical and human. The confirmed anti-reference is anything
 - Flat surfaces with 1px hairlines; cards lift onto a soft shadow on hover.
 - Pills for things you press, 14px corners for things that hold content.
 - Real photography and real research figures only.
-- Light and dark themes with the same structure; the scan monitor is always dark.
+- Light and dark themes with the same structure; the photo viewer is always dark.
 - Motion uses strong ease-out (`cubic-bezier(0.23, 1, 0.32, 1)`), presses scale to 0.97, and every looping animation can be paused.
 
 ## Colors
@@ -230,14 +226,14 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 - **Muted Ink** (#5c6773 / #8a95a1): dates, labels, captions, secondary metadata.
 - **Hairline** (#d3dbe3 / #26303a): 1px rules, card borders, outlines for chips and ghost buttons.
 - **Deep Sunk** (#d2d6dc / #2f353c): the "3D and simulation" element tiles and their legend swatch. In CSS it is `--el-sunk`, a 10% mix of Ink into Sunk Surface, so the tiles read against the page in both themes.
-- **Monitor Black** (#0a0d11): the scan screen and the lightbox, in both themes.
+- **Monitor Black** (#0a0d11): the photo viewer, in both themes.
 
 ### Named Rules
 **The One Signal Rule.** Powder blue is the only hue. Families and states are told apart by value (ink, blue fill, sunk grey, outline), never by adding a colour. The four element families prove that it works.
 
 **The Three Blues Rule.** Fill blue is for areas, Signal Blue for marks of 1–3px, Ink Blue for text. Never set text in fill blue on a light background.
 
-**The Monitor Rule.** Anything that shows imaging (the scan, the photo lightbox) sits on Monitor Black in both themes, like a real screen.
+**The Monitor Rule.** Anything that shows imagery full-screen (the photo viewer) sits on Monitor Black in both themes, like a real screen.
 
 ## Typography
 
@@ -284,27 +280,27 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 
 ## Elevation & Depth
 
-Flat at rest, lifted on hover. Surfaces are separated by tone and 1px hairlines, not by shadow. Cards and tiles that respond to the pointer rise 2px onto a soft, offset shadow when hovered. Only things that sit in front of the page carry a shadow at rest: the scan monitor and the floating "Show N papers" button. Shadows are tinted toward the page's blue-grey in light mode and pure black in dark mode.
+Flat at rest, lifted on hover. Surfaces are separated by tone and 1px hairlines, not by shadow. Cards and tiles that respond to the pointer rise 2px onto a soft, offset shadow when hovered. Only things that sit in front of the page carry a shadow at rest: the floating "Show N papers" button. Shadows are tinted toward the page's blue-grey in light mode and pure black in dark mode.
 
 ### Shadow Vocabulary
-- **Soft** (`0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)`): hover lift for research cards and element tiles; the scan monitor at rest.
+- **Soft** (`0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)`): hover lift for research cards and element tiles.
 - **Lift** (`0 1px 0 rgb(16 20 26 / 0.04), 0 28px 48px -26px rgb(36 52 70 / 0.45)`): the floating "Show N papers" button.
 - **Selection ring** (`0 0 0 2px bg, 0 0 0 4px Signal Blue`): a selected element tile; combined with Soft on hover.
 
 ### Named Rules
 **The Lift-on-Hover Rule.** Cards are flat until a fine pointer reaches them; then they rise 2px onto the Soft shadow over 200ms. Touch never lifts. Reduced motion keeps the shadow and drops the rise.
 
-**The Physical Object Rule.** A shadow at rest means "this sits in front of the page": the monitor, the floating results button. Nothing else casts one until it is hovered.
+**The Physical Object Rule.** A shadow at rest means "this sits in front of the page": the floating results button. Nothing else casts one until it is hovered.
 
 ## Shapes
 
 - **Corner families:**
   - Full pills (999px) for everything pressable: buttons, chips, tags, icon buttons, social links.
-  - 14px for containers: cards, the news lead, the monitor, the lightbox.
+  - 14px for containers: cards, the news lead, the photo viewer.
   - 10px for things inside them, or small on their own: element tiles, news photos.
   - 8px for media inset inside a card.
 - **Borders:** always 1px Hairline. A 2px Ink top rule marks teaching modules and the three selected papers; a 1px Ink rule marks section sub-heads (Experience columns, the facts list, the talks list).
-- **Signature geometry:** the ultrasound sector, a 68° fan drawn from a point at the top. It appears in the nav mark, behind the hero portrait and in the scan itself. The marquee separators are small Signal Blue triangles.
+- **Signature geometry:** the ultrasound sector, a 68° fan drawn from a point at the top. It appears in the nav mark and behind the hero portrait. The marquee separators are small Signal Blue triangles.
 
 ## Components
 
@@ -346,10 +342,6 @@ Tactile and precise.
 - **Status bar:** directly under the tiles, so a pick shows its result at once. The status names what is showing ("7 of 13 papers on Deep learning", "2 of 13 papers on Imaging · first author, journals"). While a filter is on, it pins under the nav for the length of the list, over a Hairline, with Ink Blue text actions that adapt: Show (while the list is still below), Change (whenever the tiles themselves are out of view or under the nav, or the phone panel is folded; it opens the panel, brings the whole panel with its legend and chips into view, and focuses the selected tile) and Clear (the only Clear). On touch the actions are 44px tall.
 - **Results button:** while a filter is on and the list starts below the screen, a floating Ink pill ("Show 6 papers ↓", 44px) rests 16px above the bottom of the viewport; when the chips scroll into that spot it rides 8px above them instead of covering them. It stands down whenever the status bar is fully on screen, and on wide screens it never sits over the tile grid. It fades and rises 8px in, disappears once the filters leave the screen, and its jump lands on the status line just under the nav (focus moves there, no `#` in the address).
 - **List changes:** filtering the list uses same-document View Transitions over 260ms. It is instant when triggered from the keyboard, and a new click finishes a running transition at once (the transition overlay never takes pointer events), so no click is lost.
-
-### Scan monitor (signature)
-- **Screen:** a Monitor Black screen with a 14px radius, an inner 1px white hairline at 7% and the Soft shadow. A canvas simulation of a soft actuator runs on it, shown as an ultrasound image.
-- **Controls:** it pauses offscreen, and a pause button sits in its corner.
 
 ### News
 - **Layout:** two columns from 900px. The left column holds the lead card (Powder Blue) and, under it, the newest photo set among the visible items as a larger strip (140–180px tall) with a short label; that column stays in view while the list scrolls past. The photos open in the photo viewer and are not repeated in the list.
@@ -406,7 +398,7 @@ Tactile and precise.
 - **Don't** introduce a second typeface. The earlier Bricolage Grotesque and Geist pairing was rejected for looking AI-generated, and no serif or monospace face belongs here either.
 - **Don't** use `transition: all` or animate layout properties. Use transform, opacity, clip-path and box-shadow; `block-size` is allowed only for the details accordion.
 - **Don't** lift anything on touch, or move anything under reduced motion.
-- **Don't** give a card a shadow at rest unless it sits in front of the page (the monitor, the floating results button).
+- **Don't** give a card a shadow at rest unless it sits in front of the page (the floating results button).
 - **Don't** dim an active control with opacity; switch it to an outline so its text stays at 4.5:1 or more.
 - **Don't** nest cards, or build a section out of same-size icon-and-heading cards.
 - **Don't** use stock or generated imagery.

@@ -61,7 +61,7 @@ layout: default
       </div>
     </div>
     <div class="hero-figure">
-      <!-- A 68° ultrasound sector behind the portrait: the same fan as the nav mark and the scan -->
+      <!-- A 68° ultrasound sector behind the portrait: the same fan as the nav mark -->
       <svg class="hero-fan" data-depth="-5" viewBox="0 0 1118 1000" aria-hidden="true" focusable="false">
         <defs>
           <radialGradient id="fan-depth" cx="559" cy="0" r="1000" gradientUnits="userSpaceOnUse">
@@ -177,24 +177,13 @@ layout: default
   </section>
   {%- endif %}
 
-  <!-- Research: the scan, the bridge in one picture, then the themes -->
+  <!-- Research: the bridge in one line, then the themes -->
   <section class="section research wrap" id="research">
     <h2 class="section-title" data-reveal>Research</h2>
     <div class="research-intro">
       <div class="research-intro-text" data-reveal>
         <p class="research-lead">My PhD taught machines to find their way through fetal ultrasound. Now I build AI for soft robots.</p>
-        <p>The scan brings the two together: a simulated soft actuator, shown as an ultrasound image.</p>
       </div>
-      <figure class="scan" aria-label="Animated, simulated ultrasound scan of a soft robotic actuator">
-        <div class="scan-screen" data-reveal-image>
-          <canvas data-scan></canvas>
-          <button class="icon-btn motion-toggle scan-toggle" type="button" data-scan-toggle aria-pressed="false" aria-label="Pause the scan animation">
-            <span class="when-playing">{% include icon.html name="pause" %}</span>
-            <span class="when-paused">{% include icon.html name="play" %}</span>
-          </button>
-        </div>
-        <figcaption class="scan-caption"><span class="caption-mouse">Move your pointer over it to push it around.</span><span class="caption-touch">Drag sideways across it to push it around.</span></figcaption>
-      </figure>
     </div>
     <div class="bento" data-stagger>
       <article class="cell cell-fetal">
@@ -355,7 +344,7 @@ layout: default
     <div class="talks-head" data-reveal>
       <h2 class="section-title">Talks and reviewing</h2>
       <div class="talks-invite">
-        <p>Happy to speak about real-time AI for ultrasound, physical AI and soft robotics, and to review or join programme committees.</p>
+        <p>Looking for a speaker, reviewer or committee member?</p>
         <div class="invite-actions">
           <a class="btn btn-solid btn-small" href="mailto:{{ p.email }}?subject={{ 'Invitation to speak' | uri_escape }}">Invite me to speak</a>
           <button class="icon-btn copy-btn" type="button" data-copy="{{ p.email }}" aria-label="Copy my email address">
