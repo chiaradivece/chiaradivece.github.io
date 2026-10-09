@@ -75,6 +75,7 @@ Three claims, in this order of weight (confirmed):
   - "My PhD taught machines to find their way through fetal ultrasound. Now I build AI for soft robots."
   - Research: "The thread across all three: real-time perception, in imaging, in surgery and in simulation."
   - Talks: "Looking for a speaker, reviewer or committee member?" (no topic list).
+  - Experience key, beside the Signal Blue triangle: "Where the work began, and where it is now." (approved October 2026)
   - Speaker bio, third person, in `_data/profile.yml` as `speaker_bio`: "Chiara Di Vece builds real-time perception for things that move, from ultrasound probes to soft robots. Chiara is AI Lead at morph and holds a PhD in Computer Science from UCL."
 - **Binding visual constraints set by the owner** (recorded, not expanded):
   - a powder-blue accent

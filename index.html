@@ -205,6 +205,12 @@ layout: default
       </article>
 
       <article class="cell cell-sim">
+        <figure class="cell-figure">
+          <div class="cell-media cell-media-paper" data-reveal-image>
+            <img src="{{ '/assets/img/research/brain-pbd.webp' | relative_url }}" alt="A segmented ovine brain with a catheter inserted, beside the same brain as a position-based dynamics particle model" width="1200" height="502" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="cell-credit">Figure: Segato, Di Vece et al., IEEE RA-L 2021, <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener license">CC BY 4.0</a></figcaption>
+        </figure>
         <h3>Simulation for surgical training</h3>
         <p>
           A position-based dynamics model of brain deformation for keyhole neurosurgery, and a VR
@@ -281,7 +287,7 @@ layout: default
             <button type="button" class="stage" data-stage="{{ st.id }}" data-name="{{ st.name }}" aria-pressed="false" aria-label="{{ st.name }}, {{ n }} {% if n == 1 %}paper{% else %}papers{% endif %}" aria-describedby="stage-{{ st.id }}-topics">
               <span class="stage-name" aria-hidden="true">{{ st.name }}</span>
               <span class="stage-count" aria-hidden="true">{{ n }}</span>
-              <span class="stage-topics" id="stage-{{ st.id }}-topics" aria-hidden="true">{% if whole != "" %}Every paper: {{ whole | split: "|" | join: ", " }}.{% if narrow != "" %} Narrow by {{ narrow | split: "|" | join: ", " }}.{% endif %}{% elsif narrow != "" %}Narrow by {{ narrow | split: "|" | join: ", " }}.{% else %}Includes {{ used | split: "|" | join: ", " }}.{% endif %}</span>
+              <span class="stage-topics" id="stage-{{ st.id }}-topics" aria-hidden="true">{% if narrow != "" %}{% if whole != "" %}Every paper: {{ whole | split: "|" | join: ", " }}. {% endif %}Narrow by {{ narrow | split: "|" | join: ", " }}.{% else %}Includes {{ used | split: "|" | join: ", " }}.{% endif %}</span>
             </button>
             {%- unless forloop.last %}<span class="stage-arrow" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>{% endunless %}
           </li>
@@ -359,7 +365,6 @@ layout: default
         <button type="button" class="chip" data-pub-empty-fix>Show all papers</button>
       </div>
     </div>
-    <a class="results-pill" href="#pub-status" data-results-pill hidden><span data-results-pill-text>Show papers</span> {% include icon.html name="arrow-right" %}</a>
     <p class="pubs-foot">* Equal contribution. Citation counts refresh weekly from <a href="{{ site.data.scholar.profile | escape }}" rel="noopener">Google Scholar</a>.</p>
   </section>
 
@@ -399,6 +404,13 @@ layout: default
         <span class="talk-date">{{ t.date }}</span>
         <h3 class="talk-title">{{ t.title }}</h3>
         <p class="talk-event"><span>{{ t.role }}</span> {{ t.event }}</p>
+        {%- if t.photos %}
+        <ul class="news-photos talk-photos">
+          {%- for ph in t.photos %}
+          <li><a href="{{ ph.src | relative_url }}" data-lightbox-open data-caption="{{ ph.caption | default: ph.alt | escape }}"><img src="{{ ph.thumb | relative_url }}" alt="{{ ph.alt }}" width="{{ ph.w }}" height="{{ ph.h }}" loading="lazy" decoding="async"></a></li>
+          {%- endfor %}
+        </ul>
+        {%- endif %}
         {%- if t.slides or t.video %}
         <p class="talk-links">
           {%- if t.slides %}<a href="{{ t.slides }}" rel="noopener">Slides<span class="sr-only">: {{ t.title }}</span> {% include icon.html name="arrow-up-right" %}</a>{% endif %}
@@ -436,6 +448,7 @@ layout: default
   <!-- Experience: industry vs academia -->
   <section class="section experience wrap" id="experience">
     <h2 class="section-title" data-reveal>Experience</h2>
+    <p class="bridge-key" data-reveal><span class="bridge-glyph" aria-hidden="true"></span>Where the work began, and where it is now.</p>
     <div class="exp-grid">
       {%- assign groups = "industry,academia" | split: "," -%}
       {%- for g in groups %}
@@ -446,6 +459,7 @@ layout: default
           <li class="job{% if job.current %} is-current{% endif %}{% if job.current or job.bridge %} is-bridge{% endif %}">
             <div class="job-meta">
               <span class="job-dates">{{ job.dates }}</span>
+              {%- if job.current %}<span class="sr-only">Where the work is now.</span>{% elsif job.bridge %}<span class="sr-only">Where the work began.</span>{% endif %}
               {%- if job.current %}<span class="tag tag-accent">Now</span>{% endif %}
             </div>
             <h4 class="job-role">{{ job.role }}</h4>

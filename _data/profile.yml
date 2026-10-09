@@ -61,6 +61,14 @@ education:
     school: University College London
     dates: 2020 – 2026
     note: "Thesis: Real-time deep learning-based plane pose estimation and navigation in freehand fetal brain ultrasound"
+  - degree: Licensed Industrial Engineer
+    school: Italy
+    dates: "2021"
+    note: Professional licence to practise
+  - degree: Alta Scuola Politecnica
+    school: Politecnico di Milano and Politecnico di Torino
+    dates: 2017 – 2020
+    note: Top 1% honours programme, diploma with merit
   - degree: MSc Biomedical Engineering
     school: Politecnico di Milano
     dates: 2017 – 2019
@@ -69,15 +77,7 @@ education:
     school: University of Illinois Chicago
     dates: 2018 – 2019
     note: GPA 4.00/4.00, summa cum laude
-  - degree: Alta Scuola Politecnica
-    school: Politecnico di Milano and Politecnico di Torino
-    dates: 2017 – 2020
-    note: Top 1% honours programme, diploma with merit
   - degree: BSc Biomedical Engineering
     school: Politecnico di Milano
     dates: 2014 – 2017
     note: "Thesis: FPGA-based brain injury evaluation through pupillometry"
-  - degree: Licensed Industrial Engineer
-    school: Italy
-    dates: "2021"
-    note: Professional licence to practise

@@ -242,8 +242,6 @@
     var emptyBox = document.querySelector('[data-pub-empty]');
     var emptyText = document.querySelector('[data-pub-empty-text]');
     var emptyFix = document.querySelector('[data-pub-empty-fix]');
-    var pill = document.querySelector('[data-results-pill]');
-    var pillText = document.querySelector('[data-results-pill-text]');
     var yearGroups = pubList.querySelectorAll('[data-year-group]');
     var pubs = Array.prototype.map.call(pubList.querySelectorAll('[data-pub]'), function (el) {
       return {
@@ -272,10 +270,10 @@
       if (!state.stage) return '';
       return state.stage.name + (state.topic ? ' · ' + topicName(state.topic) : '');
     }
-    // "5 of 13 papers in Learn", "4 of 13 papers in Learn · ultrasound · first author · journals"
+    // "5 of 13 papers in Learn", "4 of 13 papers in Learn · Ultrasound · first author · journals"
     function describe(n) {
       var parts = [n + ' of ' + pubs.length + ' papers' + (state.stage ? ' in ' + state.stage.name : '')];
-      if (state.topic) parts.push(topicName(state.topic).toLowerCase());
+      if (state.topic) parts.push(topicName(state.topic));
       if (state.first) parts.push('first author');
       if (state.journal) parts.push('journals');
       return parts.join(' · ');
@@ -373,36 +371,21 @@
           .filter(Boolean).join(' · ');
       }
       updateBarActions();
-      if (pillText) pillText.textContent = shown ? 'Show ' + plural(shown, 'paper') : 'No papers match';
-      updatePill();
+      updateBarActions();
     }
 
-    // "Show 6 papers": while a filter is on, the filters are on screen and the list starts
-    // below it (always the case on a phone), a button at the bottom takes you there.
+    // Where things are on screen, for the bar's actions: Show while the list is still below,
+    // Change once the pipeline is out of view (or the phone panel is folded), Clear always
     var listBelow = false;
-    var gridInView = false;
     var pipelineInView = false;
     var chipsRow = document.querySelector('[data-pub-filters]');
-    var bar = document.querySelector('[data-pub-bar]');
-    var barInView = false;
     var showLink = document.querySelector('[data-pub-show]');
     var panel = document.querySelector('[data-filter-panel]');
     var panelState = document.querySelector('[data-filter-panel-state]');
-    function updatePill() {
-      if (!pill) return;
-      var filtered = !!(state.stage || state.first || state.journal);
-      pill.hidden = !(filtered && gridInView && listBelow && !barInView);
-      placePill();
-      updateBarActions();
-    }
-    // Show while the list is still below; Change once the pipeline is out of view; Clear always
     function updateBarActions() {
       if (showLink) showLink.hidden = !listBelow;
       if (changeLink) changeLink.hidden = pipelineInView && !(panel && !panel.open);
     }
-    // Resting 16px above the bottom edge; when the chips scroll into that spot, the button
-    // rides 8px above them instead, so it never covers a control and never disappears.
-    var placing = 0;
     var phone = window.matchMedia('(max-width: 639px)');
     function syncPanel() { if (panel) panel.open = !phone.matches; }
     syncPanel();
@@ -416,78 +399,26 @@
         }
       }
     });
-    function placePill() {
-      if (!pill || !chipsRow) return;
-      var filtered = !!(state.stage || state.first || state.journal);
-      if (!(filtered && gridInView && listBelow && !barInView)) return;
-      var vh = window.innerHeight;
-      var h = pill.offsetHeight || 44;
-      var open = !panel || panel.open;
-      var restingTop = vh - 16 - h;
-      var lift = 0;
-      if (open) {
-        // lift only while the chips overlap the spot where the button rests
-        var chips = chipsRow.getBoundingClientRect();
-        var overlaps = chips.top < vh - 16 && chips.bottom > restingTop - 8;
-        if (overlaps) lift = Math.max(0, (vh - chips.top) + 8 - 16);
-      }
-      // Then check where it would actually land: never over the pipeline (stages and topics)
-      // or the phone's "Filter papers" toggle. If it would, leave it out: the status bar's Show
-      // does the same job once the list is near
-      var top = restingTop - lift, bottom = vh - 16 - lift;
-      var blockers = [];
-      if (open) blockers.push(pipeline.getBoundingClientRect());
-      var toggle = panel && panel.querySelector('summary');
-      if (toggle && toggle.offsetParent) blockers.push(toggle.getBoundingClientRect());
-      // a blocker just entering at the bottom edge counts too, so the button never flashes
-      // for the few pixels before the pipeline reaches it
-      var covers = blockers.some(function (b) { return b.height > 0 && b.top < bottom + 24 && b.bottom > top - 8; });
-      pill.hidden = covers;
-      if (covers) return;
-      pill.style.bottom = 'calc(max(16px, env(safe-area-inset-bottom)) + ' + lift + 'px)';
-    }
-    window.addEventListener('scroll', function () {
-      if (pill && !placing) placing = requestAnimationFrame(function () { placing = 0; placePill(); });
-    }, { passive: true });
-    window.addEventListener('resize', function () { placePill(); });
-    if (pill && 'IntersectionObserver' in window) {
+    if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
         var e = entries[0];
         listBelow = !e.isIntersecting && e.boundingClientRect.top > 0;
-        updatePill();
+        updateBarActions();
       }, { rootMargin: '0px 0px -15% 0px' }).observe(pubList);
-      // "The filters" = the pipeline plus the chips under it; either on screen counts
-      var filterParts = [pipeline, chipsRow].filter(Boolean);
-      var partsInView = new Set();
-      var filterIO = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) partsInView.add(e.target); else partsInView.delete(e.target);
-        });
-        gridInView = partsInView.size > 0;
-        pipelineInView = partsInView.has(pipeline);
-        updatePill();
-      }, { rootMargin: '-' + (nav ? nav.offsetHeight : 0) + 'px 0px 0px 0px' }); // under the sticky nav is not "in view"
-      filterParts.forEach(function (el) { filterIO.observe(el); });
-      if (bar) {
-        // "in view" means fully readable, not a sliver at the bottom edge
-        new IntersectionObserver(function (entries) {
-          barInView = entries[0].intersectionRatio >= 0.99;
-          updatePill();
-        }, { threshold: [0, 1] }).observe(bar);
-      }
-      // The jump lands on the status line ("Showing 6 of 13 papers") just below the nav, with
-      // the list right under it, and moves focus there without adding a #hash to the address
-      var jumpToResults = function (e) {
-        e.preventDefault();
-        pill.hidden = true;
-        if (statusEl) {
-          statusEl.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-          statusEl.focus({ preventScroll: true });
-        }
-      };
-      pill.addEventListener('click', jumpToResults);
-      if (showLink) showLink.addEventListener('click', jumpToResults);
+      new IntersectionObserver(function (entries) {
+        pipelineInView = entries[0].isIntersecting;
+        updateBarActions();
+      }, { rootMargin: '-' + (nav ? nav.offsetHeight : 0) + 'px 0px 0px 0px' }).observe(pipeline); // under the sticky nav is not "in view"
     }
+    // Show lands on the status line ("6 of 13 papers in Learn") just below the nav, with the
+    // list right under it, and moves focus there without adding a #hash to the address
+    if (showLink) showLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (statusEl) {
+        statusEl.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        statusEl.focus({ preventScroll: true });
+      }
+    });
 
     // Pointer-driven changes animate the list with a View Transition; keyboard-driven
     // ones (click events with detail 0) apply instantly, as do browsers without support
@@ -524,11 +455,17 @@
       var valid = st && st.row && st.row.querySelector('[data-topic="' + topic + '"]');
       return { stage: st, topic: valid ? topic : null, first: q.get('first') === '1', journal: q.get('journal') === '1' };
     }
+    // The first change from the unfiltered list adds a history entry; later tweaks replace
+    // it, so one Back always returns to the unfiltered list (and a second leaves the page)
     function remember() {
       var url = stateToQuery(state);
-      if (url !== window.location.pathname + window.location.search + window.location.hash) {
-        try { history.pushState({ pubs: true }, '', url); } catch (e) {}
-      }
+      if (url === window.location.pathname + window.location.search + window.location.hash) return;
+      var wasFiltered = !!(history.state && history.state.pubs);
+      var isFiltered = !!(state.stage || state.first || state.journal);
+      try {
+        if (isFiltered && !wasFiltered) history.pushState({ pubs: true }, '', url);
+        else history.replaceState(isFiltered ? { pubs: true } : null, '', url);
+      } catch (e) {}
     }
 
     function update(event) {
@@ -586,7 +523,19 @@
     }
     // A shared link or a Back/Forward step restores the filter (instantly, no transition)
     var fromUrl = stateFromQuery();
-    if (fromUrl.stage || fromUrl.first || fromUrl.journal) { state = fromUrl; render(); }
+    if (fromUrl.stage || fromUrl.first || fromUrl.journal) {
+      state = fromUrl;
+      render();
+      // A shared link opens on the filtered list, not the hero: the status line under the nav
+      if (!window.location.hash && statusEl) {
+        try { history.replaceState({ pubs: true }, ''); } catch (e) {}
+        // instant, not the page's smooth scroll; after load, so the browser's own scroll
+        // restoration doesn't put it back at the top
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        var land = function () { statusEl.scrollIntoView({ block: 'start', behavior: 'instant' }); };
+        if (document.readyState === 'complete') land(); else window.addEventListener('load', land, { once: true });
+      }
+    }
     window.addEventListener('popstate', function () {
       state = stateFromQuery();
       if (running) running.skipTransition();
