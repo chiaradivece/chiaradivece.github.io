@@ -266,13 +266,15 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 - **Composition:** asymmetric grids carry each section rather than centred stacks:
   - About is 7 : 5 (text, then facts and numbers);
   - News is 6 : 5;
-  - Research is a two-line intro (up to 40rem wide, no second column), then a 6-column grid of research cards; the simulation card sits beside the fetal card and is only as tall as its text;
+  - Research is a two-line intro (up to 40rem wide, no second column), then a 6-column grid of research cards; beside the fetal card (which spans two rows) sit the simulation card and a "Now" card (name, link and role at morph only, from the current role in `_data/experience.yml`);
   - Experience is two equal columns.
 - **Page order:** About, News, Research, Publications (three selected papers before the filtered list), Talks and reviewing (invitation, past talks, speaker kit, then the review record and venue marquee), Experience, Awards, Teaching and mentoring, Contact. Papers and speaking come before career history; short roles fold their details away.
 - **Grid gaps:** cards sit 16px apart; element tiles 10px apart.
 - **Hero:** fills the viewport under the nav. The copy is left-aligned in the lower left; the cut-out portrait is anchored bottom-right and fades out at its lower edge.
 - **Responsive changes:**
   - The nav collapses into a menu below 1024px.
+  - Below 640px, Community folds behind its heading (open without JavaScript and on wider screens) and teaching modules become one row each (code, then name and place).
+  - On touch, every small inline link (paper links, "Cited by", card and news links, the contact email, the About reviewer link, the award-row link) has an invisible hit area of at least 44px.
   - The hero stacks below 900px.
   - Element tiles go from 4 columns to 8 at 640px.
   - Awards is a full list: one column on phones, two from 900px.
@@ -311,7 +313,7 @@ Tactile and precise.
 - **Ghost:** transparent with a Hairline border; on hover the border turns Ink.
 - **Press:** every button scales to 0.97 on `:active` (160ms, strong ease-out). Colour changes take 200ms with `ease`.
 - **Icon button:** a 40px circle with a Hairline border that scales to 0.95 on press. It is used for the theme toggle, the menu, the photo viewer and the pause controls (all 40px).
-- **Copy button:** a small ghost button with a visible label ("Copy email", "Copy bio"); its copy icon cross-fades to a check (160ms, blurred and scaled). The status line under it ("Copied") never moves the page: under the Talks invite it hangs below the buttons, in the speaker kit its line is reserved. If the browser refuses the clipboard, the text is selected and the line says how to copy it. The footer keeps the 40px icon-only version beside the address.
+- **Copy button:** a small ghost button with a visible label ("Copy email", "Copy bio"); its copy icon cross-fades to a check (160ms, blurred and scaled). The status line under it ("Copied") never moves the page: under the Talks invite it hangs below the buttons; in the speaker kit success is announced only (the check shows it). If the browser refuses the clipboard, the text is selected and the line says how to copy it. The footer keeps the 40px icon-only version beside the address.
 
 ### Chips
 - **Style:** transparent, a Hairline pill, Soft Ink text, 38px tall.
@@ -363,12 +365,12 @@ Tactile and precise.
 
 ### Speaker kit
 - **Place:** in "Talks and reviewing", between the past talks and the review record.
-- **Style:** a Hairline-bordered 14px box, flat (no shadow, no fill): "Speaker kit" at 1.05rem/600, the third-person bio in Soft Ink (up to 62ch), then "Copy bio" and "Download photo" as small ghost buttons, to the right of the bio from 900px. The photo is the hero portrait, `assets/img/chiara.jpg`, downloaded as `chiara-di-vece.jpg`.
+- **Style:** a Hairline-bordered 14px box, flat (no shadow, no fill), up to 50rem wide: the photo as it will download (112px square from 768px, 64px beside the title on phones, 8px radius), "Speaker kit" at 1.05rem/600, the third-person bio in Soft Ink (up to 62ch), then "Copy bio" and "Download photo" ("JPG, 1024 px" in Muted Ink inside the button) as small ghost buttons directly under the bio. A successful copy shows only the check on the button and is announced; a refused copy shows its instruction in a line under the buttons. The photo is the hero portrait, `assets/img/chiara.jpg`, downloaded as `chiara-di-vece.jpg`.
 
 ### Reviewing marquee
 - **Place:** inside "Talks and reviewing", under its own sub-head; the track still runs edge to edge (it is clipped by the marquee, never by the page).
 - **Track:** venue names at 1rem/500 in Soft Ink, below the count and the award, separated by Signal Blue triangles. It runs linearly over 60s, with faded edges.
-- **Heading:** the count leads as a Numeral ("15+", 2–2.6rem/500, Ink Blue) followed by "peer reviews" at 1.35rem/600, over an Ink rule. The Outstanding Reviewer award follows at 1.05rem/600 in Ink. That award is shown here only, not again in the Awards list.
+- **Heading:** the count leads as a Numeral ("15+", 2–2.6rem/500, Ink Blue) followed by "peer reviews" at 1.35rem/600, over an Ink rule. The Outstanding Reviewer award follows at 1.05rem/600 in Ink. The Awards list also carries it, as a row that links back here, so the About and Awards counts can be checked.
 - **Pausing:** hover pauses it and a pause control sits beside the heading. Under reduced motion it becomes a static wrapped list.
 
 ### Photo viewer

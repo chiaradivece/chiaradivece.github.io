@@ -49,7 +49,7 @@ Three claims, in this order of weight (confirmed):
   - hero (role line, headline, photo inside a faint ultrasound sector)
   - About (text; facts: role, PhD, reviewer record; Scholar numbers)
   - News
-  - Research (one line on the move from fetal ultrasound to soft robots and one on the thread across the cards, then the research cards)
+  - Research (one line on the move from fetal ultrasound to soft robots and one on the thread across the cards, then the research cards and a "Now" card with morph's name, link and the role)
   - Publications (three selected papers, then the full list filtered by research element, first author, journal)
   - Talks and reviewing (an invitation line with email and copy buttons, past talks, a speaker kit with a copyable bio and the portrait to download, the review count and reviewer award, the venue marquee)
   - Experience and education (short roles fold their details away)
@@ -88,7 +88,7 @@ Three claims, in this order of weight (confirmed):
 - **Portrait:** `assets/img/chiara.jpg`, plus a cutout at `assets/img/chiara-cutout.webp`. The portrait was made with AI SuitUp; the owner chose it and it stays. `chiara.jpg` is also the speaker-kit photo.
 - **CV:** the short CV at `assets/pdf/Chiara_Di_Vece_CV.pdf`. An extended CV exists but is not published.
 - **Publications:** 13 papers with links and notes in `_data/publications.yml`. Live Scholar numbers are in `_data/scholar.yml`.
-- **Recognition:** awards, reviewing venues, talks, teaching, mentoring and community roles in `_data/recognition.yml`. The "awards" number counts competitive awards only; degree honours and admissions carry `honour: true`, stay in the Awards row and are not counted. The Awards count line reads "15 competitive awards, plus 3 degree honours." (both numbers computed from the data).
+- **Recognition:** awards, reviewing venues, talks, teaching, mentoring and community roles in `_data/recognition.yml`. The "awards" number counts competitive awards only; degree honours and admissions carry `honour: true`, stay in the Awards row and are not counted. The Awards count line reads "15 competitive awards, plus 3 degree honours." (both numbers computed from the data). The Outstanding Reviewer award is listed both with the review record in Talks and as a row in Awards, so the count can be checked.
 - **Research images:** `assets/img/research/fetal-pipeline.jpg` and `assets/img/research/hykey.jpg`.
 - **Viva photos:** `assets/img/news/viva-*.webp`.
   - The group photo shows about 25 colleagues; the owner confirmed their consent to publish it (October 2026).

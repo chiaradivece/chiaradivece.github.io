@@ -647,6 +647,17 @@
     });
   }
 
+  /* ---------- Phone folds ---------- */
+  // Secondary lists (Community) start folded on phones and open on wider screens.
+  // Without JavaScript they stay open.
+  var foldPhone = window.matchMedia('(max-width: 639px)');
+  var folds = document.querySelectorAll('[data-fold-phone]');
+  function syncFolds() { folds.forEach(function (d) { d.open = !foldPhone.matches; }); }
+  if (folds.length) {
+    syncFolds();
+    if (foldPhone.addEventListener) foldPhone.addEventListener('change', syncFolds);
+  }
+
   /* ---------- Copy email ---------- */
   // Success swaps the icon and says "Copied" (announced politely). If the clipboard is
   // unavailable or refused, the text (address or bio) is selected and the note says how to copy it.
@@ -665,10 +676,13 @@
       var text = btn.getAttribute('data-copy');
       var done = function () {
         btn.setAttribute('data-copied', '');
+        // A quiet note announces success without taking a line; the check on the button shows it
+        if (note && note.hasAttribute('data-quiet-success')) note.classList.add('sr-only');
         say('Copied');
         setTimeout(function () { btn.removeAttribute('data-copied'); }, 1800);
       };
       var fallback = function () {
+        if (note) note.classList.remove('sr-only');
         var touch = window.matchMedia('(pointer: coarse)').matches;
         var keys = isMac ? '⌘C' : 'Ctrl+C';
         var source = document.getElementById(btn.getAttribute('data-copy-source') || '');
