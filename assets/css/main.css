@@ -61,19 +61,12 @@
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --nav-h: 64px;
-  /* the "3D and simulation" element tiles: one step deeper than surface-2 so they read on the page */
-  --el-sunk: color-mix(in srgb, var(--surface-2) 90%, var(--ink));
-  /* "Imaging" tiles: the strongest neutral. In dark, Ink would turn near-white and sit beside
-     Powder Blue at almost the same value, so dark uses Muted Ink to keep the four steps apart */
-  --el-imaging: var(--ink);
-  --el-imaging-ink: var(--bg);
 
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --el-imaging: var(--ink-3);
     --bg: #0c0f13;
     --surface: #141920;
     --surface-2: #1a2028;
@@ -95,7 +88,6 @@
   }
 }
 :root[data-theme="dark"] {
-  --el-imaging: var(--ink-3);
   --bg: #0c0f13;
   --surface: #141920;
   --surface-2: #1a2028;
@@ -424,6 +416,8 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .number dd { margin: 0; font-size: clamp(2rem, 3vw, 2.6rem); font-weight: 500; letter-spacing: -0.04em; line-height: 1; }
 .number dt { font-size: 0.8rem; color: var(--ink-3); margin-top: 0.3rem; }
 .number:first-child dd { color: var(--accent-ink); }
+.number a { color: inherit; text-decoration: none; background-image: linear-gradient(var(--accent-mark), var(--accent-mark)); background-size: 0% 2px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size 250ms var(--ease-out); }
+.number a:hover { background-size: 100% 2px; }
 .facts-source { font-size: 0.75rem; color: var(--ink-3); }
 
 /* ---------- News ---------- */
@@ -532,10 +526,10 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
   transition: block-size 250ms var(--ease-out), opacity 250ms var(--ease-out), content-visibility 250ms allow-discrete;
 }
 .news-older[open]::details-content, .job-more[open]::details-content, .fold[open]::details-content { block-size: auto; opacity: 1; }
-/* The filter panel never clips (selection rings and focus outlines sit outside the tiles):
+/* The filter panel never clips (focus outlines and the hover lift sit outside the stages):
    it opens at full height and fades in instead of growing */
-.el-panel::details-content { opacity: 0; transition: opacity 200ms var(--ease-out), content-visibility 200ms allow-discrete; }
-.el-panel[open]::details-content { opacity: 1; }
+.filter-panel::details-content { opacity: 0; transition: opacity 200ms var(--ease-out), content-visibility 200ms allow-discrete; }
+.filter-panel[open]::details-content { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .news-older::details-content, .job-more::details-content, .fold::details-content { transition: opacity 200ms ease, content-visibility 200ms allow-discrete; }
 }
@@ -627,10 +621,18 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .cell-media img { width: 100%; height: 100%; object-fit: contain; }
 .cell-media-paper { padding: clamp(0.75rem, 2vw, 1.5rem); }
 
-/* Beside the fetal card: Simulation, then what the work is now (name, link, role only:
+/* Beside the fetal card, Simulation fills the column with its links at the foot */
+.cell-sim { grid-template-rows: auto auto 1fr; }
+.cell-sim .cell-links { align-self: end; }
+/* What the work is now, as one hairline row under the cards (name, link and role only:
    morph is in stealth) */
-.cell-sim { align-content: start; }
-.cell-now { align-content: start; }
+.research-now {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.75rem;
+  margin-top: clamp(1.25rem, 2.5vw, 1.75rem); padding-top: 1rem; border-top: 1px solid var(--line);
+  color: var(--ink-2);
+}
+.research-now a { color: var(--ink); font-weight: 500; text-decoration-color: var(--accent-mark); text-underline-offset: 0.2em; }
+.research-now a .icon { width: 0.8em; height: 0.8em; }
 
 .cell-surgical { align-items: center; }
 .cell-fetal { grid-template-rows: 1fr auto; align-content: stretch; }
@@ -638,10 +640,9 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 
 @media (min-width: 900px) {
   .bento { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-  .cell-fetal { grid-column: 1 / span 4; grid-row: 1 / span 2; }
+  .cell-fetal { grid-column: 1 / span 4; grid-row: 1; }
   .cell-sim { grid-column: 5 / span 2; grid-row: 1; }
-  .cell-now { grid-column: 5 / span 2; grid-row: 2; }
-  .cell-surgical { grid-column: 1 / -1; grid-row: 3; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(1.5rem, 3vw, 2.5rem); }
+  .cell-surgical { grid-column: 1 / -1; grid-row: 2; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(1.5rem, 3vw, 2.5rem); }
 }
 
 /* ---------- Publications ---------- */
@@ -665,83 +666,70 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .pick-cited { font-size: 0.875rem; color: var(--accent-ink); text-decoration: none; }
 .pick-cited:hover { text-decoration: underline; }
 
-/* Research elements, periodic-table style. Families differ by value, not by new colours. */
-.elements { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 1.25rem; }
-@media (min-width: 640px) { .elements { grid-template-columns: repeat(8, minmax(0, 1fr)); } }
-.el {
-  aspect-ratio: 1;
-  display: grid; grid-template-rows: auto 1fr 2.4em; align-items: start;
-  padding: 8px 9px; text-align: left;
-  border-radius: var(--radius-sm); border: 1px solid transparent;
+/* The perception pipeline: four stages read left to right like a model diagram, joined by
+   Signal Blue arrows. A stage is a card-shaped button (Lift on Hover); picked, it fills with Ink
+   like a pressed chip, and only its topics appear under the row as chips to narrow it. */
+.pipeline { margin-bottom: 0.75rem; }
+.stages { display: grid; gap: 22px; }
+@media (min-width: 900px) { .stages { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px; } }
+.stage-item { position: relative; display: grid; }
+.stage {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.3rem 1rem; align-content: start;
+  min-height: 44px; padding: 0.85rem 1rem; text-align: left;
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--ink);
   cursor: pointer;
-  transition: transform 160ms var(--ease-out), background-color 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+  transition: transform 160ms var(--ease-out), box-shadow 200ms var(--ease-out), background-color 200ms ease, border-color 200ms ease, color 200ms ease;
 }
-.el-count { font-size: 0.75rem; font-weight: 500; opacity: 0.8; line-height: 1; }
-.el-symbol { font-size: clamp(1.3rem, 2.3vw, 1.95rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; align-self: center; }
-.el-name { font-size: 0.75rem; line-height: 1.25; opacity: 0.9; align-self: end; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; hyphens: manual; }
-/* Wide screens: half-height tiles, so the papers lead the section and the filter follows */
-@media (min-width: 640px) {
-  .el {
-    aspect-ratio: auto; min-height: 76px;
-    grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto 1fr;
-    grid-template-areas: "symbol count" "name name";
-    gap: 4px 6px; padding: 8px 10px;
-  }
-  .el-symbol { grid-area: symbol; font-size: clamp(1.15rem, 1.6vw, 1.4rem); align-self: start; }
-  .el-count { grid-area: count; align-self: start; padding-top: 2px; }
-  .el-name { grid-area: name; }
-}
-/* Phones: tiles grow to fit the whole name instead of cutting it off */
-@media (max-width: 639px) {
-  .el { aspect-ratio: auto; min-height: 88px; grid-template-rows: auto auto 1fr; gap: 6px; padding: 8px 7px; }
-  .el-symbol { align-self: start; }
-  .el-name { display: block; overflow: visible; }
-}
-.el[data-family="imaging"] { --fam: var(--el-imaging); background: var(--el-imaging); color: var(--el-imaging-ink); }
-.el[data-family="learning"] { --fam: var(--accent); background: var(--accent); color: var(--on-accent); }
-.el[data-family="geometry"] { --fam: color-mix(in srgb, var(--el-sunk) 70%, var(--ink)); background: var(--el-sunk); color: var(--ink); }
-.el[data-family="practice"] { background: transparent; color: var(--ink); border-color: var(--line); }
-.el[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent-mark); }
-/* Keyboard focus is an Ink outline outside the selection ring, so the two never look alike */
-/* the 3px of page colour between tile and outline keeps it off the tile's own edge and,
-   in a 10px gap, off the neighbour; a selected tile pushes it outside its ring */
-.el:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: var(--radius-sm); }
-.el[aria-pressed="true"]:focus-visible { outline-offset: 6px; }
-.elements[data-active] .el[aria-pressed="false"],
-.el[data-empty] { background: transparent; color: var(--ink-2); border-color: var(--line); }
-.el[data-empty] { color: var(--ink-3); border-style: dashed; }
-.elements[data-active] .el[aria-pressed="false"]:not([data-family="practice"]),
-.el[data-empty]:not([data-family="practice"]) { box-shadow: inset 0 3px 0 var(--fam); }
-.el:active { transform: scale(0.97); }
+@media (min-width: 900px) { .stage { padding: 1rem 1.1rem; } }
+.stage-name { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
+.stage-count { grid-row: 1 / span 2; grid-column: 2; font-size: 1.6rem; font-weight: 500; letter-spacing: -0.03em; line-height: 1; color: var(--accent-ink); font-variant-numeric: tabular-nums; }
+.stage-topics { font-size: 0.8rem; line-height: 1.4; color: var(--ink-3); }
+.stage[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.stage[aria-pressed="true"] .stage-count { color: inherit; }
+.stage[aria-pressed="true"] .stage-topics { color: color-mix(in srgb, var(--bg) 72%, var(--ink)); }
+.stage[data-empty] { border-style: dashed; background: transparent; color: var(--ink-3); }
+.stage[data-empty] .stage-count { color: inherit; }
+.stage:active { transform: scale(0.98); }
+.stage:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 @media (hover: hover) and (pointer: fine) {
-  .el:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-  .el[aria-pressed="true"]:hover { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent-mark), var(--shadow); }
-  .el:active { transform: scale(0.97); }
+  .stage:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--ink); }
+  .stage[aria-pressed="true"]:hover, .stage[data-empty]:hover { box-shadow: none; }
+  .stage:active { transform: scale(0.98); }
+}
+/* The arrow sits in the gap: under each stage on phones, between stages from 900px */
+.stage-arrow {
+  position: absolute; left: 50%; top: 100%; display: grid; place-items: center;
+  width: 22px; height: 22px; transform: translateX(-50%);
+  color: var(--accent-mark); font-size: 0.95rem;
+}
+.stage-arrow .icon { transform: rotate(90deg); }
+@media (min-width: 900px) {
+  .stage-arrow { left: 100%; top: 50%; width: 40px; transform: translateY(-50%); }
+  .stage-arrow .icon { transform: none; }
 }
 
-.el-panel { margin-bottom: 0.5rem; }
-.el-panel > .elements { margin-bottom: 0; }
-.el-panel-toggle {
+.topics { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; padding-top: 0.85rem; }
+.topics[hidden] { display: none; }
+.topics-label { font-size: 0.85rem; color: var(--ink-3); margin-right: 0.15rem; }
+.chip-count { margin-left: 0.45rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.chip[aria-pressed="true"] .chip-count { color: inherit; opacity: 0.75; }
+.chip[data-empty] { border-style: dashed; color: var(--ink-3); }
+
+.filter-panel { margin-bottom: 0.5rem; }
+.filter-panel-toggle {
   display: none; align-items: center; justify-content: space-between; gap: 1rem;
   min-height: 44px; padding: 0 1rem; border: 1px solid var(--line); border-radius: 999px;
   font-size: 0.95rem; font-weight: 550; cursor: pointer; list-style: none;
 }
-.el-panel-toggle::-webkit-details-marker { display: none; }
-.el-panel-toggle::after { content: "+"; font-weight: 400; font-size: 1.25em; line-height: 1; transition: transform 200ms var(--ease-out); }
-.el-panel[open] > .el-panel-toggle::after { transform: rotate(45deg); }
-.el-panel-state { margin-left: auto; color: var(--accent-ink); font-weight: 500; }
+.filter-panel-toggle::-webkit-details-marker { display: none; }
+.filter-panel-toggle::after { content: "+"; font-weight: 400; font-size: 1.25em; line-height: 1; transition: transform 200ms var(--ease-out); }
+.filter-panel[open] > .filter-panel-toggle::after { transform: rotate(45deg); }
+.filter-panel-state { margin-left: auto; color: var(--accent-ink); font-weight: 500; }
 @media (max-width: 639px) {
-  .el-panel-toggle { display: flex; }
-  .el-panel[open] > .el-panel-toggle { margin-bottom: 0.75rem; }
+  .filter-panel-toggle { display: flex; }
+  .filter-panel[open] > .filter-panel-toggle { margin-bottom: 0.75rem; }
 }
-.pub-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1.5rem; margin-bottom: 0.75rem; } /* sits above the tiles, inside the filter panel */
-.el-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; font-size: 0.8rem; color: var(--ink-3); }
-.el-key { display: inline-flex; align-items: center; gap: 0.45rem; }
-.el-swatch { width: 12px; height: 12px; border-radius: 3px; border: 1px solid transparent; }
-.el-key[data-family="imaging"] .el-swatch { background: var(--el-imaging); }
-.el-key[data-family="learning"] .el-swatch { background: var(--accent); }
-.el-key[data-family="geometry"] .el-swatch { background: var(--el-sunk); border-color: var(--ink-3); }
-.el-key[data-family="practice"] .el-swatch { border-color: var(--ink-3); }
+.pub-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; } /* First author / Journals, under the pipeline */
 .pub-bar {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.25rem 1rem;
   min-height: 48px; margin-bottom: 0.5rem;
@@ -903,9 +891,10 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .award-body { display: grid; gap: 0.15rem; }
 .award-title { font-size: 1rem; font-weight: 600; line-height: 1.35; letter-spacing: -0.005em; }
 .award-title .tag { margin-left: 0.35rem; vertical-align: 0.1em; }
+.nowrap { white-space: nowrap; }
 .award-detail { font-size: 0.875rem; color: var(--ink-3); }
 
-/* Lift on hover: research cells (and the element tiles above) rise 2px onto the soft
+/* Lift on hover: research cells (and the pipeline stages above) rise 2px onto the soft
    shadow. Fine pointers only, since a tap would leave it stuck; reduced motion keeps the
    shadow and drops the rise. */
 .cell { transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out); }
@@ -913,7 +902,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
   .cell:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
-  .cell:hover, .el:hover { transform: none; }
+  .cell:hover, .stage:hover { transform: none; }
 }
 
 
@@ -944,11 +933,22 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .speaker-bio { color: var(--ink-2); max-width: 62ch; }
 .speaker-kit-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.6rem; }
 .btn-note { font-weight: 400; font-size: 0.8em; color: var(--ink-3); }
-@media (min-width: 768px) {
+@media (min-width: 900px) {
+  .speaker-kit { grid-template-columns: 80px minmax(0, 1fr); }
+  .speaker-thumb { width: 80px; height: 80px; }
+}
+/* Tablets: the photo stands beside the text. From 900px the kit sits in the narrow column
+   beside the talks, so it keeps the phone arrangement with a slightly larger photo. */
+@media (min-width: 768px) and (max-width: 899px) {
   .speaker-kit { grid-template-columns: 112px minmax(0, 1fr); grid-template-rows: auto auto 1fr; align-items: start; column-gap: 1.75rem; max-width: 50rem; }
   .speaker-thumb { width: 112px; height: 112px; grid-row: 1 / -1; }
   .speaker-bio, .speaker-kit-actions { grid-column: 2; }
   .speaker-kit-actions { margin-top: 0.25rem; }
+}
+.talks-body { display: grid; }
+@media (min-width: 900px) {
+  .talks-body { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: start; }
+  .talks-body .speaker-kit { margin-top: 0; position: sticky; top: calc(var(--nav-h) + 24px); }
 }
 .talk-list { border-top: 1px solid var(--ink); }
 .talk {
@@ -963,7 +963,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
   font-weight: 600; letter-spacing: -0.01em; line-height: 1.35;
   max-width: 60ch;
 }
-.talk-event { color: var(--ink-2); font-size: 0.95rem; }
+.talk-event { color: var(--ink-2); font-size: 0.95rem; max-width: 60ch; }
 .talk-event span { color: var(--ink); font-weight: 550; margin-right: 0.35rem; }
 
 /* ---------- Teaching ---------- */
@@ -995,9 +995,14 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .mentor h3 { font-size: 1.15rem; letter-spacing: -0.01em; }
 .mentor p:last-child { color: var(--ink-2); max-width: 58ch; }
 
-.community { padding-top: 1.75rem; border-top: 1px solid var(--line); }
-.community > summary { width: auto; }
-.community[open] > summary { margin-bottom: 1rem; }
+.community { display: grid; gap: 1rem; padding-top: 1.75rem; border-top: 1px solid var(--line); }
+.community .fold > summary { font-size: 0.875rem; font-weight: 500; color: var(--ink-2); }
+.community .fold[open] > summary { margin-bottom: 0.75rem; }
+/* Phone-only folds open from 640px up, where their toggle has no job, so it is hidden */
+@media (min-width: 640px) {
+  [data-fold-phone] > summary { display: none; }
+  .community .fold[open] > summary { margin-bottom: 0; }
+}
 .community-title { font-size: 1.15rem; letter-spacing: -0.01em; }
 .community-list { display: grid; gap: 0.75rem 2.5rem; }
 @media (min-width: 768px) { .community-list { grid-template-columns: 1fr 1fr; } }
@@ -1066,13 +1071,18 @@ html:not(.js) .contact-time { display: none; }
   .news-older summary, .job-more summary, .fold > summary { min-height: 44px; }
   .pub-bar-link { display: inline-flex; align-items: center; min-height: 44px; }
   .nav-mark { padding-block: 9px; }
-  .cell-links { row-gap: 1rem; }
+  .cell-links { row-gap: 1.5rem; } /* two 11px reaches never overlap across wrapped rows */
   /* Small inline links keep their look; an invisible box extends what a thumb can hit */
-  .pub-links a, .news-link, .cell-links a, .pick-cited, .contact-email-link, .fact a, .award-detail a { position: relative; }
-  .pub-links a::after, .news-link::after, .cell-links a::after, .pick-cited::after, .contact-email-link::after, .fact a::after, .award-detail a::after {
+  .pub-links a, .news-link, .cell-links a, .pick-cited, .contact-email-link, .fact a, .award-detail a,
+  .pub-title a, .job-org a, .research-now a, .number a, .facts-source a, .pubs-foot a { position: relative; }
+  .pub-links a::after, .news-link::after, .cell-links a::after, .pick-cited::after, .contact-email-link::after, .fact a::after, .award-detail a::after,
+  .pub-title a::after, .job-org a::after, .research-now a::after, .number a::after, .facts-source a::after, .pubs-foot a::after {
     content: ""; position: absolute; inset: -11px -6px;
   }
-  .award-detail a::after { inset-block: -14px; } /* smaller text, so a taller reach */
+  /* smaller text, so a taller reach */
+  .award-detail a::after { inset-block: -14px; }
+  .facts-source a::after, .pubs-foot a::after { inset-block: -15px; }
+  .research-now a::after { inset-block: -13px; }
 }
 
 /* ---------- 404 ---------- */

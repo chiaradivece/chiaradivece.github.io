@@ -13,7 +13,6 @@ colors:
   ink-2: "#3f4852"
   ink-3: "#5c6773"
   line: "#d3dbe3"
-  el-sunk: "#d2d6dc"
   screen: "#0a0d11"
   paper: "#fdfdfd"
   nav-bg: "rgb(244 246 248 / 0.8)"
@@ -26,7 +25,6 @@ colors:
   line-dark: "#26303a"
   accent-mark-dark: "#a8c8e8"
   accent-ink-dark: "#bcd7f0"
-  el-sunk-dark: "#2f353c"
   paper-dark: "#eef2f5"
 typography:
   display:
@@ -76,7 +74,7 @@ rounded:
   sm: "10px"
   inset: "8px"
 spacing:
-  tile-gap: "8px"
+  stage-gap: "40px"
   grid-gap: "16px"
   gutter: "16px"
   gutter-wide: "32px"
@@ -132,29 +130,15 @@ components:
     textColor: "{colors.on-accent}"
     rounded: "{rounded.md}"
     padding: "clamp(1.5rem, 3vw, 2.25rem)"
-  element-imaging:
+  pipeline-stage:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.md}"
+    padding: "1rem 1.1rem"
+  pipeline-stage-picked:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.bg}"
-    rounded: "{rounded.sm}"
-    padding: "8px 9px"
-  element-learning:
-    backgroundColor: "{colors.accent}"
-    textColor: "{colors.on-accent}"
-    rounded: "{rounded.sm}"
-    padding: "8px 9px"
-  element-geometry:
-    backgroundColor: "{colors.el-sunk}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.sm}"
-    padding: "8px 9px"
-  element-practice:
-    backgroundColor: "transparent"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.sm}"
-    padding: "8px 9px"
-  element-unmatched:
-    backgroundColor: "transparent"
-    textColor: "{colors.ink-2}"
+    rounded: "{rounded.md}"
   results-pill:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.bg}"
@@ -177,7 +161,7 @@ One clear signal on a quiet field. The page is a cool, near-white field of blue-
 The density is moderate and the rhythm is editorial: big plain section titles that match the nav, hairline rules instead of boxes, and data laid out as lists and grids rather than dashboards. A few hand-made objects carry the personality, so the rest of the page can stay plain:
 
 - a faint ultrasound sector behind the hero portrait;
-- a periodic table of research elements;
+- the perception pipeline (Perceive → Learn → Simulate → Deploy) that filters the papers;
 - a marquee of reviewing venues.
 
 Motion is physical and brief: strong ease-out curves, springs for anything that hangs or follows the pointer, and nothing that moves without a way to pause it.
@@ -200,7 +184,6 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 ### Primary
 - **Powder Blue** (#a8c8e8): the owner's chosen accent and the only hue on the page. Used as a fill:
   - the lead news card;
-  - the "Learning" family of element tiles;
   - the solid button's hover state;
   - text selection.
 
@@ -211,7 +194,7 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
   - link underlines and the timeline fill;
   - the marquee's triangle separators;
   - the full stop after the hero headline;
-  - the selected element tile's ring.
+  - the arrows between pipeline stages.
 - **Ink Blue** (#2b5f8c; #bcd7f0 in dark): text-safe blue at 4.5:1 or more. Used for:
   - link hover;
   - the citation count in About;
@@ -220,16 +203,15 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 ### Neutral
 - **Cool Paper** (#f4f6f8 / #0c0f13): the page background.
 - **Surface** (#fcfdfe / #141920): research cards.
-- **Sunk Surface** (#e7ecf1 / #1a2028): the "3D and simulation" element tiles, photo placeholders.
-- **Ink** (#10141a / #e8edf2): headings, primary text, the solid button, the "Imaging" element tiles in light. In dark those tiles use Muted Ink (#8a95a1) with background-coloured text, because near-white would sit at almost the same value as Powder Blue.
+- **Sunk Surface** (#e7ecf1 / #1a2028): photo placeholders.
+- **Ink** (#10141a / #e8edf2): headings, primary text, the solid button, pressed chips and the picked pipeline stage.
 - **Soft Ink** (#3f4852 / #b0bac4): body copy in paragraphs and lists.
 - **Muted Ink** (#5c6773 / #8a95a1): dates, labels, captions, secondary metadata.
 - **Hairline** (#d3dbe3 / #26303a): 1px rules, card borders, outlines for chips and ghost buttons.
-- **Deep Sunk** (#d2d6dc / #2f353c): the "3D and simulation" element tiles and their legend swatch. In CSS it is `--el-sunk`, a 10% mix of Ink into Sunk Surface, so the tiles read against the page in both themes.
 - **Monitor Black** (#0a0d11): the photo viewer, in both themes.
 
 ### Named Rules
-**The One Signal Rule.** Powder blue is the only hue. Families and states are told apart by value (ink, blue fill, sunk grey, outline), never by adding a colour. The four element families prove that it works.
+**The One Signal Rule.** Powder blue is the only hue. States are told apart by value (ink fill, blue fill, outline, dashed outline), never by adding a colour.
 
 **The Three Blues Rule.** Fill blue is for areas, Signal Blue for marks of 1–3px, Ink Blue for text. Never set text in fill blue on a light background.
 
@@ -249,7 +231,7 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 - **Title** (600, clamp(1.4rem, 2.2vw, 1.85rem), 1.1): research card headings. Smaller titles step down: the current role 1.45rem/600, selected-paper titles 1.3rem/600, other job roles 1.12rem/600, paper titles 1.15–1.2rem/600, talk titles 1.1rem/600 (never above paper titles), award titles 1.05rem/600.
 - **Lead** (400–500, clamp(1.25rem, 2vw, 1.5rem), 1.35): the opening paragraph of About and Research, and the lead news item. Under the Research lead, one plain line in Soft Ink (1.05rem) says what links the cards.
 - **Body** (400, 1rem, 1.6): paragraphs in Soft Ink, held to 58–62ch.
-- **Numeral** (500, clamp(2rem, 3vw, 2.6rem), 1): Scholar numbers; the first one in Ink Blue.
+- **Numeral** (500, clamp(2rem, 3vw, 2.6rem), 1): Scholar numbers; the first one in Ink Blue. Each About number links to its proof (citations and h-index to Scholar, papers and awards to their lists) and keeps its look; a Signal Blue underline grows on hover.
 - **Label** (400, 0.75–0.875rem): dates, captions, metadata in Muted Ink. Links that are actions (paper links, "Read more", research card links) are never below 0.875rem.
 
 ### Named Rules
@@ -266,28 +248,28 @@ A cool, nearly monochrome field with one powder-blue signal, used at three stren
 - **Composition:** asymmetric grids carry each section rather than centred stacks:
   - About is 7 : 5 (text, then facts and numbers);
   - News is 6 : 5;
-  - Research is a two-line intro (up to 40rem wide, no second column), then a 6-column grid of research cards; beside the fetal card (which spans two rows) sit the simulation card and a "Now" card (name, link and role at morph only, from the current role in `_data/experience.yml`);
+  - Research is a two-line intro (up to 40rem wide, no second column), then a 6-column grid of research cards; beside the fetal card sits the simulation card, as tall as it with its links at the foot; under the grid a hairline "Now" row gives the current role (the accent "Now" tag, role, morph link and start date only, from `_data/experience.yml`);
   - Experience is two equal columns.
 - **Page order:** About, News, Research, Publications (three selected papers before the filtered list), Talks and reviewing (invitation, past talks, speaker kit, then the review record and venue marquee), Experience, Awards, Teaching and mentoring, Contact. Papers and speaking come before career history; short roles fold their details away.
-- **Grid gaps:** cards sit 16px apart; element tiles 10px apart.
+- **Grid gaps:** cards sit 16px apart; pipeline stages 40px apart (22px stacked on phones), with the arrow in the gap.
 - **Hero:** fills the viewport under the nav. The copy is left-aligned in the lower left; the cut-out portrait is anchored bottom-right and fades out at its lower edge.
 - **Responsive changes:**
   - The nav collapses into a menu below 1024px.
-  - Below 640px, Community folds behind its heading (open without JavaScript and on wider screens) and teaching modules become one row each (code, then name and place).
-  - On touch, every small inline link (paper links, "Cited by", card and news links, the contact email, the About reviewer link, the award-row link) has an invisible hit area of at least 44px.
+  - Below 640px, the Community list and every Experience summary except the current role fold behind a small toggle ("4 roles", "What I did"); they are open without JavaScript and from 640px, where the toggle is hidden. Teaching modules become one row each (code, then name and place).
+  - From 900px, past talks (7 columns) and the speaker kit (5 columns, sticky under the nav) sit side by side, so the evidence and the kit are read together.
+  - On touch, every small link outside running prose (paper titles and links, "Cited by", card, news and "Now" links, the About numbers and reviewer link, employer links, the Scholar footnotes, the contact email, the award-row link) has an invisible hit area of at least 44px.
   - The hero stacks below 900px.
-  - Element tiles go from 4 columns to 8 at 640px.
+  - The pipeline runs in a row from 900px and stacks top to bottom below it, the arrows turning to point down.
   - Awards is a full list: one column on phones, two from 900px.
 - **Touch:** on coarse pointers every control grows to a 44px target.
 
 ## Elevation & Depth
 
-Flat at rest, lifted on hover. Surfaces are separated by tone and 1px hairlines, not by shadow. Cards and tiles that respond to the pointer rise 2px onto a soft, offset shadow when hovered. Only things that sit in front of the page carry a shadow at rest: the floating "Show N papers" button. Shadows are tinted toward the page's blue-grey in light mode and pure black in dark mode.
+Flat at rest, lifted on hover. Surfaces are separated by tone and 1px hairlines, not by shadow. Cards and pipeline stages that respond to the pointer rise 2px onto a soft, offset shadow when hovered. Only things that sit in front of the page carry a shadow at rest: the floating "Show N papers" button. Shadows are tinted toward the page's blue-grey in light mode and pure black in dark mode.
 
 ### Shadow Vocabulary
-- **Soft** (`0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)`): hover lift for research cards and element tiles.
+- **Soft** (`0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)`): hover lift for research cards and pipeline stages.
 - **Lift** (`0 1px 0 rgb(16 20 26 / 0.04), 0 28px 48px -26px rgb(36 52 70 / 0.45)`): the floating "Show N papers" button.
-- **Selection ring** (`0 0 0 2px bg, 0 0 0 4px Signal Blue`): a selected element tile; combined with Soft on hover.
 
 ### Named Rules
 **The Lift-on-Hover Rule.** Cards are flat until a fine pointer reaches them; then they rise 2px onto the Soft shadow over 200ms. Touch never lifts. Reduced motion keeps the shadow and drops the rise.
@@ -298,8 +280,8 @@ Flat at rest, lifted on hover. Surfaces are separated by tone and 1px hairlines,
 
 - **Corner families:**
   - Full pills (999px) for everything pressable: buttons, chips, tags, icon buttons, social links.
-  - 14px for containers: cards, the news lead, the photo viewer.
-  - 10px for things inside them, or small on their own: element tiles, news photos.
+  - 14px for containers: cards, the news lead, the photo viewer, pipeline stages.
+  - 10px for things inside them, or small on their own: news photos, the speaker-kit photo.
   - 8px for media inset inside a card.
 - **Borders:** always 1px Hairline. A 2px Ink top rule marks teaching modules and the three selected papers; a 1px Ink rule marks section sub-heads (Experience columns, the facts list, the talks list).
 - **Signature geometry:** the ultrasound sector, a 68° fan drawn from a point at the top. It appears in the nav mark and behind the hero portrait. The marquee separators are small Signal Blue triangles.
@@ -335,15 +317,15 @@ Tactile and precise.
 - **Links:** 0.925rem in Soft Ink, turning Ink on hover or when current. A 2px Signal Blue underline follows the current section; it moves by transform alone, over 300ms with strong ease-in-out.
 - **Mobile:** below 1024px the links become a full-width sheet that fades and drops 6px. It opens in 200ms and closes in 150ms. The sheet adds Contact and Download CV under a hairline, and marks the current section in Ink Blue. Opening it moves focus to the first link; Tab cycles between the menu button and the sheet's links; Escape closes it and returns focus to the button; a tap outside closes it.
 
-### Research elements table (signature)
-- **Tiles:** a periodic-table grid with 10px gaps, inside one filter panel that also holds the legend and the First author / Journals chips (above the tiles), so every filter control sits together. On wide screens the tiles are compact (about 76px tall): the symbol and the paper count share the top row and the name sits under them. On phones the tiles are taller than square so names fit, and the whole panel folds behind a 44px "Filter papers" toggle (open on wide screens, folded on phones) that names the current filter ("Pose estimation · journals"). On phones a pick (tile or chip) folds the panel again, so the result line sits right under the toggle and nothing floats over the tiles. The panel never clips its content (it fades rather than growing), so selection rings and focus outlines always show in full. Counts are 0.75rem/500, names 0.75rem; long names break only where the data marks a soft hyphen (`&shy;`).
-- **Focus:** keyboard focus is a 2px Ink outline 3px outside the tile (6px on a selected tile, outside its ring). The 3px of page colour keeps it off the tile's edge, and the 10px gap keeps it off the neighbour, so it can never be mistaken for the Signal Blue selection ring or fuse with an Ink tile next to it.
-- **Families:** the four families are told apart by value alone, never by a new hue: Ink (Muted Ink in dark), Powder Blue, Deep Sunk, Hairline outline. The legend repeats them as 12px swatches.
-- **Counts:** each tile shows how many papers it would leave under the current First author / Journal chips. A tile that would leave none turns to a dashed outline with a 0.
-- **Selection:** a selected tile keeps its family fill and gets the Selection ring. The others turn to outlines (transparent, Soft Ink text, Hairline border) that keep a 3px family-coloured top edge (none for the outline family), so the legend still describes what is on screen: still readable, clearly still pressable. Never dim an active tile with opacity.
-- **Empty result:** names the combination ("No journal papers on Wearable sensing yet.") and offers the one change that helps, as a chip ("Show the Wearable sensing paper").
-- **Status bar:** directly under the tiles, so a pick shows its result at once. The status names what is showing ("7 of 13 papers on Deep learning", "2 of 13 papers on Imaging · first author, journals"). While a filter is on, it pins under the nav for the length of the list, over a Hairline, with Ink Blue text actions that adapt: Show (while the list is still below), Change (whenever the tiles themselves are out of view or under the nav, or the phone panel is folded; it opens the panel, brings the whole panel with its legend and chips into view, and focuses the selected tile) and Clear (the only Clear). On touch the actions are 44px tall.
-- **Results button:** while a filter is on and the list starts below the screen, a floating Ink pill ("Show 6 papers ↓", 44px) rests 16px above the bottom of the viewport; when the chips scroll into that spot it rides 8px above them instead of covering them. It stands down whenever the status bar is fully on screen, and on wide screens it never sits over the tile grid. It fades and rises 8px in, disappears once the filters leave the screen, and its jump lands on the status line just under the nav (focus moves there, no `#` in the address).
+### Perception pipeline (signature filter)
+- **Shape:** the papers are filtered by where they sit in a perception pipeline, drawn like a model diagram: four stages, Perceive → Learn → Simulate → Deploy (`_data/pipeline.yml`), joined by Signal Blue arrows. Each stage is a 14px card-shaped button on Surface with a Hairline border: the name at 1.05rem/600, the paper count as an Ink Blue numeral (1.6rem/500, tabular) and its topics in Muted Ink at 0.8rem. From 900px the stages sit in one row 40px apart with the arrows in the gaps; below that they stack 22px apart and the arrows point down.
+- **Picking:** a picked stage fills with Ink, like a pressed chip, and only its topics appear under the row as chips with counts ("Narrow to: Ultrasound 6, Hyperspectral 1…"), so 4 choices show before you pick and at most 5 after. Picking a topic narrows the stage; picking the stage again clears both. First author and Journals sit under the pipeline.
+- **Panel:** stages, topics and chips sit in one panel that folds behind a 44px "Filter papers" toggle on phones (open on wide screens) and names the current filter ("Pose estimation · journals"). On phones a stage pick keeps the panel open (its topics just appeared); a topic or chip pick folds it, so the result line sits right under the toggle. The panel never clips (it fades rather than growing), so focus outlines and the hover lift show in full.
+- **Focus and hover:** keyboard focus is a 2px Ink outline 3px outside the stage. Stages follow the Lift-on-Hover rule (fine pointers only); a picked or empty stage does not lift.
+- **Counts:** every stage and topic shows how many papers it would leave under the current chips. One that would leave none turns to a dashed outline in Muted Ink.
+- **Empty result:** names the combination ("No first-author papers on Hyperspectral yet.") and offers the one change that helps, as a chip ("Show the Hyperspectral paper").
+- **Status bar:** directly under the filters, so a pick shows its result at once. The status names what is showing ("7 of 13 papers in Learn", "4 of 13 papers on Pose estimation · journals"). While a filter is on, it pins under the nav for the length of the list, over a Hairline, with Ink Blue text actions that adapt: Show (while the list is still below), Change (whenever the pipeline is out of view or under the nav, or the phone panel is folded; it opens the panel, brings it into view, and focuses the picked topic or stage) and Clear (the only Clear). On touch the actions are 44px tall.
+- **Results button:** while a filter is on and the list starts below the screen, a floating Ink pill ("Show 6 papers ↓", 44px) rests 16px above the bottom of the viewport; when the chips scroll into that spot it rides 8px above them instead of covering them. It stands down whenever the status bar is fully on screen, and on wide screens it never sits over the pipeline. It fades and rises 8px in, disappears once the filters leave the screen, and its jump lands on the status line just under the nav (focus moves there, no `#` in the address).
 - **List changes:** filtering the list uses same-document View Transitions over 260ms. It is instant when triggered from the keyboard, and a new click finishes a running transition at once (the transition overlay never takes pointer events), so no click is lost.
 
 ### News
@@ -364,8 +346,8 @@ Tactile and precise.
 - **Motion:** fades in with the portrait; drifts slightly against the portrait's parallax (depth -5); lifts with the hero on scroll.
 
 ### Speaker kit
-- **Place:** in "Talks and reviewing", between the past talks and the review record.
-- **Style:** a Hairline-bordered 14px box, flat (no shadow, no fill), up to 50rem wide: the photo as it will download (112px square from 768px, 64px beside the title on phones, 8px radius), "Speaker kit" at 1.05rem/600, the third-person bio in Soft Ink (up to 62ch), then "Copy bio" and "Download photo" ("JPG, 1024 px" in Muted Ink inside the button) as small ghost buttons directly under the bio. A successful copy shows only the check on the button and is announced; a refused copy shows its instruction in a line under the buttons. The photo is the hero portrait, `assets/img/chiara.jpg`, downloaded as `chiara-di-vece.jpg`.
+- **Place:** in "Talks and reviewing", beside the past talks from 900px (sticky under the nav) and after them on narrower screens, before the review record.
+- **Style:** a Hairline-bordered 14px box, flat (no shadow, no fill), the photo as it will download (64px beside the title on phones, 112px beside the text on tablets, 80px beside the title in the column beside the talks; 8px radius), "Speaker kit" at 1.05rem/600, the third-person bio in Soft Ink (up to 62ch), then "Copy bio" and "Download photo" ("JPG, 1024 px" in Muted Ink inside the button) as small ghost buttons directly under the bio. A successful copy shows only the check on the button and is announced; a refused copy shows its instruction in a line under the buttons. The photo is the hero portrait, `assets/img/chiara.jpg`, downloaded as `chiara-di-vece.jpg`.
 
 ### Reviewing marquee
 - **Place:** inside "Talks and reviewing", under its own sub-head; the track still runs edge to edge (it is clipped by the marquee, never by the page).
