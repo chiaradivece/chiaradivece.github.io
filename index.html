@@ -19,6 +19,7 @@ layout: default
       <a href="#talks">Talks</a>
       <a href="#experience">Experience</a>
       <a href="#recognition">Awards</a>
+      <a href="#teaching">Teaching</a>
       <a class="nav-extra" href="#contact">Contact</a>
       <a class="nav-extra" href="{{ p.cv | relative_url }}" download>Download CV</a>
       <span class="nav-indicator" aria-hidden="true" data-nav-indicator></span>
@@ -274,7 +275,7 @@ layout: default
 
     {%- assign pl = site.data.pipeline %}
     <details class="filter-panel" data-filter-panel open>
-      <summary class="filter-panel-toggle"><span>Filter papers</span><span class="sr-only">: </span><span class="filter-panel-state" data-filter-panel-state></span></summary>
+      {% capture arrow %}{% include icon.html name="arrow-right" %}{% endcapture %}<summary class="filter-panel-toggle"><span class="toggle-text"><span>Filter papers</span><span class="toggle-pipe" aria-hidden="true">{% for st in pl.stages %}<span>{{ st.name }}</span>{% unless forloop.last %}{{ arrow | strip }}{% endunless %}{% endfor %}</span></span><span class="sr-only">: </span><span class="filter-panel-state" data-filter-panel-state></span></summary>
       <div class="pipeline" data-pipeline>
         <ol class="stages" aria-label="Filter papers by stage of the perception pipeline">
           {%- for st in pl.stages %}

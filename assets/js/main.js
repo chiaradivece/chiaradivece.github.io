@@ -271,7 +271,12 @@
       return state.stage.name + (state.topic ? ' · ' + topicName(state.topic) : '');
     }
     // "5 of 13 papers in Learn", "4 of 13 papers in Learn · Ultrasound · first author · journals"
+    // On phones the bar keeps one row, so the status is shorter: "4 of 13 · Learn · Ultrasound"
     function describe(n) {
+      if (window.matchMedia('(max-width: 639px)').matches) {
+        return [n + ' of ' + pubs.length, state.stage && state.stage.name, state.topic && topicName(state.topic),
+          state.first && 'first author', state.journal && 'journals'].filter(Boolean).join(' · ');
+      }
       var parts = [n + ' of ' + pubs.length + ' papers' + (state.stage ? ' in ' + state.stage.name : '')];
       if (state.topic) parts.push(topicName(state.topic));
       if (state.first) parts.push('first author');
@@ -371,7 +376,7 @@
           .filter(Boolean).join(' · ');
       }
       updateBarActions();
-      updateBarActions();
+      measureList(); // filtering moves the first paper shown, so Show re-checks
     }
 
     // Where things are on screen, for the bar's actions: Show while the list is still below,
@@ -399,12 +404,17 @@
         }
       }
     });
+    // Show only while the first paper shown is still below the screen's bottom edge
+    var measuring = 0;
+    function measureList() {
+      measuring = 0;
+      var first = pubList.querySelector('[data-pub]:not([hidden])') || pubList;
+      var below = first.getBoundingClientRect().top > window.innerHeight - 48;
+      if (below !== listBelow) { listBelow = below; updateBarActions(); }
+    }
+    window.addEventListener('scroll', function () { if (!measuring) measuring = requestAnimationFrame(measureList); }, { passive: true });
+    window.addEventListener('resize', measureList);
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        var e = entries[0];
-        listBelow = !e.isIntersecting && e.boundingClientRect.top > 0;
-        updateBarActions();
-      }, { rootMargin: '0px 0px -15% 0px' }).observe(pubList);
       new IntersectionObserver(function (entries) {
         pipelineInView = entries[0].isIntersecting;
         updateBarActions();
