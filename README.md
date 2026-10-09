@@ -49,7 +49,6 @@ Pushing to `master` runs `.github/workflows/deploy.yml`, which builds the site a
 - `assets/css/main.css`: all styles (light and dark tokens at the top)
 - `assets/fonts/`: TeX Gyre Heros, the free Helvetica clone used only where Helvetica Neue isn't installed
 - `assets/js/main.js`: theme toggle, menu, reveals, publication filters, awards rail
-- `assets/js/scan.js`: the simulated ultrasound scan in the Research section
 - `assets/js/motion.js`: the hero portrait's pointer parallax (tune the feel with `STIFFNESS`, `DAMPING`)
 - `assets/img/chiara-cutout.webp`: the hero portrait, cut out of `chiara.jpg` on-device with macOS Vision and cropped above the original frame edges
 - `_redirects/`: keeps old al-folio URLs (`/publications/`, `/cv/`, ...) working

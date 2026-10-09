@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-09T07:00:37+00:00",
+  "generatedAt": "2026-10-09T07:26:17+00:00",
   "title": "Design System: Chiara Di Vece",
   "extensions": {
     "colorMeta": {
@@ -263,7 +263,7 @@
       {
         "name": "soft",
         "value": "0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)",
-        "purpose": "Hover lift for research cards and element tiles; the scan monitor at rest."
+        "purpose": "Hover lift for research cards and element tiles."
       },
       {
         "name": "soft-dark",
@@ -456,14 +456,14 @@
   ],
   "narrative": {
     "northStar": "Clean Signal",
-    "overview": "One clear signal on a quiet field. The page is a cool, near-white field of blue-grey neutrals. Across it runs a single powder-blue signal that marks what matters: the selected filter, the current job, the first number, the dot that ends the headline. Helvetica Neue carries everything, set tight and large where it speaks and loose and calm where it informs. The precision is technical. The warmth comes from a real person: the portrait, the live local time, the photos from the viva.\n\nThe density is moderate and the rhythm is editorial: big plain section titles that match the nav, hairline rules instead of boxes, and data laid out as lists and grids rather than dashboards. A few hand-made objects carry the personality, so the rest of the page can stay plain:\n\n- a faint ultrasound sector behind the hero portrait;\n- an ultrasound monitor that stays dark in both themes;\n- a periodic table of research elements;\n- a marquee of reviewing venues.\n\nMotion is physical and brief: strong ease-out curves, springs for anything that hangs or follows the pointer, and nothing that moves without a way to pause it.\n\nThe mood is crisp, technical and human. The confirmed anti-reference is anything that reads as AI-generated: template typography, purple-blue glow gradients, stock imagery, generic same-size feature cards.",
+    "overview": "One clear signal on a quiet field. The page is a cool, near-white field of blue-grey neutrals. Across it runs a single powder-blue signal that marks what matters: the selected filter, the current job, the first number, the dot that ends the headline. Helvetica Neue carries everything, set tight and large where it speaks and loose and calm where it informs. The precision is technical. The warmth comes from a real person: the portrait, the live local time, the photos from the viva.\n\nThe density is moderate and the rhythm is editorial: big plain section titles that match the nav, hairline rules instead of boxes, and data laid out as lists and grids rather than dashboards. A few hand-made objects carry the personality, so the rest of the page can stay plain:\n\n- a faint ultrasound sector behind the hero portrait;\n- a periodic table of research elements;\n- a marquee of reviewing venues.\n\nMotion is physical and brief: strong ease-out curves, springs for anything that hangs or follows the pointer, and nothing that moves without a way to pause it.\n\nThe mood is crisp, technical and human. The confirmed anti-reference is anything that reads as AI-generated: template typography, purple-blue glow gradients, stock imagery, generic same-size feature cards.",
     "keyCharacteristics": [
       "One hue (powder blue) on cool blue-grey neutrals; every neutral leans toward the accent's hue.",
       "A single family, Helvetica Neue, with a self-hosted TeX Gyre Heros fallback.",
       "Flat surfaces with 1px hairlines; cards lift onto a soft shadow on hover.",
       "Pills for things you press, 14px corners for things that hold content.",
       "Real photography and real research figures only.",
-      "Light and dark themes with the same structure; the scan monitor is always dark.",
+      "Light and dark themes with the same structure; the photo viewer is always dark.",
       "Motion uses strong ease-out (`cubic-bezier(0.23, 1, 0.32, 1)`), presses scale to 0.97, and every looping animation can be paused."
     ],
     "rules": [
@@ -479,7 +479,7 @@
       },
       {
         "name": "The Monitor Rule",
-        "body": "Anything that shows imaging (the scan, the photo lightbox) sits on Monitor Black in both themes, like a real screen.",
+        "body": "Anything that shows imagery full-screen (the photo viewer) sits on Monitor Black in both themes, like a real screen.",
         "section": "colors"
       },
       {
@@ -504,7 +504,7 @@
       },
       {
         "name": "The Physical Object Rule",
-        "body": "A shadow at rest means \"this sits in front of the page\": the monitor, the floating results button. Nothing else casts one until it is hovered.",
+        "body": "A shadow at rest means \"this sits in front of the page\": the floating results button. Nothing else casts one until it is hovered.",
         "section": "elevation"
       }
     ],
@@ -525,7 +525,7 @@
       "**Don't** introduce a second typeface. The earlier Bricolage Grotesque and Geist pairing was rejected for looking AI-generated, and no serif or monospace face belongs here either.",
       "**Don't** use `transition: all` or animate layout properties. Use transform, opacity, clip-path and box-shadow; `block-size` is allowed only for the details accordion.",
       "**Don't** lift anything on touch, or move anything under reduced motion.",
-      "**Don't** give a card a shadow at rest unless it sits in front of the page (the monitor, the floating results button).",
+      "**Don't** give a card a shadow at rest unless it sits in front of the page (the floating results button).",
       "**Don't** dim an active control with opacity; switch it to an outline so its text stays at 4.5:1 or more.",
       "**Don't** nest cards, or build a section out of same-size icon-and-heading cards.",
       "**Don't** use stock or generated imagery."
