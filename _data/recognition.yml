@@ -85,6 +85,8 @@ reviewing:
   - IEEE Access
   - EMBC
 
+# Talks, newest first. Optional per talk: slides and video (URLs), shown as links
+# under the talk only when present.
 talks:
   - date: Mar 2025
     title: "FETUS: Freehand Echographic Training for Ultrasound System"

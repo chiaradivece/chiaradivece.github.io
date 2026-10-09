@@ -20,6 +20,10 @@
   // forgotten and the site goes back to following the device, including when the device
   // switches later (at sunset, say). Only a theme that differs from the device is saved.
   function applyTheme(next) {
+    // Colours switch at once (the circle reveal is the only motion), so no element fades on
+    // its own colour transition; transitions come back two frames later
+    root.classList.add('theme-switching');
+    requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.remove('theme-switching'); }); });
     var deviceTheme = darkQuery.matches ? 'dark' : 'light';
     if (next === deviceTheme) {
       root.removeAttribute('data-theme');
@@ -287,16 +291,24 @@
         st.btn.toggleAttribute('data-empty', n === 0 && !on);
         st.btn.setAttribute('aria-pressed', String(on));
         st.btn.setAttribute('aria-label', st.name + ', ' + plural(n, 'paper'));
-        if (st.row) st.row.hidden = !on;
       });
+      // A chip that would keep every paper the stage shows (under the current chips) no longer
+      // narrows anything, so it steps aside; a row left with no chips hides
       topicChips.forEach(function (chip) {
         var chipStage = stageFor(chip.closest('[data-topics-for]').dataset.topicsFor);
         var n = countFor({ stage: chipStage, topic: chip.dataset.topic, first: state.first, journal: state.journal });
+        var all = countFor({ stage: chipStage, topic: null, first: state.first, journal: state.journal });
         var on = chip.dataset.topic === state.topic;
         chip.querySelector('.chip-count').textContent = n;
+        chip.hidden = !on && n > 0 && n === all;
         chip.toggleAttribute('data-empty', n === 0 && !on);
         chip.setAttribute('aria-pressed', String(on));
         chip.setAttribute('aria-label', chip.dataset.name + ', ' + plural(n, 'paper'));
+      });
+      stages.forEach(function (st) {
+        if (!st.row) return;
+        var open = st === state.stage && !!st.row.querySelector('[data-topic]:not([hidden])');
+        st.row.hidden = !open;
       });
       // First author and Journals preview too: what the list would show with the chip on
       toggles.forEach(function (btn) {
@@ -390,24 +402,42 @@
     function syncPanel() { if (panel) panel.open = !phone.matches; }
     syncPanel();
     if (phone.addEventListener) phone.addEventListener('change', syncPanel);
-    if (panel) panel.addEventListener('toggle', function () { updateBarActions(); });
+    if (panel) panel.addEventListener('toggle', function () {
+      updateBarActions();
+      if (panel.open && phone.matches) {
+        var r = panel.getBoundingClientRect();
+        if (r.top > window.innerHeight * 0.6) {
+          window.scrollBy({ top: r.top - (nav ? nav.offsetHeight : 0) - 12, behavior: reduceMotion ? 'auto' : 'smooth' });
+        }
+      }
+    });
     function placePill() {
       if (!pill || !chipsRow) return;
       var filtered = !!(state.stage || state.first || state.journal);
       if (!(filtered && gridInView && listBelow && !barInView)) return;
       var vh = window.innerHeight;
-      // If the button would cover the pipeline (its stages or topics), leave it out: the status
-      // bar's Show does the same job once the pipeline scrolls on
-      var box = pipeline.getBoundingClientRect();
-      var coversPipeline = box.bottom > vh - 16 - 52 && box.top < vh - 16;
-      pill.hidden = coversPipeline;
-      if (coversPipeline) return;
-      var chips = chipsRow.getBoundingClientRect();
-      var restingTop = vh - 16 - pill.offsetHeight;
-      // lift only while the chips overlap the spot where the button rests
-      var overlaps = chips.top < vh - 16 && chips.bottom > restingTop - 8;
-      var lift = overlaps ? (vh - chips.top) + 8 - 16 : 0;
-      pill.style.bottom = 'calc(max(16px, env(safe-area-inset-bottom)) + ' + Math.max(0, lift) + 'px)';
+      var h = pill.offsetHeight || 44;
+      var open = !panel || panel.open;
+      var restingTop = vh - 16 - h;
+      var lift = 0;
+      if (open) {
+        // lift only while the chips overlap the spot where the button rests
+        var chips = chipsRow.getBoundingClientRect();
+        var overlaps = chips.top < vh - 16 && chips.bottom > restingTop - 8;
+        if (overlaps) lift = Math.max(0, (vh - chips.top) + 8 - 16);
+      }
+      // Then check where it would actually land: never over the pipeline (stages and topics)
+      // or the phone's "Filter papers" toggle. If it would, leave it out: the status bar's Show
+      // does the same job once the list is near
+      var top = restingTop - lift, bottom = vh - 16 - lift;
+      var blockers = [];
+      if (open) blockers.push(pipeline.getBoundingClientRect());
+      var toggle = panel && panel.querySelector('summary');
+      if (toggle && toggle.offsetParent) blockers.push(toggle.getBoundingClientRect());
+      var covers = blockers.some(function (b) { return b.height > 0 && b.top < bottom + 8 && b.bottom > top - 8; });
+      pill.hidden = covers;
+      if (covers) return;
+      pill.style.bottom = 'calc(max(16px, env(safe-area-inset-bottom)) + ' + lift + 'px)';
     }
     window.addEventListener('scroll', function () {
       if (pill && !placing) placing = requestAnimationFrame(function () { placing = 0; placePill(); });

@@ -1,9 +1,8 @@
 # Roles, newest first, in two columns.
 #   current: true  marks the role held now
-#   keep_open: true  never folds the summary on phones (other summaries of two or more
-#                  sentences fold there, except the current role's)
-#   brief: true    folds the summary behind a "What I did" toggle; use it only for
-#                  summaries of two or more sentences (one sentence always shows)
+#   keep_open: true  never folds the summary on phones. Otherwise summaries of two or more
+#                  sentences fold behind "What I did" on phones (never the current role's);
+#                  on wider screens every summary shows in full
 
 industry:
   - role: AI Lead and Founding Applied Scientist
@@ -50,7 +49,6 @@ academia:
     org: Politecnico di Milano, NEARLab
     place: Milan, Italy
     dates: Mar 2020 – Sep 2020
-    brief: true
     summary: >-
       NeuroEngineering and Medical Robotics Lab, EU project EDEN2020. Built a real-time,
       position-based dynamics simulator of brain deformation for keyhole neurosurgery in
@@ -61,7 +59,6 @@ academia:
     org: University of Illinois Chicago
     place: Chicago, US
     dates: Jan 2019 – May 2019
-    brief: true
     summary: >-
       Developed a haptics and VR simulator for Veress needle insertion training, rated
       "good" on the System Usability Scale by experienced clinicians. TA for Biological

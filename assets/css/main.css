@@ -158,6 +158,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 
 .when-light { display: var(--show-light); }
 .when-dark { display: var(--show-dark); }
+.theme-switching *, .theme-switching *::before, .theme-switching *::after { transition: none !important; }
 
 /* ---------- Buttons, chips, tags ---------- */
 .btn {
@@ -662,7 +663,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .pick-title a { text-decoration: none; background-image: linear-gradient(var(--accent-mark), var(--accent-mark)); background-size: 0% 2px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size 250ms var(--ease-out); }
 .pick-title a:hover { color: var(--ink); background-size: 100% 2px; }
 .pick-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.75rem; }
-.pick-foot .tag { white-space: normal; height: auto; min-height: 22px; padding-block: 2px; line-height: 1.35; }
+.pick-foot .tag { white-space: normal; height: auto; min-height: 22px; padding-block: 3px 4px; line-height: 1.35; }
 .pick-cited { font-size: 0.875rem; color: var(--accent-ink); text-decoration: none; }
 .pick-cited:hover { text-decoration: underline; }
 
@@ -730,8 +731,12 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
   font-size: 0.95rem; font-weight: 550; cursor: pointer; list-style: none;
 }
 .filter-panel-toggle::-webkit-details-marker { display: none; }
-.filter-panel-toggle::after { content: "+"; font-weight: 400; font-size: 1.25em; line-height: 1; transition: transform 200ms var(--ease-out); }
-.filter-panel[open] > .filter-panel-toggle::after { transform: rotate(45deg); }
+.filter-panel-toggle::after {
+  content: ""; flex: none; width: 0.5em; height: 0.5em; margin: -0.25em 0.15rem 0 0.35rem;
+  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg); transition: transform 200ms var(--ease-out);
+}
+.filter-panel[open] > .filter-panel-toggle::after { transform: translateY(0.25em) rotate(-135deg); }
 .filter-panel-state { margin-left: auto; color: var(--accent-ink); font-weight: 500; }
 @media (max-width: 639px) {
   .filter-panel-toggle { display: flex; }
@@ -761,6 +766,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
   border-bottom: 1px solid var(--line);
 }
 #pub-status:focus { outline: none; }
+#pub-status:focus-visible { outline: 2px solid var(--accent-mark); outline-offset: 4px; border-radius: 4px; }
 .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .chip {
   display: inline-flex; align-items: center; gap: 0.45rem;
@@ -789,7 +795,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .pub-title a { text-decoration: none; background-image: linear-gradient(var(--accent-mark), var(--accent-mark)); background-size: 0% 2px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size 250ms var(--ease-out); }
 @media (hover: hover) and (pointer: fine) { .pub-title a:hover { color: var(--ink); background-size: 100% 2px; } }
 .pub-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.6rem; font-size: 0.9rem; color: var(--ink-2); }
-.pub-meta .tag { white-space: normal; height: auto; min-height: 22px; padding-block: 2px; line-height: 1.35; }
+.pub-meta .tag { white-space: normal; height: auto; min-height: 22px; padding-block: 3px 4px; line-height: 1.35; }
 .pub-links { display: inline-flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; }
 .pub-links a { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.875rem; color: var(--ink-2); text-decoration: none; }
 .pub-links a:hover { color: var(--accent-ink); }
@@ -954,6 +960,9 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
   .speaker-kit-actions { margin-top: 0.25rem; }
 }
 .talks-body { display: grid; }
+@media (max-width: 899px) {
+  .talks-body .speaker-kit { order: -1; margin-top: 0; margin-bottom: clamp(2rem, 4vw, 3rem); }
+}
 @media (min-width: 900px) {
   .talks-body { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: start; }
   .talks-body .speaker-kit { margin-top: 0; position: sticky; top: calc(var(--nav-h) + 24px); }
@@ -972,6 +981,10 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
   max-width: 60ch;
 }
 .talk-event { color: var(--ink-2); font-size: 0.95rem; max-width: 60ch; }
+.talk-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.875rem; }
+@media (min-width: 768px) { .talk-links { grid-column: 2; } }
+.talk-links a { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--ink); text-decoration-color: var(--accent-mark); text-underline-offset: 0.2em; }
+.talk-links .icon { width: 0.85em; height: 0.85em; }
 .talk-event span { color: var(--ink); font-weight: 550; margin-right: 0.35rem; }
 
 /* ---------- Teaching ---------- */
@@ -1082,16 +1095,15 @@ html:not(.js) .contact-time { display: none; }
   .cell-links { row-gap: 1.5rem; } /* two 11px reaches never overlap across wrapped rows */
   /* Small inline links keep their look; an invisible box extends what a thumb can hit */
   .pub-links a, .news-link, .cell-links a, .pick-cited, .contact-email-link, .fact a, .award-detail a,
-  .pub-title a, .job-org a, .research-now a, .number a, .facts-source a, .pubs-foot a { position: relative; }
+  .pub-title a, .job-org a, .research-now a, .number a, .facts-source a, .pubs-foot a, .talk-links a { position: relative; }
   .pub-links a::after, .news-link::after, .cell-links a::after, .pick-cited::after, .contact-email-link::after, .fact a::after, .award-detail a::after,
-  .pub-title a::after, .job-org a::after, .research-now a::after, .number a::after, .facts-source a::after, .pubs-foot a::after {
+  .pub-title a::after, .job-org a::after, .research-now a::after, .number a::after, .facts-source a::after, .pubs-foot a::after, .talk-links a::after {
     content: ""; position: absolute; inset: -11px -6px;
   }
   /* smaller text, so a taller reach */
   .award-detail a::after { inset-block: -14px; }
   .facts-source a::after, .pubs-foot a::after { inset-block: -15px; }
   .research-now a::after { inset-block: -13px; }
-  .job-org:has(a) + .job-more { margin-top: 0.35rem; } /* the employer link's reach clears the toggle below */
 }
 
 /* ---------- 404 ---------- */
