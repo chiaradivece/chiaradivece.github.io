@@ -266,13 +266,19 @@
       for (var i = 0; i < topicChips.length; i++) if (topicChips[i].dataset.topic === id) return topicChips[i].dataset.name;
       return id;
     }
-    // What is picked, in words: "Pose estimation" (a topic) or "Learn" (a stage)
-    function pickName() { return state.topic ? topicName(state.topic) : state.stage ? state.stage.name : ''; }
-    // "7 of 13 papers in Learn", "2 of 13 papers on Pose estimation · first author, journals"
+    // What is picked, in words, always with its stage: "Learn" or "Learn · Ultrasound".
+    // A topic alone would misstate the record (4 ultrasound papers in Learn, 6 in all).
+    function pickName() {
+      if (!state.stage) return '';
+      return state.stage.name + (state.topic ? ' · ' + topicName(state.topic) : '');
+    }
+    // "5 of 13 papers in Learn", "4 of 13 papers in Learn · ultrasound · first author · journals"
     function describe(n) {
-      var topic = state.topic ? ' on ' + topicName(state.topic) : state.stage ? ' in ' + state.stage.name : '';
-      var also = [state.first ? 'first author' : '', state.journal ? 'journals' : ''].filter(Boolean).join(', ');
-      return n + ' of ' + pubs.length + ' papers' + topic + (also ? ' · ' + also : '');
+      var parts = [n + ' of ' + pubs.length + ' papers' + (state.stage ? ' in ' + state.stage.name : '')];
+      if (state.topic) parts.push(topicName(state.topic).toLowerCase());
+      if (state.first) parts.push('first author');
+      if (state.journal) parts.push('journals');
+      return parts.join(' · ');
     }
     function countFor(s) {
       var n = 0;
@@ -329,13 +335,12 @@
       emptyBox.hidden = shown !== 0;
       if (shown !== 0 || !emptyText || !emptyFix) return;
       var kind = (state.first ? 'first-author ' : '') + (state.journal ? 'journal ' : '');
-      var name = pickName();
-      var where = state.topic ? ' on ' + name : state.stage ? ' in ' + name : '';
+      // "in Learn on ultrasound", "in Simulate"
+      var where = state.stage ? ' in ' + state.stage.name + (state.topic ? ' on ' + topicName(state.topic).toLowerCase() : '') : '';
       emptyText.textContent = 'No ' + kind + 'papers' + where + ' yet.';
-      if (name && (state.first || state.journal)) {
+      if (state.stage && (state.first || state.journal)) {
         var all = countFor({ stage: state.stage, topic: state.topic, first: false, journal: false });
-        var phrase = state.topic ? name + ' paper' : 'paper in ' + name; // e.g. "Show the paper in Simulate"
-        emptyFix.textContent = all === 1 ? 'Show the ' + phrase : 'Show all ' + all + ' ' + (state.topic ? name + ' papers' : 'papers in ' + name);
+        emptyFix.textContent = all === 1 ? 'Show the paper' + where : 'Show all ' + all + ' papers' + where;
         emptyFix.dataset.fix = 'chips';
       } else {
         emptyFix.textContent = 'Show all papers';
@@ -434,7 +439,9 @@
       if (open) blockers.push(pipeline.getBoundingClientRect());
       var toggle = panel && panel.querySelector('summary');
       if (toggle && toggle.offsetParent) blockers.push(toggle.getBoundingClientRect());
-      var covers = blockers.some(function (b) { return b.height > 0 && b.top < bottom + 8 && b.bottom > top - 8; });
+      // a blocker just entering at the bottom edge counts too, so the button never flashes
+      // for the few pixels before the pipeline reaches it
+      var covers = blockers.some(function (b) { return b.height > 0 && b.top < bottom + 24 && b.bottom > top - 8; });
       pill.hidden = covers;
       if (covers) return;
       pill.style.bottom = 'calc(max(16px, env(safe-area-inset-bottom)) + ' + lift + 'px)';
@@ -498,7 +505,34 @@
       });
     }
 
+    // The filter lives in the address (?stage=learn&topic=ultrasound&first=1&journal=1), so a
+    // view can be shared and Back undoes a change. Each change adds one history entry.
+    function stateToQuery(s) {
+      var q = new URLSearchParams(window.location.search);
+      ['stage', 'topic', 'first', 'journal'].forEach(function (k) { q.delete(k); });
+      if (s.stage) q.set('stage', s.stage.id);
+      if (s.stage && s.topic) q.set('topic', s.topic);
+      if (s.first) q.set('first', '1');
+      if (s.journal) q.set('journal', '1');
+      var str = q.toString();
+      return window.location.pathname + (str ? '?' + str : '') + window.location.hash;
+    }
+    function stateFromQuery() {
+      var q = new URLSearchParams(window.location.search);
+      var st = stageFor(q.get('stage'));
+      var topic = q.get('topic');
+      var valid = st && st.row && st.row.querySelector('[data-topic="' + topic + '"]');
+      return { stage: st, topic: valid ? topic : null, first: q.get('first') === '1', journal: q.get('journal') === '1' };
+    }
+    function remember() {
+      var url = stateToQuery(state);
+      if (url !== window.location.pathname + window.location.search + window.location.hash) {
+        try { history.pushState({ pubs: true }, '', url); } catch (e) {}
+      }
+    }
+
     function update(event) {
+      remember();
       if (running) running.skipTransition();
       if (!canTransition || (event && event.detail === 0)) { render(); return; }
       nameForTransition(true);
@@ -550,6 +584,14 @@
         pipeline.querySelector('.stage[aria-pressed="true"]') || stages[0].btn;
       if (picked) picked.focus({ preventScroll: true });
     }
+    // A shared link or a Back/Forward step restores the filter (instantly, no transition)
+    var fromUrl = stateFromQuery();
+    if (fromUrl.stage || fromUrl.first || fromUrl.journal) { state = fromUrl; render(); }
+    window.addEventListener('popstate', function () {
+      state = stateFromQuery();
+      if (running) running.skipTransition();
+      render();
+    });
     var barClear = document.querySelector('[data-pub-bar-clear]');
     if (changeLink) {
       changeLink.addEventListener('click', function (e) {
@@ -743,6 +785,29 @@
   if (folds.length) {
     syncFolds();
     if (foldPhone.addEventListener) foldPhone.addEventListener('change', syncFolds);
+  }
+
+  /* ---------- Education notes (phones) ---------- */
+  // Phones show compact rows (degree, school, dates); honours and notes are one tap away.
+  // Without JavaScript, and from 640px, the notes always show.
+  var eduList = document.getElementById('edu-list');
+  var eduToggle = document.querySelector('[data-edu-notes]');
+  if (eduList && eduToggle) {
+    var eduPhone = window.matchMedia('(max-width: 639px)');
+    var setNotes = function (show) {
+      eduList.toggleAttribute('data-notes-folded', !show);
+      eduToggle.setAttribute('aria-expanded', String(show));
+      eduToggle.textContent = show ? 'Hide honours and notes' : 'Show honours and notes';
+    };
+    var syncEdu = function () {
+      eduToggle.hidden = !eduPhone.matches;
+      setNotes(!eduPhone.matches);
+    };
+    syncEdu();
+    if (eduPhone.addEventListener) eduPhone.addEventListener('change', syncEdu);
+    eduToggle.addEventListener('click', function () {
+      setNotes(eduList.hasAttribute('data-notes-folded'));
+    });
   }
 
   /* ---------- Copy email ---------- */

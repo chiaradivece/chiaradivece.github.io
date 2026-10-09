@@ -275,12 +275,13 @@ layout: default
           {%- assign st_pubs = pubs | where: "stage", st.id %}
           {%- assign n = st_pubs.size %}
           {%- capture whole %}{% for g in pl.stages %}{% for t in g.topics %}{% assign c = 0 %}{% for pub in st_pubs %}{% if pub.topics contains t.id %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}{% if c == n and n > 1 %}{{ t.name | downcase | replace: "3d", "3D" | replace: "vr ", "VR " }}|{% endif %}{% endfor %}{% endfor %}{% endcapture %}
+          {%- capture narrow %}{% if n >= 4 %}{% for g in pl.stages %}{% for t in g.topics %}{% assign c = 0 %}{% for pub in st_pubs %}{% if pub.topics contains t.id %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}{% if c > 1 and c < n %}{{ t.name | downcase | replace: "3d", "3D" | replace: "vr ", "VR " }}|{% endif %}{% endfor %}{% endfor %}{% endif %}{% endcapture %}
           {%- capture used %}{% for t in st.topics %}{% assign c = 0 %}{% for pub in st_pubs %}{% if pub.topics contains t.id %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}{% if c > 0 %}{{ t.name | downcase | replace: "3d", "3D" | replace: "vr ", "VR " }}|{% endif %}{% endfor %}{% endcapture %}
           <li class="stage-item">
             <button type="button" class="stage" data-stage="{{ st.id }}" data-name="{{ st.name }}" aria-pressed="false" aria-label="{{ st.name }}, {{ n }} {% if n == 1 %}paper{% else %}papers{% endif %}" aria-describedby="stage-{{ st.id }}-topics">
               <span class="stage-name" aria-hidden="true">{{ st.name }}</span>
               <span class="stage-count" aria-hidden="true">{{ n }}</span>
-              <span class="stage-topics" id="stage-{{ st.id }}-topics" aria-hidden="true">{% if whole != "" %}Every paper: {{ whole | split: "|" | join: ", " }}{% else %}Includes {{ used | split: "|" | join: ", " }}{% endif %}</span>
+              <span class="stage-topics" id="stage-{{ st.id }}-topics" aria-hidden="true">{% if whole != "" %}Every paper: {{ whole | split: "|" | join: ", " }}.{% if narrow != "" %} Narrow by {{ narrow | split: "|" | join: ", " }}.{% endif %}{% elsif narrow != "" %}Narrow by {{ narrow | split: "|" | join: ", " }}.{% else %}Includes {{ used | split: "|" | join: ", " }}.{% endif %}</span>
             </button>
             {%- unless forloop.last %}<span class="stage-arrow" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>{% endunless %}
           </li>
@@ -291,7 +292,7 @@ layout: default
         {%- capture chips %}
           {%- for g in pl.stages %}{% for t in g.topics %}
           {%- assign c = 0 %}{% for pub in st_pubs %}{% if pub.topics contains t.id %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}
-          {%- if c > 1 and c < st_pubs.size %}
+          {%- if st_pubs.size >= 4 and c > 1 and c < st_pubs.size %}
           <button type="button" class="chip topic" data-topic="{{ t.id }}" data-name="{{ t.name }}" aria-pressed="false" aria-label="{{ t.name }}, {{ c }} papers"><span aria-hidden="true">{{ t.name }}</span><span class="chip-count" aria-hidden="true">{{ c }}</span></button>
           {%- endif %}
           {%- endfor %}{% endfor %}
@@ -379,6 +380,19 @@ layout: default
       </div>
     </div>
     <div class="talks-body">
+    <div class="speaker-kit" data-reveal>
+      <img class="speaker-thumb" src="{{ p.photo | relative_url }}" alt="The speaker-kit photo: Chiara Di Vece, head and shoulders" width="96" height="96" loading="lazy" decoding="async">
+      <h3 class="speaker-kit-title">Speaker kit</h3>
+      <p class="speaker-bio" id="speaker-bio">{{ p.speaker_bio }}</p>
+      <div class="speaker-kit-actions">
+        <button class="btn btn-ghost btn-small copy-btn" type="button" data-copy="{{ p.speaker_bio | escape }}" data-copy-source="speaker-bio">
+          <span class="copy-glyph"><span class="when-idle">{% include icon.html name="copy" %}</span><span class="when-done">{% include icon.html name="check" %}</span></span>
+          Copy bio
+        </button>
+        <a class="btn btn-ghost btn-small" href="{{ p.photo | relative_url }}" download="chiara-di-vece.jpg">{% include icon.html name="download-simple" %} Download photo <span class="btn-note">JPG, 1024 px</span></a>
+        <p class="copy-note" data-copy-note data-quiet-success role="status"></p>
+      </div>
+    </div>
     <ol class="talk-list" data-stagger>
       {%- for t in rec.talks %}
       <li class="talk">
@@ -394,19 +408,6 @@ layout: default
       </li>
       {%- endfor %}
     </ol>
-    <div class="speaker-kit" data-reveal>
-      <img class="speaker-thumb" src="{{ p.photo | relative_url }}" alt="The speaker-kit photo: Chiara Di Vece, head and shoulders" width="96" height="96" loading="lazy" decoding="async">
-      <h3 class="speaker-kit-title">Speaker kit</h3>
-      <p class="speaker-bio" id="speaker-bio">{{ p.speaker_bio }}</p>
-      <div class="speaker-kit-actions">
-        <button class="btn btn-ghost btn-small copy-btn" type="button" data-copy="{{ p.speaker_bio | escape }}" data-copy-source="speaker-bio">
-          <span class="copy-glyph"><span class="when-idle">{% include icon.html name="copy" %}</span><span class="when-done">{% include icon.html name="check" %}</span></span>
-          Copy bio
-        </button>
-        <a class="btn btn-ghost btn-small" href="{{ p.photo | relative_url }}" download="chiara-di-vece.jpg">{% include icon.html name="download-simple" %} Download photo <span class="btn-note">JPG, 1024 px</span></a>
-        <p class="copy-note" data-copy-note data-quiet-success role="status"></p>
-      </div>
-    </div>
     </div>
 
     <!-- The review record; the venue marquee runs edge to edge (the only marquee on the page) -->
@@ -442,7 +443,7 @@ layout: default
         <h3 class="exp-heading">{% if g == "industry" %}Industry{% else %}Research and teaching{% endif %}</h3>
         <ol class="exp-list" data-stagger>
           {%- for job in site.data.experience[g] %}
-          <li class="job{% if job.current %} is-current{% endif %}">
+          <li class="job{% if job.current %} is-current{% endif %}{% if job.current or job.bridge %} is-bridge{% endif %}">
             <div class="job-meta">
               <span class="job-dates">{{ job.dates }}</span>
               {%- if job.current %}<span class="tag tag-accent">Now</span>{% endif %}
@@ -469,7 +470,8 @@ layout: default
     </div>
     <div class="edu-block">
       <h3 class="exp-heading">Education</h3>
-      <ul class="edu" data-stagger>
+      <button class="edu-notes-toggle" type="button" aria-expanded="true" aria-controls="edu-list" data-edu-notes hidden>Show honours and notes</button>
+      <ul class="edu" id="edu-list" data-stagger>
         {%- for e in p.education %}
         <li>
           <span class="edu-degree">{{ e.degree }}</span>
