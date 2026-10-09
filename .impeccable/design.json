@@ -209,24 +209,6 @@
       "paper-dark": {
         "role": "neutral",
         "displayName": "Paper (dark)"
-      },
-      "el-sunk": {
-        "role": "neutral",
-        "displayName": "Deep Sunk",
-        "tonalRamp": [
-          "oklch(15% 0.011 252)",
-          "oklch(26% 0.011 252)",
-          "oklch(38% 0.011 252)",
-          "oklch(49% 0.011 252)",
-          "oklch(61% 0.011 252)",
-          "oklch(72% 0.011 252)",
-          "oklch(84% 0.011 252)",
-          "oklch(95% 0.011 252)"
-        ]
-      },
-      "el-sunk-dark": {
-        "role": "neutral",
-        "displayName": "Deep Sunk (dark)"
       }
     },
     "typographyMeta": {
@@ -263,7 +245,7 @@
       {
         "name": "soft",
         "value": "0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)",
-        "purpose": "Hover lift for research cards and element tiles."
+        "purpose": "Hover lift for research cards and pipeline stages."
       },
       {
         "name": "soft-dark",
@@ -279,11 +261,6 @@
         "name": "lift-dark",
         "value": "0 1px 0 rgb(255 255 255 / 0.03), 0 28px 48px -24px rgb(0 0 0 / 0.75)",
         "purpose": "Lift, in the dark theme."
-      },
-      {
-        "name": "selection-ring",
-        "value": "0 0 0 2px var(--bg), 0 0 0 4px var(--accent-mark)",
-        "purpose": "A selected element tile; combined with soft on hover."
       },
       {
         "name": "focus-ring",
@@ -315,7 +292,7 @@
       {
         "name": "lift",
         "value": "translateY(-2px) + soft shadow over 200ms ease-out",
-        "purpose": "Cards and tiles on fine-pointer hover; reduced motion keeps only the shadow."
+        "purpose": "Cards and pipeline stages on fine-pointer hover; reduced motion keeps only the shadow."
       },
       {
         "name": "reveal",
@@ -359,7 +336,7 @@
         "value": "560px"
       },
       {
-        "name": "tiles-8",
+        "name": "filter-fold",
         "value": "640px"
       },
       {
@@ -422,12 +399,12 @@
       "css": ".ds-tag { display: inline-flex; align-items: center; height: 22px; padding: 0 0.6rem; border-radius: 999px; border: 1px solid var(--line, #d3dbe3); color: var(--ink-2, #3f4852); font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); font-size: 0.75rem; font-weight: 500; white-space: nowrap; } .ds-tag-accent { border-color: transparent; background: var(--accent, #a8c8e8); color: var(--on-accent, #10141a); }"
     },
     {
-      "name": "Element Tile",
-      "kind": "custom",
-      "refersTo": "element-learning",
-      "description": "Periodic-table filter tile. Families differ by value; unmatched tiles turn to outlines and zero-count tiles to dashed outlines, never faded.",
-      "html": "<div class=\"ds-els\"><button class=\"ds-el ds-el-imaging\" type=\"button\" aria-pressed=\"false\" data-unmatched><span class=\"ds-el-count\">5</span><span class=\"ds-el-symbol\">Us</span><span class=\"ds-el-name\">Ultrasound</span></button><button class=\"ds-el ds-el-learning\" type=\"button\" aria-pressed=\"true\"><span class=\"ds-el-count\">7</span><span class=\"ds-el-symbol\">Dl</span><span class=\"ds-el-name\">Deep learning</span></button><button class=\"ds-el ds-el-geometry\" type=\"button\" aria-pressed=\"false\"><span class=\"ds-el-count\">3</span><span class=\"ds-el-symbol\">Sm</span><span class=\"ds-el-name\">Simulation</span></button><button class=\"ds-el ds-el-practice\" type=\"button\" aria-pressed=\"false\" data-empty><span class=\"ds-el-count\">0</span><span class=\"ds-el-symbol\">Ws</span><span class=\"ds-el-name\">Wearable sensing</span></button></div>",
-      "css": ".ds-els { display: grid; grid-template-columns: repeat(4, 96px); gap: 8px; } .ds-el { aspect-ratio: 1; display: grid; grid-template-rows: auto 1fr 2.4em; align-items: start; padding: 8px 9px; text-align: left; border-radius: 10px; border: 1px solid transparent; font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); cursor: pointer; transition: transform 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)), box-shadow 200ms ease; } .ds-el-count { font-size: 0.68rem; opacity: 0.75; line-height: 1; } .ds-el-symbol { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1; align-self: center; } .ds-el-name { font-size: 0.69rem; line-height: 1.25; opacity: 0.85; align-self: end; } .ds-el-imaging { background: var(--ink, #10141a); color: var(--bg, #f4f6f8); } .ds-el-learning { background: var(--accent, #a8c8e8); color: var(--on-accent, #10141a); } .ds-el-geometry { background: var(--el-sunk, #d2d6dc); color: var(--ink, #10141a); } .ds-el-practice { background: transparent; color: var(--ink, #10141a); border-color: var(--line, #d3dbe3); } .ds-el[aria-pressed=\"true\"] { box-shadow: 0 0 0 2px var(--bg, #f4f6f8), 0 0 0 4px var(--accent-mark, #5b8fc2); } .ds-el:hover { transform: translateY(-2px); box-shadow: var(--shadow, 0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)); } .ds-el[aria-pressed=\"true\"]:hover { box-shadow: 0 0 0 2px var(--bg, #f4f6f8), 0 0 0 4px var(--accent-mark, #5b8fc2), var(--shadow, 0 12px 32px -18px rgb(36 52 70 / 0.3)); } .ds-el:active { transform: scale(0.97); } .ds-el:focus-visible { outline: 2px solid var(--accent-mark, #5b8fc2); outline-offset: 3px; } .ds-el[data-unmatched], .ds-el[data-empty] { background: transparent; color: var(--ink-2, #3f4852); border-color: var(--line, #d3dbe3); } .ds-el[data-empty] { color: var(--ink-3, #5c6773); border-style: dashed; }"
+      "name": "Pipeline Stage",
+      "kind": "button",
+      "refersTo": "pipeline-stage",
+      "description": "One stage of the perception pipeline that filters the papers (Perceive → Learn → Simulate → Deploy): a 14px card-shaped button with the stage name, an Ink Blue paper count and its topics in Muted Ink; Signal Blue arrows join the stages. Picked, it fills with Ink and its topics appear below as chips; a stage that would leave no papers turns dashed.",
+      "html": "<div class=\"ds-pipe\"><button class=\"ds-stage\" type=\"button\" aria-pressed=\"false\"><span class=\"ds-stage-name\">Perceive</span><span class=\"ds-stage-count\">11</span><span class=\"ds-stage-topics\">ultrasound, hyperspectral, laparoscopy</span></button><span class=\"ds-arrow\" aria-hidden=\"true\">→</span><button class=\"ds-stage\" type=\"button\" aria-pressed=\"true\"><span class=\"ds-stage-name\">Learn</span><span class=\"ds-stage-count\">7</span><span class=\"ds-stage-topics\">deep learning, pose estimation</span></button></div>",
+      "css": ".ds-pipe { display: flex; align-items: stretch; gap: 0; font-family: var(--font-sans, \"Helvetica Neue\", Helvetica, Arial, sans-serif); } .ds-arrow { display: grid; place-items: center; width: 40px; color: var(--accent-mark, #5b8fc2); } .ds-stage { display: grid; grid-template-columns: 1fr auto; gap: 0.3rem 1rem; width: 220px; padding: 1rem 1.1rem; text-align: left; border-radius: 14px; border: 1px solid var(--line, #d3dbe3); background: var(--surface, #fcfdfe); color: var(--ink, #10141a); font: inherit; cursor: pointer; transition: transform 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)), box-shadow 200ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)); } .ds-stage:hover { transform: translateY(-2px); box-shadow: var(--shadow, 0 1px 0 rgb(16 20 26 / 0.04), 0 12px 32px -18px rgb(36 52 70 / 0.3)); } .ds-stage[aria-pressed=\"true\"] { background: var(--ink, #10141a); border-color: var(--ink, #10141a); color: var(--bg, #f4f6f8); } .ds-stage-name { font-weight: 600; font-size: 1.05rem; } .ds-stage-count { grid-row: 1 / span 2; grid-column: 2; font-size: 1.6rem; font-weight: 500; line-height: 1; color: var(--accent-ink, #2b5f8c); } .ds-stage[aria-pressed=\"true\"] .ds-stage-count { color: inherit; } .ds-stage-topics { font-size: 0.8rem; color: var(--ink-3, #5c6773); } .ds-stage[aria-pressed=\"true\"] .ds-stage-topics { color: inherit; opacity: 0.75; }"
     },
     {
       "name": "Research Card",
@@ -477,7 +454,7 @@
     "rules": [
       {
         "name": "The One Signal Rule",
-        "body": "Powder blue is the only hue. Families and states are told apart by value (ink, blue fill, sunk grey, outline), never by adding a colour. The four element families prove that it works.",
+        "body": "Powder blue is the only hue. States are told apart by value (ink fill, blue fill, outline, dashed outline), never by adding a colour.",
         "section": "colors"
       },
       {

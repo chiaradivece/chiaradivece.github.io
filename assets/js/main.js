@@ -205,23 +205,37 @@
     }
   }
 
-  /* ---------- Publications: research elements + filters ---------- */
+  /* ---------- Publications: the perception pipeline + filters ---------- */
 
   // A paper is shown when it matches every active filter:
-  //   element  the research element picked in the periodic table, if any
+  //   stage    a pipeline stage (Perceive, Learn, Simulate, Deploy): any of its topics
+  //   topic    one topic inside the picked stage, which narrows the stage
   //   first    first-author papers; equal-contribution (co-first) papers count too
   //   journal  journal papers, including ones under review at a journal (public on arXiv)
   function matchesFilter(pub, state) {
-    if (state.element && pub.elements.indexOf(state.element) === -1) return false;
+    if (state.topic) {
+      if (pub.topics.indexOf(state.topic) === -1) return false;
+    } else if (state.stage) {
+      if (!state.stage.topics.some(function (t) { return pub.topics.indexOf(t) > -1; })) return false;
+    }
     if (state.first && pub.first !== 'sole' && pub.first !== 'joint') return false;
     if (state.journal && pub.type !== 'journal') return false;
     return true;
   }
 
-  var elementGrid = document.querySelector('[data-element-grid]');
+  var pipeline = document.querySelector('[data-pipeline]');
   var pubList = document.querySelector('[data-pub-list]');
-  if (elementGrid && pubList) {
-    var tiles = elementGrid.querySelectorAll('[data-element]');
+  if (pipeline && pubList) {
+    var stages = Array.prototype.map.call(pipeline.querySelectorAll('[data-stage]'), function (btn) {
+      return {
+        btn: btn,
+        id: btn.dataset.stage,
+        name: btn.dataset.name,
+        topics: btn.dataset.topics.split(' '),
+        row: pipeline.querySelector('[data-topics-for="' + btn.dataset.stage + '"]')
+      };
+    });
+    var topicChips = pipeline.querySelectorAll('[data-topic]');
     var toggles = document.querySelectorAll('[data-toggle]');
     var statusEl = document.querySelector('[data-pub-status]');
     var emptyBox = document.querySelector('[data-pub-empty]');
@@ -235,18 +249,26 @@
         el: el,
         type: el.dataset.type,
         first: el.dataset.first,
-        elements: (el.dataset.elements || '').split(' ').filter(Boolean)
+        topics: (el.dataset.topics || '').split(' ').filter(Boolean)
       };
     });
-    var state = { element: null, first: false, journal: false };
+    var blank = function () { return { stage: null, topic: null, first: false, journal: false }; };
+    var state = blank();
 
     function plural(n, word) { return n + ' ' + word + (n === 1 ? '' : 's'); }
-    var pubSection = elementGrid.closest('section');
+    var pubSection = pipeline.closest('section');
     var changeLink = document.querySelector('[data-pub-change]');
     var barActions = document.querySelector('[data-pub-bar-actions]');
-    // "7 of 13 papers on Deep learning", "2 of 13 papers on Imaging · first author, journals"
+    function stageFor(id) { for (var i = 0; i < stages.length; i++) if (stages[i].id === id) return stages[i]; return null; }
+    function topicName(id) {
+      for (var i = 0; i < topicChips.length; i++) if (topicChips[i].dataset.topic === id) return topicChips[i].dataset.name;
+      return id;
+    }
+    // What is picked, in words: "Pose estimation" (a topic) or "Learn" (a stage)
+    function pickName() { return state.topic ? topicName(state.topic) : state.stage ? state.stage.name : ''; }
+    // "7 of 13 papers in Learn", "2 of 13 papers on Pose estimation · first author, journals"
     function describe(n) {
-      var topic = state.element ? ' on ' + elementName(state.element).replace(/\u00ad/g, '') : '';
+      var topic = state.topic ? ' on ' + topicName(state.topic) : state.stage ? ' in ' + state.stage.name : '';
       var also = [state.first ? 'first author' : '', state.journal ? 'journals' : ''].filter(Boolean).join(', ');
       return n + ' of ' + pubs.length + ' papers' + topic + (also ? ' · ' + also : '');
     }
@@ -255,21 +277,27 @@
       pubs.forEach(function (pub) { if (matchesFilter(pub, s)) n++; });
       return n;
     }
-    function elementName(symbol) {
-      for (var i = 0; i < tiles.length; i++) if (tiles[i].dataset.element === symbol) return tiles[i].dataset.name;
-      return symbol;
-    }
 
-    // Under the chips, each tile shows how many papers it would leave, so a dead end is
-    // visible before anyone clicks it (dashed outline, count 0).
-    function renderTiles() {
-      tiles.forEach(function (tile) {
-        var n = countFor({ element: tile.dataset.element, first: state.first, journal: state.journal });
-        var countEl = tile.querySelector('.el-count');
-        if (countEl) countEl.textContent = n;
-        tile.toggleAttribute('data-empty', n === 0 && tile.dataset.element !== state.element);
-        tile.setAttribute('aria-pressed', String(tile.dataset.element === state.element));
-        tile.setAttribute('aria-label', tile.dataset.name.replace(/\u00ad/g, '') + ', ' + plural(n, 'paper'));
+    // Under the chips, each stage and topic shows how many papers it would leave, so a dead
+    // end is visible before anyone clicks it (dashed outline, count 0). Only the picked
+    // stage's topics are shown.
+    function renderPipeline() {
+      stages.forEach(function (st) {
+        var n = countFor({ stage: st, topic: null, first: state.first, journal: state.journal });
+        var on = st === state.stage;
+        st.btn.querySelector('.stage-count').textContent = n;
+        st.btn.toggleAttribute('data-empty', n === 0 && !on);
+        st.btn.setAttribute('aria-pressed', String(on));
+        st.btn.setAttribute('aria-label', st.name + ', ' + plural(n, 'paper'));
+        if (st.row) st.row.hidden = !on;
+      });
+      topicChips.forEach(function (chip) {
+        var n = countFor({ stage: null, topic: chip.dataset.topic, first: state.first, journal: state.journal });
+        var on = chip.dataset.topic === state.topic;
+        chip.querySelector('.chip-count').textContent = n;
+        chip.toggleAttribute('data-empty', n === 0 && !on);
+        chip.setAttribute('aria-pressed', String(on));
+        chip.setAttribute('aria-label', chip.dataset.name + ', ' + plural(n, 'paper'));
       });
     }
 
@@ -279,11 +307,13 @@
       emptyBox.hidden = shown !== 0;
       if (shown !== 0 || !emptyText || !emptyFix) return;
       var kind = (state.first ? 'first-author ' : '') + (state.journal ? 'journal ' : '');
-      var name = state.element ? elementName(state.element) : '';
-      emptyText.textContent = 'No ' + kind + 'papers' + (name ? ' on ' + name : '') + ' yet.';
-      if (state.element && (state.first || state.journal)) {
-        var all = countFor({ element: state.element, first: false, journal: false });
-        emptyFix.textContent = all === 1 ? 'Show the ' + name + ' paper' : 'Show all ' + all + ' ' + name + ' papers';
+      var name = pickName();
+      var where = state.topic ? ' on ' + name : state.stage ? ' in ' + name : '';
+      emptyText.textContent = 'No ' + kind + 'papers' + where + ' yet.';
+      if (name && (state.first || state.journal)) {
+        var all = countFor({ stage: state.stage, topic: state.topic, first: false, journal: false });
+        var phrase = state.topic ? name + ' paper' : 'paper in ' + name;
+        emptyFix.textContent = all === 1 ? 'Show the ' + phrase : 'Show all ' + all + ' ' + (state.topic ? name + ' papers' : 'papers in ' + name);
         emptyFix.dataset.fix = 'chips';
       } else {
         emptyFix.textContent = 'Show all papers';
@@ -301,19 +331,19 @@
       yearGroups.forEach(function (group) {
         group.hidden = !group.querySelector('[data-pub]:not([hidden])');
       });
-      renderTiles();
+      renderPipeline();
       renderEmpty(shown);
-      elementGrid.toggleAttribute('data-active', !!state.element);
+      pipeline.toggleAttribute('data-active', !!state.stage);
       toggles.forEach(function (btn) {
         btn.setAttribute('aria-pressed', String(!!state[btn.dataset.toggle]));
       });
-      var filtered = !!(state.element || state.first || state.journal);
+      var filtered = !!(state.stage || state.first || state.journal);
       if (statusEl) statusEl.textContent = filtered ? describe(shown) : 'Showing all ' + pubs.length + ' papers';
       if (pubSection) pubSection.toggleAttribute('data-filtered', filtered);
       if (barActions) barActions.hidden = !filtered;
       if (panelState) {
-        panelState.textContent = [state.element ? elementName(state.element).replace(/\u00ad/g, '') : '',
-          state.first ? 'first author' : '', state.journal ? 'journals' : ''].filter(Boolean).join(' · ');
+        panelState.textContent = [pickName(), state.first ? 'first author' : '', state.journal ? 'journals' : '']
+          .filter(Boolean).join(' · ');
       }
       updateBarActions();
       if (pillText) pillText.textContent = shown ? 'Show ' + plural(shown, 'paper') : 'No papers match';
@@ -324,24 +354,24 @@
     // below it (always the case on a phone), a button at the bottom takes you there.
     var listBelow = false;
     var gridInView = false;
-    var tilesInView = false;
+    var pipelineInView = false;
     var chipsRow = document.querySelector('[data-pub-filters]');
     var bar = document.querySelector('[data-pub-bar]');
     var barInView = false;
     var showLink = document.querySelector('[data-pub-show]');
-    var panel = document.querySelector('[data-el-panel]');
-    var panelState = document.querySelector('[data-el-panel-state]');
+    var panel = document.querySelector('[data-filter-panel]');
+    var panelState = document.querySelector('[data-filter-panel-state]');
     function updatePill() {
       if (!pill) return;
-      var filtered = !!(state.element || state.first || state.journal);
+      var filtered = !!(state.stage || state.first || state.journal);
       pill.hidden = !(filtered && gridInView && listBelow && !barInView);
       placePill();
       updateBarActions();
     }
-    // Show while the list is still below; Change once the tiles are out of view; Clear always
+    // Show while the list is still below; Change once the pipeline is out of view; Clear always
     function updateBarActions() {
       if (showLink) showLink.hidden = !listBelow;
-      if (changeLink) changeLink.hidden = tilesInView && !(panel && !panel.open);
+      if (changeLink) changeLink.hidden = pipelineInView && !(panel && !panel.open);
     }
     // Resting 16px above the bottom edge; when the chips scroll into that spot, the button
     // rides 8px above them instead, so it never covers a control and never disappears.
@@ -354,15 +384,15 @@
     if (panel) panel.addEventListener('toggle', function () { updateBarActions(); });
     function placePill() {
       if (!pill || !chipsRow) return;
-      var filtered = !!(state.element || state.first || state.journal);
+      var filtered = !!(state.stage || state.first || state.journal);
       if (!(filtered && gridInView && listBelow && !barInView)) return;
       var vh = window.innerHeight;
       if (wide.matches) {
-        // Desktop: the list is a short scroll away; if the button would cover tiles, leave it out
-        var grid = elementGrid.getBoundingClientRect();
-        var coversGrid = grid.bottom > vh - 16 - 52 && grid.top < vh - 16;
-        pill.hidden = coversGrid;
-        if (coversGrid) return;
+        // Desktop: the list is a short scroll away; if the button would cover the pipeline, leave it out
+        var box = pipeline.getBoundingClientRect();
+        var coversPipeline = box.bottom > vh - 16 - 52 && box.top < vh - 16;
+        pill.hidden = coversPipeline;
+        if (coversPipeline) return;
       }
       var chips = chipsRow.getBoundingClientRect();
       var restingTop = vh - 16 - pill.offsetHeight;
@@ -381,15 +411,15 @@
         listBelow = !e.isIntersecting && e.boundingClientRect.top > 0;
         updatePill();
       }, { rootMargin: '0px 0px -15% 0px' }).observe(pubList);
-      // "The filters" = the element grid plus the chips under it; either on screen counts
-      var filterParts = [elementGrid, document.querySelector('.pub-controls')].filter(Boolean);
+      // "The filters" = the pipeline plus the chips under it; either on screen counts
+      var filterParts = [pipeline, chipsRow].filter(Boolean);
       var partsInView = new Set();
       var filterIO = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
           if (e.isIntersecting) partsInView.add(e.target); else partsInView.delete(e.target);
         });
         gridInView = partsInView.size > 0;
-        tilesInView = partsInView.has(elementGrid);
+        pipelineInView = partsInView.has(pipeline);
         updatePill();
       }, { rootMargin: '-' + (nav ? nav.offsetHeight : 0) + 'px 0px 0px 0px' }); // under the sticky nav is not "in view"
       filterParts.forEach(function (el) { filterIO.observe(el); });
@@ -442,41 +472,55 @@
       }).catch(function () {});
     }
 
-    tiles.forEach(function (tile) {
-      tile.addEventListener('click', function (e) {
-        state.element = state.element === tile.dataset.element ? null : tile.dataset.element;
+    // Phones: a final pick (a topic, or a chip) folds the panel; its toggle names the filter,
+    // so the result line and Show sit right under it and nothing floats over the controls.
+    // A stage pick keeps the panel open, because its topics have just appeared.
+    function foldOnPhone(e) {
+      if (!(phone.matches && panel && panel.open)) return;
+      panel.open = false;
+      var top = panel.getBoundingClientRect().top;
+      if (top < (nav ? nav.offsetHeight : 0)) panel.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      var toggle = panel.querySelector('summary');
+      if (toggle && e.detail === 0) toggle.focus({ preventScroll: true }); // keyboard: focus stays on the filter
+    }
+    stages.forEach(function (st) {
+      st.btn.addEventListener('click', function (e) {
+        state.stage = state.stage === st ? null : st;
+        state.topic = null;
         update(e);
-        // Phones: a pick folds the panel (its toggle names the filter), so the result line and
-        // Show sit right under it and nothing has to float over the tiles
-        if (phone.matches && panel && panel.open && state.element) {
-          panel.open = false;
-          var top = panel.getBoundingClientRect().top;
-          if (top < (nav ? nav.offsetHeight : 0)) panel.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-          var toggle = panel.querySelector('summary');
-          if (toggle && e.detail === 0) toggle.focus({ preventScroll: true }); // keyboard: focus stays on the filter
-        }
+      });
+    });
+    topicChips.forEach(function (chip) {
+      chip.addEventListener('click', function (e) {
+        state.topic = state.topic === chip.dataset.topic ? null : chip.dataset.topic;
+        update(e);
+        if (state.topic) foldOnPhone(e);
       });
     });
     toggles.forEach(function (btn) {
       btn.addEventListener('click', function (e) {
         state[btn.dataset.toggle] = !state[btn.dataset.toggle];
         update(e);
-        if (phone.matches && panel && panel.open) panel.open = false; // phones: chips fold the panel too
+        foldOnPhone(e);
       });
     });
+    function focusPick() {
+      var picked = pipeline.querySelector('.topic[aria-pressed="true"]') ||
+        pipeline.querySelector('.stage[aria-pressed="true"]') || stages[0].btn;
+      if (picked) picked.focus({ preventScroll: true });
+    }
     var barClear = document.querySelector('[data-pub-bar-clear]');
     if (changeLink) {
       changeLink.addEventListener('click', function (e) {
         e.preventDefault();
         if (panel && !panel.open) panel.open = true;
-        (panel || elementGrid).scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }); // legend and chips too
-        var selected = elementGrid.querySelector('[aria-pressed="true"]') || tiles[0];
-        if (selected) selected.focus({ preventScroll: true });
+        (panel || pipeline).scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }); // stages and chips too
+        focusPick();
       });
     }
     if (barClear) {
       barClear.addEventListener('click', function (e) {
-        state = { element: null, first: false, journal: false };
+        state = blank();
         update(e);
         if (statusEl) statusEl.focus({ preventScroll: true }); // the button hides; focus stays on the result
       });
@@ -484,11 +528,10 @@
     if (emptyFix) {
       emptyFix.addEventListener('click', function (e) {
         if (emptyFix.dataset.fix === 'chips') { state.first = false; state.journal = false; }
-        else state = { element: null, first: false, journal: false };
+        else state = blank();
         update(e);
         // the fix button disappears with the empty state, so focus needs a new home
-        var selected = elementGrid.querySelector('[aria-pressed="true"]') || tiles[0];
-        if (selected) selected.focus({ preventScroll: true });
+        focusPick();
       });
     }
   }

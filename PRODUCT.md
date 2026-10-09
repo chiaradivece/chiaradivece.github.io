@@ -49,15 +49,15 @@ Three claims, in this order of weight (confirmed):
   - hero (role line, headline, photo inside a faint ultrasound sector)
   - About (text; facts: role, PhD, reviewer record; Scholar numbers)
   - News
-  - Research (one line on the move from fetal ultrasound to soft robots and one on the thread across the cards, then the research cards and a "Now" card with morph's name, link and the role)
-  - Publications (three selected papers, then the full list filtered by research element, first author, journal)
-  - Talks and reviewing (an invitation line with email and copy buttons, past talks, a speaker kit with a copyable bio and the portrait to download, the review count and reviewer award, the venue marquee)
+  - Research (one line on the move from fetal ultrasound to soft robots and one on the thread across the cards, then the three research cards and a one-line "Now" row with the role, morph's link and the start date)
+  - Publications (three selected papers, then the full list filtered by stage of the perception pipeline, first author, journal)
+  - Talks and reviewing (an invitation line with email and copy buttons, past talks with the speaker kit beside them on desktop (a copyable bio and the portrait to download), the review count and reviewer award, the venue marquee)
   - Experience and education (short roles fold their details away)
   - Awards (a full list; honours labelled and not counted)
   - Teaching and mentoring
   - Contact (email, CV, local clocks)
 - **Terminology:**
-  - "Elements" are the research topics in the periodic-table-style filter (`_data/elements.yml`).
+  - The publications filter is a perception pipeline: four stages (Perceive, Learn, Simulate, Deploy), each with its topics, in `_data/pipeline.yml`. It replaced a periodic-table filter in October 2026 because the owner works in AI and the table did not speak to the field.
   - "First author" includes co-first authorship.
   - The TMI paper under review counts as a journal paper (it is on arXiv).
 - **morph is in stealth.** The site shows the name, the link and Chiara's role only. No product, customer, funding or technical details.
@@ -96,7 +96,6 @@ Three claims, in this order of weight (confirmed):
   - PhD viva: 27 February 2026, passed with minor corrections.
   - PhD awarded: 28 September 2026.
 - **Settled in review (October 2026), not to reopen:**
-  - The periodic table is a filter for the papers, not a portrait of the research.
   - "Cited by" stays the first blue number on a paper.
   - Date ranges use an en dash ("Sep 2020 – Jan 2025").
 - **Absent, never fabricate:**

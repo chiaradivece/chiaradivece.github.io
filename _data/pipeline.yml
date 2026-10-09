@@ -1,0 +1,37 @@
+# The perception pipeline: the filter above the publication list.
+# Four stages, read left to right; picking a stage shows every paper with any of its
+# topics, and its topics appear as chips to narrow further. Papers list topic ids in
+# publications.yml (`topics:`). Paper counts are computed from publications.yml.
+
+stages:
+  - id: perceive
+    name: Perceive
+    topics:
+      - { id: ultrasound, name: Ultrasound }
+      - { id: hyperspectral, name: Hyperspectral }
+      - { id: laparoscopy, name: Laparoscopy }
+      - { id: infrared, name: Infrared }
+      - { id: wearable-sensing, name: Wearable sensing }
+
+  - id: learn
+    name: Learn
+    topics:
+      - { id: deep-learning, name: Deep learning }
+      - { id: pose-estimation, name: Pose estimation }
+      - { id: keypoint-matching, name: Keypoint matching }
+      - { id: segmentation, name: Landmarks and segmentation }
+
+  - id: simulate
+    name: Simulate
+    topics:
+      - { id: 3d-reconstruction, name: 3D reconstruction }
+      - { id: simulation, name: Simulation }
+      - { id: vr-haptics, name: VR and haptics }
+
+  - id: deploy
+    name: Deploy
+    topics:
+      - { id: robotics, name: Robotics }
+      - { id: neurosurgery, name: Neurosurgery }
+      - { id: clinical-studies, name: Clinical studies }
+      - { id: datasets, name: Datasets and benchmarks }

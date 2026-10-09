@@ -2,7 +2,7 @@
 #   type:    journal | conference | preprint
 #   status:  optional label shown as a tag, e.g. Under review
 #   first:   sole (first author) | joint (equal contribution) | none
-#   elements: symbols from elements.yml (drives the research-elements filter)
+#   topics:  topic ids from pipeline.yml (drive the perception-pipeline filter)
 #   links:   label -> url (Paper, arXiv, Code, Data)
 #   note:    optional short highlight (award, acceptance)
 #   selected: true to show the paper in the short "start here" list above the filters (keep it to three)
@@ -15,7 +15,7 @@
   type: journal
   status: Under review
   first: sole
-  elements: [Us, Dl, Ps, Lm]
+  topics: [ultrasound, deep-learning, pose-estimation, segmentation]
   links:
     arXiv: https://arxiv.org/abs/2404.07124
 
@@ -25,7 +25,7 @@
   year: 2026
   type: journal
   first: none
-  elements: [Hs, Lp, Dl, Km, Ps, 3d, Ds]
+  topics: [hyperspectral, laparoscopy, deep-learning, keypoint-matching, pose-estimation, 3d-reconstruction, datasets]
   links:
     Paper: https://doi.org/10.1007/s11548-026-03633-z
     arXiv: https://arxiv.org/abs/2604.17446
@@ -37,7 +37,7 @@
   year: 2026
   type: journal
   first: sole
-  elements: [Us, Dl, Lm, Ds, Cs]
+  topics: [ultrasound, deep-learning, segmentation, datasets, clinical-studies]
   links:
     Paper: https://doi.org/10.1038/s41598-026-47854-3
     Data: https://doi.org/10.5522/04/30819911
@@ -50,7 +50,7 @@
   selected: true
   type: journal
   first: none
-  elements: [Lp, 3d, Rb, Ds]
+  topics: [laparoscopy, 3d-reconstruction, robotics, datasets]
   links:
     Paper: https://doi.org/10.1109/LRA.2025.3540529
     arXiv: https://arxiv.org/abs/2410.11703
@@ -61,7 +61,7 @@
   year: 2025
   type: conference
   first: joint
-  elements: [Dl, Km, Ps, 3d, Ds]
+  topics: [deep-learning, keypoint-matching, pose-estimation, 3d-reconstruction, datasets]
   links:
     Paper: https://doi.org/10.1007/978-3-031-91989-3_8
     arXiv: https://arxiv.org/abs/2408.16445
@@ -73,7 +73,7 @@
   year: 2024
   type: journal
   first: none
-  elements: [Us, Cs]
+  topics: [ultrasound, clinical-studies]
   links:
     Paper: https://doi.org/10.1016/j.ejogrb.2024.04.042
 
@@ -83,7 +83,7 @@
   year: 2023
   type: journal
   first: sole
-  elements: [Us, Dl, Ps]
+  topics: [ultrasound, deep-learning, pose-estimation]
   links:
     Paper: https://doi.org/10.1109/TMRB.2023.3328638
 
@@ -93,7 +93,7 @@
   year: 2022
   type: conference
   first: sole
-  elements: [Us, Dl, Ps]
+  topics: [ultrasound, deep-learning, pose-estimation]
   links:
     Paper: https://doi.org/10.31256/HSMR2022.24
 
@@ -104,7 +104,7 @@
   selected: true
   type: journal
   first: sole
-  elements: [Us, Dl, Ps, Sm]
+  topics: [ultrasound, deep-learning, pose-estimation, simulation]
   note: AURIS/IPCAI Young Investigator Travel Award, 1st place
   links:
     Paper: https://doi.org/10.1007/s11548-022-02609-z
@@ -115,7 +115,7 @@
   year: 2021
   type: journal
   first: joint
-  elements: [Sm, Rb, Ns]
+  topics: [simulation, robotics, neurosurgery]
   links:
     Paper: https://doi.org/10.1109/LRA.2021.3090016
 
@@ -125,7 +125,7 @@
   year: 2021
   type: journal
   first: sole
-  elements: [Lp, Vr, Sm, Cs]
+  topics: [laparoscopy, vr-haptics, simulation, clinical-studies]
   links:
     Paper: https://doi.org/10.1007/s11548-021-02341-0
 
@@ -135,7 +135,7 @@
   year: 2019
   type: conference
   first: joint
-  elements: [Ws]
+  topics: [wearable-sensing]
   links:
     Paper: https://doi.org/10.1109/EMBC.2019.8857927
 
@@ -145,6 +145,6 @@
   year: 2017
   type: conference
   first: joint
-  elements: [Ir]
+  topics: [infrared]
   links:
     Paper: https://doi.org/10.1109/RTSI.2017.8065976
