@@ -801,37 +801,30 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .chip[hidden] { display: none; }
 
-.pub-years { display: grid; }
-.pub-years { border-top: 1px solid var(--line); }
-.pub-year { display: grid; gap: 0.5rem 2rem; padding-block: 1.75rem; }
-@media (min-width: 768px) { .pub-year { grid-template-columns: 120px minmax(0, 1fr); } }
+.pub-years { display: grid; border-top: 1px solid var(--line); }
+.pubs[data-filtered] .pub-years { border-top-color: transparent; } /* the pinned bar's hairline is the rule */
+/* Compact rows: the year is a small inline heading, rows use the full column */
+.pub-year { display: grid; gap: 0.25rem; padding-block: 1.25rem 0.25rem; }
 .pub-year[hidden] { display: none; }
-.pub-year-label {
-  font-size: clamp(1.6rem, 2.6vw, 2.25rem);
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  color: var(--ink-3);
-  align-self: start;
-}
-@media (min-width: 768px) { .pub-year-label { position: sticky; top: calc(var(--nav-h) + 20px); } }
-@media (min-width: 768px) { .pubs[data-filtered] .pub-year-label { top: calc(var(--nav-h) + 48px + 20px); } }
-.pub-items { display: grid; gap: 1.75rem; }
-.pub { display: grid; gap: 0.3rem; }
+.pub-year-label { font-size: 0.875rem; font-weight: 600; letter-spacing: 0.02em; color: var(--ink-3); }
+.pub-items { display: grid; }
+.pub { display: grid; gap: 0.2rem; padding-block: 0.8rem; border-bottom: 1px solid var(--line); }
+.pub:last-child { border-bottom: 0; }
 .pub[hidden] { display: none; }
-.pub-title { font-size: clamp(1.15rem, 1.3vw, 1.2rem); font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; max-width: 70ch; }
-.pub-title a { text-decoration: none; background-image: linear-gradient(var(--accent-mark), var(--accent-mark)); background-size: 0% 2px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size 250ms var(--ease-out); }
-.pub-title a:hover { color: var(--ink); background-size: 100% 2px; }
-.pub-authors { font-size: 0.9rem; color: var(--ink-3); }
-.pub-authors strong { color: var(--ink); font-weight: 600; }
-.pub-venue { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.6rem; font-size: 0.92rem; color: var(--ink-2); }
-.pub-venue .tag { white-space: normal; height: auto; min-height: 22px; padding-block: 2px; line-height: 1.35; }
 .pub-years > *, .pub-items > * { min-width: 0; }
-.pub-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; margin-top: 0.2rem; }
+.pub-title { font-size: clamp(1.15rem, 1.3vw, 1.2rem); font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; max-width: 80ch; }
+.pub-title a { text-decoration: none; background-image: linear-gradient(var(--accent-mark), var(--accent-mark)); background-size: 0% 2px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size 250ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .pub-title a:hover { color: var(--ink); background-size: 100% 2px; } }
+.pub-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.6rem; font-size: 0.9rem; color: var(--ink-2); }
+.pub-meta .tag { white-space: normal; height: auto; min-height: 22px; padding-block: 2px; line-height: 1.35; }
+.pub-links { display: inline-flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; }
 .pub-links a { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.875rem; color: var(--ink-2); text-decoration: none; }
 .pub-links a:hover { color: var(--accent-ink); }
 .pub-links .icon { width: 0.8em; height: 0.8em; }
 .pub-links .pub-cited { color: var(--accent-ink); }
 .pub-links .pub-cited:hover { text-decoration: underline; }
+.pub-authors { font-size: 0.8rem; line-height: 1.45; color: var(--ink-3); }
+.pub-authors strong { color: var(--ink-2); font-weight: 600; }
 .pubs-empty { display: grid; justify-items: start; gap: 0.9rem; padding: 2rem 0; color: var(--ink-2); }
 .pubs-empty[hidden] { display: none; }
 .pubs-foot { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--ink-3); }
@@ -923,9 +916,13 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 }
 
 /* ---------- Awards: one list, all visible ---------- */
-.awards { display: grid; border-top: 1px solid var(--ink); }
-@media (min-width: 900px) { .awards { grid-template-columns: 1fr 1fr; column-gap: clamp(2rem, 5vw, 5rem); } }
+.awards-count { margin-bottom: 1rem; font-size: 0.9rem; color: var(--ink-2); }
+.awards-count a { color: var(--ink); text-decoration-color: var(--accent-mark); }
+/* fills column by column, so the years read top to bottom */
+.awards { border-top: 1px solid var(--ink); }
+@media (min-width: 900px) { .awards { columns: 2; column-gap: clamp(2rem, 5vw, 5rem); } }
 .award-row {
+  break-inside: avoid;
   display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); gap: 0.25rem 1rem;
   padding-block: 0.9rem; border-bottom: 1px solid var(--line);
 }

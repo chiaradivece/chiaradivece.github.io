@@ -269,7 +269,7 @@
         if (countEl) countEl.textContent = n;
         tile.toggleAttribute('data-empty', n === 0 && tile.dataset.element !== state.element);
         tile.setAttribute('aria-pressed', String(tile.dataset.element === state.element));
-        tile.setAttribute('aria-label', tile.dataset.name + ', ' + plural(n, 'paper'));
+        tile.setAttribute('aria-label', tile.dataset.name.replace(/\u00ad/g, '') + ', ' + plural(n, 'paper'));
       });
     }
 
@@ -391,7 +391,7 @@
         gridInView = partsInView.size > 0;
         tilesInView = partsInView.has(elementGrid);
         updatePill();
-      });
+      }, { rootMargin: '-' + (nav ? nav.offsetHeight : 0) + 'px 0px 0px 0px' }); // under the sticky nav is not "in view"
       filterParts.forEach(function (el) { filterIO.observe(el); });
       if (bar) {
         // "in view" means fully readable, not a sliver at the bottom edge
@@ -461,6 +461,7 @@
       btn.addEventListener('click', function (e) {
         state[btn.dataset.toggle] = !state[btn.dataset.toggle];
         update(e);
+        if (phone.matches && panel && panel.open) panel.open = false; // phones: chips fold the panel too
       });
     });
     var barClear = document.querySelector('[data-pub-bar-clear]');
@@ -468,7 +469,7 @@
       changeLink.addEventListener('click', function (e) {
         e.preventDefault();
         if (panel && !panel.open) panel.open = true;
-        elementGrid.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        (panel || elementGrid).scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }); // legend and chips too
         var selected = elementGrid.querySelector('[aria-pressed="true"]') || tiles[0];
         if (selected) selected.focus({ preventScroll: true });
       });
