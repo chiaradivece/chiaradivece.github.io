@@ -268,18 +268,19 @@ layout: default
 
     {%- assign pl = site.data.pipeline %}
     <details class="filter-panel" data-filter-panel open>
-      <summary class="filter-panel-toggle"><span>Filter papers</span><span class="filter-panel-state" data-filter-panel-state></span></summary>
+      <summary class="filter-panel-toggle"><span>Filter papers</span><span class="sr-only">: </span><span class="filter-panel-state" data-filter-panel-state></span></summary>
       <div class="pipeline" data-pipeline>
         <ol class="stages" aria-label="Filter papers by stage of the perception pipeline">
           {%- for st in pl.stages %}
           {%- assign st_pubs = pubs | where: "stage", st.id %}
           {%- assign n = st_pubs.size %}
+          {%- capture whole %}{% for g in pl.stages %}{% for t in g.topics %}{% assign c = 0 %}{% for pub in st_pubs %}{% if pub.topics contains t.id %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}{% if c == n and n > 1 %}{{ t.name | downcase | replace: "3d", "3D" | replace: "vr ", "VR " }}|{% endif %}{% endfor %}{% endfor %}{% endcapture %}
           {%- capture used %}{% for t in st.topics %}{% assign c = 0 %}{% for pub in st_pubs %}{% if pub.topics contains t.id %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}{% if c > 0 %}{{ t.name | downcase | replace: "3d", "3D" | replace: "vr ", "VR " }}|{% endif %}{% endfor %}{% endcapture %}
           <li class="stage-item">
-            <button type="button" class="stage" data-stage="{{ st.id }}" data-name="{{ st.name }}" aria-pressed="false" aria-label="{{ st.name }}, {{ n }} {% if n == 1 %}paper{% else %}papers{% endif %}">
+            <button type="button" class="stage" data-stage="{{ st.id }}" data-name="{{ st.name }}" aria-pressed="false" aria-label="{{ st.name }}, {{ n }} {% if n == 1 %}paper{% else %}papers{% endif %}" aria-describedby="stage-{{ st.id }}-topics">
               <span class="stage-name" aria-hidden="true">{{ st.name }}</span>
               <span class="stage-count" aria-hidden="true">{{ n }}</span>
-              <span class="stage-topics" aria-hidden="true">{{ used | split: "|" | join: ", " }}</span>
+              <span class="stage-topics" id="stage-{{ st.id }}-topics" aria-hidden="true">{% if whole != "" %}Every paper: {{ whole | split: "|" | join: ", " }}{% else %}Includes {{ used | split: "|" | join: ", " }}{% endif %}</span>
             </button>
             {%- unless forloop.last %}<span class="stage-arrow" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>{% endunless %}
           </li>
@@ -288,12 +289,12 @@ layout: default
         {%- for st in pl.stages %}
         {%- assign st_pubs = pubs | where: "stage", st.id %}
         {%- capture chips %}
-          {%- for t in st.topics %}
+          {%- for g in pl.stages %}{% for t in g.topics %}
           {%- assign c = 0 %}{% for pub in st_pubs %}{% if pub.topics contains t.id %}{% assign c = c | plus: 1 %}{% endif %}{% endfor %}
-          {%- if c > 0 and c < st_pubs.size %}
-          <button type="button" class="chip topic" data-topic="{{ t.id }}" data-name="{{ t.name }}" aria-pressed="false" aria-label="{{ t.name }}, {{ c }} {% if c == 1 %}paper{% else %}papers{% endif %}"><span aria-hidden="true">{{ t.name }}</span><span class="chip-count" aria-hidden="true">{{ c }}</span></button>
+          {%- if c > 1 and c < st_pubs.size %}
+          <button type="button" class="chip topic" data-topic="{{ t.id }}" data-name="{{ t.name }}" aria-pressed="false" aria-label="{{ t.name }}, {{ c }} papers"><span aria-hidden="true">{{ t.name }}</span><span class="chip-count" aria-hidden="true">{{ c }}</span></button>
           {%- endif %}
-          {%- endfor %}
+          {%- endfor %}{% endfor %}
         {%- endcapture %}
         {%- if chips contains "data-topic" %}
         <div class="topics" role="group" aria-label="Narrow {{ st.name }} to one topic" data-topics-for="{{ st.id }}" hidden>
@@ -384,6 +385,12 @@ layout: default
         <span class="talk-date">{{ t.date }}</span>
         <h3 class="talk-title">{{ t.title }}</h3>
         <p class="talk-event"><span>{{ t.role }}</span> {{ t.event }}</p>
+        {%- if t.slides or t.video %}
+        <p class="talk-links">
+          {%- if t.slides %}<a href="{{ t.slides }}" rel="noopener">Slides<span class="sr-only">: {{ t.title }}</span> {% include icon.html name="arrow-up-right" %}</a>{% endif %}
+          {%- if t.video %}<a href="{{ t.video }}" rel="noopener">Video<span class="sr-only">: {{ t.title }}</span> {% include icon.html name="arrow-up-right" %}</a>{% endif %}
+        </p>
+        {%- endif %}
       </li>
       {%- endfor %}
     </ol>
@@ -446,12 +453,7 @@ layout: default
               {%- if job.place %}<span class="job-place">{{ job.place }}</span>{% endif %}
             </p>
             {%- assign sentences = job.summary | split: ". " | size %}
-            {%- if job.brief %}
-            <details class="job-more">
-              <summary>What I did<span class="sr-only"> at {{ job.org }}</span></summary>
-              <p class="job-summary">{{ job.summary }}</p>
-            </details>
-            {%- elsif job.current or job.keep_open or sentences < 2 %}
+            {%- if job.current or job.keep_open or sentences < 2 %}
             <p class="job-summary">{{ job.summary }}</p>
             {%- else %}
             <details class="job-more" data-fold-phone open>
@@ -471,7 +473,7 @@ layout: default
         {%- for e in p.education %}
         <li>
           <span class="edu-degree">{{ e.degree }}</span>
-          <span class="edu-school">{{ e.school }}<span class="edu-dates">{{ e.dates }}</span></span>
+          <span class="edu-school">{{ e.school }}<span class="sr-only">, </span><span class="edu-dates">{{ e.dates }}</span></span>
           <span class="edu-note">{{ e.note }}</span>
         </li>
         {%- endfor %}

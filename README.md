@@ -11,10 +11,10 @@ Everything on the page comes from YAML in `_data/`:
 | `_data/profile.yml` | Name, role, links, local clocks, education |
 | `_data/news.yml` | News items, newest first (the first one is shown large) |
 | `_data/scholar.yml` | Citations, h-index and per-paper citation counts. Written automatically, don't edit |
-| `_data/experience.yml` | Industry and research roles. `brief: true` folds a role's summary behind a toggle |
+| `_data/experience.yml` | Industry and research roles. On phones, summaries of two or more sentences fold behind "What I did" (never the current role; `keep_open: true` keeps one open) |
 | `_data/publications.yml` | Papers, newest first, with links, filter metadata and pipeline topics. `selected: true` puts a paper in the three-paper list at the top |
 | `_data/pipeline.yml` | The perception pipeline (Perceive → Learn → Simulate → Deploy) and its topics: the filter above the publications |
-| `_data/recognition.yml` | Awards, reviewing venues and review count, talks, teaching, mentoring |
+| `_data/recognition.yml` | Awards, reviewing venues and review count, talks (optional `slides` and `video` links), teaching, mentoring |
 
 The CV lives at `assets/pdf/Chiara_Di_Vece_CV.pdf`. Replace the file to update it.
 
