@@ -569,6 +569,13 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 }
 @keyframes timeline-fill { to { transform: scaleY(1); } }
 .job.is-current { border-left-color: var(--accent-mark); }
+/* The two ends of the bridge (the PhD and the current role) carry the sector mark on the
+   timeline, the same Signal Blue triangle that separates the reviewing venues */
+.job.is-bridge::before {
+  content: ""; position: absolute; z-index: 2; left: -5px; top: 1.85rem;
+  width: 9px; height: 8px; background: var(--accent-mark);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
 .job-meta { display: flex; align-items: center; gap: 0.6rem; }
 .job-dates { font-size: 0.8rem; color: var(--ink-3); }
 .job-role { font-size: 1.12rem; font-weight: 600; letter-spacing: -0.01em; }
@@ -592,6 +599,19 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .edu-school { color: var(--ink-2); }
 .edu-note { color: var(--ink-3); font-size: 0.84rem; }
 .edu-dates { font-size: 0.75rem; color: var(--ink-3); margin-left: 0.5rem; white-space: nowrap; }
+/* Phones: compact rows (degree, school and dates); the notes are one tap away */
+.edu-notes-toggle {
+  display: inline-flex; align-items: center; gap: 0.45rem; min-height: 44px; margin-top: 0.25rem;
+  font: inherit; font-size: 0.875rem; font-weight: 500; color: var(--ink-2); background: none; border: 0; padding: 0; cursor: pointer;
+}
+.edu-notes-toggle[hidden] { display: none; }
+.edu-notes-toggle::after { content: "+"; font-weight: 400; font-size: 1.2em; line-height: 1; transition: transform 200ms var(--ease-out); }
+.edu-notes-toggle[aria-expanded="true"]::after { transform: rotate(45deg); }
+.edu-notes-toggle:hover { color: var(--accent-ink); }
+@media (max-width: 639px) {
+  .edu { gap: 0.9rem; padding-top: 0.5rem; }
+  .edu[data-notes-folded] .edu-note { display: none; }
+}
 
 /* ---------- Research ---------- */
 .research-intro { display: grid; gap: 0.75rem; max-width: 40rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
@@ -959,13 +979,14 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
   .speaker-bio, .speaker-kit-actions { grid-column: 2; }
   .speaker-kit-actions { margin-top: 0.25rem; }
 }
+/* The kit comes first in the markup (and on phones, right after the invitation); from 900px
+   it moves to the right-hand column beside the talks, by grid placement, not reordering */
 .talks-body { display: grid; }
-@media (max-width: 899px) {
-  .talks-body .speaker-kit { order: -1; margin-top: 0; margin-bottom: clamp(2rem, 4vw, 3rem); }
-}
+.talks-body .speaker-kit { margin-top: 0; margin-bottom: clamp(2rem, 4vw, 3rem); }
 @media (min-width: 900px) {
   .talks-body { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: start; }
-  .talks-body .speaker-kit { margin-top: 0; position: sticky; top: calc(var(--nav-h) + 24px); }
+  .talks-body .talk-list { grid-column: 1; grid-row: 1; }
+  .talks-body .speaker-kit { grid-column: 2; grid-row: 1; margin-bottom: 0; position: sticky; top: calc(var(--nav-h) + 24px); }
 }
 .talk-list { border-top: 1px solid var(--ink); }
 .talk {
