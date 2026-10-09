@@ -455,6 +455,7 @@ html { scrollbar-color: color-mix(in srgb, var(--ink) 28%, var(--bg)) var(--bg);
 .news-link .icon { width: 0.85em; height: 0.85em; }
 .news-older { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
 .news-photos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.6rem; }
+.news-photos[hidden] { display: none; } /* a slide deck: links only, opened from "Slides" */
 .news-photos a { display: block; border-radius: var(--radius-sm); overflow: hidden; background: var(--surface-2); }
 .news-photos img { height: 112px; width: auto; object-fit: cover; transition: transform 200ms var(--ease-out); }
 @media (hover: hover) and (pointer: fine) {
