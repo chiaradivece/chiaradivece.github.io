@@ -1,9 +1,9 @@
 # Written by bin/update_scholar.py (weekly GitHub Action). Edits by hand get overwritten.
 profile: "https://scholar.google.com/citations?user=CStrr20AAAAJ&hl=en"
-updated: 2026-10-19
-citations: 138
+updated: 2026-11-09
+citations: 139
 h_index: 8
-i10_index: 5
+i10_index: 6
 papers:
   a-multicentre-benchmark-dataset-for-comprehensive-landmark-based-fetal-ultrasound-biometry:
     cites: 12
@@ -33,7 +33,7 @@ papers:
     cites: 31
     url: "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=16359219011138023970"
   robotic-arm-platform-for-multi-view-image-acquisition-and-3d-reconstruction-in-minimally-invasive-surgery:
-    cites: 9
+    cites: 10
     url: "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=18055705067697277225"
   ultrasound-plane-pose-regression-assessing-generalized-pose-coordinates-in-the-fetal-brain:
     cites: 8
